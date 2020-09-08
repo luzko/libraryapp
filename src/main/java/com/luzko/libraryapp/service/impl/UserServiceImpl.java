@@ -70,4 +70,5 @@ public class UserServiceImpl implements UserService {
     public boolean updatePassword(String newPassword) {
         return false;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.model.dao.impl;
 
+import com.luzko.libraryapp.connection.ConnectionPool;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.dao.StatementSql;
 import com.luzko.libraryapp.model.dao.UserDao;
@@ -27,7 +28,8 @@ public class UserDaoImpl implements UserDao {
         if (user == null) {
             throw new DaoException("User is not exist");
         }
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/project?useUnicode=true&serverTimezone=UTC", "root", "root");
+
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.INSERT_USER)) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
@@ -40,7 +42,6 @@ public class UserDaoImpl implements UserDao {
         }
         return isUserAdded;
     }
-
 
     @Override
     public boolean update(User user) throws DaoException {
