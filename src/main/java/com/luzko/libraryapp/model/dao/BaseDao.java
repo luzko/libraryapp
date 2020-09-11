@@ -15,7 +15,5 @@ public interface BaseDao<T extends BaseEntity> {
 
     T findById(long id) throws DaoException;
 
-    List<T> findByName(String name) throws DaoException;
-
     List<T> findAll() throws DaoException;
 }

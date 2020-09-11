@@ -12,6 +12,10 @@ public class User extends BaseEntity {
     private Date registered;
     private Set<Role> roles;
 
+    public User() {
+
+    }
+
     public User(String name, String email, String password, Set<Role> roles) {
         this(name, email, password, true, new Date(), roles);
     }

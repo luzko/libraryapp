@@ -5,9 +5,14 @@ public class StatementSql {
     }
 
     public static final String INSERT_USER =
-            "INSERT INTO users(name, email, password) VALUES(?,?,?)";
+            "";
 
     public static final String FIND_USER_BY_EMAIL =
-            "SELECT name, email, password, registered FROM users WHERE enabled = true AND email = ?";
+            "";
+
+    public static final String FIND_USER_BY_LOGIN =
+            "SELECT login, password WHERE login = ?";
+
+
 
 }

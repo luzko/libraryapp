@@ -7,13 +7,14 @@ import com.luzko.libraryapp.model.dao.UserDao;
 import com.luzko.libraryapp.model.entity.User;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();
+    private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     private UserDaoImpl() {
     }
@@ -29,7 +30,7 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException("User is not exist");
         }
 
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.INSERT_USER)) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
@@ -59,17 +60,41 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findByName(String name) throws DaoException {
-        return null;
-    }
-
-    @Override
     public User findByEmail(String email) throws DaoException {
         return null;
     }
 
     @Override
+    public User findByLogin(String login) throws DaoException {
+        ResultSet resultSet = null;
+        User user = null;
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(StatementSql.FIND_USER_BY_LOGIN)) {
+            preparedStatement.setString(1, login);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                user = new User();
+                fillUserField(user, resultSet);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new DaoException("dao", e); //TODO
+        }
+        return null;
+    }
+
+    @Override
+    public void registerUser(User user) throws DaoException {
+
+    }
+
+    @Override
     public List<User> findAll() throws DaoException {
         return null;
+    }
+
+    public void fillUserField(User user, ResultSet set) {
+        user.setLogin(set.getString("login"));
+        user.setPassword(set.getString("password"));
     }
 }

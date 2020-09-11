@@ -1,102 +1,102 @@
-DROP DATABASE IF EXISTS library;
-CREATE DATABASE library;
+DROP DATABASE IF EXISTS library_v2;
+CREATE DATABASE library_v2;
 
-use library;
+use library_v2;
 
-DROP TABLE IF EXISTS book_category;
-CREATE TABLE book_category
-(
-  id   TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  name VARCHAR(40) 				   	   NOT NULL,
-  PRIMARY KEY (id)
+DROP TABLE IF EXISTS categories;
+CREATE TABLE categories(
+  category_id   TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  category		VARCHAR(40) 				   	NOT NULL,
+  PRIMARY KEY (category_id)
 );
 
-DROP TABLE IF EXISTS book;
-CREATE TABLE book
+DROP TABLE IF EXISTS books;
+CREATE TABLE books
 (
-	id   		INT UNSIGNED AUTO_INCREMENT NOT NULL,
-    title 		VARCHAR(40) 				NOT NULL,
-    year 		SMALLINT UNSIGNED 			NOT NULL,
-    pages 		SMALLINT UNSIGNED 			NOT NULL,
-    description VARCHAR(500) 				NOT NULL,
-    category_id TINYINT UNSIGNED 			NOT NULL,
-    PRIMARY KEY (id),
-    UNIQUE KEY (title, year, pages, description, category_id),
-    FOREIGN KEY (category_id) REFERENCES book_category (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+	book_id   		INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    title 			VARCHAR(40) 				NOT NULL,
+    year 			SMALLINT UNSIGNED 			NOT NULL,
+    pages 			SMALLINT UNSIGNED 			NOT NULL,
+    description 	VARCHAR(500) 				NOT NULL,
+    number_copies   TINYINT UNSIGNED			NOT NULL,
+    category_id_fk  TINYINT UNSIGNED 			NOT NULL,
+    PRIMARY KEY (book_id),
+    UNIQUE KEY  (title, year, pages),
+    FOREIGN KEY (category_id_fk) REFERENCES categories (category_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-DROP TABLE IF EXISTS author;
-CREATE TABLE author
+DROP TABLE IF EXISTS authors;
+CREATE TABLE authors
 (
-  id   		 INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  first_name VARCHAR(20) 		   		 NOT NULL,
-  last_name  VARCHAR(20) 		   		 NOT NULL,
-  PRIMARY KEY (id)
+  author_id   	 INT UNSIGNED AUTO_INCREMENT NOT NULL,
+  author	 	 VARCHAR(20) 		   		 NOT NULL,
+  UNIQUE  KEY(author),
+  PRIMARY KEY (author_id)
 );
 
-DROP TABLE IF EXISTS book_author;
-CREATE TABLE book_author
+DROP TABLE IF EXISTS book_authors;
+CREATE TABLE book_authors
 (
-	id   	  INT UNSIGNED AUTO_INCREMENT NOT NULL,
-    book_id   INT UNSIGNED 				  NOT NULL,
-    author_id INT UNSIGNED				  NOT NULL,
-    PRIMARY KEY (id),
-    UNIQUE KEY (book_id, author_id),
-    FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (author_id) REFERENCES author (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+	book_author_id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    book_id_fk     INT UNSIGNED 			   NOT NULL,
+    author_id_fk   INT UNSIGNED				   NOT NULL,
+    PRIMARY KEY (book_author_id),
+    UNIQUE KEY  (book_id_fk, author_id_fk),
+    FOREIGN KEY (book_id_fk)   REFERENCES books (book_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (author_id_fk) REFERENCES authors (author_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-DROP TABLE IF EXISTS book_copy;
-CREATE TABLE book_copy
+DROP TABLE IF EXISTS roles;
+CREATE TABLE roles
 (
-	id   	  INT UNSIGNED AUTO_INCREMENT NOT NULL,
-    book_id   INT UNSIGNED 				  NOT NULL,
-    available BOOL 			 			  NOT NULL DEFAULT TRUE,
-    PRIMARY KEY (id),
-	FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE ON UPDATE CASCADE
+  role_id TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  role 		   VARCHAR(20) 				  NOT NULL,
+  UNIQUE  KEY(role),
+  PRIMARY KEY (role_id)
 );
 
-DROP TABLE IF EXISTS user_role;
-CREATE TABLE user_role
+DROP TABLE IF EXISTS users;
+CREATE TABLE users
 (
-  id   TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  name VARCHAR(20) 				   	   NOT NULL,
-  PRIMARY KEY (id)
+	user_id       INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    login         VARCHAR(20) 				  NOT NULL,
+	password      VARCHAR(60) 				  NOT NULL,
+	role_id_fk    TINYINT UNSIGNED 		      NOT NULL,
+    first_name    VARCHAR(20) 				  NOT NULL,
+	last_name     VARCHAR(20) 				  NOT NULL,
+	email 	      VARCHAR(40) 				  NOT NULL,
+    passport      VARCHAR(20)				  NOT NULL,
+	enabled       BOOL 			 	     	  NOT NULL DEFAULT TRUE,
+    UNIQUE KEY  (login),
+	UNIQUE KEY  (email),
+    UNIQUE KEY  (passport),
+    PRIMARY KEY (user_id),
+    FOREIGN KEY (role_id_fk) REFERENCES roles (role_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-DROP TABLE IF EXISTS user;
-CREATE TABLE user
+DROP TABLE IF EXISTS statuses;
+CREATE TABLE statuses
 (
-  id         INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  login      VARCHAR(20) 				 NOT NULL,
-  password   VARCHAR(20) 				 NOT NULL,
-  role_id    TINYINT UNSIGNED 			 NOT NULL,
-  first_name VARCHAR(20) 				 NOT NULL,
-  last_name  VARCHAR(20) 				 NOT NULL,
-  address 	 VARCHAR(60) 				 NOT NULL,
-  email 	 VARCHAR(40) 				 NOT NULL,
-  phone 	 VARCHAR(20) 				 NOT NULL,
-  enabled 	 BOOL 			 			 NOT NULL DEFAULT TRUE,
-  registered DATETIME  		 			 NOT NULL DEFAULT NOW(),
-  PRIMARY KEY (id),
-  UNIQUE KEY (login),
-  UNIQUE KEY (email),
-  FOREIGN KEY (role_id) REFERENCES user_role (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+	status_id TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    UNIQUE KEY  (status),
+    PRIMARY KEY (status_id)
 );
 
-DROP TABLE IF EXISTS book_order;
-CREATE TABLE book_order
+DROP TABLE IF EXISTS orders;
+CREATE TABLE orders
 (
-	id           INT UNSIGNED AUTO_INCREMENT NOT NULL,
-    user_id 	 INT UNSIGNED 				 NOT NULL,
-    book_copy_id INT UNSIGNED 			     NOT NULL,
-    status       BOOL 			 			 NOT NULL DEFAULT FALSE,
+	order_id     INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    user_id_fk 	 INT UNSIGNED 				 NOT NULL,
+    book_id_fk   INT UNSIGNED 			     NOT NULL,
+    status_id_fk TINYINT UNSIGNED 			 NOT NULL,
     reading_room BOOL 			 			 NOT NULL DEFAULT FALSE,
-    date 	 	 DATETIME  		 			 NOT NULL DEFAULT NOW(),
-    take_date 	 DATETIME  		 			 NOT NULL,
-    return_date  DATETIME  		 			 NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    FOREIGN KEY (book_copy_id) REFERENCES book_copy (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    order_date 	 BIGINT  		 			 NOT NULL,
+    return_date  BIGINT  		 			 NOT NULL,
+    PRIMARY KEY (order_id),
+    FOREIGN KEY (user_id_fk) REFERENCES users (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    FOREIGN KEY (book_id_fk) REFERENCES books (book_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    FOREIGN KEY (status_id_fk) REFERENCES statuses (status_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
+
 
