@@ -8,7 +8,7 @@
     <div class="container">
         <h3 class="text-center">Hello!</h3>
         <br/>
-        <h2 class="text-center">${user}, hello!</h2>
+        <h2 class="text-center">Hello world!!!</h2>
         <div>
             <a href="controller?command=logout" class="btn btn-login float-right">Logout</a>
         </div>

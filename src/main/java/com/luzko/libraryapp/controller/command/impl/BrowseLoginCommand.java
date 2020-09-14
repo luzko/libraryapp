@@ -7,8 +7,7 @@ import com.luzko.libraryapp.controller.router.Router;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LogoutCommand implements Command {
-
+public class BrowseLoginCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         //return PagePath.LOGIN;

@@ -1,42 +1,45 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.PagePath;
+import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.command.Command;
+import com.luzko.libraryapp.controller.router.Router;
+import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.service.UserService;
 import com.luzko.libraryapp.service.impl.UserServiceImpl;
-import com.luzko.libraryapp.util.AlertManager;
-import com.luzko.libraryapp.util.PathManager;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class LoginCommand implements Command {
-    private static Logger logger = LogManager.getLogger(LoginCommand.class);
-    private static final String PARAM_LOGIN = "login";
-    private static final String PARAM_PASSWORD = "password";
-    private static final String ATTR_USER = "user";
+    private static final Logger logger = LogManager.getLogger(LoginCommand.class);
+    private static final UserService service = UserServiceImpl.getInstance();
 
     @Override
-    public String execute(HttpServletRequest request) {
-        UserService service = UserServiceImpl.getInstance();
-        String page;
-        String login = request.getParameter(PARAM_LOGIN);
-        String password = request.getParameter(PARAM_PASSWORD);
+    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+        Router router = new Router();
+        String login = request.getParameter(RequestParameter.LOGIN);
+        String password = request.getParameter(RequestParameter.PASSWORD);
+
         try {
             if (service.checkLogin(login, password)) {
-                request.setAttribute(ATTR_USER, login);
-                page = PathManager.getProperty(PathManager.KEY_PAGE_MAIN);
+                router.setPagePath(PagePath.MAIN);
+                router.setRouterType(RouterType.REDIRECT);
             } else {
-                request.setAttribute(AlertManager.getClearName(AlertManager.KEY_LOGIN_ERROR),
-                        AlertManager.getProperty(AlertManager.KEY_LOGIN_ERROR));
-                page = PathManager.getProperty(PathManager.KEY_PAGE_LOGIN);
+                request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE, "Incorrect login or password");
+                router.setPagePath(PagePath.LOGIN);
+                router.setRouterType(RouterType.FORWARD);
             }
         } catch (ServiceException e) {
-            logger.error(e);
-            page = PathManager.getProperty(PathManager.KEY_PAGE_INDEX);
+            logger.log(Level.ERROR, "Error in login", e);
+            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            router.setPagePath(PagePath.ERROR);
+            router.setRouterType(RouterType.FORWARD);
         }
-        return page;
+        return router;
     }
-
 }

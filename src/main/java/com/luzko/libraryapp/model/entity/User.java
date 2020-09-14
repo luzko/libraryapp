@@ -1,48 +1,41 @@
 package com.luzko.libraryapp.model.entity;
 
-import java.util.Date;
-import java.util.Set;
 import java.util.StringJoiner;
 
 public class User extends BaseEntity {
-    private String name;
-    private String email;
+    private long userId;
+    private String login;
     private String password;
+    private UserRole userRole;
+    private String name;
+    private String surname;
+    private String email;
     private boolean enabled;
-    private Date registered;
-    private Set<Role> roles;
 
     public User() {
 
     }
 
-    public User(String name, String email, String password, Set<Role> roles) {
-        this(name, email, password, true, new Date(), roles);
-    }
-
-    public User(String name, String email, String password, boolean enabled, Date registered, Set<Role> roles) {
-        this.name = name;
-        this.email = email;
+    public User(long userId, String login, String password) {
+        this.userId = userId;
+        this.login = login;
         this.password = password;
-        this.enabled = enabled;
-        this.registered = registered;
-        this.roles = roles;
     }
 
-    public String getName() {
-        return name;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -53,6 +46,38 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -61,63 +86,54 @@ public class User extends BaseEntity {
         this.enabled = enabled;
     }
 
-    public Date getRegistered() {
-        return registered;
-    }
-
-    public void setRegistered(Date registered) {
-        this.registered = registered;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass() || !super.equals(o)) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
             return false;
         }
 
         User user = (User) o;
 
-        if (enabled != user.enabled || !name.equals(user.name) || !email.equals(user.email) ||
-                !password.equals(user.password) || !registered.equals(user.registered)) {
+        if (userId != user.userId || enabled != user.enabled || !login.equals(user.login) ||
+                !password.equals(user.password) || userRole != user.userRole ||
+                !name.equals(user.name) || !surname.equals(user.surname)) {
             return false;
         }
 
-        return roles.equals(user.roles);
+        return email.equals(user.email);
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + email.hashCode();
+        result = 31 * result + (int) (userId ^ (userId >>> 32));
+        result = 31 * result + login.hashCode();
         result = 31 * result + password.hashCode();
+        result = 31 * result + userRole.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + surname.hashCode();
+        result = 31 * result + email.hashCode();
         result = 31 * result + (enabled ? 1 : 0);
-        result = 31 * result + registered.hashCode();
-        result = 31 * result + roles.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
-                .add("name='" + name + "'")
-                .add("email='" + email + "'")
+                .add("userId=" + userId)
+                .add("login='" + login + "'")
                 .add("password='" + password + "'")
+                .add("userRole=" + userRole)
+                .add("name='" + name + "'")
+                .add("surname='" + surname + "'")
+                .add("email='" + email + "'")
                 .add("enabled=" + enabled)
-                .add("registered=" + registered)
-                .add("roles=" + roles)
-                .add("id=" + id)
                 .toString();
     }
 }

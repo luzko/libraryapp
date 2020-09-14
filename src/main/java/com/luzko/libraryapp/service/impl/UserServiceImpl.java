@@ -6,8 +6,10 @@ import com.luzko.libraryapp.model.dao.UserDao;
 import com.luzko.libraryapp.model.dao.impl.UserDaoImpl;
 import com.luzko.libraryapp.model.entity.User;
 import com.luzko.libraryapp.service.UserService;
+import com.luzko.libraryapp.util.PasswordEncryption;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
 
@@ -62,8 +64,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean checkLogin(String login, String password) throws ServiceException{
-        return true;
+    public boolean checkLogin(String login, String password) throws ServiceException {
+        //TODO
+        UserDao userDao = UserDaoImpl.getInstance();
+        PasswordEncryption encryption = PasswordEncryption.getInstance();
+        boolean isLoginCorrect = false;
+        //TODO validator на ввод символов...
+        try {
+            //User user = userDao.findByLogin(login);
+            String userPassword = userDao.findPasswordByLogin(login);
+            String encryptedPassword = encryption.encrypt(password);
+            System.out.println(login);
+            System.out.println(password);
+            System.out.println(userPassword);
+            System.out.println(encryptedPassword);
+            if(userPassword != null) {
+                isLoginCorrect = userPassword.equals(encryptedPassword);
+            }
+
+        } catch (DaoException e) {
+            //TODO
+        }
+
+        return isLoginCorrect;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.luzko.libraryapp.model.dao.impl;
 
 import com.luzko.libraryapp.connection.ConnectionPool;
 import com.luzko.libraryapp.exception.DaoException;
+import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.StatementSql;
 import com.luzko.libraryapp.model.dao.UserDao;
 import com.luzko.libraryapp.model.entity.User;
@@ -25,6 +26,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean save(User user) throws DaoException {
+        //TODO
         boolean isUserAdded = false;
         if (user == null) {
             throw new DaoException("User is not exist");
@@ -69,18 +71,43 @@ public class UserDaoImpl implements UserDao {
         ResultSet resultSet = null;
         User user = null;
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(StatementSql.FIND_USER_BY_LOGIN)) {
-            preparedStatement.setString(1, login);
-            resultSet = preparedStatement.executeQuery();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_USER_BY_LOGIN)) {
+            statement.setString(1, login);
+            resultSet = statement.executeQuery();
+
             if (resultSet.next()) {
-                user = new User();
-                fillUserField(user, resultSet);
+                user = fillUserField(resultSet);
             }
+            return user;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             throw new DaoException("dao", e); //TODO
+        } finally {
+            closeResultSet(resultSet);
         }
-        return null;
+    }
+
+    @Override
+    public String findPasswordByLogin(String login) throws DaoException {
+        ResultSet resultSet = null;
+        String password = null;
+        try(Connection connection = connectionPool.getConnection();
+            PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PASS_BY_LOGIN)) {
+            statement.setString(1, login);
+            resultSet = statement.executeQuery();
+            System.out.println("resultSet " + resultSet);
+            if (resultSet.next()) {
+                System.out.println(true);
+                password = resultSet.getString(ColumnName.PASSWORD);
+            }
+            System.out.println(password);
+            return password;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new DaoException("dao", e); //TODO
+        } finally {
+            closeResultSet(resultSet);
+        }
     }
 
     @Override
@@ -93,8 +120,10 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-    public void fillUserField(User user, ResultSet set) {
-        user.setLogin(set.getString("login"));
-        user.setPassword(set.getString("password"));
+    public User fillUserField(ResultSet resultSet) throws SQLException {
+        long userId = resultSet.getLong(ColumnName.USER_ID);
+        String login = resultSet.getString(ColumnName.LOGIN);
+        String password = resultSet.getString(ColumnName.PASSWORD);
+        return new User(userId, login, password);
     }
 }

@@ -1,13 +1,15 @@
 package com.luzko.libraryapp.controller.command;
 
-import com.luzko.libraryapp.controller.command.impl.LoginCommand;
-import com.luzko.libraryapp.controller.command.impl.LogoutCommand;
+import com.luzko.libraryapp.controller.command.impl.*;
 
 public enum CommandType {
+    BROWSE_LOGIN(new BrowseLoginCommand()),
     LOGIN(new LoginCommand()),
-    LOGOUT(new LogoutCommand());
+    LOGOUT(new LogoutCommand()),
+    REGISTRATION(new RegistrationCommand()),
+    BROWSE_REGISTRATION(new BrowseRegistration());
 
-    private Command command;
+    private final Command command;
 
     CommandType(Command command) {
         this.command = command;
@@ -16,5 +18,4 @@ public enum CommandType {
     public Command getCommand() {
         return command;
     }
-
 }
