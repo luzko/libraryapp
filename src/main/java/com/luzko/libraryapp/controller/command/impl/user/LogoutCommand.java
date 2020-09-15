@@ -1,6 +1,5 @@
-package com.luzko.libraryapp.controller.command.impl;
+package com.luzko.libraryapp.controller.command.impl.user;
 
-import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.controller.router.Router;
 
@@ -11,7 +10,7 @@ public class LogoutCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
-        //return PagePath.LOGIN;
+        //TODO some logic...
         return null;
     }
 }

@@ -1,13 +1,16 @@
 package com.luzko.libraryapp.controller.command;
 
-import com.luzko.libraryapp.controller.command.impl.*;
+import com.luzko.libraryapp.controller.command.impl.page.LoginPage;
+import com.luzko.libraryapp.controller.command.impl.user.RegistrationCommand;
+import com.luzko.libraryapp.controller.command.impl.user.LoginCommand;
+import com.luzko.libraryapp.controller.command.impl.user.LogoutCommand;
 
 public enum CommandType {
-    BROWSE_LOGIN(new BrowseLoginCommand()),
+    LOGIN_PAGE(new LoginPage()),
+    REGISTRATION_PAGE(new RegistrationCommand()),
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
-    REGISTRATION(new RegistrationCommand()),
-    BROWSE_REGISTRATION(new BrowseRegistration());
+    REGISTRATION(new RegistrationCommand());
 
     private final Command command;
 

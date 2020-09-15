@@ -2,16 +2,18 @@ package com.luzko.libraryapp.model.dao.impl;
 
 import com.luzko.libraryapp.connection.ConnectionPool;
 import com.luzko.libraryapp.exception.DaoException;
-import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.StatementSql;
 import com.luzko.libraryapp.model.dao.UserDao;
 import com.luzko.libraryapp.model.entity.User;
+import com.luzko.libraryapp.model.entity.UserRole;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+import static com.luzko.libraryapp.model.dao.ColumnName.*;
 
 public class UserDaoImpl implements UserDao {
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();
@@ -26,24 +28,20 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean save(User user) throws DaoException {
-        //TODO
-        boolean isUserAdded = false;
-        if (user == null) {
-            throw new DaoException("User is not exist");
-        }
-
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.INSERT_USER)) {
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPassword());
-            int rows = statement.executeUpdate();
-            isUserAdded = rows != 0;
+             PreparedStatement statement = connection.prepareStatement(StatementSql.ADD_USER)) {
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getPassword());
+            statement.setInt(3, user.getUserRole().getId());
+            statement.setString(4, user.getName());
+            statement.setString(5, user.getSurname());
+            statement.setString(6, user.getEmail());
+            statement.setBoolean(7, user.isEnabled());
+
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             throw new DaoException("dao", e); //TODO
         }
-        return isUserAdded;
     }
 
     @Override
@@ -69,50 +67,16 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findByLogin(String login) throws DaoException {
         ResultSet resultSet = null;
-        User user = null;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_USER_BY_LOGIN)) {
             statement.setString(1, login);
             resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                user = fillUserField(resultSet);
-            }
-            return user;
+            return createUserFromResultSet(resultSet);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             throw new DaoException("dao", e); //TODO
         } finally {
             closeResultSet(resultSet);
         }
-    }
-
-    @Override
-    public String findPasswordByLogin(String login) throws DaoException {
-        ResultSet resultSet = null;
-        String password = null;
-        try(Connection connection = connectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PASS_BY_LOGIN)) {
-            statement.setString(1, login);
-            resultSet = statement.executeQuery();
-            System.out.println("resultSet " + resultSet);
-            if (resultSet.next()) {
-                System.out.println(true);
-                password = resultSet.getString(ColumnName.PASSWORD);
-            }
-            System.out.println(password);
-            return password;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new DaoException("dao", e); //TODO
-        } finally {
-            closeResultSet(resultSet);
-        }
-    }
-
-    @Override
-    public void registerUser(User user) throws DaoException {
-
     }
 
     @Override
@@ -120,10 +84,19 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-    public User fillUserField(ResultSet resultSet) throws SQLException {
-        long userId = resultSet.getLong(ColumnName.USER_ID);
-        String login = resultSet.getString(ColumnName.LOGIN);
-        String password = resultSet.getString(ColumnName.PASSWORD);
-        return new User(userId, login, password);
+    private User createUserFromResultSet(ResultSet resultSet) throws SQLException, DaoException {
+        if (resultSet.next()) {
+            User user = new User();
+            user.setUserId(resultSet.getLong(USER_ID));
+            user.setLogin(resultSet.getString(LOGIN));
+            user.setPassword(resultSet.getString(PASSWORD));
+            user.setUserRole(UserRole.getRoleById(resultSet.getInt(ROLE_ID_FK)));
+            user.setName(resultSet.getString(NAME));
+            user.setSurname(resultSet.getString(SURNAME));
+            user.setEmail(resultSet.getString(EMAIL));
+            return user;
+        } else {
+            throw new DaoException(); //TODO
+        }
     }
 }

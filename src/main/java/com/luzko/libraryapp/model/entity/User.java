@@ -3,7 +3,7 @@ package com.luzko.libraryapp.model.entity;
 import java.util.StringJoiner;
 
 public class User extends BaseEntity {
-    private long userId;
+    private Long userId;
     private String login;
     private String password;
     private UserRole userRole;
@@ -16,10 +16,15 @@ public class User extends BaseEntity {
 
     }
 
-    public User(long userId, String login, String password) {
+    public User(Long userId, String login, String password, UserRole userRole, String name, String surname, String email) {
         this.userId = userId;
         this.login = login;
         this.password = password;
+        this.userRole = userRole;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.enabled = true;
     }
 
     public long getUserId() {

@@ -13,7 +13,11 @@ public interface UserService {
 
     boolean updatePassword(String newPassword);
 
-    boolean save(User user) throws ServiceException;
+    //boolean save(User user) throws ServiceException;
+
+    //void registration(User user);
+
+    boolean registration(String login, String password, String name, String surname, String email) throws ServiceException;
 
     boolean update(User user) throws ServiceException;
 
