@@ -5,3 +5,8 @@ out
 .log
 logs
 libs
+/src/main/webapp/antony/
+/src/main/webapp/img/
+/src/main/java/com/luzko/libraryapp/tag/
+/src/main/webapp/img/
+/src/main/java/com/luzko/libraryapp/tag/
