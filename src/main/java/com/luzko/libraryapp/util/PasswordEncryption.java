@@ -23,10 +23,6 @@ public class PasswordEncryption {
     private PasswordEncryption() {
     }
 
-    public static void main(String[] args) {
-        System.out.println(new PasswordEncryption().encrypt("qwer"));
-    }
-
     public String encrypt(String password) {
         String encryptedPassword = null;
         try {
