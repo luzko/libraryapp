@@ -5,7 +5,6 @@ import java.util.StringJoiner;
 public class User extends BaseEntity {
     private Long userId;
     private String login;
-    private String password;
     private UserRole userRole;
     private String name;
     private String surname;
@@ -16,10 +15,9 @@ public class User extends BaseEntity {
 
     }
 
-    public User(Long userId, String login, String password, UserRole userRole, String name, String surname, String email) {
+    public User(Long userId, String login, UserRole userRole, String name, String surname, String email) {
         this.userId = userId;
         this.login = login;
-        this.password = password;
         this.userRole = userRole;
         this.name = name;
         this.surname = surname;
@@ -41,14 +39,6 @@ public class User extends BaseEntity {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public UserRole getUserRole() {
@@ -106,8 +96,7 @@ public class User extends BaseEntity {
         User user = (User) o;
 
         if (userId != user.userId || enabled != user.enabled || !login.equals(user.login) ||
-                !password.equals(user.password) || userRole != user.userRole ||
-                !name.equals(user.name) || !surname.equals(user.surname)) {
+                userRole != user.userRole || !name.equals(user.name) || !surname.equals(user.surname)) {
             return false;
         }
 
@@ -119,7 +108,6 @@ public class User extends BaseEntity {
         int result = super.hashCode();
         result = 31 * result + (int) (userId ^ (userId >>> 32));
         result = 31 * result + login.hashCode();
-        result = 31 * result + password.hashCode();
         result = 31 * result + userRole.hashCode();
         result = 31 * result + name.hashCode();
         result = 31 * result + surname.hashCode();
@@ -133,7 +121,6 @@ public class User extends BaseEntity {
         return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
                 .add("userId=" + userId)
                 .add("login='" + login + "'")
-                .add("password='" + password + "'")
                 .add("userRole=" + userRole)
                 .add("name='" + name + "'")
                 .add("surname='" + surname + "'")

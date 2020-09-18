@@ -3,29 +3,15 @@ package com.luzko.libraryapp.service;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.entity.User;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public interface UserService {
 
-    User findByEmail(String email) throws ServiceException;
+    boolean verifyUser(String login, String password) throws ServiceException;
 
-    boolean checkLogin(String login, String password) throws ServiceException;
+    Optional<User> findByLogin(String login) throws ServiceException;
 
-    boolean updatePassword(String newPassword);
+    boolean registration(Map<String, String> registrationParameters) throws ServiceException;
 
-    //boolean save(User user) throws ServiceException;
-
-    //void registration(User user);
-
-    boolean registration(String login, String password, String name, String surname, String email) throws ServiceException;
-
-    boolean update(User user) throws ServiceException;
-
-    boolean delete(long id) throws ServiceException;
-
-    User findById(long id) throws ServiceException;
-
-    List<User> findByName(String name) throws ServiceException;
-
-    List<User> findAll() throws ServiceException;
 }

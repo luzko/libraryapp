@@ -8,13 +8,16 @@ import com.luzko.libraryapp.model.entity.User;
 import com.luzko.libraryapp.model.entity.UserRole;
 import com.luzko.libraryapp.service.UserService;
 import com.luzko.libraryapp.util.PasswordEncryption;
+import com.luzko.libraryapp.validator.UserValidator;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import static com.luzko.libraryapp.model.dao.ColumnName.*;
 
 public class UserServiceImpl implements UserService {
 
-    private static UserServiceImpl instance = new UserServiceImpl();
+    private static final UserServiceImpl instance = new UserServiceImpl();
 
     private UserServiceImpl() {
     }
@@ -24,75 +27,53 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean registration(String login, String password, String name, String surname, String email) throws ServiceException {
+    public boolean verifyUser(String login, String password) throws ServiceException {
         UserDao userDao = UserDaoImpl.getInstance();
         PasswordEncryption encryption = PasswordEncryption.getInstance();
-        boolean result = false;
-        //TODO validation на то какие пришли строки
-        String encryptedPassword = encryption.encrypt(password);
-        //TODO проверить, что такого юзера с таким логином и такой почтой нет.
-        User user = new User(null, login, encryptedPassword, UserRole.READER, name, surname, email);
+        boolean isCredentialCorrect = false;
+        //TODO валидация на входящие поля логина и пароля, если апраори неверные, то зачем выполнять работу..
+
         try {
-            result = userDao.save(user);
-        } catch (DaoException e) {
-            throw new ServiceException(); //TODO
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean update(User user) throws ServiceException {
-        return false;
-    }
-
-    @Override
-    public boolean delete(long id) throws ServiceException {
-        return false;
-    }
-
-    @Override
-    public User findById(long id) throws ServiceException {
-        return null;
-    }
-
-    @Override
-    public List<User> findByName(String name) throws ServiceException {
-        return null;
-    }
-
-    @Override
-    public User findByEmail(String email) throws ServiceException {
-        return null;
-    }
-
-    @Override
-    public List<User> findAll() throws ServiceException {
-        return null;
-    }
-
-    @Override
-    public boolean checkLogin(String login, String password) throws ServiceException {
-        //TODO
-        UserDao userDao = UserDaoImpl.getInstance();
-        PasswordEncryption encryption = PasswordEncryption.getInstance();
-        boolean isLoginCorrect = false;
-        //TODO validator на ввод символов...
-        String encryptedPassword = encryption.encrypt(password);
-        try {
-            User user = userDao.findByLogin(login);
-            if (user != null) {
-                isLoginCorrect = user.getPassword().equals(encryptedPassword);
+            String userPassword = userDao.findPasswordByLogin(login);
+            if (userPassword != null && !userPassword.isEmpty()) {
+                String encryptedPassword = encryption.encrypt(password);
+                isCredentialCorrect = userPassword.equals(encryptedPassword);
             }
         } catch (DaoException e) {
-            //TODO
+            throw new ServiceException(""); //TODO
         }
-        return isLoginCorrect;
+        return isCredentialCorrect;
     }
 
     @Override
-    public boolean updatePassword(String newPassword) {
-        return false;
+    public Optional<User> findByLogin(String login) throws ServiceException {
+        UserDao userDao = UserDaoImpl.getInstance();
+        try {
+            return userDao.findByLogin(login);
+        } catch (DaoException e) {
+            throw new ServiceException("service");
+        }
     }
 
+    @Override
+    public boolean registration(Map<String, String> registrationParameters) throws ServiceException {
+        UserValidator validator = new UserValidator();
+        UserDao userDao = UserDaoImpl.getInstance();
+        PasswordEncryption encryption = PasswordEncryption.getInstance();
+        boolean isRegistered = false;
+        if (validator.isValidRegistrationParameters(registrationParameters)) {
+            //TODO проверить, что такого юзера с таким логином и такой почтой нет.
+            try {
+                String login = registrationParameters.get(LOGIN);
+                String encryptedPassword = encryption.encrypt(registrationParameters.get(PASSWORD));
+                String name = registrationParameters.get(NAME);
+                String surname = registrationParameters.get(SURNAME);
+                String email = registrationParameters.get(EMAIL);
+                isRegistered = userDao.add(login, encryptedPassword, UserRole.READER, name, surname, email);
+            } catch (DaoException e) {
+                throw new ServiceException("service"); // TODO
+            }
+        }
+        return isRegistered;
+    }
 }

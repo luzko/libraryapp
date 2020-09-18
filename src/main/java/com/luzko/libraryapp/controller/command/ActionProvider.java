@@ -1,7 +1,5 @@
-package com.luzko.libraryapp.controller;
+package com.luzko.libraryapp.controller.command;
 
-import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.command.CommandType;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

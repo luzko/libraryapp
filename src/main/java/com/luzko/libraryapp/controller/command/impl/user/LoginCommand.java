@@ -6,6 +6,8 @@ import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.controller.router.Router;
 import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
+import com.luzko.libraryapp.model.entity.User;
+import com.luzko.libraryapp.model.entity.UserRole;
 import com.luzko.libraryapp.service.UserService;
 import com.luzko.libraryapp.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
@@ -14,10 +16,11 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 public class LoginCommand implements Command {
     private static final Logger logger = LogManager.getLogger(LoginCommand.class);
-    private static final UserService service = UserServiceImpl.getInstance();
+    private static final UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
@@ -26,9 +29,20 @@ public class LoginCommand implements Command {
         String password = request.getParameter(RequestParameter.PASSWORD);
 
         try {
-            if (service.checkLogin(login, password)) {
-                router.setPagePath(PagePath.MAIN);
-                router.setRouterType(RouterType.REDIRECT);
+            if (userService.verifyUser(login, password)) {
+                Optional<User> loggedUser = userService.findByLogin(login);
+                if (loggedUser.isPresent()) {
+                    User user = loggedUser.get();
+                    if (user.isEnabled()) {
+                        defineRouterValuesByRole(router, user.getUserRole());
+                    } else {
+                        //TODO new page. Данный пользователь заблокирован. Для разблокировки обратитесь к админу(библиотекарю..);
+                    }
+                } else {
+                    request.setAttribute(RequestParameter.ERROR_MESSAGE, "User is incorrect"); //TODO
+                    router.setPagePath(PagePath.ERROR);
+                    router.setRouterType(RouterType.FORWARD);
+                }
             } else {
                 request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE, "Incorrect login or password");
                 router.setPagePath(PagePath.LOGIN);
@@ -41,5 +55,23 @@ public class LoginCommand implements Command {
             router.setRouterType(RouterType.FORWARD);
         }
         return router;
+    }
+
+    public void defineRouterValuesByRole(Router router, UserRole userRole) {
+
+        switch (userRole) {
+            case READER -> {
+                router.setPagePath(PagePath.MAIN);
+                router.setRouterType(RouterType.REDIRECT);
+            }
+            case LIBRARIAN -> {
+                //router.setPagePath(PagePath.HOME); TODO
+                router.setRouterType(RouterType.REDIRECT);
+            }
+            case ADMIN -> {
+                //router.setPagePath(PagePath.MAIN);
+                router.setRouterType(RouterType.REDIRECT);
+            }
+        }
     }
 }
