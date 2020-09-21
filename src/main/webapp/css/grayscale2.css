@@ -6,7 +6,7 @@
 
 #mainNav {
   min-height: 56px;
-  background-color: #fff;
+  /*background-color: #fff;*/
 }
 
 #mainNav .navbar-toggler {
@@ -163,12 +163,12 @@
 }
 
 .about-section {
-  padding-top: 10rem;
+  /*padding-top: 10rem;*/
   background: linear-gradient(to bottom, #161616 0%, rgba(22, 22, 22, 0.9) 75%, rgba(22, 22, 22, 0.8) 100%);
 }
 
 .about-section p {
-  margin-bottom: 5rem;
+  /*margin-bottom: 5rem;*/
 }
 
 .projects-section {
