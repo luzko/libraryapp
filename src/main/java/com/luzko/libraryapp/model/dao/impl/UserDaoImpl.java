@@ -17,16 +17,16 @@ import java.util.Optional;
 import static com.luzko.libraryapp.model.dao.ColumnName.*;
 
 public class UserDaoImpl implements UserDao {
-    private static final UserDaoImpl INSTANCE = new UserDaoImpl();
+    //private static final UserDaoImpl INSTANCE = new UserDaoImpl();
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    private UserDaoImpl() {
+    //private UserDaoImpl() {
 
-    }
+    //}
 
-    public static UserDaoImpl getInstance() {
-        return INSTANCE;
-    }
+    //public static UserDaoImpl getInstance() {
+    //    return INSTANCE;
+    //}
 
     @Override
     public String findPasswordByLogin(String login) throws DaoException {

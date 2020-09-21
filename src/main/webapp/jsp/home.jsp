@@ -74,7 +74,7 @@
             <form action="${pageContext.request.contextPath}/controller" method="post">
                 <input type="hidden" name="command" value="to_library"/>
                 <div>
-                    <button class="btn btn-primary js-scroll-trigger" style="height: 25%">
+                    <button class="btn btn-primary js-scroll-trigger" style="width: 80%; background-color: darkred">
                         <fmt:message key="submit.library"/>
                     </button>
                 </div>

@@ -28,7 +28,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean verifyUser(String login, String password) throws ServiceException {
-        UserDao userDao = UserDaoImpl.getInstance();
+        //UserDao userDao = UserDaoImpl.getInstance();
+        UserDao userDao = new UserDaoImpl();
         PasswordEncryption encryption = PasswordEncryption.getInstance();
         boolean isCredentialCorrect = false;
         //TODO валидация на входящие поля логина и пароля, если апраори неверные, то зачем выполнять работу..
@@ -47,7 +48,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findByLogin(String login) throws ServiceException {
-        UserDao userDao = UserDaoImpl.getInstance();
+        //UserDao userDao = UserDaoImpl.getInstance();
+        UserDao userDao = new UserDaoImpl();
         try {
             return userDao.findByLogin(login);
         } catch (DaoException e) {
@@ -58,7 +60,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean registration(Map<String, String> registrationParameters) throws ServiceException {
         UserValidator validator = new UserValidator();
-        UserDao userDao = UserDaoImpl.getInstance();
+        //UserDao userDao = UserDaoImpl.getInstance();
+        UserDao userDao = new UserDaoImpl();
         PasswordEncryption encryption = PasswordEncryption.getInstance();
         boolean isRegistered = false;
         if (validator.isValidRegistrationParameters(registrationParameters)) {

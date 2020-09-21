@@ -12,4 +12,10 @@ public class PagePath {
     public static final String LOGIN = "/jsp/login.jsp";
 
     public static final String REGISTRATION = "/jsp/registration.jsp";
+
+    public static final String READER = "/jsp/reader.jsp";
+
+    public static final String ADMIN = "/jsp/admin.jsp";
+
+    public static final String LIBRARIAN = "/jsp/librarian.jsp";
 }

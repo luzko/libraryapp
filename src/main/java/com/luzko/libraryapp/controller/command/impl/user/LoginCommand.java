@@ -61,15 +61,15 @@ public class LoginCommand implements Command {
 
         switch (userRole) {
             case READER -> {
-                router.setPagePath(PagePath.HOME);
+                router.setPagePath(PagePath.READER);
                 router.setRouterType(RouterType.REDIRECT);
             }
             case LIBRARIAN -> {
-                //router.setPagePath(PagePath.HOME); TODO
+                router.setPagePath(PagePath.LIBRARIAN);
                 router.setRouterType(RouterType.REDIRECT);
             }
             case ADMIN -> {
-                //router.setPagePath(PagePath.MAIN);
+                router.setPagePath(PagePath.ADMIN);
                 router.setRouterType(RouterType.REDIRECT);
             }
         }
