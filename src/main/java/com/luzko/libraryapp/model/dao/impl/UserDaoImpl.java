@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,6 +58,19 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public List<User> findAll() throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ALL_USERS)) {
+            ResultSet resultSet = statement.executeQuery();
+            System.out.println("dao resultSet " + resultSet);
+            //System.out.println("dao " + createUsersFromResultSet(resultSet));
+            return createUsersFromResultSet(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException("dao"); //TODO
+        }
+    }
+
+    @Override
     public boolean add(String login, String password, UserRole role,
                        String name, String surname, String email) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
@@ -96,23 +110,40 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findAll() throws DaoException {
-        return null;
-    }
-
-    private User createUserFromResultSet(ResultSet resultSet) throws SQLException, DaoException {
-        if (resultSet.next()) {
-            User user = new User();
-            user.setUserId(resultSet.getLong(USER_ID));
-            user.setLogin(resultSet.getString(LOGIN));
-            user.setUserRole(UserRole.getRoleById(resultSet.getInt(ROLE_ID_FK)));
-            user.setName(resultSet.getString(NAME));
-            user.setSurname(resultSet.getString(SURNAME));
-            user.setEmail(resultSet.getString(EMAIL));
-            user.setEnabled(resultSet.getBoolean(ENABLED));
-            return user;
-        } else {
-            throw new DaoException(); //TODO
+    public boolean changeUserStatus(String login, boolean isEnable) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.CHANGE_USER_STATUS)) {
+            statement.setBoolean(1, !isEnable);
+            statement.setString(2, login);
+            return statement.executeUpdate() == 1;
+        } catch (SQLException e) {
+            throw new DaoException("dao", e); //TODO
         }
     }
+
+    private User createUserFromResultSet(ResultSet resultSet) throws SQLException {
+        return resultSet.next() ? createUser(resultSet) : null;
+    }
+
+    private List<User> createUsersFromResultSet(ResultSet resultSet) throws SQLException {
+        List<User> userList = new ArrayList<>();
+        while (resultSet.next()) {
+            User user = createUser(resultSet);
+            userList.add(user);
+        }
+        return userList;
+    }
+
+    private User createUser(ResultSet resultSet) throws SQLException {
+        User user = new User();
+        user.setUserId(resultSet.getLong(USER_ID));
+        user.setLogin(resultSet.getString(LOGIN));
+        user.setUserRole(UserRole.getRoleById(resultSet.getInt(ROLE_ID_FK)));
+        user.setName(resultSet.getString(NAME));
+        user.setSurname(resultSet.getString(SURNAME));
+        user.setEmail(resultSet.getString(EMAIL));
+        user.setEnabled(resultSet.getBoolean(ENABLED));
+        return user;
+    }
 }
+

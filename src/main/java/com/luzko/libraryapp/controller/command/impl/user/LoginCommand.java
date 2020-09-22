@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Optional;
 
 public class LoginCommand implements Command {
@@ -34,8 +35,26 @@ public class LoginCommand implements Command {
                 if (loggedUser.isPresent()) {
                     User user = loggedUser.get();
                     if (user.isEnabled()) {
-                        defineRouterValuesByRole(router, user.getUserRole());
+                        UserRole userRole = user.getUserRole();
+                        switch (userRole) {
+                            case READER -> {
+                                router.setPagePath(PagePath.READER);
+                                router.setRouterType(RouterType.REDIRECT);
+                            }
+                            case LIBRARIAN -> {
+                                router.setPagePath(PagePath.LIBRARIAN);
+                                router.setRouterType(RouterType.REDIRECT);
+                            }
+                            case ADMIN -> {
+                                List<User> users = userService.findAll();
+                                request.getSession().setAttribute(RequestParameter.ALL_USERS, users);
+                                router.setPagePath(PagePath.ADMIN);
+                                router.setRouterType(RouterType.REDIRECT);
+                            }
+                        }
                     } else {
+                        //TODO
+                        //TODO
                         //TODO new page. Данный пользователь заблокирован. Для разблокировки обратитесь к админу(библиотекарю..);
                     }
                 } else {
@@ -55,23 +74,5 @@ public class LoginCommand implements Command {
             router.setRouterType(RouterType.FORWARD);
         }
         return router;
-    }
-
-    public void defineRouterValuesByRole(Router router, UserRole userRole) {
-
-        switch (userRole) {
-            case READER -> {
-                router.setPagePath(PagePath.READER);
-                router.setRouterType(RouterType.REDIRECT);
-            }
-            case LIBRARIAN -> {
-                router.setPagePath(PagePath.LIBRARIAN);
-                router.setRouterType(RouterType.REDIRECT);
-            }
-            case ADMIN -> {
-                router.setPagePath(PagePath.ADMIN);
-                router.setRouterType(RouterType.REDIRECT);
-            }
-        }
     }
 }

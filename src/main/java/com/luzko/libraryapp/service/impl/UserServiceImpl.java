@@ -10,6 +10,7 @@ import com.luzko.libraryapp.service.UserService;
 import com.luzko.libraryapp.util.PasswordEncryption;
 import com.luzko.libraryapp.validator.UserValidator;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -78,5 +79,25 @@ public class UserServiceImpl implements UserService {
             }
         }
         return isRegistered;
+    }
+
+    @Override
+    public List<User> findAll() throws ServiceException {
+        UserDao userDao = new UserDaoImpl();
+        try {
+            return userDao.findAll();
+        } catch (DaoException e) {
+            throw new ServiceException("service");
+        }
+    }
+
+    @Override
+    public boolean changeUserStatus(String login, boolean isEnable) throws ServiceException {
+        UserDao userDao = new UserDaoImpl();
+        try {
+            return userDao.changeUserStatus(login, isEnable);
+        } catch (DaoException e) {
+            throw new ServiceException("service");
+        }
     }
 }

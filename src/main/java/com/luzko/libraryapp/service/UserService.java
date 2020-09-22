@@ -3,6 +3,7 @@ package com.luzko.libraryapp.service;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.entity.User;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -13,5 +14,9 @@ public interface UserService {
     Optional<User> findByLogin(String login) throws ServiceException;
 
     boolean registration(Map<String, String> registrationParameters) throws ServiceException;
+
+    List<User> findAll() throws ServiceException;
+
+    boolean changeUserStatus(String login, boolean isEnable) throws ServiceException;
 
 }

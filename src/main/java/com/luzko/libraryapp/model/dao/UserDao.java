@@ -15,4 +15,6 @@ public interface UserDao extends BaseDao<User> {
     boolean add(String login, String password, UserRole role,
                 String name, String surname, String email) throws DaoException;
 
+    boolean changeUserStatus(String login, boolean isEnable) throws DaoException;
+
 }

@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command;
 
+import com.luzko.libraryapp.controller.command.impl.admin.ChangeUserStatus;
 import com.luzko.libraryapp.controller.command.impl.page.HomePage;
 import com.luzko.libraryapp.controller.command.impl.page.LoginPage;
 import com.luzko.libraryapp.controller.command.impl.page.RegistrationPage;
@@ -15,7 +16,8 @@ public enum CommandType {
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
     REGISTRATION(new RegistrationCommand()),
-    LOCALE(new LocaleCommand());
+    LOCALE(new LocaleCommand()),
+    CHANGE_USER_STATUS(new ChangeUserStatus());
 
     private final Command command;
 
