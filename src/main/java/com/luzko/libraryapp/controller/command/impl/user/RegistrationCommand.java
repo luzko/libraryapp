@@ -29,6 +29,9 @@ public class RegistrationCommand implements Command {
 
         try {
             if (service.registration(registrationParameters)) {
+                //TODO логика по отсылки письма с подтверждем.. Редирект на страницу подтверждения..
+                //TODO
+
                 router.setPagePath(PagePath.HOME);
                 router.setRouterType(RouterType.REDIRECT);
             } else {

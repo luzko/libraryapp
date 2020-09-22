@@ -35,7 +35,7 @@
     <div class="container">
         <form class="form-inline" action="${pageContext.request.contextPath}/controller" method="post">
             <c:if test="${login != null}">
-                <input type="hidden" name="command" value="--"/>
+                <input type="hidden" name="command" value="--------"/>
                 <button type="submit" class="btn btn-outline-secondary">
                     <label>Account</label>
                 </button>
@@ -131,7 +131,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 

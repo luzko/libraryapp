@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
         PasswordEncryption encryption = PasswordEncryption.getInstance();
         boolean isRegistered = false;
         if (validator.isValidRegistrationParameters(registrationParameters)) {
-            //TODO проверить, что такого юзера с таким логином и такой почтой нет.
+            //TODO проверить, что такого юзера с таким логином и такой почтой нет. !!!
             try {
                 String login = registrationParameters.get(LOGIN);
                 String encryptedPassword = encryption.encrypt(registrationParameters.get(PASSWORD));
