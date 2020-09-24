@@ -57,15 +57,20 @@ VALUES ('Admin'),
        ('Librarian'),
        ('Reader');
 
-INSERT INTO users (login, password, role_id_fk, first_name, last_name, email, passport)
-VALUES ('adminius', 'asdf', 1, 'not required', 'not required', 'not required', 'not required'),
-       ('librarianius', 'qwer', 2, 'Мария', 'Шилковская', 'test@gmail.com', 'AB2222222'),
-       ('user1', 'zxcv', 3, 'Дмитрий', 'Уласовец', 'user1@gmail.com', 'AB3333333');
+INSERT INTO user_statuses (user_status)
+VALUES ('Active'),
+       ('Blocked'),
+       ('Unconfirmed');
 
-INSERT INTO statuses (status)
+INSERT INTO users (login, password, role_id_fk, first_name, last_name, email, user_status_id_fk, confirm)
+VALUES ('adminius', 'asdf', 1, 'not required', 'not required', 'not required', '1', '0'),
+       ('librarianius', 'qwer', 2, 'Мария', 'Шилковская', 'test@gmail.com', '1', '0'),
+       ('user1', 'zxcv', 3, 'Дмитрий', 'Уласовец', 'user1@gmail.com', '1', '0');
+
+INSERT INTO order_statuses (status)
 VALUES ('New'),
        ('Approved'),
        ('Denied');
 
-INSERT INTO orders (user_id_fk, book_id_fk, status_id_fk, order_date, return_date)
+INSERT INTO orders (user_id_fk, book_id_fk, order_status_id_fk, order_date, return_date)
 VALUES (3, 1, 3, 1599854214000, 1599911154000);

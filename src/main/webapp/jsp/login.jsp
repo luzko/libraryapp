@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<%@ taglib prefix="ctg" uri="customtags" %>--%>
 <fmt:setLocale value="${locale}"/>
-<fmt:setBundle basename="pagecontent"/>
+<fmt:setBundle basename="prop.pagecontent"/>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

@@ -1,10 +1,11 @@
-DROP DATABASE IF EXISTS library_v2;
-CREATE DATABASE library_v2;
+DROP DATABASE IF EXISTS library;
+CREATE DATABASE library;
 
-use library_v2;
+use library;
 
 DROP TABLE IF EXISTS categories;
-CREATE TABLE categories(
+CREATE TABLE categories
+(
   category_id   TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
   category		VARCHAR(40) 				   	NOT NULL,
   PRIMARY KEY (category_id)
@@ -55,6 +56,15 @@ CREATE TABLE roles
   PRIMARY KEY (role_id)
 );
 
+DROP TABLE IF EXISTS user_statuses;
+CREATE TABLE user_statuses
+(
+	user_status_id TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
+    user_status VARCHAR(20)						   NOT NULL,
+    UNIQUE KEY (user_status),
+    PRIMARY KEY (user_status_id)
+);
+
 DROP TABLE IF EXISTS users;
 CREATE TABLE users
 (
@@ -65,22 +75,22 @@ CREATE TABLE users
     first_name    VARCHAR(20) 				  NOT NULL,
 	last_name     VARCHAR(20) 				  NOT NULL,
 	email 	      VARCHAR(40) 				  NOT NULL,
-    passport      VARCHAR(20)				  NOT NULL,
-	enabled       BOOL 			 	     	  NOT NULL DEFAULT TRUE,
+	user_status_id_fk TINYINT UNSIGNED 		  NOT NULL,
+    confirm       VARCHAR(40)				  NOT NULL,
     UNIQUE KEY  (login),
 	UNIQUE KEY  (email),
-    UNIQUE KEY  (passport),
     PRIMARY KEY (user_id),
-    FOREIGN KEY (role_id_fk) REFERENCES roles (role_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    FOREIGN KEY (role_id_fk) REFERENCES roles (role_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    FOREIGN KEY (user_status_id_fk) REFERENCES user_statuses (user_status_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-DROP TABLE IF EXISTS statuses;
-CREATE TABLE statuses
+DROP TABLE IF EXISTS order_statuses;
+CREATE TABLE order_statuses
 (
-	status_id TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
+	order_status_id TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
     status VARCHAR(20) NOT NULL,
     UNIQUE KEY  (status),
-    PRIMARY KEY (status_id)
+    PRIMARY KEY (order_status_id)
 );
 
 DROP TABLE IF EXISTS orders;
@@ -89,14 +99,12 @@ CREATE TABLE orders
 	order_id     INT UNSIGNED AUTO_INCREMENT NOT NULL,
     user_id_fk 	 INT UNSIGNED 				 NOT NULL,
     book_id_fk   INT UNSIGNED 			     NOT NULL,
-    status_id_fk TINYINT UNSIGNED 			 NOT NULL,
+    order_status_id_fk TINYINT UNSIGNED 	 NOT NULL,
     reading_room BOOL 			 			 NOT NULL DEFAULT FALSE,
     order_date 	 BIGINT  		 			 NOT NULL,
     return_date  BIGINT  		 			 NOT NULL,
     PRIMARY KEY (order_id),
     FOREIGN KEY (user_id_fk) REFERENCES users (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     FOREIGN KEY (book_id_fk) REFERENCES books (book_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    FOREIGN KEY (status_id_fk) REFERENCES statuses (status_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    FOREIGN KEY (order_status_id_fk) REFERENCES order_statuses (order_status_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
-
-
