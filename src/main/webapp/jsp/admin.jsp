@@ -95,14 +95,82 @@
                                             key="label.userRoleType"/></div>
                                 </th>
                                 <th scope="col">
-                                    <div class="d-flex justify-content-around"><fmt:message key="label.active"/></div>
+                                    <div class="d-flex justify-content-around"><fmt:message key="label.status"/></div>
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
 
                             <c:forEach items="${allUsers}" var="user">
-                                <c:if test="${user.enabled}">
+                                <%--<c:if test="${user.enabled}">--%>
+                                <tr class="table-success">
+                                    <td>
+                                        <div class="d-flex justify-content-around"><h4><span
+                                                class="badge badge-outline-primary"><c:out
+                                                value="${user.login}"/></span></h4></div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-around"><h4><span
+                                                class="badge badge-outline-primary"> <c:out
+                                                value="${user.name}"/></span></h4></div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-around"><h4><span
+                                                class="badge badge-outline-primary"><c:out
+                                                value="${user.surname}"/> </span></h4></div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-around"><h4><span
+                                                class="badge badge-outline-primary"><c:out
+                                                value="${user.email}"/> </span></h4></div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-around"><h4><span
+                                                class="badge badge-outline-primary"><c:out
+                                                value="${user.userRole}"/> </span></h4></div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-around"><h4><span
+                                                class="badge badge-outline-primary"><c:out
+                                                value="${user.userStatus}"/> </span></h4></div>
+                                    </td>
+
+                                    <c:choose>
+                                        <c:when test="${user.userStatus == 'ACTIVE'}">
+                                            <form action="${pageContext.request.contextPath}/controller" method="post">
+                                                <input type="hidden" name="command" value="change_user_status"/>
+                                                <input type="hidden" name="login" value="${user.login}"/>
+                                                <input type="hidden" name="enabled" value="${user.userStatus}">
+                                                <th scope="row">
+                                                    <div class="d-flex justify-content-around">
+                                                        <input style="background-color: green"
+                                                               class="btn btn-outline-success my-2 my-sm-0"
+                                                               type="submit"
+                                                               name="id" value="<fmt:message key="label.block"/>"/>
+                                                    </div>
+                                                </th>
+                                            </form>
+                                        </c:when>
+                                        <c:when test="${user.userStatus == 'BLOCKED'}">
+                                            <form action="${pageContext.request.contextPath}/controller" method="post">
+                                                <input type="hidden" name="command" value="change_user_status"/>
+                                                <input type="hidden" name="login" value="${user.login}"/>
+                                                <input type="hidden" name="status" value="${user.userStatus}">
+                                                <th scope="row">
+                                                    <div class="d-flex justify-content-around">
+                                                        <input style="background-color: red"
+                                                               class="btn btn-outline-success my-2 my-sm-0"
+                                                               type="submit"
+                                                               name="id" value="<fmt:message key="label.unlock"/>"/>
+                                                    </div>
+                                                </th>
+                                            </form>
+                                        </c:when>
+
+                                    </c:choose>
+                                </tr>
+                                <%--</c:if>--%>
+                                <%--<c:if test="${not user.enabled}">
                                     <tr class="table-success">
                                         <td>
                                             <div class="d-flex justify-content-around"><h4><span
@@ -132,57 +200,12 @@
                                         <td>
                                             <div class="d-flex justify-content-around"><h4><span
                                                     class="badge badge-outline-primary"><c:out
-                                                    value="${user.enabled}"/> </span></h4></div>
+                                                    value="${user.userStatus}"/> </span></h4></div>
                                         </td>
                                         <form action="${pageContext.request.contextPath}/controller" method="post">
                                             <input type="hidden" name="command" value="change_user_status"/>
                                             <input type="hidden" name="login" value="${user.login}"/>
-                                            <input type="hidden" name="enabled" value="${user.enabled}">
-                                            <th scope="row">
-                                                <div class="d-flex justify-content-around">
-                                                    <input style="background-color: green"
-                                                           class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                                                           name="id" value="<fmt:message key="label.block"/>"/></div>
-                                            </th>
-                                        </form>
-                                    </tr>
-                                </c:if>
-                                <c:if test="${not user.enabled}">
-                                    <tr class="table-success">
-                                        <td>
-                                            <div class="d-flex justify-content-around"><h4><span
-                                                    class="badge badge-outline-primary"><c:out
-                                                    value="${user.login}"/></span></h4></div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-around"><h4><span
-                                                    class="badge badge-outline-primary"> <c:out
-                                                    value="${user.name}"/></span></h4></div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-around"><h4><span
-                                                    class="badge badge-outline-primary"><c:out
-                                                    value="${user.surname}"/> </span></h4></div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-around"><h4><span
-                                                    class="badge badge-outline-primary"><c:out
-                                                    value="${user.email}"/> </span></h4></div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-around"><h4><span
-                                                    class="badge badge-outline-primary"><c:out
-                                                    value="${user.userRole}"/> </span></h4></div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-around"><h4><span
-                                                    class="badge badge-outline-primary"><c:out
-                                                    value="${user.enabled}"/> </span></h4></div>
-                                        </td>
-                                        <form action="${pageContext.request.contextPath}/controller" method="post">
-                                            <input type="hidden" name="command" value="change_user_status"/>
-                                            <input type="hidden" name="login" value="${user.login}"/>
-                                            <input type="hidden" name="enabled" value="${user.enabled}">
+                                            <input type="hidden" name="enabled" value="${user.userStatus}">
                                             <th scope="row">
                                                 <div class="d-flex justify-content-around">
                                                     <input style="background-color: red"
@@ -191,7 +214,7 @@
                                             </th>
                                         </form>
                                     </tr>
-                                </c:if>
+                                </c:if>--%>
                             </c:forEach>
                             </tbody>
                         </table>

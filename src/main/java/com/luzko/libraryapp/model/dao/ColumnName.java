@@ -11,5 +11,7 @@ public class ColumnName {
     public static final String NAME = "name";
     public static final String SURNAME = "surname";
     public static final String EMAIL = "email";
-    public static final String ENABLED = "enabled";
+    //public static final String ENABLED = "enabled";
+    public static final String USER_STATUS_ID_FK = "user_status_id_fk";
+    public static final String CONFIRM_CODE = "confirm";
 }

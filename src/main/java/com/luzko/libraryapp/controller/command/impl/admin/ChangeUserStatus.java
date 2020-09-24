@@ -7,6 +7,7 @@ import com.luzko.libraryapp.controller.router.Router;
 import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.entity.User;
+import com.luzko.libraryapp.model.entity.UserStatus;
 import com.luzko.libraryapp.service.UserService;
 import com.luzko.libraryapp.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
@@ -25,10 +26,13 @@ public class ChangeUserStatus implements Command {
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
         String login = request.getParameter(RequestParameter.LOGIN);
-        Boolean isEnable = Boolean.valueOf(request.getParameter(RequestParameter.ENABLED));
+        //Boolean isEnable = Boolean.valueOf(request.getParameter(RequestParameter.ENABLED));
+        String userStatus = request.getParameter(RequestParameter.USER_STATUS);
 
         try {
-            if (userService.changeUserStatus(login, isEnable)) {
+            //System.out.println(login);
+            //System.out.println(userStatus);
+            if (userService.changeUserStatus(login, userStatus)) {
                 List<User> users = userService.findAll();
                 request.getSession().setAttribute(RequestParameter.ALL_USERS, users);
                 router.setPagePath(PagePath.ADMIN);

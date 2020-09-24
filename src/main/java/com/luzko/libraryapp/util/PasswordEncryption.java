@@ -1,15 +1,12 @@
 package com.luzko.libraryapp.util;
 
-import com.luzko.libraryapp.model.dao.impl.UserDaoImpl;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Optional;
+
 
 public class PasswordEncryption {
     private static final String ENCRYPTION_ALGORITHM = "SHA-1";
@@ -22,6 +19,8 @@ public class PasswordEncryption {
 
     private PasswordEncryption() {
     }
+
+
 
     public String encrypt(String password) {
         String encryptedPassword = null;

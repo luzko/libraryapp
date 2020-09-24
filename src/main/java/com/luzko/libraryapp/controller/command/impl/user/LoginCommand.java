@@ -8,6 +8,7 @@ import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.entity.User;
 import com.luzko.libraryapp.model.entity.UserRole;
+import com.luzko.libraryapp.model.entity.UserStatus;
 import com.luzko.libraryapp.service.UserService;
 import com.luzko.libraryapp.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
@@ -31,34 +32,12 @@ public class LoginCommand implements Command {
 
         try {
             if (userService.verifyUser(login, password)) {
-                Optional<User> loggedUser = userService.findByLogin(login);
-                if (loggedUser.isPresent()) {
-                    User user = loggedUser.get();
-                    if (user.isEnabled()) {
-                        UserRole userRole = user.getUserRole();
-                        switch (userRole) {
-                            case READER -> {
-                                router.setPagePath(PagePath.READER);
-                                router.setRouterType(RouterType.REDIRECT);
-                            }
-                            case LIBRARIAN -> {
-                                router.setPagePath(PagePath.LIBRARIAN);
-                                router.setRouterType(RouterType.REDIRECT);
-                            }
-                            case ADMIN -> {
-                                List<User> users = userService.findAll();
-                                request.getSession().setAttribute(RequestParameter.ALL_USERS, users);
-                                router.setPagePath(PagePath.ADMIN);
-                                router.setRouterType(RouterType.REDIRECT);
-                            }
-                        }
-                    } else {
-                        //TODO
-                        //TODO
-                        //TODO new page. Данный пользователь заблокирован. Для разблокировки обратитесь к админу(библиотекарю..);
-                    }
+                Optional<User> userOptional = userService.findByLogin(login);
+                if (userOptional.isPresent()) {
+                    User user = userOptional.get();
+                    router = defineRouterByStatus(user, request);
                 } else {
-                    request.setAttribute(RequestParameter.ERROR_MESSAGE, "User is incorrect"); //TODO
+                    request.getSession().setAttribute(RequestParameter.ERROR_MESSAGE, "User is incorrect");
                     router.setPagePath(PagePath.ERROR);
                     router.setRouterType(RouterType.FORWARD);
                 }
@@ -75,4 +54,53 @@ public class LoginCommand implements Command {
         }
         return router;
     }
+
+    private Router defineRouterByStatus(User user, HttpServletRequest request) throws ServiceException {
+        UserStatus userStatus = user.getUserStatus();
+        Router router = new Router();
+
+        switch (userStatus) {
+            case ACTIVE -> {
+                router = defineRouterByRole(user, request);
+            }
+            case BLOCKED -> {
+                //TODO
+                //TODO new page. Данный пользователь заблокирован. Для разблокировки обратитесь к админу(библиотекарю..);
+            }
+            case UNCONFIRMED -> {
+                //TODO
+                //TODO new page. Данный пользователь не подтвердил свою почту.
+            }
+            default -> {
+                //TODO error..
+            }
+        }
+        return router;
+    }
+
+    private Router defineRouterByRole(User user, HttpServletRequest request) throws ServiceException {
+        UserRole userRole = user.getUserRole();
+        Router router = new Router();
+        switch (userRole) {
+            case READER -> {
+                router.setPagePath(PagePath.READER);
+                router.setRouterType(RouterType.REDIRECT);
+            }
+            case LIBRARIAN -> {
+                router.setPagePath(PagePath.LIBRARIAN);
+                router.setRouterType(RouterType.REDIRECT);
+            }
+            case ADMIN -> {
+                List<User> users = userService.findAll();
+                request.getSession().setAttribute(RequestParameter.ALL_USERS, users);
+                router.setPagePath(PagePath.ADMIN);
+                router.setRouterType(RouterType.REDIRECT);
+            }
+            default -> {
+                //TODO error
+            }
+        }
+        return router;
+    }
 }
+

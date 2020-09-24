@@ -17,6 +17,6 @@ public interface UserService {
 
     List<User> findAll() throws ServiceException;
 
-    boolean changeUserStatus(String login, boolean isEnable) throws ServiceException;
+    boolean changeUserStatus(String login, String userStatus) throws ServiceException;
 
 }

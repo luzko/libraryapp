@@ -13,8 +13,8 @@ public interface UserDao extends BaseDao<User> {
     Optional<User> findByLogin(String login) throws DaoException;
 
     boolean add(String login, String password, UserRole role,
-                String name, String surname, String email) throws DaoException;
+                String name, String surname, String email, String codeConfirm) throws DaoException;
 
-    boolean changeUserStatus(String login, boolean isEnable) throws DaoException;
+    boolean changeUserStatus(String login, int status) throws DaoException;
 
 }

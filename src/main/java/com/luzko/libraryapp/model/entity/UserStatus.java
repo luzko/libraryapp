@@ -1,13 +1,13 @@
 package com.luzko.libraryapp.model.entity;
 
-public enum UserRole {
-    ADMIN(1),
-    LIBRARIAN(2),
-    READER(3);
+public enum UserStatus {
+    ACTIVE(1),
+    BLOCKED(2),
+    UNCONFIRMED(3);
 
     private final int id;
 
-    UserRole(int id) {
+    UserStatus(int id) {
         this.id = id;
     }
 
@@ -15,10 +15,10 @@ public enum UserRole {
         return id;
     }
 
-    public static UserRole getRoleById(int id) {
-        for (UserRole userRole : UserRole.values()) {
-            if (userRole.id == id) {
-                return userRole;
+    public static UserStatus getStatusById(int id) {
+        for (UserStatus userStatus : UserStatus.values()) {
+            if (userStatus.id == id) {
+                return userStatus;
             }
         }
         //LOGGER.warn(String.format("Role with id: %d is not found", id));

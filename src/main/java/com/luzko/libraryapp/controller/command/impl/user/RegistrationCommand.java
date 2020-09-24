@@ -8,6 +8,7 @@ import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.service.UserService;
 import com.luzko.libraryapp.service.impl.UserServiceImpl;
+import com.luzko.libraryapp.util.ConfirmCodeGenerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -55,6 +56,7 @@ public class RegistrationCommand implements Command {
         registrationParameters.put(NAME, request.getParameter(NAME).trim());
         registrationParameters.put(SURNAME, request.getParameter(SURNAME).trim());
         registrationParameters.put(EMAIL, request.getParameter(EMAIL).trim());
+        registrationParameters.put(CONFIRM_CODE, ConfirmCodeGenerator.getInstance().generate());
         return registrationParameters;
     }
 }

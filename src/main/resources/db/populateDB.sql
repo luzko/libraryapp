@@ -62,7 +62,7 @@ VALUES ('Active'),
        ('Blocked'),
        ('Unconfirmed');
 
-INSERT INTO users (login, password, role_id_fk, first_name, last_name, email, user_status_id_fk, confirm)
+INSERT INTO users (login, password, role_id_fk, name, surname, email, user_status_id_fk, confirm)
 VALUES ('adminius', 'asdf', 1, 'not required', 'not required', 'not required', '1', '0'),
        ('librarianius', 'qwer', 2, 'Мария', 'Шилковская', 'test@gmail.com', '1', '0'),
        ('user1', 'zxcv', 3, 'Дмитрий', 'Уласовец', 'user1@gmail.com', '1', '0');

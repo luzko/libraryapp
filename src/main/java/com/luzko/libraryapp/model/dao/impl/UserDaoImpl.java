@@ -6,6 +6,7 @@ import com.luzko.libraryapp.model.dao.StatementSql;
 import com.luzko.libraryapp.model.dao.UserDao;
 import com.luzko.libraryapp.model.entity.User;
 import com.luzko.libraryapp.model.entity.UserRole;
+import com.luzko.libraryapp.model.entity.UserStatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -72,7 +73,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean add(String login, String password, UserRole role,
-                       String name, String surname, String email) throws DaoException {
+                       String name, String surname, String email, String codeConfirm) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.ADD_USER)) {
             statement.setString(1, login);
@@ -81,8 +82,8 @@ public class UserDaoImpl implements UserDao {
             statement.setString(4, name);
             statement.setString(5, surname);
             statement.setString(6, email);
-            statement.setBoolean(7, true);
-
+            statement.setInt(7, UserStatus.UNCONFIRMED.getId());
+            statement.setString(8, codeConfirm);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException("dao", e); //TODO
@@ -110,10 +111,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean changeUserStatus(String login, boolean isEnable) throws DaoException {
+    public boolean changeUserStatus(String login, int status) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.CHANGE_USER_STATUS)) {
-            statement.setBoolean(1, !isEnable);
+            statement.setInt(1, status);
             statement.setString(2, login);
             return statement.executeUpdate() == 1;
         } catch (SQLException e) {
@@ -122,14 +123,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     private User createUserFromResultSet(ResultSet resultSet) throws SQLException {
-        return resultSet.next() ? createUser(resultSet) : null;
+        return resultSet != null && resultSet.next() ? createUser(resultSet) : null;
     }
 
     private List<User> createUsersFromResultSet(ResultSet resultSet) throws SQLException {
         List<User> userList = new ArrayList<>();
-        while (resultSet.next()) {
-            User user = createUser(resultSet);
-            userList.add(user);
+        if (resultSet != null) {
+            while (resultSet.next()) {
+                User user = createUser(resultSet);
+                userList.add(user);
+            }
         }
         return userList;
     }
@@ -142,7 +145,7 @@ public class UserDaoImpl implements UserDao {
         user.setName(resultSet.getString(NAME));
         user.setSurname(resultSet.getString(SURNAME));
         user.setEmail(resultSet.getString(EMAIL));
-        user.setEnabled(resultSet.getBoolean(ENABLED));
+        user.setUserStatus(UserStatus.getStatusById(resultSet.getInt(USER_STATUS_ID_FK)));
         return user;
     }
 }

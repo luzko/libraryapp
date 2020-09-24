@@ -6,6 +6,7 @@ import com.luzko.libraryapp.model.dao.UserDao;
 import com.luzko.libraryapp.model.dao.impl.UserDaoImpl;
 import com.luzko.libraryapp.model.entity.User;
 import com.luzko.libraryapp.model.entity.UserRole;
+import com.luzko.libraryapp.model.entity.UserStatus;
 import com.luzko.libraryapp.service.UserService;
 import com.luzko.libraryapp.util.PasswordEncryption;
 import com.luzko.libraryapp.validator.UserValidator;
@@ -73,7 +74,9 @@ public class UserServiceImpl implements UserService {
                 String name = registrationParameters.get(NAME);
                 String surname = registrationParameters.get(SURNAME);
                 String email = registrationParameters.get(EMAIL);
-                isRegistered = userDao.add(login, encryptedPassword, UserRole.READER, name, surname, email);
+                String codeConfirm = registrationParameters.get(CONFIRM_CODE);
+
+                isRegistered = userDao.add(login, encryptedPassword, UserRole.READER, name, surname, email, codeConfirm);
             } catch (DaoException e) {
                 throw new ServiceException("service"); // TODO
             }
@@ -92,12 +95,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean changeUserStatus(String login, boolean isEnable) throws ServiceException {
+    public boolean changeUserStatus(String login, String userStatus) throws ServiceException {
         UserDao userDao = new UserDaoImpl();
+        boolean isChangeStatus = false;
+        UserStatus status = UserStatus.valueOf(userStatus);
         try {
-            return userDao.changeUserStatus(login, isEnable);
+            if (status == UserStatus.ACTIVE) {
+                isChangeStatus = userDao.changeUserStatus(login, UserStatus.BLOCKED.getId());
+            } else if (status == UserStatus.BLOCKED) {
+                isChangeStatus = userDao.changeUserStatus(login, UserStatus.ACTIVE.getId());
+            }
         } catch (DaoException e) {
             throw new ServiceException("service");
         }
+
+        return isChangeStatus;
     }
 }
