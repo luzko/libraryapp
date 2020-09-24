@@ -56,7 +56,7 @@
                         </label>
                         <div class="col-sm-8 ">
                             <input type="text" name="login" id="login" class="float-sm-left"
-                                   pattern="^[\\p{Alnum}._-]{5,20}$"
+                                   pattern="[A-Za-zА-Яа-я\d\-\_]{0,45}"
                                    maxlength="20"
                                    title="<fmt:message key="invalid.login"/>"
                                    required
@@ -124,7 +124,7 @@
                         </label>
                         <div class="col-sm-8">
                             <input type="text" name="surname" id="surname" class="float-sm-left"
-                                   pattern="^([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{3,23})$"
+                                   pattern="^([А-Я]{1}[а-яё]{1,20}|[A-Z]{1}[a-z]{3,20})$"
                                    maxlength="45"
                                    title="<fmt:message key="invalid.name"/>"
                                    required

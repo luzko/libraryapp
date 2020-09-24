@@ -57,7 +57,8 @@
                             <input type="text" name="login" id="login" class="float-sm-left"
                                    pattern="[A-Za-zА-Яа-я\d\-\_]{0,45}"
                                    maxlength="45"
-                                   title="<fmt:message key="invalid.login"/>" required/>
+                                   title="<fmt:message key="invalid.login"/>"
+                                   required/>
                             <c:if test="${errorLoginPasswordMessage}">
                                 <label style="color: #9fcdff"><fmt:message key="invalid.registration.login"/></label>
                             </c:if>

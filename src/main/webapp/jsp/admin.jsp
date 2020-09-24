@@ -140,7 +140,7 @@
                                             <form action="${pageContext.request.contextPath}/controller" method="post">
                                                 <input type="hidden" name="command" value="change_user_status"/>
                                                 <input type="hidden" name="login" value="${user.login}"/>
-                                                <input type="hidden" name="enabled" value="${user.userStatus}">
+                                                <input type="hidden" name="status" value="${user.userStatus}">
                                                 <th scope="row">
                                                     <div class="d-flex justify-content-around">
                                                         <input style="background-color: green"
