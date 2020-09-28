@@ -6,9 +6,9 @@ use library;
 DROP TABLE IF EXISTS categories;
 CREATE TABLE categories
 (
-  category_id   TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  category		VARCHAR(40) 				   	NOT NULL,
-  PRIMARY KEY (category_id)
+   category_id   TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
+   category		VARCHAR(40) 				   	NOT NULL,
+   PRIMARY KEY (category_id)
 );
 
 DROP TABLE IF EXISTS books;
@@ -29,10 +29,10 @@ CREATE TABLE books
 DROP TABLE IF EXISTS authors;
 CREATE TABLE authors
 (
-  author_id   	 INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  author	 	 VARCHAR(20) 		   		 NOT NULL,
-  UNIQUE  KEY(author),
-  PRIMARY KEY (author_id)
+   author_id   	 INT UNSIGNED AUTO_INCREMENT NOT NULL,
+   author	 	 VARCHAR(20) 		   		 NOT NULL,
+   UNIQUE  KEY(author),
+   PRIMARY KEY (author_id)
 );
 
 DROP TABLE IF EXISTS book_authors;
@@ -50,9 +50,9 @@ CREATE TABLE book_authors
 DROP TABLE IF EXISTS roles;
 CREATE TABLE roles
 (
-  role_id TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  role 		   VARCHAR(20) 				  NOT NULL,
-  UNIQUE  KEY(role),
+   role_id TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
+   role 		   VARCHAR(20) 				  NOT NULL,
+   UNIQUE  KEY(role),
   PRIMARY KEY (role_id)
 );
 
