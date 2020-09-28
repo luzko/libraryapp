@@ -18,6 +18,6 @@ public class ConfirmCodeGenerator {
 
     public String generate() {
         UUID confirmCodeUuid = Generators.randomBasedGenerator().generate();
-        return confirmCodeUuid.toString();
+        return confirmCodeUuid.toString().replaceAll("-", "");
     }
 }
