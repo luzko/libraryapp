@@ -1,9 +1,7 @@
 package com.luzko.libraryapp.controller.command;
 
 import com.luzko.libraryapp.controller.command.impl.admin.ChangeUserStatus;
-import com.luzko.libraryapp.controller.command.impl.page.HomePage;
-import com.luzko.libraryapp.controller.command.impl.page.LoginPage;
-import com.luzko.libraryapp.controller.command.impl.page.RegistrationPage;
+import com.luzko.libraryapp.controller.command.impl.page.*;
 import com.luzko.libraryapp.controller.command.impl.user.LocaleCommand;
 import com.luzko.libraryapp.controller.command.impl.user.RegistrationCommand;
 import com.luzko.libraryapp.controller.command.impl.user.LoginCommand;
@@ -13,6 +11,10 @@ public enum CommandType {
     LOGIN_PAGE(new LoginPage()),
     REGISTRATION_PAGE(new RegistrationPage()),
     HOME_PAGE(new HomePage()),
+    ADMIN_PAGE(new AdminPage()),
+    LIBRARIAN_PAGE(new LibrarianPage()),
+    READER_PAGE(new ReaderPage()),
+    LIBRARY_PAGE(new LibraryPage()),
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
     REGISTRATION(new RegistrationCommand()),

@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean registration(Map<String, String> registrationParameters) throws ServiceException {
+    public boolean registration(Map<String, String> registrationParameters, boolean isLibrarian) throws ServiceException {
         UserValidator validator = new UserValidator();
         //UserDao userDao = UserDaoImpl.getInstance();
         UserDao userDao = new UserDaoImpl();
@@ -76,7 +76,9 @@ public class UserServiceImpl implements UserService {
                 String email = registrationParameters.get(EMAIL);
                 String codeConfirm = registrationParameters.get(CONFIRM_CODE);
 
-                isRegistered = userDao.add(login, encryptedPassword, UserRole.READER, name, surname, email, codeConfirm);
+                UserRole userRole = isLibrarian ? UserRole.LIBRARIAN : UserRole.READER;
+
+                isRegistered = userDao.add(login, encryptedPassword, userRole, name, surname, email, codeConfirm);
             } catch (DaoException e) {
                 throw new ServiceException("service"); // TODO
             }

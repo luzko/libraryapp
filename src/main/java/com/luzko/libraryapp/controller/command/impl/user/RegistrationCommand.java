@@ -6,6 +6,7 @@ import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.controller.router.Router;
 import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
+import com.luzko.libraryapp.model.entity.UserRole;
 import com.luzko.libraryapp.service.UserService;
 import com.luzko.libraryapp.service.impl.UserServiceImpl;
 import com.luzko.libraryapp.util.ConfirmCodeGenerator;
@@ -27,12 +28,15 @@ public class RegistrationCommand implements Command {
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
         Map<String, String> registrationParameters = fillRegistrationParameters(request);
+        Object role = request.getSession().getAttribute(RequestParameter.USER_ROLE);
+        boolean isLibrarian = role == UserRole.ADMIN;
 
         try {
-            if (service.registration(registrationParameters)) {
+            if (service.registration(registrationParameters, isLibrarian)) {
                 //TODO логика по отсылки письма с подтверждем.. Редирект на страницу подтверждения..
                 //TODO
 
+                //TODO isLibrarian на админа, если нет, на страницу подтверждения..
                 router.setPagePath(PagePath.HOME);
                 router.setRouterType(RouterType.REDIRECT);
             } else {

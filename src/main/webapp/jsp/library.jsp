@@ -55,8 +55,8 @@
             </button>
         </form>
         <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="GET">
-            <input type="hidden" name="command" value="library_page"/>
-            <button type="submit" class="btn btn-outline-secondary"><label><fmt:message key="submit.library"/></label>
+            <input type="hidden" name="command" value="admin_page"/>
+            <button type="submit" class="btn btn-outline-secondary"><label><fmt:message key="submit.users"/></label>
             </button>
         </form>
         <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="post">
@@ -73,20 +73,7 @@
             <div class="row justify-content-center ">
                 <form method="get" action="${pageContext.request.contextPath}/controller">
                     <div class="jumbotron">
-                        <!-- TODO -->
-                        <nav class="navbar navbar-expand-lg navbar-light">
-                            <div class="container">
-                                <form class="form-inline" name="Simple"
-                                      action="${pageContext.request.contextPath}/controller" method="GET">
-                                    <input type="hidden" name="command" value="registration_page"/>
-                                    <button type="submit" class="btn btn-outline-secondary"><label><fmt:message
-                                            key="submit.newLibrarian"/></label>
-                                    </button>
-                                </form>
-                            </div>
-                        </nav>
-                        <!-- TODO -->
-                        <div class="d-flex justify-content-around"><h2>Users</h2></div>
+                        <div class="d-flex justify-content-around"><h2>Books</h2></div>
                         <table class="table table-bordered table-hover">
 
                             <thead class="thead-dark">
@@ -182,52 +169,6 @@
 
                                     </c:choose>
                                 </tr>
-                                <%--</c:if>--%>
-                                <%--<c:if test="${not user.enabled}">
-                                    <tr class="table-success">
-                                        <td>
-                                            <div class="d-flex justify-content-around"><h4><span
-                                                    class="badge badge-outline-primary"><c:out
-                                                    value="${user.login}"/></span></h4></div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-around"><h4><span
-                                                    class="badge badge-outline-primary"> <c:out
-                                                    value="${user.name}"/></span></h4></div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-around"><h4><span
-                                                    class="badge badge-outline-primary"><c:out
-                                                    value="${user.surname}"/> </span></h4></div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-around"><h4><span
-                                                    class="badge badge-outline-primary"><c:out
-                                                    value="${user.email}"/> </span></h4></div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-around"><h4><span
-                                                    class="badge badge-outline-primary"><c:out
-                                                    value="${user.userRole}"/> </span></h4></div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-around"><h4><span
-                                                    class="badge badge-outline-primary"><c:out
-                                                    value="${user.userStatus}"/> </span></h4></div>
-                                        </td>
-                                        <form action="${pageContext.request.contextPath}/controller" method="post">
-                                            <input type="hidden" name="command" value="change_user_status"/>
-                                            <input type="hidden" name="login" value="${user.login}"/>
-                                            <input type="hidden" name="enabled" value="${user.userStatus}">
-                                            <th scope="row">
-                                                <div class="d-flex justify-content-around">
-                                                    <input style="background-color: red"
-                                                           class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                                                           name="id" value="<fmt:message key="label.unlock"/>"/></div>
-                                            </th>
-                                        </form>
-                                    </tr>
-                                </c:if>--%>
                             </c:forEach>
                             </tbody>
                         </table>

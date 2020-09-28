@@ -18,4 +18,6 @@ public class PagePath {
     public static final String ADMIN = "/jsp/admin.jsp";
 
     public static final String LIBRARIAN = "/jsp/librarian.jsp";
+
+    public static final String LIBRARY = "/jsp/library.jsp";
 }

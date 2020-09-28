@@ -13,7 +13,7 @@ public interface UserService {
 
     Optional<User> findByLogin(String login) throws ServiceException;
 
-    boolean registration(Map<String, String> registrationParameters) throws ServiceException;
+    boolean registration(Map<String, String> registrationParameters, boolean isLibrarian) throws ServiceException;
 
     List<User> findAll() throws ServiceException;
 

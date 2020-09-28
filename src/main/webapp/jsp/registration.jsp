@@ -35,11 +35,29 @@
             <input type="submit" class="btn btn-outline-secondary" name="button"
                    value="<fmt:message key="submit.home"/>" style="color: #9fcdff"/>
         </form>
-        <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="GET">
-            <input type="hidden" name="command" value="login_page"/>
-            <input type="submit" class="btn btn-outline-secondary" name="button"
-                   value="<fmt:message key="submit.logIn"/>" style="color: #9fcdff"/>
-        </form>
+
+
+        <c:choose>
+            <c:when test="${userRole == null}">
+                <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="GET">
+                    <input type="hidden" name="command" value="login_page"/>
+                    <input type="submit" class="btn btn-outline-secondary" name="button"
+                           value="<fmt:message key="submit.logIn"/>" style="color: #9fcdff"/>
+                </form>
+            </c:when>
+
+            <c:when test="${userRole == 'ADMIN'}">
+
+                <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="GET">
+                    <input type="hidden" name="command" value="admin_page"/>
+                    <input type="submit" class="btn btn-outline-secondary" name="button"
+                           value="<fmt:message key="submit.users"/>" style="color: #9fcdff"/>
+                </form>
+            </c:when>
+
+        </c:choose>
+
+
     </div>
 </nav>
 

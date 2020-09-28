@@ -42,10 +42,37 @@
 
         <form class="form-inline" action="${pageContext.request.contextPath}/controller" method="post">
             <c:if test="${login != null}">
-                <input type="hidden" name="command" value="account_page"/>
+
+                <%--<input type="hidden" name="command" value=""/>
                 <button type="submit" class="btn btn-outline-secondary">
                     <label>Account</label>
-                </button>
+                </button>--%>
+                <c:choose>
+
+                    <c:when test="${userRole == 'ADMIN'}">
+                        <input type="hidden" name="command" value="admin_page"/>
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <label>Account</label>
+                        </button>
+                    </c:when>
+
+                    <c:when test="${userRole == 'LIBRARIAN'}">
+                        <input type="hidden" name="command" value="librarian_page"/>
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <label>Account</label>
+                        </button>
+                    </c:when>
+
+                    <c:when test="${userRole == 'READER'}">
+                        <input type="hidden" name="command" value="reader_page"/>
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <label>Account</label>
+                        </button>
+                    </c:when>
+
+                </c:choose>
+
+
             </c:if>
             <c:if test="${login == null}">
                 <input type="hidden" name="command" value="login_page"/>
