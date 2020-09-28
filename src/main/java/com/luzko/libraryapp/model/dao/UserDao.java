@@ -17,4 +17,6 @@ public interface UserDao extends BaseDao<User> {
 
     boolean changeUserStatus(String login, int status) throws DaoException;
 
+    boolean isLoginUnique(String login) throws DaoException;
+
 }

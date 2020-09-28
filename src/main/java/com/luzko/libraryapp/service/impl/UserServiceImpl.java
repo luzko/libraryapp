@@ -67,8 +67,7 @@ public class UserServiceImpl implements UserService {
         boolean isRegistered = false;
         //System.out.println(registrationParameters);
         if (validator.isValidRegistrationParameters(registrationParameters)) {
-        //if (true) {
-            //TODO проверить, что такого юзера с таким логином и такой почтой нет. !!!
+            //if (true) {
             try {
                 String login = registrationParameters.get(ColumnName.LOGIN);
                 String encryptedPassword = encryption.encrypt(registrationParameters.get(ColumnName.PASSWORD));
@@ -113,5 +112,19 @@ public class UserServiceImpl implements UserService {
         }
 
         return isChangeStatus;
+    }
+
+    @Override
+    public boolean isLoginUnique(String login) throws ServiceException {
+        System.out.println(login + " service");
+        UserDao userDao = new UserDaoImpl();
+        boolean isLoginUnique = false;
+        try {
+            isLoginUnique = userDao.isLoginUnique(login);
+        } catch (DaoException e) {
+            throw new ServiceException("service");
+        }
+
+        return isLoginUnique;
     }
 }

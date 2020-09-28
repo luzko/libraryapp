@@ -12,7 +12,7 @@
         <Console name="console">
             <PatternLayout pattern="${pattern_console}"/>
         </Console>
-        <File name="file" filename="logs/final.log">
+        <File name="file" filename="logs/libraryapp.log">
             <PatternLayout pattern="${pattern_file}"/>
         </File>
     </Appenders>

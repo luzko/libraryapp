@@ -119,6 +119,22 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    @Override
+    public boolean isLoginUnique(String login) throws DaoException {
+        System.out.println(login + " DAO");
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_BY_LOGIN)) {
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+
+            int count = resultSet.getInt(ColumnName.COUNT);
+            return count == 0;
+        } catch (SQLException e) {
+            throw new DaoException("dao", e); //TODO
+        }
+    }
+
     private User createUserFromResultSet(ResultSet resultSet) throws SQLException {
         return resultSet != null && resultSet.next() ? createUser(resultSet) : null;
     }

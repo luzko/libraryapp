@@ -32,12 +32,13 @@ public class RegistrationCommand implements Command {
         boolean isLibrarian = role == UserRole.ADMIN;
 
         try {
-            if (service.isLoginUnique()) {
+            boolean ii = service.isLoginUnique(registrationParameters.get(ColumnName.LOGIN));
+            System.out.println(ii);
+            if (ii) {
                 if (service.registration(registrationParameters, isLibrarian)) {
                     //TODO логика по отсылки письма с подтверждем.. Редирект на страницу подтверждения..
-                    //TODO
 
-                    //TODO isLibrarian на админа, если нет, на страницу подтверждения..
+                    //TODO isLibrarian на админа
                     router.setPagePath(PagePath.HOME);
                     router.setRouterType(RouterType.REDIRECT);
                 } else {

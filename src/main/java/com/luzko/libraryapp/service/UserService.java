@@ -19,4 +19,6 @@ public interface UserService {
 
     boolean changeUserStatus(String login, String userStatus) throws ServiceException;
 
+    boolean isLoginUnique(String login) throws ServiceException;
+
 }
