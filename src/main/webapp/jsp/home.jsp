@@ -33,9 +33,16 @@
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
+        <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
+            <input type="hidden" name="command" value="locale"/>
+            <button type="submit" class="btn btn-outline-secondary">
+                <label>Locale</label>
+            </button>
+        </form>
+
         <form class="form-inline" action="${pageContext.request.contextPath}/controller" method="post">
             <c:if test="${login != null}">
-                <input type="hidden" name="command" value="--------"/>
+                <input type="hidden" name="command" value="account_page"/>
                 <button type="submit" class="btn btn-outline-secondary">
                     <label>Account</label>
                 </button>
@@ -47,13 +54,8 @@
                 </button>
             </c:if>
         </form>
-        <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
-            <input type="hidden" name="command" value="locale"/>
-            <button type="submit" class="btn btn-outline-secondary">
-                <label>Locale</label>
-            </button>
-        </form>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+
+        <%--<div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#about">ABOUT</a>
@@ -62,7 +64,7 @@
                     <a class="nav-link js-scroll-trigger" href="#contact">CONTACT</a>
                 </li>
             </ul>
-        </div>
+        </div>--%>
     </div>
 </nav>
 

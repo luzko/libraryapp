@@ -37,7 +37,7 @@ public class LoginCommand implements Command {
                     User user = userOptional.get();
                     router = defineRouterByStatus(user, request);
                 } else {
-                    request.getSession().setAttribute(RequestParameter.ERROR_MESSAGE, "User is incorrect");
+                    request.setAttribute(RequestParameter.ERROR_MESSAGE, "User is incorrect");
                     router.setPagePath(PagePath.ERROR);
                     router.setRouterType(RouterType.FORWARD);
                 }
@@ -58,18 +58,21 @@ public class LoginCommand implements Command {
     private Router defineRouterByStatus(User user, HttpServletRequest request) throws ServiceException {
         UserStatus userStatus = user.getUserStatus();
         Router router = new Router();
-
+        request.getSession().setAttribute(RequestParameter.LOGIN, user.getLogin());
+        request.getSession().setAttribute(RequestParameter.USER_ROLE, user.getUserRole());
         switch (userStatus) {
             case ACTIVE -> {
                 router = defineRouterByRole(user, request);
             }
             case BLOCKED -> {
                 //TODO
-                //TODO new page. Данный пользователь заблокирован. Для разблокировки обратитесь к админу(библиотекарю..);
+                //TODO new page. Данный пользователь заблокирован. Для разблокировки обратитесь к админу..
+
             }
             case UNCONFIRMED -> {
                 //TODO
-                //TODO new page. Данный пользователь не подтвердил свою почту.
+                //TODO new page. Данный пользователь не подтвердил свою почту..
+
             }
             default -> {
                 //TODO error..
