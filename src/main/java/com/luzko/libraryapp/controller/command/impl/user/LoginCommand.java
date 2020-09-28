@@ -71,11 +71,12 @@ public class LoginCommand implements Command {
             }
             case UNCONFIRMED -> {
                 //TODO
-                //TODO new page. Данный пользователь не подтвердил свою почту..
+                //TODO new page. Страница подтверждения пароля..
 
             }
             default -> {
                 //TODO error..
+
             }
         }
         return router;
@@ -101,6 +102,7 @@ public class LoginCommand implements Command {
             }
             default -> {
                 //TODO error
+
             }
         }
         return router;

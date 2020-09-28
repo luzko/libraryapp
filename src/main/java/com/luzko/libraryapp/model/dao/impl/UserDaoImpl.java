@@ -2,6 +2,7 @@ package com.luzko.libraryapp.model.dao.impl;
 
 import com.luzko.libraryapp.connection.ConnectionPool;
 import com.luzko.libraryapp.exception.DaoException;
+import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.StatementSql;
 import com.luzko.libraryapp.model.dao.UserDao;
 import com.luzko.libraryapp.model.entity.User;
@@ -15,8 +16,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static com.luzko.libraryapp.model.dao.ColumnName.*;
 
 public class UserDaoImpl implements UserDao {
     //private static final UserDaoImpl INSTANCE = new UserDaoImpl();
@@ -38,7 +37,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             String userPassword = null;
             if (resultSet.next()) {
-                userPassword = resultSet.getString(PASSWORD);
+                userPassword = resultSet.getString(ColumnName.PASSWORD);
             }
             return userPassword;
         } catch (SQLException e) {
@@ -63,8 +62,6 @@ public class UserDaoImpl implements UserDao {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ALL_USERS)) {
             ResultSet resultSet = statement.executeQuery();
-            System.out.println("dao resultSet " + resultSet);
-            //System.out.println("dao " + createUsersFromResultSet(resultSet));
             return createUsersFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new DaoException("dao"); //TODO
@@ -139,13 +136,13 @@ public class UserDaoImpl implements UserDao {
 
     private User createUser(ResultSet resultSet) throws SQLException {
         User user = new User();
-        user.setUserId(resultSet.getLong(USER_ID));
-        user.setLogin(resultSet.getString(LOGIN));
-        user.setUserRole(UserRole.getRoleById(resultSet.getInt(ROLE_ID_FK)));
-        user.setName(resultSet.getString(NAME));
-        user.setSurname(resultSet.getString(SURNAME));
-        user.setEmail(resultSet.getString(EMAIL));
-        user.setUserStatus(UserStatus.getStatusById(resultSet.getInt(USER_STATUS_ID_FK)));
+        user.setUserId(resultSet.getLong(ColumnName.USER_ID));
+        user.setLogin(resultSet.getString(ColumnName.LOGIN));
+        user.setUserRole(UserRole.getRoleById(resultSet.getInt(ColumnName.ROLE_ID_FK)));
+        user.setName(resultSet.getString(ColumnName.NAME));
+        user.setSurname(resultSet.getString(ColumnName.SURNAME));
+        user.setEmail(resultSet.getString(ColumnName.EMAIL));
+        user.setUserStatus(UserStatus.getStatusById(resultSet.getInt(ColumnName.USER_STATUS_ID_FK)));
         return user;
     }
 }

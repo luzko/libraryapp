@@ -18,7 +18,6 @@ public class LocaleCommand implements Command {
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
         String locale = (String) request.getSession().getAttribute(RequestParameter.LOCALE);
-        //System.out.println("locale === " + locale);
         //TODO locale = null
         if (locale == null || locale.equals(RequestParameter.RUS)) {
             request.getSession().setAttribute(RequestParameter.LOCALE, RequestParameter.ENG);
@@ -29,6 +28,5 @@ public class LocaleCommand implements Command {
         router.setPagePath(PagePath.HOME);
         router.setRouterType(RouterType.FORWARD);
         return router;
-
     }
 }

@@ -63,9 +63,9 @@ VALUES ('Active'),
        ('Unconfirmed');
 
 INSERT INTO users (login, password, role_id_fk, name, surname, email, user_status_id_fk, confirm)
-VALUES ('adminius', 'asdf', 1, 'not required', 'not required', 'not required', '1', '0'),
-       ('librarianius', 'qwer', 2, 'Мария', 'Шилковская', 'test@gmail.com', '1', '0'),
-       ('user1', 'zxcv', 3, 'Дмитрий', 'Уласовец', 'user1@gmail.com', '1', '0');
+VALUES ('adminius', '1161e6ffd3637b302a5cd74076283a7bd1fc20d3', 1, 'not required', 'not required', 'not required', '1', '0'),
+       ('librarianius', '3da541559918a808c2402bba5012f6c60b27661c', 2, 'Мария', 'Шилковская', 'test@gmail.com', '1', '0'),
+       ('user1', '9878e362285eb314cfdbaa8ee8c300c285856810', 3, 'Дмитрий', 'Уласовец', 'user1@gmail.com', '1', '0');
 
 INSERT INTO order_statuses (status)
 VALUES ('New'),

@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS library;
-CREATE DATABASE library;
+CREATE DATABASE library CHARACTER SET utf8;
 
 use library;
 

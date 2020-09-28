@@ -5,7 +5,6 @@
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="prop.pagecontent"/>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -39,7 +38,8 @@
 
         <c:choose>
             <c:when test="${userRole == null}">
-                <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="GET">
+                <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller"
+                      method="GET">
                     <input type="hidden" name="command" value="login_page"/>
                     <input type="submit" class="btn btn-outline-secondary" name="button"
                            value="<fmt:message key="submit.logIn"/>" style="color: #9fcdff"/>
@@ -48,7 +48,8 @@
 
             <c:when test="${userRole == 'ADMIN'}">
 
-                <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="GET">
+                <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller"
+                      method="GET">
                     <input type="hidden" name="command" value="admin_page"/>
                     <input type="submit" class="btn btn-outline-secondary" name="button"
                            value="<fmt:message key="submit.users"/>" style="color: #9fcdff"/>

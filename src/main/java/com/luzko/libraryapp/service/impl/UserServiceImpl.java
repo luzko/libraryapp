@@ -2,6 +2,7 @@ package com.luzko.libraryapp.service.impl;
 
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
+import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.UserDao;
 import com.luzko.libraryapp.model.dao.impl.UserDaoImpl;
 import com.luzko.libraryapp.model.entity.User;
@@ -14,8 +15,6 @@ import com.luzko.libraryapp.validator.UserValidator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-import static com.luzko.libraryapp.model.dao.ColumnName.*;
 
 public class UserServiceImpl implements UserService {
 
@@ -66,15 +65,17 @@ public class UserServiceImpl implements UserService {
         UserDao userDao = new UserDaoImpl();
         PasswordEncryption encryption = PasswordEncryption.getInstance();
         boolean isRegistered = false;
+        //System.out.println(registrationParameters);
         if (validator.isValidRegistrationParameters(registrationParameters)) {
+        //if (true) {
             //TODO проверить, что такого юзера с таким логином и такой почтой нет. !!!
             try {
-                String login = registrationParameters.get(LOGIN);
-                String encryptedPassword = encryption.encrypt(registrationParameters.get(PASSWORD));
-                String name = registrationParameters.get(NAME);
-                String surname = registrationParameters.get(SURNAME);
-                String email = registrationParameters.get(EMAIL);
-                String codeConfirm = registrationParameters.get(CONFIRM_CODE);
+                String login = registrationParameters.get(ColumnName.LOGIN);
+                String encryptedPassword = encryption.encrypt(registrationParameters.get(ColumnName.PASSWORD));
+                String name = registrationParameters.get(ColumnName.NAME);
+                String surname = registrationParameters.get(ColumnName.SURNAME);
+                String email = registrationParameters.get(ColumnName.EMAIL);
+                String codeConfirm = registrationParameters.get(ColumnName.CONFIRM_CODE);
 
                 UserRole userRole = isLibrarian ? UserRole.LIBRARIAN : UserRole.READER;
 

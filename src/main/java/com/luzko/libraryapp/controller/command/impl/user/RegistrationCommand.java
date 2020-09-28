@@ -6,6 +6,7 @@ import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.controller.router.Router;
 import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
+import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.entity.UserRole;
 import com.luzko.libraryapp.service.UserService;
 import com.luzko.libraryapp.service.impl.UserServiceImpl;
@@ -18,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.luzko.libraryapp.model.dao.ColumnName.*;
 
 public class RegistrationCommand implements Command {
     private static Logger logger = LogManager.getLogger(RegistrationCommand.class);
@@ -55,12 +55,17 @@ public class RegistrationCommand implements Command {
 
     private Map<String, String> fillRegistrationParameters(HttpServletRequest request) {
         Map<String, String> registrationParameters = new HashMap<>();
-        registrationParameters.put(LOGIN, request.getParameter(LOGIN).trim());
-        registrationParameters.put(PASSWORD, request.getParameter(PASSWORD).trim());
-        registrationParameters.put(NAME, request.getParameter(NAME).trim());
-        registrationParameters.put(SURNAME, request.getParameter(SURNAME).trim());
-        registrationParameters.put(EMAIL, request.getParameter(EMAIL).trim());
-        registrationParameters.put(CONFIRM_CODE, ConfirmCodeGenerator.getInstance().generate());
+        registrationParameters.put(ColumnName.LOGIN, request.getParameter(ColumnName.LOGIN).trim());
+        registrationParameters.put(ColumnName.PASSWORD, request.getParameter(ColumnName.PASSWORD).trim());
+        registrationParameters.put(ColumnName.NAME, request.getParameter(ColumnName.NAME).trim());
+        registrationParameters.put(ColumnName.SURNAME, request.getParameter(ColumnName.SURNAME).trim());
+        registrationParameters.put(ColumnName.EMAIL, request.getParameter(ColumnName.EMAIL).trim());
+        registrationParameters.put(ColumnName.CONFIRM_CODE, ConfirmCodeGenerator.getInstance().generate());
+
+        System.out.println(request.getParameter(ColumnName.SURNAME));
+        System.out.println(request.getParameter(ColumnName.NAME));
+
+
         return registrationParameters;
     }
 }
