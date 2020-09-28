@@ -32,15 +32,22 @@ public class RegistrationCommand implements Command {
         boolean isLibrarian = role == UserRole.ADMIN;
 
         try {
-            if (service.registration(registrationParameters, isLibrarian)) {
-                //TODO логика по отсылки письма с подтверждем.. Редирект на страницу подтверждения..
-                //TODO
+            if (service.isLoginUnique()) {
+                if (service.registration(registrationParameters, isLibrarian)) {
+                    //TODO логика по отсылки письма с подтверждем.. Редирект на страницу подтверждения..
+                    //TODO
 
-                //TODO isLibrarian на админа, если нет, на страницу подтверждения..
-                router.setPagePath(PagePath.HOME);
-                router.setRouterType(RouterType.REDIRECT);
+                    //TODO isLibrarian на админа, если нет, на страницу подтверждения..
+                    router.setPagePath(PagePath.HOME);
+                    router.setRouterType(RouterType.REDIRECT);
+                } else {
+                    request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE, "Incorrect data");
+                    request.setAttribute("registrationParameters", registrationParameters);
+                    router.setPagePath(PagePath.REGISTRATION);
+                    router.setRouterType(RouterType.FORWARD);
+                }
             } else {
-                request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE, "Incorrect data");
+                request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE, "This login is already in use in the system");
                 request.setAttribute("registrationParameters", registrationParameters);
                 router.setPagePath(PagePath.REGISTRATION);
                 router.setRouterType(RouterType.FORWARD);
@@ -64,7 +71,6 @@ public class RegistrationCommand implements Command {
 
         System.out.println(request.getParameter(ColumnName.SURNAME));
         System.out.println(request.getParameter(ColumnName.NAME));
-
 
         return registrationParameters;
     }

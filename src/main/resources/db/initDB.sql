@@ -78,7 +78,6 @@ CREATE TABLE users
 	user_status_id_fk TINYINT UNSIGNED 		  NOT NULL,
     confirm       VARCHAR(40)				  NOT NULL,
     UNIQUE KEY  (login),
-	UNIQUE KEY  (email),
     PRIMARY KEY (user_id),
     FOREIGN KEY (role_id_fk) REFERENCES roles (role_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     FOREIGN KEY (user_status_id_fk) REFERENCES user_statuses (user_status_id) ON DELETE RESTRICT ON UPDATE RESTRICT
