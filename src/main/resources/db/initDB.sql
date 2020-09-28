@@ -53,7 +53,7 @@ CREATE TABLE roles
    role_id TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
    role 		   VARCHAR(20) 				  NOT NULL,
    UNIQUE  KEY(role),
-  PRIMARY KEY (role_id)
+   PRIMARY KEY (role_id)
 );
 
 DROP TABLE IF EXISTS user_statuses;
