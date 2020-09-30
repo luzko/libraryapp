@@ -1,29 +1,20 @@
 package com.luzko.libraryapp.model.entity;
 
 public enum UserRole {
-    ADMIN(1),
-    LIBRARIAN(2),
-    READER(3);
+    ADMIN,
+    LIBRARIAN,
+    READER;
 
-    private final int id;
-
-    UserRole(int id) {
-        this.id = id;
+    public int defineId() {
+        return this.ordinal() + 1;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public static UserRole getRoleById(int id) {
+    public static UserRole defineRoleById(int id) {
         for (UserRole userRole : UserRole.values()) {
-            if (userRole.id == id) {
+            if (userRole.defineId() == id) {
                 return userRole;
             }
         }
-        //LOGGER.warn(String.format("Role with id: %d is not found", id));
-        throw new EnumConstantNotPresentException(UserRole.class, String.format("Role with id: %d is not found", id));
-        //throw new Exception(""); //TODO
-        //TODO !!!!!!! change
+        return null;
     }
 }

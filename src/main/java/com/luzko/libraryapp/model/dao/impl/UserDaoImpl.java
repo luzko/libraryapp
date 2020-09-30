@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao {
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_USER_BY_LOGIN)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
-            return Optional.of(createUserFromResultSet(resultSet));
+            return createUserFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new DaoException("dao", e); //TODO
         }
@@ -75,11 +75,11 @@ public class UserDaoImpl implements UserDao {
              PreparedStatement statement = connection.prepareStatement(StatementSql.ADD_USER)) {
             statement.setString(1, login);
             statement.setString(2, password);
-            statement.setInt(3, role.getId());
+            statement.setInt(3, role.defineId());
             statement.setString(4, name);
             statement.setString(5, surname);
             statement.setString(6, email);
-            statement.setInt(7, UserStatus.UNCONFIRMED.getId());
+            statement.setInt(7, UserStatus.UNCONFIRMED.defineId());
             statement.setString(8, codeConfirm);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -135,31 +135,35 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    private User createUserFromResultSet(ResultSet resultSet) throws SQLException {
-        return resultSet != null && resultSet.next() ? createUser(resultSet) : null;
+    private Optional<User> createUserFromResultSet(ResultSet resultSet) throws SQLException {
+        return resultSet != null && resultSet.next() ? createUser(resultSet) : Optional.empty();
     }
 
     private List<User> createUsersFromResultSet(ResultSet resultSet) throws SQLException {
         List<User> userList = new ArrayList<>();
         if (resultSet != null) {
             while (resultSet.next()) {
-                User user = createUser(resultSet);
-                userList.add(user);
+                Optional<User> userOptional = createUser(resultSet);
+                userOptional.ifPresent(userList::add);
             }
         }
         return userList;
     }
 
-    private User createUser(ResultSet resultSet) throws SQLException {
+    private Optional<User> createUser(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setUserId(resultSet.getLong(ColumnName.USER_ID));
         user.setLogin(resultSet.getString(ColumnName.LOGIN));
-        user.setUserRole(UserRole.getRoleById(resultSet.getInt(ColumnName.ROLE_ID_FK)));
+        user.setUserRole(UserRole.defineRoleById(resultSet.getInt(ColumnName.ROLE_ID_FK)));
         user.setName(resultSet.getString(ColumnName.NAME));
         user.setSurname(resultSet.getString(ColumnName.SURNAME));
         user.setEmail(resultSet.getString(ColumnName.EMAIL));
-        user.setUserStatus(UserStatus.getStatusById(resultSet.getInt(ColumnName.USER_STATUS_ID_FK)));
-        return user;
+        user.setUserStatus(UserStatus.defineStatusById(resultSet.getInt(ColumnName.USER_STATUS_ID_FK)));
+        Optional<User> userOptional = Optional.empty();
+
+        if (user.getUserRole() != null && user.getUserStatus() != null) {
+            userOptional = Optional.of(user);
+        }
+        return userOptional;
     }
 }
-

@@ -19,6 +19,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private static final UserServiceImpl instance = new UserServiceImpl();
+    //TODO add logger..
 
     private UserServiceImpl() {
     }
@@ -98,8 +99,8 @@ public class UserServiceImpl implements UserService {
         UserStatus status = UserStatus.valueOf(userStatus);
         boolean isChangeStatus;
         try {
-            int statusNumber = status == UserStatus.ACTIVE ? UserStatus.BLOCKED.getId() : UserStatus.ACTIVE.getId();
-            isChangeStatus = userDao.changeUserStatus(login, statusNumber);
+            int statusCode = status == UserStatus.ACTIVE ? UserStatus.BLOCKED.defineId() : UserStatus.ACTIVE.defineId();
+            isChangeStatus = userDao.changeUserStatus(login, statusCode);
         } catch (DaoException e) {
             throw new ServiceException("service", e);
         }
