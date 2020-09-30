@@ -20,6 +20,8 @@ public class PagePath {
     public static final String LIBRARIAN = "/jsp/librarian.jsp";
 
     public static final String LIBRARY = "/jsp/library.jsp";
+
+    public static final String CONFIRMATION = "/jsp/confirmation.jsp";
 }
 
 //TODO replace in property

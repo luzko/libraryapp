@@ -5,7 +5,6 @@
 <%--<%@ taglib prefix="ctg" uri="customtags"%>--%>
 <fmt:setBundle basename="prop.pagecontent"/>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -128,8 +127,10 @@
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
                                 <div class="project-text w-100 my-auto text-center text-lg-left">
-                                    <h4 class="text-white"><fmt:message key="text.site.why"/></h4>
-                                    <p class="mb-0 text-white-50"><fmt:message key="text.site.why.description"/></p>
+                                    <h4 class="text-white" style="margin-left: 10px"><fmt:message
+                                            key="text.site.why"/></h4>
+                                    <p class="mb-0 text-white-50" style="margin-left: 10px"><fmt:message
+                                            key="text.site.why.description"/></p>
                                     <hr class="d-none d-lg-block mb-0 ml-0">
                                 </div>
                             </div>
@@ -145,8 +146,9 @@
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
                                 <div class="project-text w-100 my-auto text-center text-lg-right">
-                                    <h4 class="text-white"><fmt:message key="text.site.why.second"/></h4>
-                                    <p class="mb-0 text-white-50"><fmt:message
+                                    <h4 class="text-white" style="margin-right: 10px"><fmt:message
+                                            key="text.site.why.second"/></h4>
+                                    <p class="mb-0 text-white-50" style="margin-right: 10px"><fmt:message
                                             key="text.site.why.second.description"/></p>
                                     <hr class="d-none d-lg-block mb-0 mr-0">
                                 </div>

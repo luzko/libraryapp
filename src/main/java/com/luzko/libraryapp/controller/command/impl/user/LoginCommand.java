@@ -60,6 +60,7 @@ public class LoginCommand implements Command {
         Router router = new Router();
         request.getSession().setAttribute(RequestParameter.LOGIN, user.getLogin());
         request.getSession().setAttribute(RequestParameter.USER_ROLE, user.getUserRole());
+        request.getSession().setAttribute(RequestParameter.USER_STATUS, userStatus);
         switch (userStatus) {
             case ACTIVE -> {
                 router = defineRouterByRole(user, request);
@@ -70,9 +71,8 @@ public class LoginCommand implements Command {
 
             }
             case UNCONFIRMED -> {
-                //TODO
-                //TODO new page. Страница подтверждения пароля..
-
+                router.setPagePath(PagePath.CONFIRMATION);
+                router.setRouterType(RouterType.REDIRECT);
             }
             default -> {
                 //TODO error..
