@@ -21,3 +21,5 @@ public class PagePath {
 
     public static final String LIBRARY = "/jsp/library.jsp";
 }
+
+//TODO replace in property

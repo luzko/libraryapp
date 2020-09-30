@@ -23,3 +23,6 @@ public class RequestParameter {
 
     public static final String ALL_USERS = "allUsers";
 }
+
+
+//TODO replace in property

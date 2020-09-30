@@ -48,7 +48,7 @@ public class LoginCommand implements Command {
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in login", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestParameter.ERROR_MESSAGE, e); //TODO e?
             router.setPagePath(PagePath.ERROR);
             router.setRouterType(RouterType.FORWARD);
         }

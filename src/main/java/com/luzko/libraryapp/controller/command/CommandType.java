@@ -1,25 +1,25 @@
 package com.luzko.libraryapp.controller.command;
 
-import com.luzko.libraryapp.controller.command.impl.admin.ChangeUserStatus;
+import com.luzko.libraryapp.controller.command.impl.admin.ChangeUserStatusCommand;
 import com.luzko.libraryapp.controller.command.impl.page.*;
-import com.luzko.libraryapp.controller.command.impl.user.LocaleCommand;
+import com.luzko.libraryapp.controller.command.impl.user.ChangeLocaleCommand;
 import com.luzko.libraryapp.controller.command.impl.user.RegistrationCommand;
 import com.luzko.libraryapp.controller.command.impl.user.LoginCommand;
 import com.luzko.libraryapp.controller.command.impl.user.LogoutCommand;
 
 public enum CommandType {
-    LOGIN_PAGE(new LoginPage()),
-    REGISTRATION_PAGE(new RegistrationPage()),
-    HOME_PAGE(new HomePage()),
-    ADMIN_PAGE(new AdminPage()),
-    LIBRARIAN_PAGE(new LibrarianPage()),
-    READER_PAGE(new ReaderPage()),
-    LIBRARY_PAGE(new LibraryPage()),
+    LOGIN_PAGE(new LoginPageCommand()),
+    REGISTRATION_PAGE(new RegistrationPageCommand()),
+    HOME_PAGE(new HomePageCommand()),
+    ADMIN_PAGE(new AdminPageCommand()),
+    LIBRARIAN_PAGE(new LibrarianPageCommand()),
+    READER_PAGE(new ReaderPageCommand()),
+    LIBRARY_PAGE(new LibraryPageCommand()),
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
     REGISTRATION(new RegistrationCommand()),
-    LOCALE(new LocaleCommand()),
-    CHANGE_USER_STATUS(new ChangeUserStatus());
+    LOCALE(new ChangeLocaleCommand()),
+    CHANGE_USER_STATUS(new ChangeUserStatusCommand());
 
     private final Command command;
 

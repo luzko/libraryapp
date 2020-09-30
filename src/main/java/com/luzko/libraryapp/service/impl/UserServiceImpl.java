@@ -75,9 +75,7 @@ public class UserServiceImpl implements UserService {
                 String surname = registrationParameters.get(ColumnName.SURNAME);
                 String email = registrationParameters.get(ColumnName.EMAIL);
                 String codeConfirm = registrationParameters.get(ColumnName.CONFIRM_CODE);
-
                 UserRole userRole = isLibrarian ? UserRole.LIBRARIAN : UserRole.READER;
-
                 isRegistered = userDao.add(login, encryptedPassword, userRole, name, surname, email, codeConfirm);
             } catch (DaoException e) {
                 throw new ServiceException("service"); // TODO
@@ -98,6 +96,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean changeUserStatus(String login, String userStatus) throws ServiceException {
+        //TODO проверка входных значений.. чтоб типо не null, ибо смысл дальше что-то делать, если null..
         UserDao userDao = new UserDaoImpl();
         boolean isChangeStatus = false;
         UserStatus status = UserStatus.valueOf(userStatus);
@@ -122,7 +121,7 @@ public class UserServiceImpl implements UserService {
         try {
             isLoginUnique = userDao.isLoginUnique(login);
         } catch (DaoException e) {
-            throw new ServiceException("service");
+            throw new ServiceException("service", e);
         }
 
         return isLoginUnique;

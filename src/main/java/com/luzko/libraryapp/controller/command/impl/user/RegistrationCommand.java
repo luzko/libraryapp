@@ -27,15 +27,13 @@ public class RegistrationCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
-        Map<String, String> registrationParameters = fillRegistrationParameters(request);
+        Map<String, String> registrationParameter = fillRegistrationParameter(request);
         Object role = request.getSession().getAttribute(RequestParameter.USER_ROLE);
         boolean isLibrarian = role == UserRole.ADMIN;
 
         try {
-            boolean ii = service.isLoginUnique(registrationParameters.get(ColumnName.LOGIN));
-            System.out.println(ii);
-            if (ii) {
-                if (service.registration(registrationParameters, isLibrarian)) {
+            if (service.isLoginUnique(registrationParameter.get(ColumnName.LOGIN))) {
+                if (service.registration(registrationParameter, isLibrarian)) {
                     //TODO логика по отсылки письма с подтверждем.. Редирект на страницу подтверждения..
 
                     //TODO isLibrarian на админа
@@ -43,13 +41,13 @@ public class RegistrationCommand implements Command {
                     router.setRouterType(RouterType.REDIRECT);
                 } else {
                     request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE, "Incorrect data");
-                    request.setAttribute("registrationParameters", registrationParameters);
+                    request.setAttribute("registrationParameters", registrationParameter);
                     router.setPagePath(PagePath.REGISTRATION);
                     router.setRouterType(RouterType.FORWARD);
                 }
             } else {
                 request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE, "This login is already in use in the system");
-                request.setAttribute("registrationParameters", registrationParameters);
+                request.setAttribute("registrationParameters", registrationParameter);
                 router.setPagePath(PagePath.REGISTRATION);
                 router.setRouterType(RouterType.FORWARD);
             }
@@ -61,7 +59,7 @@ public class RegistrationCommand implements Command {
         return router;
     }
 
-    private Map<String, String> fillRegistrationParameters(HttpServletRequest request) {
+    private Map<String, String> fillRegistrationParameter(HttpServletRequest request) {
         Map<String, String> registrationParameters = new HashMap<>();
         registrationParameters.put(ColumnName.LOGIN, request.getParameter(ColumnName.LOGIN).trim());
         registrationParameters.put(ColumnName.PASSWORD, request.getParameter(ColumnName.PASSWORD).trim());
@@ -69,10 +67,9 @@ public class RegistrationCommand implements Command {
         registrationParameters.put(ColumnName.SURNAME, request.getParameter(ColumnName.SURNAME).trim());
         registrationParameters.put(ColumnName.EMAIL, request.getParameter(ColumnName.EMAIL).trim());
         registrationParameters.put(ColumnName.CONFIRM_CODE, ConfirmCodeGenerator.getInstance().generate());
-
-        System.out.println(request.getParameter(ColumnName.SURNAME));
-        System.out.println(request.getParameter(ColumnName.NAME));
-
         return registrationParameters;
     }
 }
+
+//TODO logger..
+//TODO add filter..

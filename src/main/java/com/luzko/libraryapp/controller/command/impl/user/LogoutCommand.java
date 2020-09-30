@@ -26,3 +26,5 @@ public class LogoutCommand implements Command {
         return router;
     }
 }
+
+//TODO logger..

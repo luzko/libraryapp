@@ -17,28 +17,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class ChangeUserStatus implements Command {
-    private static final Logger logger = LogManager.getLogger(ChangeUserStatus.class);
-    private static final UserService userService = UserServiceImpl.getInstance();
+public class ChangeUserStatusCommand implements Command {
+    private static final Logger logger = LogManager.getLogger(ChangeUserStatusCommand.class);
 
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
+        UserService userService = UserServiceImpl.getInstance();
         Router router = new Router();
         String login = request.getParameter(RequestParameter.LOGIN);
         String userStatus = request.getParameter(RequestParameter.USER_STATUS);
 
         try {
-            if (userService.changeUserStatus(login, userStatus)) {
-                List<User> users = userService.findAll();
-                request.getSession().setAttribute(RequestParameter.ALL_USERS, users);
-                router.setPagePath(PagePath.ADMIN);
-                router.setRouterType(RouterType.REDIRECT);
-            } else {
-                //TODO что-то пошло не так..
+            boolean isChangeUserStatus = userService.changeUserStatus(login, userStatus);
+            List<User> users = userService.findAll();
+            request.getSession().setAttribute(RequestParameter.ALL_USERS, users);
+            router.setPagePath(PagePath.ADMIN);
+            router.setRouterType(RouterType.REDIRECT);
+            if (!isChangeUserStatus) {
+                logger.log(Level.WARN, "User status is not change");
+                request.setAttribute(RequestParameter.ERROR_MESSAGE, "User status is not change");
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in change status", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestParameter.ERROR_MESSAGE, e); //TODO нужно ли e?
             router.setPagePath(PagePath.ERROR);
             router.setRouterType(RouterType.FORWARD);
         }

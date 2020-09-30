@@ -8,11 +8,11 @@ import com.luzko.libraryapp.controller.router.RouterType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LibraryPage implements Command {
+public class AdminPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
-        router.setPagePath(PagePath.LIBRARY);
+        router.setPagePath(PagePath.ADMIN);
         router.setRouterType(RouterType.FORWARD);
         return router;
     }

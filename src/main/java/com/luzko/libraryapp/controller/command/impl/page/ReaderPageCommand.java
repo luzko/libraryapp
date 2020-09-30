@@ -8,12 +8,12 @@ import com.luzko.libraryapp.controller.router.RouterType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class RegistrationPage implements Command {
+public class ReaderPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
-        router.setPagePath(PagePath.REGISTRATION);
-        router.setRouterType(RouterType.REDIRECT);
+        router.setPagePath(PagePath.READER);
+        router.setRouterType(RouterType.FORWARD);
         return router;
     }
 }

@@ -11,14 +11,15 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LocaleCommand implements Command {
-    private static final Logger logger = LogManager.getLogger(LocaleCommand.class);
+public class ChangeLocaleCommand implements Command {
+    private static final Logger logger = LogManager.getLogger(ChangeLocaleCommand.class);
 
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
         String locale = (String) request.getSession().getAttribute(RequestParameter.LOCALE);
-        //TODO locale = null
+        //TODO locale = null.. Настроить локаль по дефолту..
+        //TODO logger..
         if (locale == null || locale.equals(RequestParameter.RUS)) {
             request.getSession().setAttribute(RequestParameter.LOCALE, RequestParameter.ENG);
         } else if (locale.equals(RequestParameter.ENG)) {

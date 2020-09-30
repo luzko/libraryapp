@@ -35,6 +35,8 @@ public class LibraryController extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
         Command command = ActionProvider.defineCommand(commandName);
+        //TODO Optional<Command> если существует, то норм. Если нет, то сразу на страницу ошибки.
+        //TODO добавить объект, что не гонять request вне контроллера..
         Router router = command.execute(request, response);
         if (router.getRouterType().equals(RouterType.FORWARD)) {
             request.getRequestDispatcher(router.getPagePath()).forward(request, response);

@@ -5,7 +5,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ActionProvider {
-    private static Logger logger = LogManager.getLogger(ActionProvider.class);
+    private static final Logger logger = LogManager.getLogger(ActionProvider.class);
+
+    private ActionProvider() {
+
+    }
 
     public static Command defineCommand(String commandName) {
         Command command = null;
@@ -21,3 +25,5 @@ public class ActionProvider {
         return command;
     }
 }
+
+//TODO public static Optional<Command> defineCommand(String commandName) {
