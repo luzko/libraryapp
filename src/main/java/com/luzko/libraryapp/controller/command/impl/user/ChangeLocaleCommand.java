@@ -18,9 +18,8 @@ public class ChangeLocaleCommand implements Command {
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
         String locale = (String) request.getSession().getAttribute(RequestParameter.LOCALE);
-        //TODO locale = null.. Настроить локаль по дефолту..
-        //TODO logger..
-        if (locale == null || locale.equals(RequestParameter.RUS)) {
+
+        if (locale.equals(RequestParameter.RUS)) {
             request.getSession().setAttribute(RequestParameter.LOCALE, RequestParameter.ENG);
         } else if (locale.equals(RequestParameter.ENG)) {
             request.getSession().setAttribute(RequestParameter.LOCALE, RequestParameter.RUS);

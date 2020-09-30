@@ -30,7 +30,6 @@ public class RegistrationCommand implements Command {
         Map<String, String> registrationParameter = fillRegistrationParameter(request);
         Object role = request.getSession().getAttribute(RequestParameter.USER_ROLE);
         boolean isLibrarian = role == UserRole.ADMIN;
-
         try {
             if (service.isLoginUnique(registrationParameter.get(ColumnName.LOGIN))) {
                 if (service.registration(registrationParameter, isLibrarian)) {

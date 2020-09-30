@@ -18,6 +18,7 @@ public class RequestParameter {
 
 
     public static final String LOCALE = "locale";
+    public static final String ENCODING = "encoding";
     public static final String RUS = "ru_RU";
     public static final String ENG = "en_US";
 
