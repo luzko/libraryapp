@@ -18,20 +18,20 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
-    //private static final UserDaoImpl INSTANCE = new UserDaoImpl();
-    private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
+    private static final UserDaoImpl INSTANCE = new UserDaoImpl();
+    //TODO add logger..
 
-    //private UserDaoImpl() {
+    private UserDaoImpl() {
 
-    //}
+    }
 
-    //public static UserDaoImpl getInstance() {
-    //    return INSTANCE;
-    //}
+    public static UserDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public String findPasswordByLogin(String login) throws DaoException {
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PASSWORD_BY_LOGIN)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
@@ -41,37 +41,37 @@ public class UserDaoImpl implements UserDao {
             }
             return userPassword;
         } catch (SQLException e) {
-            throw new DaoException("dao"); //TODO
+            throw new DaoException("dao", e); //TODO
         }
     }
 
     @Override
     public Optional<User> findByLogin(String login) throws DaoException {
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_USER_BY_LOGIN)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             return Optional.of(createUserFromResultSet(resultSet));
         } catch (SQLException e) {
-            throw new DaoException("dao"); //TODO
+            throw new DaoException("dao", e); //TODO
         }
     }
 
     @Override
     public List<User> findAll() throws DaoException {
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ALL_USERS)) {
             ResultSet resultSet = statement.executeQuery();
             return createUsersFromResultSet(resultSet);
         } catch (SQLException e) {
-            throw new DaoException("dao"); //TODO
+            throw new DaoException("dao", e); //TODO
         }
     }
 
     @Override
     public boolean add(String login, String password, UserRole role,
                        String name, String surname, String email, String codeConfirm) throws DaoException {
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.ADD_USER)) {
             statement.setString(1, login);
             statement.setString(2, password);
@@ -109,7 +109,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean changeUserStatus(String login, int status) throws DaoException {
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.CHANGE_USER_STATUS)) {
             statement.setInt(1, status);
             statement.setString(2, login);
@@ -122,7 +122,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean isLoginUnique(String login) throws DaoException {
         System.out.println(login + " DAO");
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_BY_LOGIN)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();

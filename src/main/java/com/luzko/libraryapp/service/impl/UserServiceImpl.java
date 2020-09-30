@@ -29,48 +29,44 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean verifyUser(String login, String password) throws ServiceException {
-        //UserDao userDao = UserDaoImpl.getInstance();
-        UserDao userDao = new UserDaoImpl();
-        PasswordEncryption encryption = PasswordEncryption.getInstance();
-        boolean isCredentialCorrect = false;
         //TODO валидация на входящие поля логина и пароля, если апраори неверные, то зачем выполнять работу..
-
+        UserDao userDao = UserDaoImpl.getInstance();
+        boolean isCredentialCorrect = false;
         try {
             String userPassword = userDao.findPasswordByLogin(login);
             if (userPassword != null && !userPassword.isEmpty()) {
-                String encryptedPassword = encryption.encrypt(password);
+                String encryptedPassword = PasswordEncryption.encrypt(password);
                 isCredentialCorrect = userPassword.equals(encryptedPassword);
             }
         } catch (DaoException e) {
-            throw new ServiceException(""); //TODO
+            throw new ServiceException("", e); //TODO
         }
         return isCredentialCorrect;
     }
 
     @Override
     public Optional<User> findByLogin(String login) throws ServiceException {
-        //UserDao userDao = UserDaoImpl.getInstance();
-        UserDao userDao = new UserDaoImpl();
+        //TODO проверка входных значений.. чтоб типо не null, ибо смысл дальше что-то делать, если null..
+        //TODO вызов валидатора..
+        UserDao userDao = UserDaoImpl.getInstance();
         try {
             return userDao.findByLogin(login);
         } catch (DaoException e) {
-            throw new ServiceException("service");
+            throw new ServiceException("service", e);
         }
     }
 
     @Override
     public boolean registration(Map<String, String> registrationParameters, boolean isLibrarian) throws ServiceException {
+        //TODO проверка входных значений.. чтоб типо не null, ибо смысл дальше что-то делать, если null..
+        //TODO вызов валидатора..
         UserValidator validator = new UserValidator();
-        //UserDao userDao = UserDaoImpl.getInstance();
-        UserDao userDao = new UserDaoImpl();
-        PasswordEncryption encryption = PasswordEncryption.getInstance();
+        UserDao userDao = UserDaoImpl.getInstance();
         boolean isRegistered = false;
-        //System.out.println(registrationParameters);
         if (validator.isValidRegistrationParameters(registrationParameters)) {
-            //if (true) {
             try {
                 String login = registrationParameters.get(ColumnName.LOGIN);
-                String encryptedPassword = encryption.encrypt(registrationParameters.get(ColumnName.PASSWORD));
+                String encryptedPassword = PasswordEncryption.encrypt(registrationParameters.get(ColumnName.PASSWORD));
                 String name = registrationParameters.get(ColumnName.NAME);
                 String surname = registrationParameters.get(ColumnName.SURNAME);
                 String email = registrationParameters.get(ColumnName.EMAIL);
@@ -78,7 +74,7 @@ public class UserServiceImpl implements UserService {
                 UserRole userRole = isLibrarian ? UserRole.LIBRARIAN : UserRole.READER;
                 isRegistered = userDao.add(login, encryptedPassword, userRole, name, surname, email, codeConfirm);
             } catch (DaoException e) {
-                throw new ServiceException("service"); // TODO
+                throw new ServiceException("service", e); // TODO
             }
         }
         return isRegistered;
@@ -86,44 +82,41 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() throws ServiceException {
-        UserDao userDao = new UserDaoImpl();
+        UserDao userDao = UserDaoImpl.getInstance();
         try {
             return userDao.findAll();
         } catch (DaoException e) {
-            throw new ServiceException("service");
+            throw new ServiceException("service", e);
         }
     }
 
     @Override
     public boolean changeUserStatus(String login, String userStatus) throws ServiceException {
         //TODO проверка входных значений.. чтоб типо не null, ибо смысл дальше что-то делать, если null..
-        UserDao userDao = new UserDaoImpl();
-        boolean isChangeStatus = false;
+        //TODO вызов валидатора..
+        UserDao userDao = UserDaoImpl.getInstance();
         UserStatus status = UserStatus.valueOf(userStatus);
+        boolean isChangeStatus;
         try {
-            if (status == UserStatus.ACTIVE) {
-                isChangeStatus = userDao.changeUserStatus(login, UserStatus.BLOCKED.getId());
-            } else if (status == UserStatus.BLOCKED) {
-                isChangeStatus = userDao.changeUserStatus(login, UserStatus.ACTIVE.getId());
-            }
+            int statusNumber = status == UserStatus.ACTIVE ? UserStatus.BLOCKED.getId() : UserStatus.ACTIVE.getId();
+            isChangeStatus = userDao.changeUserStatus(login, statusNumber);
         } catch (DaoException e) {
-            throw new ServiceException("service");
+            throw new ServiceException("service", e);
         }
-
         return isChangeStatus;
     }
 
     @Override
     public boolean isLoginUnique(String login) throws ServiceException {
-        System.out.println(login + " service");
-        UserDao userDao = new UserDaoImpl();
-        boolean isLoginUnique = false;
+        //TODO проверка входных значений.. чтоб типо не null, ибо смысл дальше что-то делать, если null..
+        //TODO вызов валидатора..
+        UserDao userDao = UserDaoImpl.getInstance();
+        boolean isLoginUnique;
         try {
             isLoginUnique = userDao.isLoginUnique(login);
         } catch (DaoException e) {
             throw new ServiceException("service", e);
         }
-
         return isLoginUnique;
     }
 }
