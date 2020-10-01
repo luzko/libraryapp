@@ -70,8 +70,8 @@
                         </div>
                     </c:when>
 
-                    <c:when test="${userRole == 'LIBRARIAN'}">
-                        <input type="hidden" name="command" value="librarian_page"/>
+                    <c:when test="${userRole == 'LIBRARIAN' or userRole == 'READER'}">
+                        <input type="hidden" name="command" value="user_page"/>
                         <div>
                             <button type="submit" class="btn btn-primary js-scroll-trigger"
                                     style="background-color: darkred; margin-top: 10px; width: 170px;">
@@ -79,17 +79,6 @@
                             </button>
                         </div>
                     </c:when>
-
-                    <c:when test="${userRole == 'READER'}">
-                        <input type="hidden" name="command" value="reader_page"/>
-                        <div>
-                            <button type="submit" class="btn btn-primary js-scroll-trigger"
-                                    style="background-color: darkred; margin-top: 10px; width: 170px;">
-                                <fmt:message key="submit.account"/>
-                            </button>
-                        </div>
-                    </c:when>
-
                 </c:choose>
 
 

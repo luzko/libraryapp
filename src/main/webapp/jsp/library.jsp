@@ -50,17 +50,17 @@
     <div class="container">
         <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="post">
             <input type="hidden" name="command" value="home_page"/>
-            <button type="submit" class="btn btn-outline-secondary"><label><fmt:message key="submit.home"/></label>
+            <button type="submit" class="btn btn-outline-secondary"><fmt:message key="submit.home"/>
             </button>
         </form>
         <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="GET">
             <input type="hidden" name="command" value="admin_page"/>
-            <button type="submit" class="btn btn-outline-secondary"><label><fmt:message key="submit.users"/></label>
+            <button type="submit" class="btn btn-outline-secondary"><fmt:message key="submit.users"/>
             </button>
         </form>
         <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="post">
             <input type="hidden" name="command" value="logout"/>
-            <button type="submit" class="btn btn-outline-secondary"><label><fmt:message key="label.logout"/></label>
+            <button type="submit" class="btn btn-outline-secondary"><fmt:message key="label.logout"/>
             </button>
         </form>
     </div>

@@ -19,20 +19,20 @@ public class ConfirmCommand implements Command {
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
         String login = (String) request.getSession().getAttribute(RequestParameter.LOGIN);
-        UserRole userRole = (UserRole) request.getSession().getAttribute(RequestParameter.USER_ROLE);
+        //UserRole userRole = (UserRole) request.getSession().getAttribute(RequestParameter.USER_ROLE);
         String codeConfirm = request.getParameter(RequestParameter.CODE);
         UserService userService = UserServiceImpl.getInstance();
 
         try {
             if (userService.isCodeConfirmCorrect(login, codeConfirm)) {
                 request.getSession().setAttribute(RequestParameter.USER_STATUS, UserStatus.ACTIVE);
-                if (userRole.equals(UserRole.LIBRARIAN)) {
-                    router.setPagePath(PagePath.LIBRARIAN);
+                //if (userRole.equals(UserRole.LIBRARIAN)) {
+                    router.setPagePath(PagePath.USER);
                     router.setRouterType(RouterType.REDIRECT);
-                } else if (userRole.equals(UserRole.READER)) {
-                    router.setPagePath(PagePath.READER);
-                    router.setRouterType(RouterType.REDIRECT);
-                }
+                //} else if (userRole.equals(UserRole.READER)) {
+                //    router.setPagePath(PagePath.USER);
+                //    router.setRouterType(RouterType.REDIRECT);
+                //}
             } else {
                 //TODO повторная отсылка пароля сразу же??
                 //TODO запрос на отслыку нового сообщения этому юзеру..
