@@ -22,6 +22,8 @@ public class PagePath {
     public static final String LIBRARY = "/jsp/library.jsp";
 
     public static final String CONFIRMATION = "/jsp/confirmation.jsp";
+
+    public static final String BLOCKED = "/jsp/blocked.jsp";
 }
 
 //TODO replace in property

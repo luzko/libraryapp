@@ -43,12 +43,12 @@
 <header class="masthead2">
     <div class="container d-flex h-100 align-items-center">
         <div class="mx-auto text-center "><h1 class="mx-auto my-0 text-uppercase"><fmt:message
-                key="text.blocked.h1"/></h1>
-            <h2 class="text-white-50 mx-auto mt-2 mb-5"><fmt:message key="text.blocked.h2"/></h2>
+                key="text.blocked.h3"/></h1>
+            <h2 class="text-white-50 mx-auto mt-2 mb-5"><fmt:message key="text.blocked.h4"/></h2>
             <div>
                 <div class="bd-example">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                            data-whatever="@fat"><fmt:message key="submit.mess.to.admin"/></button>
+                    <%--data-whatever="@fat"--%>><fmt:message key="submit.mess.to.admin"/></button>
                     <div class="modal fade" id="exampleModal" tabindex="-1" <%--userRoleType="dialog"--%>
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <form class="form" action="${pageContext.request.contextPath}/controller" method="post">

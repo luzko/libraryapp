@@ -71,9 +71,8 @@ public class LoginCommand implements Command {
                 router = defineRouterByRole(user, request);
             }
             case BLOCKED -> {
-                //TODO
-                //TODO new page. Данный пользователь заблокирован. Для разблокировки обратитесь к админу..
-
+                router.setPagePath(PagePath.BLOCKED);
+                router.setRouterType(RouterType.REDIRECT);
             }
             case UNCONFIRMED -> {
                 router.setPagePath(PagePath.CONFIRMATION);
