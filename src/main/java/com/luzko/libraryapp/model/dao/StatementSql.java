@@ -11,6 +11,9 @@ public class StatementSql {
     public static final String FIND_PASSWORD_BY_LOGIN =
             "SELECT password FROM users WHERE login LIKE ?";
 
+    public static final String FIND_CODE_BY_LOGIN =
+            "SELECT confirm FROM users WHERE login LIKE ?";
+
     public static final String FIND_COUNT_BY_LOGIN =
             "SELECT count(user_id) as count FROM users WHERE login LIKE ?";
 

@@ -19,4 +19,6 @@ public interface UserDao extends BaseDao<User> {
 
     boolean isLoginUnique(String login) throws DaoException;
 
+    String findCodeConfirmByLogin(String login) throws DaoException;
+
 }

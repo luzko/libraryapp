@@ -23,6 +23,9 @@ public class RequestParameter {
     public static final String ENG = "en_US";
 
     public static final String ALL_USERS = "allUsers";
+
+    public static final String CODE = "code";
+    public static final String PARAM_CONFIRM_ERROR = "confirmError";
 }
 
 

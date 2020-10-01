@@ -121,7 +121,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean isLoginUnique(String login) throws DaoException {
-        System.out.println(login + " DAO");
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_BY_LOGIN)) {
             statement.setString(1, login);
@@ -132,6 +131,22 @@ public class UserDaoImpl implements UserDao {
             return count == 0;
         } catch (SQLException e) {
             throw new DaoException("dao", e); //TODO
+        }
+    }
+
+    @Override
+    public String findCodeConfirmByLogin(String login) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_CODE_BY_LOGIN)){
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            String confirmCode = null;
+            if (resultSet.next()) {
+                confirmCode = resultSet.getString(ColumnName.CONFIRM_CODE);
+            }
+            return confirmCode;
+        } catch (SQLException e) {
+            throw new DaoException("dao", e);
         }
     }
 

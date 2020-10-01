@@ -22,11 +22,11 @@ import java.util.Optional;
 
 public class LoginCommand implements Command {
     private static final Logger logger = LogManager.getLogger(LoginCommand.class);
-    private static final UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
+        UserService userService = UserServiceImpl.getInstance();
         String login = request.getParameter(RequestParameter.LOGIN);
         String password = request.getParameter(RequestParameter.PASSWORD);
 
@@ -35,6 +35,9 @@ public class LoginCommand implements Command {
                 Optional<User> userOptional = userService.findByLogin(login);
                 if (userOptional.isPresent()) {
                     User user = userOptional.get();
+                    System.out.println(user);
+                    System.out.println(user.getUserStatus());
+                    System.out.println(user.getUserRole());
                     router = defineRouterByStatus(user, request);
                 } else {
                     request.setAttribute(RequestParameter.ERROR_MESSAGE, "User is incorrect");
@@ -61,6 +64,8 @@ public class LoginCommand implements Command {
         request.getSession().setAttribute(RequestParameter.LOGIN, user.getLogin());
         request.getSession().setAttribute(RequestParameter.USER_ROLE, user.getUserRole());
         request.getSession().setAttribute(RequestParameter.USER_STATUS, userStatus);
+        System.out.println(userStatus);
+        System.out.println(user.getUserRole());
         switch (userStatus) {
             case ACTIVE -> {
                 router = defineRouterByRole(user, request);
@@ -83,6 +88,7 @@ public class LoginCommand implements Command {
     }
 
     private Router defineRouterByRole(User user, HttpServletRequest request) throws ServiceException {
+        UserService userService = UserServiceImpl.getInstance();
         UserRole userRole = user.getUserRole();
         Router router = new Router();
         switch (userRole) {

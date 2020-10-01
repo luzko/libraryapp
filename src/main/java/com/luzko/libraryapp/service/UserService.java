@@ -21,4 +21,6 @@ public interface UserService {
 
     boolean isLoginUnique(String login) throws ServiceException;
 
+    boolean isCodeConfirmCorrect(String login, String codeConfirm) throws ServiceException;
+
 }
