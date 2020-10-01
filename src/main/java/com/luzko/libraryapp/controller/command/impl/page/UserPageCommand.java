@@ -10,7 +10,7 @@ import com.luzko.libraryapp.model.entity.UserStatus;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ReaderPageCommand implements Command {
+public class UserPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
@@ -18,11 +18,12 @@ public class ReaderPageCommand implements Command {
 
         switch (userStatus) {
             case ACTIVE -> {
-                router.setPagePath(PagePath.READER);
+                router.setPagePath(PagePath.USER);
                 router.setRouterType(RouterType.FORWARD);
             }
             case BLOCKED -> {
-
+                router.setPagePath(PagePath.BLOCKED);
+                router.setRouterType(RouterType.FORWARD);
             }
             case UNCONFIRMED -> {
                 router.setPagePath(PagePath.CONFIRMATION);
