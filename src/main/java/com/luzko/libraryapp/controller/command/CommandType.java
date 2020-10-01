@@ -17,7 +17,8 @@ public enum CommandType {
     REGISTRATION(new RegistrationCommand()),
     LOCALE(new ChangeLocaleCommand()),
     CHANGE_USER_STATUS(new ChangeUserStatusCommand()),
-    CONFIRM(new ConfirmCommand());
+    CONFIRM(new ConfirmCommand()),
+    SEND_MESSAGE_ADMIN(new SendMessageAdmin());
 
     private final Command command;
 
