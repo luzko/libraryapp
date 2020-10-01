@@ -7,6 +7,7 @@ import com.luzko.libraryapp.controller.router.Router;
 import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.entity.UserRole;
+import com.luzko.libraryapp.model.entity.UserStatus;
 import com.luzko.libraryapp.service.UserService;
 import com.luzko.libraryapp.service.impl.UserServiceImpl;
 
@@ -24,8 +25,7 @@ public class ConfirmCommand implements Command {
 
         try {
             if (userService.isCodeConfirmCorrect(login, codeConfirm)) {
-                //запрос на то, чтоб сделать юзера активным.
-                request.getSession().setAttribute(RequestParameter.USER_STATUS, "ACTIVE"); //TODO вынести отсюда
+                request.getSession().setAttribute(RequestParameter.USER_STATUS, UserStatus.ACTIVE);
                 if (userRole.equals(UserRole.LIBRARIAN)) {
                     router.setPagePath(PagePath.LIBRARIAN);
                     router.setRouterType(RouterType.REDIRECT);
@@ -45,8 +45,6 @@ public class ConfirmCommand implements Command {
             router.setRouterType(RouterType.REDIRECT);
             //TODO error
         }
-
-
         return router;
     }
 }

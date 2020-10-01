@@ -124,12 +124,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isCodeConfirmCorrect(String login, String codeConfirm) throws ServiceException {
         UserDao userDao = UserDaoImpl.getInstance();
-        boolean isCodeConfirmCorrect;
+        boolean isCodeConfirmCorrect = false;
         try {
             String code = userDao.findCodeConfirmByLogin(login);
-            isCodeConfirmCorrect = codeConfirm.equals(code);
-            System.out.println(codeConfirm);
-            System.out.println(code);
+            if(codeConfirm.equals(code)) {
+                isCodeConfirmCorrect = userDao.changeUserStatus(login, UserStatus.ACTIVE.defineId());
+            }
         } catch (DaoException e) {
             throw new ServiceException("service", e);
         }
