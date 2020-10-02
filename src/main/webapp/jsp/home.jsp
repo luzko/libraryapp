@@ -9,14 +9,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
     <title>libraryapp</title>
     <style>
         <%@include file="../vendor/bootstrap/css/bootstrap.min.css"%>
         <%@include file="../css/grayscale.min.css"%>
         <%@include file="../vendor/fontawesome-free/css/all.min.css"%>
+        <%@include file="../css/button.css"%>
         html {
             overflow-x: hidden;
         }
@@ -25,30 +23,26 @@
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
-
-    <link href="${pageContext.request.contextPath}/css/grayscale.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
-
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
+
+
         <form class="form-inline"
               method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="library_page"/>
             <div>
-                <button type="submit" class="btn btn-primary js-scroll-trigger"
-                        style="background-color: darkred; margin-top: 10px; width: 170px;">
+                <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
                     <fmt:message key="submit.library"/>
                 </button>
             </div>
         </form>
 
-
         <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="locale"/>
             <div>
-                <button type="submit" class="btn btn-primary js-scroll-trigger"
-                        style="background-color: darkred; margin-top: 10px; width: 170px;">
+                <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
                     <fmt:message key="submit.locale"/>
                 </button>
             </div>
@@ -57,14 +51,11 @@
         <form class="form-inline"
               action="${pageContext.request.contextPath}/controller" method="post">
             <c:if test="${login != null}">
-
                 <c:choose>
-
                     <c:when test="${userRole == 'ADMIN'}">
                         <input type="hidden" name="command" value="admin_page"/>
                         <div>
-                            <button type="submit" class="btn btn-primary js-scroll-trigger"
-                                    style="background-color: darkred; margin-top: 10px; width: 170px;">
+                            <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
                                 <fmt:message key="submit.account"/>
                             </button>
                         </div>
@@ -73,21 +64,17 @@
                     <c:when test="${userRole == 'LIBRARIAN' or userRole == 'READER'}">
                         <input type="hidden" name="command" value="user_page"/>
                         <div>
-                            <button type="submit" class="btn btn-primary js-scroll-trigger"
-                                    style="background-color: darkred; margin-top: 10px; width: 170px;">
+                            <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
                                 <fmt:message key="submit.account"/>
                             </button>
                         </div>
                     </c:when>
                 </c:choose>
-
-
             </c:if>
             <c:if test="${login == null}">
                 <input type="hidden" name="command" value="login_page"/>
                 <div>
-                    <button type="submit" class="btn btn-primary js-scroll-trigger"
-                            style="background-color: darkred; margin-top: 10px; width: 170px;">
+                    <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
                         <fmt:message key="submit.logIn"/>
                     </button>
                 </div>
@@ -152,11 +139,5 @@
 
 <%-- <ctg:end-page/> --%>
 
-<script type="text/javascript">
-    <%@include file="../vendor/jquery/jquery.min.js"%>
-    <%@include file="../vendor/bootstrap/js/bootstrap.bundle.min.js"%>
-    <%@include file="../vendor/jquery-easing/jquery.easing.min.js"%>
-    <%@include file="../js/grayscale.min.js"%>
-</script>
 </body>
 </html>

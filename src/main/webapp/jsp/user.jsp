@@ -18,57 +18,12 @@
     <style>
         <%@include file="../vendor/bootstrap/css/bootstrap.min.css"%>
         <%@include file="../css/grayscale3.css"%>
+        <%@include file="../css/userpage.css"%>
+        <%@include file="../css/grayscale.min.css"%>
         <%@include file="../vendor/fontawesome-free/css/all.min.css"%>
-        input {
-            height: 20px;
-        }
-
-        i.fa {
-            width: 26px;
-            height: 26px;
-            line-height: 26px;
-            text-align: center;
-            margin-right: -26px;
-            position: relative;
-            z-index: 1;
-            float: left;
-        }
-
-        i.fa + input {
-            padding-left: 26px;
-        }
-
-        .field {
-            clear: both;
-            text-align: right;
-            line-height: 25px;
-        }
-
-        label {
-            float: left;
-            padding-right: 10px;
-        }
-
-        .main {
-            float: left
-        }
-
-        .text_demoBlock {
-            padding-bottom: 20px; /*отступ снизу*/
-            width: 100%; /*указываем общую ширину блока с колонками*/
-            text-align: justify; /*выравнивание текста внутри колонок*/
-            column-count: 2; /*количество колонок, на которое хотим разбить текст*/
-            -moz-column-count: 2; /*для мозилы*/
-            -webkit-column-count: 2; /*для webkit браузеров*/
-            column-gap: 40px; /*отступ между колонками*/
-            -moz-column-gap: 40px;
-            -webkit-column-gap: 40px;
-            column-rule: 1px solid #000; /*если требуется по дизайну, разделяем колонки линией*/
-            -moz-column-rule: 1px solid #000;
-            -webkit-column-rule: 1px solid #000;
-        }
+        <%@include file="../css/button.css"%>
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">%--%>
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
@@ -77,20 +32,31 @@
 <body id="page-top">
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="post">
+        <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="home_page"/>
-            <button type="submit" class="btn btn-outline-secondary"><fmt:message key="submit.home"/>
-            </button>
+            <div>
+                <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                    <fmt:message key="submit.home"/>
+                </button>
+            </div>
         </form>
-        <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="GET">
+
+        <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="library_page"/>
-            <button type="submit" class="btn btn-outline-secondary"><fmt:message key="submit.library"/>
-            </button>
+            <div>
+                <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                    <fmt:message key="submit.library"/>
+                </button>
+            </div>
         </form>
-        <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="post">
+
+        <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="logout"/>
-            <button type="submit" class="btn btn-outline-secondary"><fmt:message key="label.logout"/>
-            </button>
+            <div>
+                <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                    <fmt:message key="label.logout"/>
+                </button>
+            </div>
         </form>
     </div>
 </nav>
@@ -107,8 +73,7 @@
                     <h1 style="color: #9fcdff">${userName} ${userSurname}</h1>
                 </div>
 
-
-                <div class="text_demoBlock">
+                <div class="text_block">
                     <div class="col-lg-4">
                         <img class="img-fluid" src="${pageContext.request.contextPath}/${userImage}"
                              style="margin-top: 60px; border-radius: 30px" width="300" height="300"/>
@@ -116,7 +81,7 @@
                     <div class="col-lg-8 text-center">
                         <div class="row">
                             <div class="col-lg-6 text-right">
-                                <h4 style="color: rgba(138,136,137,0.99)">
+                                <h4 style="color: #fff">
                                     <br/><br/>
                                     <fmt:message key="label.login"/>:
                                     <br/>
@@ -128,7 +93,7 @@
                                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                             </div>
                             <div class="col-lg-6 text-left">
-                                <h4 style="color: rgba(138,136,137,0.99)">
+                                <h4 style="color: #fff">
                                     <br/><br/>
                                     ${login}
                                     <br/>
@@ -138,21 +103,27 @@
                                     <br/><br/><br/>
                                 </h4>
                                 <div class="text-right">
-                                    <form class="form-inline" name="Simple"
-                                          action="${pageContext.request.contextPath}/controller" method="post">
+                                    <form class="form-inline" method="POST"
+                                          action="${pageContext.request.contextPath}/controller">
                                         <input type="hidden" name="command" value="settings"/>
-                                        <button class="btn btn-outline-success my-2" type="submit">
-                                            <fmt:message key="submit.Settings.profile"/>
-                                        </button>
+                                        <div>
+                                            <button type="submit"
+                                                    class="btn btn-primary js-scroll-trigger custom-button">
+                                                <fmt:message key="submit.settings.profile"/>
+                                            </button>
+                                        </div>
                                     </form>
                                 </div>
                                 <div class="text-right">
-                                    <form class="form-inline" name="Simple"
-                                          action="${pageContext.request.contextPath}/controller" method="post">
-                                        <input type="hidden" name="command" value="to_list_complete_books"/>
-                                        <button class="btn btn-outline-success my-2" type="submit">
-                                            <fmt:message key="submit.to.list.completed.book"/>
-                                        </button>
+                                    <form class="form-inline" method="POST"
+                                          action="${pageContext.request.contextPath}/controller">
+                                        <input type="hidden" name="command" value=""/>
+                                        <div>
+                                            <button type="submit"
+                                                    class="btn btn-primary js-scroll-trigger custom-button">
+                                                <fmt:message key="submit.order.book"/>
+                                            </button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -307,9 +278,6 @@
             </div>
         </div>
         <br/><br/><br/> <br/><br/><br/> <br/><br/><br/> <br/><br/><br/>
-        <div class="row justify-content-center no-gutters mx-auto text-center">
-            <h1 class="mx-auto my-0 text-uppercase" style="color: #1c7430"><fmt:message key="text.site.name"/></h1>
-        </div>
     </div>
 </section>
 

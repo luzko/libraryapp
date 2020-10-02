@@ -1,0 +1,48 @@
+input {
+    height: 20px;
+}
+
+i.fa {
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    margin-right: -26px;
+    position: relative;
+    z-index: 1;
+    float: left;
+}
+
+i.fa + input {
+    padding-left: 26px;
+}
+
+.field {
+    clear: both;
+    text-align: right;
+    line-height: 25px;
+}
+
+label {
+    float: left;
+    padding-right: 10px;
+}
+
+.main {
+    float: left
+}
+
+.text_block {
+    padding-bottom: 20px;
+    width: 100%;
+    text-align: justify;
+    column-count: 2;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-gap: 40px;
+    -moz-column-gap: 40px;
+    -webkit-column-gap: 40px;
+    column-rule: 1px solid #000;
+    -moz-column-rule: 1px solid #000;
+    -webkit-column-rule: 1px solid #000;
+}

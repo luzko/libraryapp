@@ -16,7 +16,9 @@
     <style>
         <%@include file="../vendor/bootstrap/css/bootstrap.min.css"%>
         <%@include file="../css/grayscale2.css"%>
+        <%@include file="../css/grayscale.min.css"%>
         <%@include file="../vendor/fontawesome-free/css/all.min.css"%>
+        <%@include file="../css/button.css"%>
     </style>
 
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
@@ -30,16 +32,22 @@
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="post">
+        <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="home_page"/>
-            <button type="submit" class="btn btn-outline-secondary"><fmt:message key="submit.home"/>
-            </button>
+            <div>
+                <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                    <fmt:message key="submit.home"/>
+                </button>
+            </div>
         </form>
 
-        <form class="form-inline" name="Simple" action="${pageContext.request.contextPath}/controller" method="post">
+        <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="logout"/>
-            <button type="submit" class="btn btn-outline-secondary"><fmt:message key="label.logout"/>
-            </button>
+            <div>
+                <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                    <fmt:message key="label.logout"/>
+                </button>
+            </div>
         </form>
     </div>
 </nav>
@@ -52,7 +60,8 @@
             <div>
                 <div class="bd-example">
 
-                    <button type="submit" class="btn btn-primary js-scroll-trigger" data-toggle="modal" data-target="#exampleModal">
+                    <button type="submit" class="btn btn-primary js-scroll-trigger custom-button"
+                            data-toggle="modal" data-target="#exampleModal">
                         <fmt:message key="submit.confirm"/>
                     </button>
 
@@ -72,8 +81,9 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                             <fmt:message key="submit.close"/></button>
-                                        <button type="submit" class="btn btn-primary"><fmt:message
-                                                key="submit.send"/></button>
+                                        <button type="submit" class="btn btn-primary" style="background-color: green">
+                                            <fmt:message
+                                                    key="submit.send"/></button>
                                     </div>
                                 </div>
                             </div>
