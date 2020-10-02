@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,12 +59,15 @@ public class LoginCommand implements Command {
     private Router defineRouterByStatus(User user, HttpServletRequest request) throws ServiceException {
         UserStatus userStatus = user.getUserStatus();
         Router router = new Router();
-        request.getSession().setAttribute(RequestParameter.LOGIN, user.getLogin());
-        request.getSession().setAttribute(RequestParameter.USER_ROLE, user.getUserRole());
-        request.getSession().setAttribute(RequestParameter.USER_STATUS, userStatus);
-        request.getSession().setAttribute(RequestParameter.USER_NAME, user.getName());
-        request.getSession().setAttribute(RequestParameter.USER_SURNAME, user.getSurname());
-        request.getSession().setAttribute(RequestParameter.EMAIL, user.getEmail());
+        HttpSession session = request.getSession();
+        session.setAttribute(RequestParameter.LOGIN, user.getLogin());
+        session.setAttribute(RequestParameter.USER_ROLE, user.getUserRole());
+        session.setAttribute(RequestParameter.USER_STATUS, userStatus);
+        session.setAttribute(RequestParameter.USER_NAME, user.getName());
+        session.setAttribute(RequestParameter.USER_SURNAME, user.getSurname());
+        session.setAttribute(RequestParameter.EMAIL, user.getEmail());
+        session.setAttribute(RequestParameter.TYPE_PROFILE_PAGE, RequestParameter.SEE_PROFILE_PAGE);
+
         switch (userStatus) {
             case ACTIVE -> {
                 router = defineRouterByRole(user, request);

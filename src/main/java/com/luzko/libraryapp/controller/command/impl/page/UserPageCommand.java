@@ -15,7 +15,7 @@ public class UserPageCommand implements Command {
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
         UserStatus userStatus = (UserStatus) request.getSession().getAttribute(RequestParameter.USER_STATUS);
-
+        request.getSession().setAttribute(RequestParameter.TYPE_PROFILE_PAGE, RequestParameter.SEE_PROFILE_PAGE);
         switch (userStatus) {
             case ACTIVE -> {
                 router.setPagePath(PagePath.USER);

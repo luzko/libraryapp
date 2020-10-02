@@ -32,14 +32,29 @@
 <body id="page-top">
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
-            <input type="hidden" name="command" value="home_page"/>
-            <div>
-                <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
-                    <fmt:message key="submit.home"/>
-                </button>
-            </div>
-        </form>
+
+
+        <c:if test="${not empty type and type eq 'see'}">
+            <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
+                <input type="hidden" name="command" value="home_page"/>
+                <div>
+                    <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                        <fmt:message key="submit.home"/>
+                    </button>
+                </div>
+            </form>
+        </c:if>
+
+        <c:if test="${not empty type and type eq 'change'}">
+            <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
+                <input type="hidden" name="command" value="user_page"/>
+                <div>
+                    <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                        <fmt:message key="submit.account"/>
+                    </button>
+                </div>
+            </form>
+        </c:if>
 
         <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="library_page"/>
@@ -67,8 +82,7 @@
         <div class="container  align-items-center">
             <div class="row justify-content-center no-gutters">
 
-                <%--<c:if test="${ not empty type and type eq 'see' }">--%>
-
+                <c:if test="${ not empty type and type eq 'see' }">
                 <div style="margin-top: 100px">
                     <h1 style="color: #9fcdff">${userName} ${userSurname}</h1>
                 </div>
@@ -95,11 +109,11 @@
                             <div class="col-lg-6 text-left">
                                 <h4 style="color: #fff">
                                     <br/><br/>
-                                    ${login}
+                                        ${login}
                                     <br/>
-                                    ${userRole}
+                                        ${userRole}
                                     <br/>
-                                    ${email}
+                                        ${email}
                                     <br/><br/><br/>
                                 </h4>
                                 <div class="text-right">
@@ -129,18 +143,27 @@
                             </div>
                         </div>
                     </div>
+                    </c:if>
 
-                    <%--</c:if>--%>
-                    <%--<c:if test="${not empty type and type eq 'change'}" >
-                        <div class="col-lg-4" style="color: red">
-                            <form class="form-inline" action="${pageContext.request.contextPath}/controller"  enctype="multipart/form-data" method="post">
+                    <c:if test="${not empty type and type eq 'change'}">
+                    <div style="margin-top: 100px">
+                        <h1 style="color: #9fcdff"><fmt:message key="submit.settings.profile"/></h1>
+                    </div>
+
+                    <div class="text_block">
+
+                        <div class="col-lg-8" style="margin-bottom: 100px">
+                            <form class="form-inline" action="${pageContext.request.contextPath}/controller"
+                                  enctype="multipart/form-data" method="post">
                                 <input type="hidden" name="command" value="change_profile_image"/>
-                                <input type="file" name="image" accept="image/jpeg,image/png" class="btn btn-outline-secondary" required/>
-                                <button class="btn btn-outline-success my-0" type="submit">
-                                    <label>
-                                        <шfmt:message key="submit.save"/>
-                                    </label>
-                                </button>
+                                <input type="file" name="image" accept="image/jpeg,image/png"
+                                       class="btn btn-outline-secondary" required/>
+                                <div>
+                                    <button type="submit" class="btn btn-primary js-scroll-trigger custom-button"
+                                            style="margin-top: 50px !important; margin-left: 80px;">
+                                        <fmt:message key="submit.save"/>
+                                    </button>
+                                </div>
                             </form>
                         </div>
                         <div class="col-lg-8">
@@ -149,20 +172,30 @@
                                     ${ChangedSave}
                                 <br/>
                                 <div class="field">
-                                    <form class="form-inline" action="${pageContext.request.contextPath}/controller" method="post">
+                                    <form class="form-inline" action="${pageContext.request.contextPath}/controller"
+                                          method="post" style="margin-top: 5px;">
                                         <br/>
                                         <input type="hidden" name="command" value="change_profile_login"/>
+
                                         <div class="col-lg-2 text-left">
-                                            <label for="login" style="color: #9fcdff;"><fmt:message key="label.login"/>:</label>
+                                            <label class="col-sm-4 col-form-label float-sm-right" for="login"
+                                                   style="color: white">
+                                                <fmt:message key="label.login"/>
+                                            </label>
                                         </div>
-                                        <div class="col-lg-8 text-left">
-                                            <input type="text" name="login" id="login" placeholder="${login}"/>
+                                        <div class="col-sm-8 text-left">
+
+                                            <input type="text" name="login" id="login" placeholder="${login}"
+                                                   class="float-sm-left" style="width: 180px; height: 30px;"
+                                                   pattern="[A-Za-zА-Яа-я\d\-\_]{0,45}"
+                                                   maxlength="20"
+                                                   required
+                                            />
                                         </div>
                                         <div class="col-lg-2 float-right">
-                                            <button class="btn btn-outline-success my-2 pull-right" type="submit">
-                                                <label>
-                                                    <fmt:message key="submit.save"/>
-                                                </label>
+                                            <button type="submit"
+                                                    class="btn btn-primary js-scroll-trigger custom-button">
+                                                <fmt:message key="submit.save"/>
                                             </button>
                                         </div>
                                         <br/>
@@ -171,20 +204,31 @@
                                     </form>
                                 </div>
                                 <div class="field">
-                                    <form class="form-inline" action="${pageContext.request.contextPath}/controller" method="post">
+                                    <form class="form-inline" action="${pageContext.request.contextPath}/controller"
+                                          method="post">
                                         <br/>
                                         <input type="hidden" name="command" value="change_profile_name"/>
+
                                         <div class="col-lg-2 text-left">
-                                            <label style="color: #9fcdff;text-align: right"><fmt:message key="label.name"/>:</label>
+                                            <label class="col-sm-4 col-form-label float-sm-right" for="login"
+                                                   style="color: white">
+                                                <fmt:message key="label.name"/>
+                                            </label>
                                         </div>
-                                        <div class="col-lg-8 text-left">
-                                            <input type="text" name="name" id="name" placeholder="${userName}"/>
+                                        <div class="col-sm-8 text-left">
+
+                                            <input type="text" name="name" id="name" placeholder="${userName}"
+                                                   class="float-sm-left" style="width: 180px; height: 30px;"
+                                                   pattern="^([А-Я]{1}[а-яё]{1,20}|[A-Z]{1}[a-z]{3,20})$"
+                                                   maxlength="20"
+                                                   required
+                                            />
                                         </div>
+
                                         <div class="col-lg-2 float-right">
-                                            <button class="btn btn-outline-success my-2 pull-right" type="submit">
-                                                <label>
-                                                    <fmt:message key="submit.save"/>
-                                                </label>
+                                            <button type="submit"
+                                                    class="btn btn-primary js-scroll-trigger custom-button">
+                                                <fmt:message key="submit.save"/>
                                             </button>
                                         </div>
                                         <br/>
@@ -193,20 +237,32 @@
                                     </form>
                                 </div>
                                 <div class="field">
-                                    <form  class="form-inline" action="${pageContext.request.contextPath}/controller" method="post">
+                                    <form class="form-inline" action="${pageContext.request.contextPath}/controller"
+                                          method="post">
                                         <br/>
                                         <input type="hidden" name="command" value="change_profile_surname"/>
-                                        <div class="col-lg-2 text-right">
-                                            <label style="color: #9fcdff; text-align: right"><fmt:message key="label.surname"/>:</label>
+
+
+                                        <div class="col-lg-2 text-left">
+                                            <label class="col-sm-4 col-form-label float-sm-right" for="login"
+                                                   style="color: white">
+                                                <fmt:message key="label.surname"/>
+                                            </label>
                                         </div>
-                                        <div class="col-lg-8 text-left">
-                                            <input type="text" name="surname" id="surname" placeholder="${surname}"/>
+                                        <div class="col-sm-8 text-left">
+
+                                            <input type="text" name="surname" id="surname" placeholder="${userSurname}"
+                                                   class="float-sm-left" style="width: 180px; height: 30px;"
+                                                   pattern="^([А-Я]{1}[а-яё]{1,20}|[A-Z]{1}[a-z]{3,20})$"
+                                                   maxlength="20"
+                                                   required
+                                            />
                                         </div>
+
                                         <div class="col-lg-2 float-right">
-                                            <button class="btn btn-outline-success my-2 pull-right" type="submit">
-                                                <label>
-                                                    <fmt:message key="submit.save"/>
-                                                </label>
+                                            <button type="submit"
+                                                    class="btn btn-primary js-scroll-trigger custom-button">
+                                                <fmt:message key="submit.save"/>
                                             </button>
                                         </div>
                                         <br/>
@@ -215,82 +271,16 @@
                                     </form>
                                 </div>
                             </div>
-                            <c:if test="${userBookId != null}">
-                                <div class="row">
-                                    <form action="${pageContext.request.contextPath}/controller" method="post">
-                                        <br/>
-                                        <input type="hidden" name="command" value="delete_user_book"/>
-                                        <button class="btn btn-outline-success my-2 pull-right" type="submit">
-                                            <label>
-                                                <fmt:message key="delete"/> ${bookName}
-                                            </label>
-                                        </button>
-                                        <br/>
-                                    </form>
-                                </div>
-                            </c:if>
-                            <c:if test="${userPlanId != null}">
-                                <div class="row">
-                                    <form action="${pageContext.request.contextPath}/controller" method="post">
-                                        <br/>
-                                        <input type="hidden" name="command" value="delete_reading_plan"/>
-                                        <input type="submit" style="color: #9fcdff"  value="<fmt:message key="delete"/> ${readingPlanName} ">
-                                        <br/>
-                                    </form>
-                                </div>
-                            </c:if>
-                            <c:if test="${userBookStatus == null and userBookId != null}">
-                                <div class="row">
-                                    <form action="${pageContext.request.contextPath}/controller" method="post">
-                                        <br/>
-                                        <input type="hidden" name="command" value="new_completed_book"/>
-                                        <button class="btn btn-outline-success my-2 pull-right" type="submit">
-                                            <label>
-                                                <fmt:message key="submit.book.status"/>
-                                            </label>
-                                        </button>
-                                        <br/>
-                                    </form>
-                                </div>
-                            </c:if>
-                            <c:if test="${ not (readingPlanName eq '--')}">
-                                <div class="row">
-                                    <form action="${pageContext.request.contextPath}/controller" method="post">
-                                        <br/>
-                                        <input type="hidden" name="command" value="delete_user_reading_plan"/>
-                                        <button class="btn btn-outline-success my-2 pull-right" type="submit">
-                                            <label>
-                                                <fmt:message key="delete"/> ${readingPlanName}
-                                            </label>
-                                        </button>
-                                        <br/>
-                                    </form>
-                                </div>
-                            </c:if>
                         </div>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                    </c:if>--%>
+                        </c:if>
+                    </div>
                 </div>
-
             </div>
         </div>
-        <br/><br/><br/> <br/><br/><br/> <br/><br/><br/> <br/><br/><br/>
     </div>
 </section>
 
-
 <%--<ctg:end-page/>--%>
-
-<script type="text/javascript">
-    <%@include file="../vendor/jquery/jquery.min.js"%>
-    <%@include file="../vendor/bootstrap/js/bootstrap.bundle.min.js"%>
-    <%@include file="../vendor/jquery-easing/jquery.easing.min.js"%>
-    <%@include file="../js/grayscale.min.js"%>
-    <%@include file="../js/modal.js" %>
-</script>
 
 </body>
 </html>

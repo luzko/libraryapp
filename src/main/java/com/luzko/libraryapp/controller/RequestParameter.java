@@ -18,6 +18,9 @@ public class RequestParameter {
     public static final String ERROR_DATA_MESSAGE = "errorDataMessage";
     public static final String USER_STATUS = "status";
 
+    public static final String TYPE_PROFILE_PAGE = "type";
+    public static final String SEE_PROFILE_PAGE = "see";
+    public static final String CHANGE_PROFILE_PAGE = "change";
 
     public static final String LOCALE = "locale";
     public static final String ENCODING = "encoding";

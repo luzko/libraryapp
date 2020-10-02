@@ -17,7 +17,8 @@ public enum CommandType {
     LOCALE(new ChangeLocaleCommand()),
     CHANGE_USER_STATUS(new ChangeUserStatusCommand()),
     CONFIRM(new ConfirmCommand()),
-    SEND_MESSAGE_ADMIN(new SendMessageAdmin());
+    SEND_MESSAGE_ADMIN(new SendMessageAdmin()),
+    SETTINGS(new ProfileSettingPageCommand());
 
     private final Command command;
 
