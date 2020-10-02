@@ -8,6 +8,8 @@ public class RequestParameter {
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
     public static final String EMAIL = "email";
+    public static final String USER_NAME = "userName";
+    public static final String USER_SURNAME = "userSurname";
     //public static final String ENABLED = "enabled";
     public static final String USER_ROLE = "userRole";
     public static final String COMMAND_NAME = "command";

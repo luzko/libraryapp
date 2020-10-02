@@ -35,9 +35,6 @@ public class LoginCommand implements Command {
                 Optional<User> userOptional = userService.findByLogin(login);
                 if (userOptional.isPresent()) {
                     User user = userOptional.get();
-                    System.out.println(user);
-                    System.out.println(user.getUserStatus());
-                    System.out.println(user.getUserRole());
                     router = defineRouterByStatus(user, request);
                 } else {
                     request.setAttribute(RequestParameter.ERROR_MESSAGE, "User is incorrect");
@@ -64,8 +61,9 @@ public class LoginCommand implements Command {
         request.getSession().setAttribute(RequestParameter.LOGIN, user.getLogin());
         request.getSession().setAttribute(RequestParameter.USER_ROLE, user.getUserRole());
         request.getSession().setAttribute(RequestParameter.USER_STATUS, userStatus);
-        System.out.println(userStatus);
-        System.out.println(user.getUserRole());
+        request.getSession().setAttribute(RequestParameter.USER_NAME, user.getName());
+        request.getSession().setAttribute(RequestParameter.USER_SURNAME, user.getSurname());
+        request.getSession().setAttribute(RequestParameter.EMAIL, user.getEmail());
         switch (userStatus) {
             case ACTIVE -> {
                 router = defineRouterByRole(user, request);
