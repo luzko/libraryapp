@@ -3,6 +3,7 @@ package com.luzko.libraryapp.controller.command;
 import com.luzko.libraryapp.controller.command.impl.admin.ChangeUserStatusCommand;
 import com.luzko.libraryapp.controller.command.impl.page.*;
 import com.luzko.libraryapp.controller.command.impl.user.*;
+import com.luzko.libraryapp.controller.command.impl.user.change.*;
 
 public enum CommandType {
     LOGIN_PAGE(new LoginPageCommand()),
@@ -18,7 +19,8 @@ public enum CommandType {
     CHANGE_USER_STATUS(new ChangeUserStatusCommand()),
     CONFIRM(new ConfirmCommand()),
     SEND_MESSAGE_ADMIN(new SendMessageAdmin()),
-    SETTINGS(new ProfileSettingPageCommand());
+    SETTINGS(new ProfileSettingPageCommand()),
+    CHANGE_PROFILE_IMAGE(new ChangeProfileImageCommand());
 
     private final Command command;
 

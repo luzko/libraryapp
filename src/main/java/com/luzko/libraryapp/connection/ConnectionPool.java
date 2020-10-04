@@ -16,7 +16,7 @@ public class ConnectionPool {
     private static final String PROPERTIES_FILENAME = "db.database";
     private static final String DRIVER_NAME = "driver";
     private static final String URL = "url";
-    private static final int POOL_SIZE = 12;
+    private static final int POOL_SIZE = 16;
     private final BlockingQueue<ProxyConnection> freeConnections;
     private final Queue<ProxyConnection> givenConnections;
     private static final ConnectionPool connectionPool = new ConnectionPool();
