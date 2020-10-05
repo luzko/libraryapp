@@ -127,12 +127,57 @@ public class UserServiceImpl implements UserService {
         boolean isCodeConfirmCorrect = false;
         try {
             String code = userDao.findCodeConfirmByLogin(login);
-            if(codeConfirm.equals(code)) {
+            if (codeConfirm.equals(code)) {
                 isCodeConfirmCorrect = userDao.changeUserStatus(login, UserStatus.ACTIVE.defineId());
             }
         } catch (DaoException e) {
             throw new ServiceException("service", e);
         }
         return isCodeConfirmCorrect;
+    }
+
+    @Override
+    public boolean isUserLoginChange(String login, String newLogin) throws ServiceException {
+        //TODO если новый логин нулевой или пустой, но сразу возвращать false
+        //TODO так же валидация!!!
+        UserDao userDao = UserDaoImpl.getInstance();
+        boolean isUserLoginChange = false;
+        try {
+            if (userDao.findByLogin(newLogin).isEmpty()) {
+                isUserLoginChange = userDao.changeUserLogin(login, newLogin);
+            }
+        } catch (DaoException e) {
+            throw new ServiceException("service", e);
+        }
+        return isUserLoginChange;
+    }
+
+    @Override
+    public boolean isUserNameChange(String login, String newName) throws ServiceException {
+        //TODO если новое имя нулевое или пустое, то сразу возвращать false
+        //TODO так же валидация!!!
+        UserDao userDao = UserDaoImpl.getInstance();
+        boolean isUserNameChange;
+        try {
+            isUserNameChange = userDao.changeUserName(login, newName);
+        } catch (DaoException e) {
+            throw new ServiceException("service", e);
+        }
+        return isUserNameChange;
+    }
+
+    @Override
+    public boolean isUserSurnameChange(String login, String newSurname) throws ServiceException {
+        //TODO если новое имя нулевое или пустое, то сразу возвращать false
+        //TODO так же валидация!!!
+        UserDao userDao = UserDaoImpl.getInstance();
+        boolean isUserSurnameChange;
+        try {
+            isUserSurnameChange = userDao.changeUserSurname(login, newSurname);
+        } catch (DaoException e) {
+            throw new ServiceException("service", e);
+        }
+
+        return isUserSurnameChange;
     }
 }

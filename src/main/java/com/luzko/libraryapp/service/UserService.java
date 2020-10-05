@@ -23,4 +23,10 @@ public interface UserService {
 
     boolean isCodeConfirmCorrect(String login, String codeConfirm) throws ServiceException;
 
+    boolean isUserLoginChange(String login, String newLogin) throws ServiceException;
+
+    boolean isUserNameChange(String login, String newName) throws ServiceException;
+
+    boolean isUserSurnameChange(String login, String newSurname) throws ServiceException;
+
 }

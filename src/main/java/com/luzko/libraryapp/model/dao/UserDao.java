@@ -21,4 +21,10 @@ public interface UserDao extends BaseDao<User> {
 
     String findCodeConfirmByLogin(String login) throws DaoException;
 
+    boolean changeUserLogin(String login, String newLogin) throws DaoException;
+
+    boolean changeUserName(String login, String newName) throws DaoException;
+
+    boolean changeUserSurname(String login, String newSurname) throws DaoException;
+
 }

@@ -5,6 +5,8 @@ public class RequestParameter {
 
     }
 
+    public static final String NAME = "name";
+    public static final String SURNAME = "surname";
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
     public static final String EMAIL = "email";
@@ -31,6 +33,11 @@ public class RequestParameter {
 
     public static final String CODE = "code";
     public static final String PARAM_CONFIRM_ERROR = "confirmError";
+
+    public static final String CHANGE_SAVED = "ChangedSave";
+    public static final String LOGIN_ERROR = "loginError";
+    public static final String NAME_ERROR = "usernameError";
+    public static final String SURNAME_ERROR = "surnameError";
 }
 
 

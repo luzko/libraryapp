@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.controller.command.impl.user.change;
+package com.luzko.libraryapp.controller.command.impl.user;
 
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;

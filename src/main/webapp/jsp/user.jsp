@@ -88,8 +88,9 @@
                 </div>
 
                 <div class="text_block">
-                    <div class="col-lg-4">
-                        <img class="img-fluid" src="${pageContext.request.contextPath}/${userImage}"
+                    <div class="col-lg-8">
+                            <%--<img class="img-fluid" src="${pageContext.request.contextPath}/${userImage}"--%>
+                        <img class="img-fluid" src="${pageContext.request.contextPath}/img/avatar.jpg"
                              style="margin-top: 60px; border-radius: 30px" width="300" height="300"/>
                     </div>
                     <div class="col-lg-8 text-center">
@@ -153,23 +154,30 @@
                     <div class="text_block">
 
                         <div class="col-lg-8" style="margin-bottom: 100px">
-                            <form class="form-inline" action="${pageContext.request.contextPath}/upload"
-                                  enctype="multipart/form-data" method="post">
-                                <input type="hidden" name="command" value="change_profile_image"/>
-                                <input type="file" name="image" accept="image/jpeg,image/png"
-                                       class="btn btn-outline-secondary" required/>
-                                <div>
-                                    <button type="submit" class="btn btn-primary js-scroll-trigger custom-button"
-                                            style="margin-top: 50px !important; margin-left: 80px;">
-                                        <fmt:message key="submit.save"/>
-                                    </button>
-                                </div>
-                            </form>
+                                <%--<form class="form-inline" action="${pageContext.request.contextPath}/upload"
+                                      enctype="multipart/form-data" method="post">
+                                    <input type="hidden" name="command" value="change_profile_image"/>
+                                    <input type="file" name="image" accept="image/jpeg,image/png"
+                                           class="btn btn-outline-secondary" required/>
+                                    <div>
+                                        <button type="submit" class="btn btn-primary js-scroll-trigger custom-button"
+                                                style="margin-top: 50px !important; margin-left: 80px;">
+                                            <fmt:message key="submit.save"/>
+                                        </button>
+                                    </div>
+                                </form>--%>
+
+                                <%--<img class="img-fluid" src="${pageContext.request.contextPath}/${userImage}"--%>
+                            <img class="img-fluid" src="${pageContext.request.contextPath}/img/avatar.jpg"
+                                 style="margin-top: 60px; border-radius: 30px" width="300" height="300"/>
+
                         </div>
                         <div class="col-lg-8">
                             <div class="main">
                                 <br/>
-                                    ${ChangedSave}
+                                <div style="color: green;">
+                                        ${ChangedSave}
+                                </div>
                                 <br/>
                                 <div class="field">
                                     <form class="form-inline" action="${pageContext.request.contextPath}/controller"
@@ -199,7 +207,9 @@
                                             </button>
                                         </div>
                                         <br/>
-                                            ${loginError}
+                                        <div style="color: red;">
+                                                ${loginError}
+                                        </div>
                                         <br/>
                                     </form>
                                 </div>
@@ -232,7 +242,9 @@
                                             </button>
                                         </div>
                                         <br/>
-                                            ${usernameError}
+                                        <div style="color: red;">
+                                                ${usernameError}
+                                        </div>
                                         <br/>
                                     </form>
                                 </div>
@@ -266,7 +278,9 @@
                                             </button>
                                         </div>
                                         <br/>
-                                            ${surnameError}
+                                        <div style="color: red;">
+                                                ${surnameError}
+                                        </div>
                                         <br/>
                                     </form>
                                 </div>

@@ -108,18 +108,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean changeUserStatus(String login, int status) throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.CHANGE_USER_STATUS)) {
-            statement.setInt(1, status);
-            statement.setString(2, login);
-            return statement.executeUpdate() == 1;
-        } catch (SQLException e) {
-            throw new DaoException("dao", e); //TODO
-        }
-    }
-
-    @Override
     public boolean isLoginUnique(String login) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_BY_LOGIN)) {
@@ -137,7 +125,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public String findCodeConfirmByLogin(String login) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-        PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_CODE_BY_LOGIN)){
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_CODE_BY_LOGIN)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             String confirmCode = null;
@@ -147,6 +135,56 @@ public class UserDaoImpl implements UserDao {
             return confirmCode;
         } catch (SQLException e) {
             throw new DaoException("dao", e);
+        }
+    }
+
+    @Override
+    public boolean changeUserLogin(String login, String newLogin) throws DaoException {
+        try {
+            return changeUserAttribute(login, newLogin, StatementSql.CHANGE_USER_LOGIN);
+        } catch (
+                SQLException e) {
+            throw new DaoException("dao", e);
+        }
+
+    }
+
+    @Override
+    public boolean changeUserName(String login, String newName) throws DaoException {
+        try {
+            return changeUserAttribute(login, newName, StatementSql.CHANGE_USER_NAME);
+        } catch (SQLException e) {
+            throw new DaoException("dao", e);
+        }
+    }
+
+    @Override
+    public boolean changeUserSurname(String login, String newSurname) throws DaoException {
+        try {
+            return changeUserAttribute(login, newSurname, StatementSql.CHANGE_USER_SURNAME);
+        } catch (SQLException e) {
+            throw new DaoException("dao", e);
+        }
+    }
+
+    private boolean changeUserAttribute(String login, String attribute, String sqlQuery) throws SQLException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
+            statement.setString(1, attribute);
+            statement.setString(2, login);
+            return statement.executeUpdate() == 1;
+        }
+    }
+
+    @Override
+    public boolean changeUserStatus(String login, int status) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.CHANGE_USER_STATUS)) {
+            statement.setInt(1, status);
+            statement.setString(2, login);
+            return statement.executeUpdate() == 1;
+        } catch (SQLException e) {
+            throw new DaoException("dao", e); //TODO
         }
     }
 
