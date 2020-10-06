@@ -27,6 +27,7 @@ public class LibraryPageCommand implements Command {
 
         try {
             List<Book> books = bookService.findAll();
+            System.out.println(books);
             request.getSession().setAttribute(RequestParameter.ALL_BOOKS, books);
             router.setPagePath(PagePath.LIBRARY);
             router.setRouterType(RouterType.FORWARD);

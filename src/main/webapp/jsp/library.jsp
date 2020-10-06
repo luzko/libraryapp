@@ -102,23 +102,23 @@
                             </thead>
                             <tbody>
 
-                            <c:forEach items="${}" var="book">
+                            <c:forEach items="${allBooks}" var="book">
                                 <%--<c:if test="${user.enabled}">--%>
                                 <tr class="table-success">
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span
                                                 class="badge badge-outline-primary"><c:out
-                                                value="${.}"/></span></h4></div>
+                                                value="${book.title}"/></span></h4></div>
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span
                                                 class="badge badge-outline-primary"> <c:out
-                                                value="${.}"/></span></h4></div>
+                                                value="${book.authors}"/></span></h4></div>
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span
                                                 class="badge badge-outline-primary"><c:out
-                                                value="${.}"/> </span></h4></div>
+                                                value="${book.category}"/> </span></h4></div>
                                     </td>
 
                                         <%--<c:choose>
