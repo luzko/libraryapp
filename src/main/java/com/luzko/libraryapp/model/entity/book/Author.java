@@ -2,6 +2,8 @@ package com.luzko.libraryapp.model.entity.book;
 
 import com.luzko.libraryapp.model.entity.BaseEntity;
 
+import java.util.StringJoiner;
+
 public class Author extends BaseEntity {
     private long authorId;
     private String name;
@@ -31,5 +33,35 @@ public class Author extends BaseEntity {
         this.name = name;
     }
 
-    //TODO equals, hashcode, toString..... now fields change.....
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Author author = (Author) o;
+
+        if (authorId != author.authorId) {
+            return false;
+        }
+        return name != null ? name.equals(author.name) : author.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (authorId ^ (authorId >>> 32));
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Author.class.getSimpleName() + "[", "]")
+                .add("authorId=" + authorId)
+                .add("name='" + name + "'")
+                .toString();
+    }
 }

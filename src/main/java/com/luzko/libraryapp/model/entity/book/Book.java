@@ -2,6 +2,8 @@ package com.luzko.libraryapp.model.entity.book;
 
 import com.luzko.libraryapp.model.entity.BaseEntity;
 
+import java.util.StringJoiner;
+
 public class Book extends BaseEntity {
     private Long bookId;
     private String title;
@@ -91,5 +93,61 @@ public class Book extends BaseEntity {
         this.authors = authors;
     }
 
-    //TODO equals, hashcode, toString..... now fields change.....
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Book book = (Book) o;
+
+        if (year != book.year || pages != book.pages || numberCopies != book.numberCopies || category != book.category) {
+            return false;
+        }
+
+        if (bookId != null ? !bookId.equals(book.bookId) : book.bookId != null) {
+            return false;
+        }
+
+        if (title != null ? !title.equals(book.title) : book.title != null) {
+            return false;
+        }
+
+        if (description != null ? !description.equals(book.description) : book.description != null) {
+            return false;
+        }
+
+        return authors != null ? authors.equals(book.authors) : book.authors == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = bookId != null ? bookId.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + year;
+        result = 31 * result + pages;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + numberCopies;
+        result = 31 * result + (category != null ? category.hashCode() : 0);
+        result = 31 * result + (authors != null ? authors.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Book.class.getSimpleName() + "[", "]")
+                .add("bookId=" + bookId)
+                .add("title='" + title + "'")
+                .add("year=" + year)
+                .add("pages=" + pages)
+                .add("description='" + description + "'")
+                .add("numberCopies=" + numberCopies)
+                .add("category=" + category)
+                .add("authors='" + authors + "'")
+                .toString();
+    }
 }
