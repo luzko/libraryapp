@@ -11,12 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>libraryapp</title>
     <style>
-        <%@include file="../vendor/bootstrap/css/bootstrap.min.css"%>
-        <%@include file="../css/grayscale3.css"%>
-        <%@include file="../vendor/fontawesome-free/css/all.min.css"%>
-        <%@include file="../css/userpage.css"%>
-        <%@include file="../css/grayscale.min.css"%>
-        <%@include file="../css/button.css"%>
+        <%@include file="../../vendor/bootstrap/css/bootstrap.min.css"%>
+        <%@include file="../../css/grayscale3.css"%>
+        <%@include file="../../vendor/fontawesome-free/css/all.min.css"%>
+        <%@include file="../../css/userpage.css"%>
+        <%@include file="../../css/grayscale.min.css"%>
+        <%@include file="../../css/button.css"%>
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
@@ -67,7 +67,7 @@
                                       action="${pageContext.request.contextPath}/controller" method="GET">
                                     <input type="hidden" name="command" value="registration_page"/>
                                     <button type="submit" class="btn btn-outline-secondary"><fmt:message
-                                            key="submit.newLibrarian"/>
+                                            key="submit.new.librarian"/>
                                     </button>
                                 </form>
                             </div>

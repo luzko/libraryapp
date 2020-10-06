@@ -14,10 +14,10 @@
 
     <title>libraryapp</title>
     <style>
-        <%@include file="../vendor/bootstrap/css/bootstrap.min.css"%>
-        <%@include file="../css/grayscale.min.css"%>
-        <%@include file="../vendor/fontawesome-free/css/all.min.css"%>
-        <%@include file="../css/button.css"%>
+        <%@include file="../../vendor/bootstrap/css/bootstrap.min.css"%>
+        <%@include file="../../css/grayscale.min.css"%>
+        <%@include file="../../vendor/fontawesome-free/css/all.min.css"%>
+        <%@include file="../../css/button.css"%>
     </style>
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"

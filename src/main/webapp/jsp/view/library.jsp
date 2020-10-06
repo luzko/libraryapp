@@ -15,12 +15,12 @@
     <title>libraryapp</title>
 
     <style>
-        <%@include file="../vendor/bootstrap/css/bootstrap.min.css"%>
-        <%@include file="../css/grayscale3.css"%>
-        <%@include file="../vendor/fontawesome-free/css/all.min.css"%>
-        <%@include file="../css/userpage.css"%>
-        <%@include file="../css/grayscale.min.css"%>
-        <%@include file="../css/button.css"%>
+        <%@include file="../../vendor/bootstrap/css/bootstrap.min.css"%>
+        <%@include file="../../css/grayscale3.css"%>
+        <%@include file="../../vendor/fontawesome-free/css/all.min.css"%>
+        <%@include file="../../css/userpage.css"%>
+        <%@include file="../../css/grayscale.min.css"%>
+        <%@include file="../../css/button.css"%>
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -96,6 +96,19 @@
             <div class="row justify-content-center ">
                 <form method="get" action="${pageContext.request.contextPath}/controller">
                     <div class="jumbotron" style="margin-top: 0px;">
+                        <c:if test="${userRole == 'ADMIN'}">
+                            <nav class="navbar navbar-expand-lg navbar-light">
+                                <div class="container">
+                                    <form class="form-inline" name="Simple"
+                                          action="${pageContext.request.contextPath}/controller" method="GET">
+                                        <input type="hidden" name="command" value="registration_page"/>
+                                        <button type="submit" class="btn btn-outline-secondary"><fmt:message
+                                                key="submit.new.book"/>
+                                        </button>
+                                    </form>
+                                </div>
+                            </nav>
+                        </c:if>
                         <div class="d-flex justify-content-around"><h2>Books</h2></div>
                         <table class="table table-bordered table-hover">
 

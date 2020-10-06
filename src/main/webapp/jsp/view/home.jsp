@@ -11,10 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>libraryapp</title>
     <style>
-        <%@include file="../vendor/bootstrap/css/bootstrap.min.css"%>
-        <%@include file="../css/grayscale.min.css"%>
-        <%@include file="../vendor/fontawesome-free/css/all.min.css"%>
-        <%@include file="../css/button.css"%>
+        <%@include file="../../vendor/bootstrap/css/bootstrap.min.css"%>
+        <%@include file="../../css/grayscale.min.css"%>
+        <%@include file="../../vendor/fontawesome-free/css/all.min.css"%>
+        <%@include file="../../css/button.css"%>
         html {
             overflow-x: hidden;
         }
