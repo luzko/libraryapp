@@ -67,6 +67,14 @@
     </div>
 </nav>
 
+<%-- тут возможно позже реализую поиск--%>
+<%-- так же для админа возмжоность добавления нового автора и новой книги--%>
+
+<%-- для юзера возможность заказать книгу --%>
+<%-- для библиотекаря возможность дать или не дать книгу--%>
+
+<%-- внизу дальше сделать пагинацию --%>
+
 <section id="about" class="registration-section text-center">
     <div class="masthead3">
         <div class="container-fluid  align-items-center">
@@ -79,95 +87,73 @@
                             <thead class="thead-dark">
                             <tr>
                                 <th scope="col">
-                                    <div class="d-flex justify-content-around"><fmt:message key="label.login"/></div>
-                                </th>
-                                <th scope="col">
-                                    <div class="d-flex justify-content-around"><fmt:message key="label.name"/></div>
-                                </th>
-                                <th scope="col">
-                                    <div class="d-flex justify-content-around"><fmt:message key="label.surname"/></div>
-                                </th>
-                                <th scope="col">
-                                    <div class="d-flex justify-content-around"><fmt:message key="label.email"/></div>
+                                    <div class="d-flex justify-content-around"><fmt:message
+                                            key="submit.book.title"/></div>
                                 </th>
                                 <th scope="col">
                                     <div class="d-flex justify-content-around"><fmt:message
-                                            key="label.userRoleType"/></div>
+                                            key="submit.book.author"/></div>
                                 </th>
                                 <th scope="col">
-                                    <div class="d-flex justify-content-around"><fmt:message key="label.status"/></div>
+                                    <div class="d-flex justify-content-around"><fmt:message
+                                            key="submit.book.category"/></div>
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            <c:forEach items="${allUsers}" var="user">
+                            <c:forEach items="${}" var="book">
                                 <%--<c:if test="${user.enabled}">--%>
                                 <tr class="table-success">
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span
                                                 class="badge badge-outline-primary"><c:out
-                                                value="${user.login}"/></span></h4></div>
+                                                value="${.}"/></span></h4></div>
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span
                                                 class="badge badge-outline-primary"> <c:out
-                                                value="${user.name}"/></span></h4></div>
+                                                value="${.}"/></span></h4></div>
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span
                                                 class="badge badge-outline-primary"><c:out
-                                                value="${user.surname}"/> </span></h4></div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-around"><h4><span
-                                                class="badge badge-outline-primary"><c:out
-                                                value="${user.email}"/> </span></h4></div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-around"><h4><span
-                                                class="badge badge-outline-primary"><c:out
-                                                value="${user.userRole}"/> </span></h4></div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-around"><h4><span
-                                                class="badge badge-outline-primary"><c:out
-                                                value="${user.userStatus}"/> </span></h4></div>
+                                                value="${.}"/> </span></h4></div>
                                     </td>
 
-                                    <c:choose>
-                                        <c:when test="${user.userStatus == 'ACTIVE'}">
-                                            <form action="${pageContext.request.contextPath}/controller" method="post">
-                                                <input type="hidden" name="command" value="change_user_status"/>
-                                                <input type="hidden" name="login" value="${user.login}"/>
-                                                <input type="hidden" name="status" value="${user.userStatus}">
-                                                <th scope="row">
-                                                    <div class="d-flex justify-content-around">
-                                                        <input style="background-color: green; color: white; line-height: 5px;"
-                                                               class="btn btn-outline-success my-2 my-sm-0"
-                                                               type="submit"
-                                                               name="id" value="<fmt:message key="label.block"/>"/>
-                                                    </div>
-                                                </th>
-                                            </form>
-                                        </c:when>
-                                        <c:when test="${user.userStatus == 'BLOCKED'}">
-                                            <form action="${pageContext.request.contextPath}/controller" method="post">
-                                                <input type="hidden" name="command" value="change_user_status"/>
-                                                <input type="hidden" name="login" value="${user.login}"/>
-                                                <input type="hidden" name="status" value="${user.userStatus}">
-                                                <th scope="row">
-                                                    <div class="d-flex justify-content-around">
-                                                        <input style="background-color: red"
-                                                               class="btn btn-outline-success my-2 my-sm-0"
-                                                               type="submit"
-                                                               name="id" value="<fmt:message key="label.unlock"/>"/>
-                                                    </div>
-                                                </th>
-                                            </form>
-                                        </c:when>
+                                        <%--<c:choose>
+                                            <c:when test="${. == }">
+                                                <form action="${pageContext.request.contextPath}/controller" method="post">
+                                                    <input type="hidden" name="command" value=""/>
+                                                    <input type="hidden" name="login" value="${.}"/>
+                                                    <input type="hidden" name="status" value="${.}">
+                                                    <th scope="row">
+                                                        <div class="d-flex justify-content-around">
+                                                            <input style="background-color: green; color: white; line-height: 5px;"
+                                                                   class="btn btn-outline-success my-2 my-sm-0"
+                                                                   type="submit"
+                                                                   name="id" value="<fmt:message key="."/>"/>
+                                                        </div>
+                                                    </th>
+                                                </form>
+                                            </c:when>
+                                            <c:when test="${user.userStatus == ''}">
+                                                <form action="${pageContext.request.contextPath}/controller" method="post">
+                                                    <input type="hidden" name="command" value=""/>
+                                                    <input type="hidden" name="login" value="${.}"/>
+                                                    <input type="hidden" name="status" value="${.}">
+                                                    <th scope="row">
+                                                        <div class="d-flex justify-content-around">
+                                                            <input style="background-color: red"
+                                                                   class="btn btn-outline-success my-2 my-sm-0"
+                                                                   type="submit"
+                                                                   name="id" value="<fmt:message key="."/>"/>
+                                                        </div>
+                                                    </th>
+                                                </form>
+                                            </c:when>
 
-                                    </c:choose>
+                                        </c:choose>--%>
                                 </tr>
                             </c:forEach>
                             </tbody>

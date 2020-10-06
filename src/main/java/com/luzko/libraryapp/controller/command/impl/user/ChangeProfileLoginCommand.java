@@ -6,9 +6,8 @@ import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.controller.router.Router;
 import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.service.UserService;
-import com.luzko.libraryapp.service.impl.UserServiceImpl;
-import org.apache.logging.log4j.Level;
+import com.luzko.libraryapp.service.user.UserService;
+import com.luzko.libraryapp.service.user.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

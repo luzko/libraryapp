@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.model.entity;
+package com.luzko.libraryapp.model.entity.user;
 
 public enum UserRole {
     ADMIN,

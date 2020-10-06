@@ -1,4 +1,6 @@
-package com.luzko.libraryapp.model.entity;
+package com.luzko.libraryapp.model.entity.user;
+
+import com.luzko.libraryapp.model.entity.BaseEntity;
 
 public class User extends BaseEntity {
     private Long userId;

@@ -1,7 +1,7 @@
-package com.luzko.libraryapp.service;
+package com.luzko.libraryapp.service.user;
 
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.entity.User;
+import com.luzko.libraryapp.model.entity.user.User;
 
 import java.util.List;
 import java.util.Map;

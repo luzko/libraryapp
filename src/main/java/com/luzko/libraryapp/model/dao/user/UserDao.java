@@ -1,8 +1,9 @@
-package com.luzko.libraryapp.model.dao;
+package com.luzko.libraryapp.model.dao.user;
 
 import com.luzko.libraryapp.exception.DaoException;
-import com.luzko.libraryapp.model.entity.User;
-import com.luzko.libraryapp.model.entity.UserRole;
+import com.luzko.libraryapp.model.dao.BaseDao;
+import com.luzko.libraryapp.model.entity.user.User;
+import com.luzko.libraryapp.model.entity.user.UserRole;
 
 import java.util.Optional;
 

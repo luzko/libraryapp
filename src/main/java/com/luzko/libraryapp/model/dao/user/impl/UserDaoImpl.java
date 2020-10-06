@@ -1,13 +1,13 @@
-package com.luzko.libraryapp.model.dao.impl;
+package com.luzko.libraryapp.model.dao.user.impl;
 
 import com.luzko.libraryapp.connection.ConnectionPool;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.StatementSql;
-import com.luzko.libraryapp.model.dao.UserDao;
-import com.luzko.libraryapp.model.entity.User;
-import com.luzko.libraryapp.model.entity.UserRole;
-import com.luzko.libraryapp.model.entity.UserStatus;
+import com.luzko.libraryapp.model.dao.user.UserDao;
+import com.luzko.libraryapp.model.entity.user.User;
+import com.luzko.libraryapp.model.entity.user.UserRole;
+import com.luzko.libraryapp.model.entity.user.UserStatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

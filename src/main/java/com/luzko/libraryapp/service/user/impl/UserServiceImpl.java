@@ -1,14 +1,14 @@
-package com.luzko.libraryapp.service.impl;
+package com.luzko.libraryapp.service.user.impl;
 
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.dao.ColumnName;
-import com.luzko.libraryapp.model.dao.UserDao;
-import com.luzko.libraryapp.model.dao.impl.UserDaoImpl;
-import com.luzko.libraryapp.model.entity.User;
-import com.luzko.libraryapp.model.entity.UserRole;
-import com.luzko.libraryapp.model.entity.UserStatus;
-import com.luzko.libraryapp.service.UserService;
+import com.luzko.libraryapp.model.dao.user.UserDao;
+import com.luzko.libraryapp.model.dao.user.impl.UserDaoImpl;
+import com.luzko.libraryapp.model.entity.user.User;
+import com.luzko.libraryapp.model.entity.user.UserRole;
+import com.luzko.libraryapp.model.entity.user.UserStatus;
+import com.luzko.libraryapp.service.user.UserService;
 import com.luzko.libraryapp.util.PasswordEncryption;
 import com.luzko.libraryapp.validator.UserValidator;
 
