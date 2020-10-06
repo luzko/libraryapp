@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
     //TODO add logger..
 
     private UserServiceImpl() {
+
     }
 
     public static UserServiceImpl getInstance() {

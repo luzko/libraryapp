@@ -2,8 +2,6 @@ package com.luzko.libraryapp.model.entity.book;
 
 import com.luzko.libraryapp.model.entity.BaseEntity;
 
-import java.util.List;
-
 public class Book extends BaseEntity {
     private Long bookId;
     private String title;
@@ -12,14 +10,13 @@ public class Book extends BaseEntity {
     private String description;
     private int numberCopies;
     private Category category;
-    private List<Author> authorList;
+    private String authors;
 
     public Book() {
 
     }
 
-    public Book(Long bookId, String title, int year, int pages, String description, int numberCopies,
-                Category category, List<Author> authorList) {
+    public Book(Long bookId, String title, int year, int pages, String description, int numberCopies, Category category, String authors) {
         this.bookId = bookId;
         this.title = title;
         this.year = year;
@@ -27,7 +24,7 @@ public class Book extends BaseEntity {
         this.description = description;
         this.numberCopies = numberCopies;
         this.category = category;
-        this.authorList = authorList;
+        this.authors = authors;
     }
 
     public Long getBookId() {
@@ -86,12 +83,12 @@ public class Book extends BaseEntity {
         this.category = category;
     }
 
-    public List<Author> getAuthorList() {
-        return authorList;
+    public String getAuthors() {
+        return authors;
     }
 
-    public void setAuthorList(List<Author> authorList) {
-        this.authorList = authorList;
+    public void setAuthors(String authors) {
+        this.authors = authors;
     }
 
     //TODO equals, hashcode, toString..... now fields change.....

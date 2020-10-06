@@ -2,7 +2,10 @@ package com.luzko.libraryapp.model.dao;
 
 public class StatementSql {
     private StatementSql() {
+
     }
+
+    //user query
 
     public static final String ADD_USER =
             "INSERT INTO users(login, password, role_id_fk, name, surname, email, user_status_id_fk, confirm) " +
@@ -37,4 +40,13 @@ public class StatementSql {
 
     public static final String CHANGE_USER_SURNAME =
             "UPDATE users SET surname = ? WHERE login LIKE ?";
+
+    //book query
+
+    public static final String FIND_ALL_BOOKS =
+            "SELECT b.book_id, b.title, b.year, b.pages, b.description, b.number_copies, " +
+                    "b.category_id_fk, group_concat(a.author) authors FROM books b " +
+                    "LEFT JOIN book_authors ba on b.book_id = ba.book_id_fk " +
+                    "LEFT JOIN authors a on a.author_id = ba.author_id_fk " +
+                    "GROUP BY b.book_id";
 }
