@@ -43,37 +43,52 @@
             </div>
         </form>
 
-        <%--<form class="form-inline"
-              method="POST" action="${pageContext.request.contextPath}/controller">
-            <input type="hidden" name="command" value="library_page"/>
-            <div>
-                <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
-                    <fmt:message key="submit.library"/>
-                </button>
-            </div>
-        </form>--%>
+        <form class="form-inline"
+              action="${pageContext.request.contextPath}/controller" method="post">
+            <c:if test="${login != null}">
+                <c:choose>
+                    <c:when test="${userRole == 'ADMIN'}">
+                        <input type="hidden" name="command" value="admin_page"/>
+                        <div>
+                            <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                                <fmt:message key="submit.account"/>
+                            </button>
+                        </div>
+                    </c:when>
 
-        <%-- переход на свой аккаунт для юзера и для админа на пользоваталей ??? --%>
+                    <c:when test="${userRole == 'LIBRARIAN' or userRole == 'READER'}">
+                        <input type="hidden" name="command" value="user_page"/>
+                        <div>
+                            <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                                <fmt:message key="submit.account"/>
+                            </button>
+                        </div>
+                    </c:when>
+                </c:choose>
+            </c:if>
+        </form>
 
         <form class="form-inline"
               method="POST" action="${pageContext.request.contextPath}/controller">
-            <input type="hidden" name="command" value="logout"/>
-            <div>
-                <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
-                    <fmt:message key="label.logout"/>
-                </button>
-            </div>
+            <c:if test="${login == null}">
+                <input type="hidden" name="command" value="login"/>
+                <div>
+                    <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                        <fmt:message key="label.login"/>
+                    </button>
+                </div>
+            </c:if>
+            <c:if test="${login != null}">
+                <input type="hidden" name="command" value="logout"/>
+                <div>
+                    <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                        <fmt:message key="label.logout"/>
+                    </button>
+                </div>
+            </c:if>
         </form>
     </div>
 </nav>
-
-<%-- тут возможно позже реализую поиск--%>
-<%-- так же для админа возмжоность добавления нового автора и новой книги--%>
-
-<%-- для юзера возможность заказать книгу --%>
-<%-- для библиотекаря возможность дать или не дать книгу--%>
-
-<%-- внизу дальше сделать пагинацию --%>
 
 <section id="about" class="registration-section text-center">
     <div class="masthead3">
@@ -98,6 +113,7 @@
                                     <div class="d-flex justify-content-around"><fmt:message
                                             key="submit.book.category"/></div>
                                 </th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -120,40 +136,19 @@
                                                 class="badge badge-outline-primary"><c:out
                                                 value="${book.category}"/> </span></h4></div>
                                     </td>
-
-                                        <%--<c:choose>
-                                            <c:when test="${. == }">
-                                                <form action="${pageContext.request.contextPath}/controller" method="post">
-                                                    <input type="hidden" name="command" value=""/>
-                                                    <input type="hidden" name="login" value="${.}"/>
-                                                    <input type="hidden" name="status" value="${.}">
-                                                    <th scope="row">
-                                                        <div class="d-flex justify-content-around">
-                                                            <input style="background-color: green; color: white; line-height: 5px;"
-                                                                   class="btn btn-outline-success my-2 my-sm-0"
-                                                                   type="submit"
-                                                                   name="id" value="<fmt:message key="."/>"/>
-                                                        </div>
-                                                    </th>
-                                                </form>
-                                            </c:when>
-                                            <c:when test="${user.userStatus == ''}">
-                                                <form action="${pageContext.request.contextPath}/controller" method="post">
-                                                    <input type="hidden" name="command" value=""/>
-                                                    <input type="hidden" name="login" value="${.}"/>
-                                                    <input type="hidden" name="status" value="${.}">
-                                                    <th scope="row">
-                                                        <div class="d-flex justify-content-around">
-                                                            <input style="background-color: red"
-                                                                   class="btn btn-outline-success my-2 my-sm-0"
-                                                                   type="submit"
-                                                                   name="id" value="<fmt:message key="."/>"/>
-                                                        </div>
-                                                    </th>
-                                                </form>
-                                            </c:when>
-
-                                        </c:choose>--%>
+                                    <form action="${pageContext.request.contextPath}/controller" method="post">
+                                        <input type="hidden" name="command" value="book_overview"/>
+                                        <input type="hidden" name="login" value="${user.login}"/>
+                                        <input type="hidden" name="status" value="${user.userStatus}">
+                                        <th scope="row">
+                                            <div class="d-flex justify-content-around">
+                                                <input style="background-color: green; color: white; line-height: 5px;"
+                                                       class="btn btn-outline-success my-2 my-sm-0"
+                                                       type="submit"
+                                                       name="id" value="<fmt:message key="submit.book.overview"/>"/>
+                                            </div>
+                                        </th>
+                                    </form>
                                 </tr>
                             </c:forEach>
                             </tbody>

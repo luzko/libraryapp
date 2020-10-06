@@ -155,7 +155,7 @@
                                                 <input type="hidden" name="status" value="${user.userStatus}">
                                                 <th scope="row">
                                                     <div class="d-flex justify-content-around">
-                                                        <input style="background-color: red"
+                                                        <input style="background-color: red; color: white; line-height: 5px;"
                                                                class="btn btn-outline-success my-2 my-sm-0"
                                                                type="submit"
                                                                name="id" value="<fmt:message key="label.unlock"/>"/>
