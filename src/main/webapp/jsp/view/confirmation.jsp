@@ -93,7 +93,9 @@
             </div>
 
             <br><br>
-            <h2 class="text-white-50 mx-auto mt-2 mb-5">${confirmError}</h2>
+            <div style="color: red;">
+                <h2 class="text-white-50 mx-auto mt-2 mb-5">${confirmError}</h2>
+            </div>
             <br><br>
         </div>
     </div>

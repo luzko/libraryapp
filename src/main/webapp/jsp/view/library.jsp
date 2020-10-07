@@ -132,7 +132,6 @@
                             <tbody>
 
                             <c:forEach items="${allBooks}" var="book">
-                                <%--<c:if test="${user.enabled}">--%>
                                 <tr class="table-success">
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span

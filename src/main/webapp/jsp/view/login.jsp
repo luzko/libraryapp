@@ -69,7 +69,7 @@
                                    title="<fmt:message key="invalid.login"/>"
                                    required/>
                             <c:if test="${errorLoginPasswordMessage}">
-                                <label style="color: darkred"><fmt:message key="invalid.registration.login"/></label>
+                                <label style="color: red;"><fmt:message key="invalid.registration.login"/></label>
                             </c:if>
                         </div>
                     </div>
@@ -85,24 +85,20 @@
                                    title="<fmt:message key="invalid.registration.password"/>"
                                    required/>
                             <c:if test="${passwordError}">
-                                <label style="color: darkred"><fmt:message key="invalid.registration.password"/></label>
+                                <label style="color: red;"><fmt:message key="invalid.registration.password"/></label>
                             </c:if>
                         </div>
                     </div>
                     <br>
                     <br>
-                    <label style="color: #9fcdff">${errorLoginPasswordMessage}</label>
+                    <label style="color: red;">${errorLoginPasswordMessage}</label>
                     <br>
                     <br>
                     <div class="form-group row">
                         <div class="col-sm-12">
-
-
                             <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
                                 <fmt:message key="submit.logIn"/>
                             </button>
-
-
                         </div>
                     </div>
                 </form>
