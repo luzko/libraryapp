@@ -1,7 +1,5 @@
 package com.luzko.libraryapp.model.entity.book;
 
-import com.luzko.libraryapp.model.entity.BaseEntity;
-
 public enum Category {
     FANTASY,
     HISTORY,

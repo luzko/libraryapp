@@ -31,7 +31,19 @@ public class UserDaoImpl implements UserDao {
             }
             return userPassword;
         } catch (SQLException e) {
-            throw new DaoException("dao", e); //TODO
+            throw new DaoException("Find password error", e);
+        }
+    }
+
+    @Override
+    public Optional<User> findById(long id) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_USER_BY_ID)) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            return createUserFromResultSet(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException("Find by id error", e);
         }
     }
 
@@ -43,7 +55,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             return createUserFromResultSet(resultSet);
         } catch (SQLException e) {
-            throw new DaoException("dao", e); //TODO
+            throw new DaoException("Find by login error", e);
         }
     }
 
@@ -54,7 +66,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             return createUsersFromResultSet(resultSet);
         } catch (SQLException e) {
-            throw new DaoException("dao", e); //TODO
+            throw new DaoException("Find all error", e);
         }
     }
 
@@ -73,28 +85,14 @@ public class UserDaoImpl implements UserDao {
             statement.setString(8, codeConfirm);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DaoException("dao", e); //TODO
+            throw new DaoException("Add error", e);
         }
     }
 
+    //TODO
     @Override
     public boolean add(User user) throws DaoException {
         return false;
-    }
-
-    @Override
-    public boolean update(User user) throws DaoException {
-        return false;
-    }
-
-    @Override
-    public boolean remove(long id) throws DaoException {
-        return false;
-    }
-
-    @Override
-    public User findById(long id) throws DaoException {
-        return null;
     }
 
     @Override
@@ -108,7 +106,7 @@ public class UserDaoImpl implements UserDao {
             int count = resultSet.getInt(ColumnName.COUNT);
             return count == 0;
         } catch (SQLException e) {
-            throw new DaoException("dao", e); //TODO
+            throw new DaoException("Login unique error", e);
         }
     }
 
@@ -124,7 +122,7 @@ public class UserDaoImpl implements UserDao {
             }
             return confirmCode;
         } catch (SQLException e) {
-            throw new DaoException("dao", e);
+            throw new DaoException("Find code confirm error", e);
         }
     }
 
@@ -134,9 +132,8 @@ public class UserDaoImpl implements UserDao {
             return changeUserAttribute(login, newLogin, StatementSql.CHANGE_USER_LOGIN);
         } catch (
                 SQLException e) {
-            throw new DaoException("dao", e);
+            throw new DaoException("Change user login error", e);
         }
-
     }
 
     @Override
@@ -144,7 +141,7 @@ public class UserDaoImpl implements UserDao {
         try {
             return changeUserAttribute(login, newName, StatementSql.CHANGE_USER_NAME);
         } catch (SQLException e) {
-            throw new DaoException("dao", e);
+            throw new DaoException("Change user name error", e);
         }
     }
 
@@ -153,7 +150,7 @@ public class UserDaoImpl implements UserDao {
         try {
             return changeUserAttribute(login, newSurname, StatementSql.CHANGE_USER_SURNAME);
         } catch (SQLException e) {
-            throw new DaoException("dao", e);
+            throw new DaoException("Change user surname error", e);
         }
     }
 
@@ -174,7 +171,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(2, login);
             return statement.executeUpdate() == 1;
         } catch (SQLException e) {
-            throw new DaoException("dao", e); //TODO
+            throw new DaoException("Change user status error", e);
         }
     }
 
@@ -203,7 +200,6 @@ public class UserDaoImpl implements UserDao {
         user.setEmail(resultSet.getString(ColumnName.EMAIL));
         user.setUserStatus(UserStatus.defineStatusById(resultSet.getInt(ColumnName.USER_STATUS_ID_FK)));
         Optional<User> userOptional = Optional.empty();
-
         if (user.getUserRole() != null && user.getUserStatus() != null) {
             userOptional = Optional.of(user);
         }

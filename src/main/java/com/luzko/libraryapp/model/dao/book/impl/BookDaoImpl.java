@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class BookDaoImpl implements BookDao {
-    //TODO add logger..
 
     @Override
     public boolean add(Book book) throws DaoException {
@@ -26,18 +25,15 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public boolean remove(long id) throws DaoException {
-        return false;
-    }
-
-    @Override
-    public boolean update(Book book) throws DaoException {
-        return false;
-    }
-
-    @Override
-    public Book findById(long id) throws DaoException {
-        return null;
+    public Optional<Book> findById(long id) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_BOOK_BY_ID)) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            return createBookFromResultSet(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException("Find by id error", e);
+        }
     }
 
     @Override
@@ -47,7 +43,7 @@ public class BookDaoImpl implements BookDao {
             ResultSet resultSet = statement.executeQuery();
             return createBooksFromResultSet(resultSet);
         } catch (SQLException e) {
-            throw new DaoException("dao", e); //TODO
+            throw new DaoException("Error in Find all", e);
         }
     }
 
@@ -62,6 +58,10 @@ public class BookDaoImpl implements BookDao {
         return bookList;
     }
 
+    private Optional<Book> createBookFromResultSet(ResultSet resultSet) throws SQLException {
+        return resultSet != null && resultSet.next() ? createBook(resultSet) : Optional.empty();
+    }
+
     private Optional<Book> createBook(ResultSet resultSet) throws SQLException {
         Book book = new Book();
         book.setBookId(resultSet.getLong(ColumnName.BOOK_ID));
@@ -72,9 +72,7 @@ public class BookDaoImpl implements BookDao {
         book.setNumberCopies(resultSet.getInt(ColumnName.NUMBER_COPIES));
         book.setCategory(Category.defineRoleById(resultSet.getInt(ColumnName.CATEGORY_ID_FK)));
         book.setAuthors(resultSet.getString(ColumnName.AUTHORS));
-
         Optional<Book> bookOptional = Optional.empty();
-
         if (book.getCategory() != null) {
             bookOptional = Optional.of(book);
         }

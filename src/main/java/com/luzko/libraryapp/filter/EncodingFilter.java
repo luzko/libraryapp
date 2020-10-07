@@ -10,8 +10,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter(urlPatterns = {"/*"}, initParams = {
-                @WebInitParam(name = "encoding", value = "UTF-8", description = "Encoding Parameter"),
-                @WebInitParam(name = "locale", value = "en_US", description = "Locale Parameter")
+        @WebInitParam(name = "encoding", value = "UTF-8", description = "Encoding Parameter"),
+        @WebInitParam(name = "locale", value = "en_US", description = "Locale Parameter")
 })
 public class EncodingFilter implements Filter {
     private String code;
@@ -36,7 +36,6 @@ public class EncodingFilter implements Filter {
         if (sessionLocale == null) {
             session.setAttribute(RequestParameter.LOCALE, locale);
         }
-
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

@@ -21,13 +21,13 @@ public class Book extends BaseEntity {
 
     public Book(BookBuilder builder) {
         this.bookId = builder.getBookId();
-        this.title = title;
-        this.year = year;
-        this.pages = pages;
-        this.description = description;
-        this.numberCopies = numberCopies;
-        this.category = category;
-        this.authors = authors;
+        this.title = builder.getTitle();
+        this.year = builder.getYear();
+        this.pages = builder.getPages();
+        this.description = builder.getDescription();
+        this.numberCopies = builder.getNumberCopies();
+        this.category = builder.getCategory();
+        this.authors = builder.getAuthors();
     }
 
     public Long getBookId() {

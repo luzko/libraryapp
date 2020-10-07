@@ -23,9 +23,13 @@ public class StatementSql {
             "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk " +
                     "FROM users WHERE login LIKE ?";
 
+    public static final String FIND_USER_BY_ID =
+            "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk " +
+                    "FROM users WHERE user_id LIKE ?";
+
     public static final String FIND_ALL_USERS =
-            "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk" +
-                    " FROM users WHERE role_id_fk != 1 ORDER BY role_id_fk";
+            "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk " +
+                    "FROM users WHERE role_id_fk != 1 ORDER BY role_id_fk";
 
     public static final String CHANGE_USER_STATUS =
             "UPDATE users SET user_status_id_fk = ? WHERE login LIKE ?";
@@ -47,6 +51,14 @@ public class StatementSql {
                     "LEFT JOIN book_authors ba on b.book_id = ba.book_id_fk " +
                     "LEFT JOIN authors a on a.author_id = ba.author_id_fk " +
                     "GROUP BY b.book_id";
+
+    public static final String FIND_BOOK_BY_ID =
+            "SELECT b.book_id, b.title, b.year, b.pages, b.description, b.number_copies, b.category_id_fk, " +
+                    "GROUP_CONCAT(DISTINCT a.author ORDER BY a.author SEPARATOR ', ') authors FROM books b " +
+                    "LEFT JOIN book_authors ba on b.book_id = ba.book_id_fk " +
+                    "LEFT JOIN authors a on a.author_id = ba.author_id_fk " +
+                    "GROUP BY b.book_id  WHERE b.book_id LIKE ?";
+
 }
 
 

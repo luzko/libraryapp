@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.model.entity.user;
 
+import com.luzko.libraryapp.builder.UserBuilder;
 import com.luzko.libraryapp.model.entity.BaseEntity;
 
 public class User extends BaseEntity {
@@ -15,14 +16,14 @@ public class User extends BaseEntity {
 
     }
 
-    public User(Long userId, String login, UserRole userRole, String name, String surname, String email, UserStatus userStatus) {
-        this.userId = userId;
-        this.login = login;
-        this.userRole = userRole;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.userStatus = userStatus;
+    public User(UserBuilder builder) {
+        this.userId = builder.getUserId();
+        this.login = builder.getLogin();
+        this.userRole = builder.getUserRole();
+        this.name = builder.getName();
+        this.surname = builder.getSurname();
+        this.email = builder.getEmail();
+        this.userStatus = builder.getUserStatus();
     }
 
     public long getUserId() {
