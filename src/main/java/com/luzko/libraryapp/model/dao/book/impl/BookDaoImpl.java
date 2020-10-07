@@ -18,16 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class BookDaoImpl implements BookDao {
-    private static final BookDaoImpl instance = new BookDaoImpl();
     //TODO add logger..
-
-    private BookDaoImpl() {
-
-    }
-
-    public static BookDaoImpl getInstance() {
-        return instance;
-    }
 
     @Override
     public boolean add(Book book) throws DaoException {

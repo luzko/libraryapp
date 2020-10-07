@@ -18,16 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
-    private static final UserDaoImpl INSTANCE = new UserDaoImpl();
-    //TODO add logger..
-
-    private UserDaoImpl() {
-
-    }
-
-    public static UserDaoImpl getInstance() {
-        return INSTANCE;
-    }
 
     @Override
     public String findPasswordByLogin(String login) throws DaoException {

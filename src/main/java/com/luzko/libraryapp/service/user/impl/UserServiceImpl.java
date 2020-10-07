@@ -18,17 +18,6 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
 
-    private static final UserServiceImpl instance = new UserServiceImpl();
-    //TODO add logger..
-
-    private UserServiceImpl() {
-
-    }
-
-    public static UserServiceImpl getInstance() {
-        return instance;
-    }
-
     @Override
     public boolean verifyUser(String login, String password) throws ServiceException {
         //TODO валидация на входящие поля логина и пароля, если апраори неверные, то зачем выполнять работу..

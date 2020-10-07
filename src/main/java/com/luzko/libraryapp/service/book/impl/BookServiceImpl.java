@@ -10,16 +10,6 @@ import com.luzko.libraryapp.service.book.BookService;
 import java.util.List;
 
 public class BookServiceImpl implements BookService {
-    private static final BookServiceImpl instance = new BookServiceImpl();
-    //TODO add logger..
-
-    private BookServiceImpl() {
-
-    }
-
-    public static BookServiceImpl getInstance() {
-        return instance;
-    }
 
     @Override
     public List<Book> findAll() throws ServiceException {
