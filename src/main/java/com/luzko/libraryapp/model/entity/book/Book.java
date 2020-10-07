@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.model.entity.book;
 
+import com.luzko.libraryapp.builder.BookBuilder;
 import com.luzko.libraryapp.model.entity.BaseEntity;
 
 import java.util.StringJoiner;
@@ -18,8 +19,8 @@ public class Book extends BaseEntity {
 
     }
 
-    public Book(Long bookId, String title, int year, int pages, String description, int numberCopies, Category category, String authors) {
-        this.bookId = bookId;
+    public Book(BookBuilder builder) {
+        this.bookId = builder.getBookId();
         this.title = title;
         this.year = year;
         this.pages = pages;
