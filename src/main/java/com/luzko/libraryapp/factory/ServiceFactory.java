@@ -10,8 +10,8 @@ public class ServiceFactory {
     private final BookService bookService;
 
     private ServiceFactory() {
-        userService = new UserServiceImpl();
-        bookService = new BookServiceImpl();
+        this.userService = new UserServiceImpl();
+        this.bookService = new BookServiceImpl();
     }
 
     private static class ServiceFactorySingletonHolder {
