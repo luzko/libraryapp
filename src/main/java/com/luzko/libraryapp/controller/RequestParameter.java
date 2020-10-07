@@ -6,6 +6,7 @@ public class RequestParameter {
     }
 
     //general
+    public static final String EMPTY = "";
     public static final String COMMAND_NAME = "command";
     public static final String LOCALE = "locale";
     public static final String ENCODING = "encoding";
@@ -19,6 +20,17 @@ public class RequestParameter {
     public static final String ERROR_DATA_MESSAGE = "errorDataMessage";
     public static final String PARAM_CONFIRM_ERROR = "confirmError";
 
+    //message error
+    public static final String PATH_LOGIN_EXIST = "message.login.exist";
+    public static final String PATH_INCORRECT_DATA = "message.login.incorrect.data";
+    public static final String PATH_INCORRECT_USER = "message.user.incorrect";
+    public static final String PATH_LOGIN_ERROR = "message.login.error";
+    public static final String PATH_INCORRECT_CODE = "message.confirm.code";
+    public static final String PATH_SAVE_CHANGES = "message.changed.save";
+    public static final String PATH_SURNAME_CHANGES = "message.user.surname.error";
+    public static final String PATH_NAME_CHANGES = "message.user.name.error";
+    public static final String PATH_LOGIN_CHANGES = "message.user.login.error";
+
     //user
     public static final String NAME = "name";
     public static final String SURNAME = "surname";
@@ -29,6 +41,7 @@ public class RequestParameter {
     public static final String USER_SURNAME = "userSurname";
     public static final String USER_ROLE = "userRole";
     public static final String USER_STATUS = "status";
+    public static final String REGISTRATION_PARAMETER = "registrationParameters";
 
     //profile
     public static final String TYPE_PROFILE_PAGE = "type";

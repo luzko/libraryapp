@@ -1,22 +1,23 @@
 package com.luzko.libraryapp.controller.command.impl.user;
 
+import com.luzko.libraryapp.config.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.controller.router.Router;
 import com.luzko.libraryapp.controller.router.RouterType;
+import com.luzko.libraryapp.exception.CommandException;
 import com.luzko.libraryapp.exception.ServiceException;
+import com.luzko.libraryapp.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.user.User;
 import com.luzko.libraryapp.model.entity.user.UserRole;
 import com.luzko.libraryapp.model.entity.user.UserStatus;
 import com.luzko.libraryapp.service.user.UserService;
-import com.luzko.libraryapp.service.user.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,7 @@ public class LoginCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
-        UserService userService = UserServiceImpl.getInstance();
+        UserService userService = ServiceFactory.getInstance().getUserService();
         String login = request.getParameter(RequestParameter.LOGIN);
         String password = request.getParameter(RequestParameter.PASSWORD);
 
@@ -38,25 +39,26 @@ public class LoginCommand implements Command {
                     User user = userOptional.get();
                     router = defineRouterByStatus(user, request);
                 } else {
-                    request.setAttribute(RequestParameter.ERROR_MESSAGE, "User is incorrect");
+                    request.setAttribute(RequestParameter.ERROR_MESSAGE,
+                            ConfigurationManager.getMessageProperty(RequestParameter.PATH_INCORRECT_USER));
                     router.setPagePath(PagePath.ERROR);
                     router.setRouterType(RouterType.FORWARD);
                 }
             } else {
-                request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE, "Incorrect login or password");
+                request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE,
+                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_LOGIN_ERROR));
                 router.setPagePath(PagePath.LOGIN);
                 router.setRouterType(RouterType.FORWARD);
             }
-        } catch (ServiceException e) {
+        } catch (ServiceException | CommandException e) {
             logger.log(Level.ERROR, "Error in login", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e); //TODO e?
             router.setPagePath(PagePath.ERROR);
             router.setRouterType(RouterType.FORWARD);
         }
         return router;
     }
 
-    private Router defineRouterByStatus(User user, HttpServletRequest request) throws ServiceException {
+    private Router defineRouterByStatus(User user, HttpServletRequest request) throws ServiceException, CommandException {
         UserStatus userStatus = user.getUserStatus();
         Router router = new Router();
         HttpSession session = request.getSession();
@@ -80,16 +82,13 @@ public class LoginCommand implements Command {
                 router.setPagePath(PagePath.CONFIRMATION);
                 router.setRouterType(RouterType.REDIRECT);
             }
-            default -> {
-                //TODO error..
-
-            }
+            default -> throw new CommandException("User status is incorrect");
         }
         return router;
     }
 
-    private Router defineRouterByRole(User user, HttpServletRequest request) throws ServiceException {
-        UserService userService = UserServiceImpl.getInstance();
+    private Router defineRouterByRole(User user, HttpServletRequest request) throws ServiceException, CommandException {
+        UserService userService = ServiceFactory.getInstance().getUserService();
         UserRole userRole = user.getUserRole();
         Router router = new Router();
         switch (userRole) {
@@ -103,10 +102,7 @@ public class LoginCommand implements Command {
                 router.setPagePath(PagePath.ADMIN);
                 router.setRouterType(RouterType.REDIRECT);
             }
-            default -> {
-                //TODO error
-
-            }
+            default -> throw new CommandException("User role is incorrect");
         }
         return router;
     }
