@@ -71,28 +71,21 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean add(String login, String password, UserRole role,
-                       String name, String surname, String email, String codeConfirm) throws DaoException {
+    public boolean add(User user, String password, String codeConfirm) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.ADD_USER)) {
-            statement.setString(1, login);
+            statement.setString(1, user.getLogin());
             statement.setString(2, password);
-            statement.setInt(3, role.defineId());
-            statement.setString(4, name);
-            statement.setString(5, surname);
-            statement.setString(6, email);
+            statement.setInt(3, user.getUserRole().defineId());
+            statement.setString(4, user.getName());
+            statement.setString(5, user.getSurname());
+            statement.setString(6, user.getEmail());
             statement.setInt(7, UserStatus.UNCONFIRMED.defineId());
             statement.setString(8, codeConfirm);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException("Add error", e);
         }
-    }
-
-    //TODO
-    @Override
-    public boolean add(User user) throws DaoException {
-        return false;
     }
 
     @Override

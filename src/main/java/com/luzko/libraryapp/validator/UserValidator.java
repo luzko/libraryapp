@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class UserValidator {
     private static final String EMPTY_VALUE = "";
-
     private static final String LOGIN_PATTERN = "^[\\p{Alnum}._-]{5,20}$";
     private static final String PASSWORD_PATTERN = "(?=.*[a-z])(?=.*\\d)([A-Za-z\\d]{8,20})";
     private static final String NAME_PATTERN = "^([А-Я]{1}[а-я]{3,20}|[A-Z]{1}[a-z]{3,20})$";

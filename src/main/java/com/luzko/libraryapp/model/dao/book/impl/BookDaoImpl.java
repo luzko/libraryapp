@@ -20,11 +20,6 @@ import java.util.Optional;
 public class BookDaoImpl implements BookDao {
 
     @Override
-    public boolean add(Book book) throws DaoException {
-        return false;
-    }
-
-    @Override
     public Optional<Book> findById(long id) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_BOOK_BY_ID)) {

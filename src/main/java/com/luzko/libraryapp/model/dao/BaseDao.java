@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BaseDao<T extends BaseEntity> {
-
-    boolean add(T baseEntity) throws DaoException;
-
     Optional<T> findById(long id) throws DaoException;
 
     List<T> findAll() throws DaoException;
