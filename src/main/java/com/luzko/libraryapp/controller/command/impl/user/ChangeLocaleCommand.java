@@ -15,7 +15,7 @@ public class ChangeLocaleCommand implements Command {
     private static final Logger logger = LogManager.getLogger(ChangeLocaleCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         String locale = (String) request.getSession().getAttribute(RequestParameter.LOCALE);
 

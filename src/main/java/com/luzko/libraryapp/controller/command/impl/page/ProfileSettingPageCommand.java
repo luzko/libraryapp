@@ -7,12 +7,11 @@ import com.luzko.libraryapp.controller.router.Router;
 import com.luzko.libraryapp.controller.router.RouterType;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class ProfileSettingPageCommand implements Command {
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         request.getSession().setAttribute(RequestParameter.TYPE_PROFILE_PAGE, RequestParameter.CHANGE_PROFILE_PAGE);
         router.setPagePath(PagePath.USER);

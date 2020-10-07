@@ -6,11 +6,10 @@ import com.luzko.libraryapp.controller.router.Router;
 import com.luzko.libraryapp.controller.router.RouterType;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class RegistrationPageCommand implements Command {
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         router.setPagePath(PagePath.REGISTRATION);
         router.setRouterType(RouterType.REDIRECT);

@@ -15,7 +15,7 @@ public class ActionProvider {
 
     public static Optional<Command> defineCommand(String commandName) {
         Optional<Command> command = Optional.empty();
-        if(commandName != null && !commandName.isBlank()) {
+        if (commandName != null && !commandName.isBlank()) {
             try {
                 CommandType commandType = CommandType.valueOf(commandName.toUpperCase());
                 command = Optional.ofNullable(commandType.getCommand());

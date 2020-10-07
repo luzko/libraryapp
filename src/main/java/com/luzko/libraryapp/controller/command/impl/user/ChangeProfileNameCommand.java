@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ChangeProfileNameCommand implements Command {
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         String login = (String) request.getSession().getAttribute(RequestParameter.LOGIN);
         String newName = request.getParameter(RequestParameter.NAME);

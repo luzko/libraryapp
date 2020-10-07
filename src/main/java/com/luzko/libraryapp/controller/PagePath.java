@@ -5,27 +5,20 @@ public class PagePath {
 
     }
 
-    public static final String ERROR = "/jsp/error/error.jsp";
-
+    //view
     public static final String HOME = "/jsp/view/home.jsp";
-
     public static final String LOGIN = "/jsp/view/login.jsp";
-
     public static final String REGISTRATION = "/jsp/view/registration.jsp";
-
-    //public static final String READER = "/jsp/reader.jsp";
-
     public static final String USER = "/jsp/view/user.jsp";
-
     public static final String ADMIN = "/jsp/view/admin.jsp";
-
-    //public static final String LIBRARIAN = "/jsp/librarian.jsp";
-
     public static final String LIBRARY = "/jsp/view/library.jsp";
-
     public static final String CONFIRMATION = "/jsp/view/confirmation.jsp";
-
     public static final String BLOCKED = "/jsp/view/blocked.jsp";
+    public static final String BOOK_OVERVIEW = "/jsp/view/bookoverview.jsp";
+    public static final String CREATE_BOOK = "/jsp/view/createbook.jsp";
+
+    //error
+    public static final String ERROR = "/jsp/error/error.jsp";
+    public static final String ERROR_STEP = "/jsp/error/errorstep.jsp";
 }
 
-//TODO replace in property

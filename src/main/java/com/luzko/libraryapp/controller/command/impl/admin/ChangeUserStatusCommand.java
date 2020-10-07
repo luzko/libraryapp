@@ -21,7 +21,7 @@ public class ChangeUserStatusCommand implements Command {
     private static final Logger logger = LogManager.getLogger(ChangeUserStatusCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         UserService userService = UserServiceImpl.getInstance();
         Router router = new Router();
         String login = request.getParameter(RequestParameter.LOGIN);

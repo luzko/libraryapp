@@ -25,7 +25,7 @@ public class LoginCommand implements Command {
     private static final Logger logger = LogManager.getLogger(LoginCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         UserService userService = UserServiceImpl.getInstance();
         String login = request.getParameter(RequestParameter.LOGIN);

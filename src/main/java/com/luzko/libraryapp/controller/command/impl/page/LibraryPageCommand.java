@@ -21,7 +21,7 @@ public class LibraryPageCommand implements Command {
     private static final Logger logger = LogManager.getLogger(LibraryPageCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         BookService bookService = BookServiceImpl.getInstance();
 

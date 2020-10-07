@@ -15,7 +15,7 @@ public class LogoutCommand implements Command {
     private static final Logger logger = LogManager.getLogger(LogoutCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         request.getSession().invalidate();
         router.setPagePath(PagePath.HOME);

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UserPageCommand implements Command {
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         UserStatus userStatus = (UserStatus) request.getSession().getAttribute(RequestParameter.USER_STATUS);
         request.getSession().setAttribute(RequestParameter.TYPE_PROFILE_PAGE, RequestParameter.SEE_PROFILE_PAGE);

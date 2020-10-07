@@ -8,7 +8,7 @@
     </welcome-file-list>
     <error-page>
         <error-code>404</error-code>
-        <location>/jsp/error/errorStepPage.jsp</location>
+        <location>/jsp/error/errorstep.jsp</location>
     </error-page>
     <error-page>
         <exception-type>java.lang.RuntimeException</exception-type>

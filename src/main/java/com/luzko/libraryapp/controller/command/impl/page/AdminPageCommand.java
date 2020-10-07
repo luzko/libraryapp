@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AdminPageCommand implements Command {
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         router.setPagePath(PagePath.ADMIN);
         router.setRouterType(RouterType.FORWARD);

@@ -25,7 +25,7 @@ public class RegistrationCommand implements Command {
     private static final UserService service = UserServiceImpl.getInstance();
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         Map<String, String> registrationParameter = fillRegistrationParameter(request);
         Object role = request.getSession().getAttribute(RequestParameter.USER_ROLE);

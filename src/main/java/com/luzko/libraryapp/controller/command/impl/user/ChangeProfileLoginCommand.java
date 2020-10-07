@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ChangeProfileLoginCommand implements Command {
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         String login = (String) request.getSession().getAttribute(RequestParameter.LOGIN);
         String newLogin = request.getParameter(RequestParameter.LOGIN);
