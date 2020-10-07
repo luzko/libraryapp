@@ -37,7 +37,7 @@ public class RegistrationCommand implements Command {
                 if (userService.registration(registrationParameter, isLibrarian)) {
                     //TODO логика по отсылки письма с подтверждем.. Редирект на страницу подтверждения, isLibrarian на админа
 
-                    router.setPagePath(PagePath.HOME);
+                    router.setPagePath(PagePath.INDEX);
                     router.setRouterType(RouterType.REDIRECT);
                 } else {
                     request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
@@ -62,13 +62,13 @@ public class RegistrationCommand implements Command {
     }
 
     private Map<String, String> fillRegistrationParameter(HttpServletRequest request) {
-        Map<String, String> registrationParameters = new HashMap<>();
-        registrationParameters.put(ColumnName.LOGIN, request.getParameter(ColumnName.LOGIN).trim());
-        registrationParameters.put(ColumnName.PASSWORD, request.getParameter(ColumnName.PASSWORD).trim());
-        registrationParameters.put(ColumnName.NAME, request.getParameter(ColumnName.NAME).trim());
-        registrationParameters.put(ColumnName.SURNAME, request.getParameter(ColumnName.SURNAME).trim());
-        registrationParameters.put(ColumnName.EMAIL, request.getParameter(ColumnName.EMAIL).trim());
-        registrationParameters.put(ColumnName.CONFIRM_CODE, ConfirmCodeGenerator.generate());
-        return registrationParameters;
+        Map<String, String> registrationParameter = new HashMap<>();
+        registrationParameter.put(ColumnName.LOGIN, request.getParameter(ColumnName.LOGIN).trim());
+        registrationParameter.put(ColumnName.PASSWORD, request.getParameter(ColumnName.PASSWORD).trim());
+        registrationParameter.put(ColumnName.NAME, request.getParameter(ColumnName.NAME).trim());
+        registrationParameter.put(ColumnName.SURNAME, request.getParameter(ColumnName.SURNAME).trim());
+        registrationParameter.put(ColumnName.EMAIL, request.getParameter(ColumnName.EMAIL).trim());
+        registrationParameter.put(ColumnName.CONFIRM_CODE, ConfirmCodeGenerator.generate());
+        return registrationParameter;
     }
 }

@@ -64,7 +64,7 @@
                         </label>
                         <div class="col-sm-8 ">
                             <input type="text" name="login" id="login" class="float-sm-left" style="width: 220px"
-                                   pattern="[A-Za-zА-Яа-я\d\-\_]{0,45}"
+                                   pattern="^[\w.]{5,20}$"
                                    maxlength="45"
                                    title="<fmt:message key="invalid.login"/>"
                                    required/>
@@ -80,7 +80,7 @@
                         <div class="col-sm-8">
                             <input type="password" name="password" id="password" class="float-sm-left"
                                    style="width: 220px"
-                                   pattern="((?=.*[a-zа-я])(?=.*\d)([A-Za-zА-Яа-я\d]{8,45})"
+                                   pattern="^(?=.*[\p{Lower}])(?=.*[\p{Upper}])(?=.*\d)[\p{Alnum}]{6,20}$"
                                    maxlength="45"
                                    title="<fmt:message key="invalid.registration.password"/>"
                                    required/>

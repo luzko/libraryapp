@@ -13,7 +13,6 @@
     <meta name="author" content="">
 
     <title>libraryapp</title>
-
     <style>
         <%@include file="../../vendor/bootstrap/css/bootstrap.min.css"%>
         <%@include file="../../css/grayscale.min.css"%>
@@ -80,15 +79,12 @@
                         </label>
                         <div class="col-sm-8 ">
                             <input type="text" name="login" id="login" class="float-sm-left" style="width: 220px"
-                                   pattern="[A-Za-zА-Яа-я\d\-\_]{0,45}"
+                                   pattern="^[\w.]{5,20}$"
                                    maxlength="20"
                                    title="<fmt:message key="invalid.login"/>"
                                    required
                                    value="${registrationParameters.get("login")}"
                             />
-                            <%--<c:if test="${loginError}">
-                                <label style="color: #9fcdff"><fmt:message key="invalid.registration.login"/></label>
-                            </c:if>--%>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -98,15 +94,12 @@
                         <div class="col-sm-8">
                             <input type="password" name="password" id="password" class="float-sm-left"
                                    style="width: 220px"
-                                   pattern="(?=.*[a-z])(?=.*\d)([A-Za-z\d]{8,20})"
+                                   pattern="^(?=.*[\p{Lower}])(?=.*[\p{Upper}])(?=.*\d)[\p{Alnum}]{6,20}$"
                                    maxlength="20"
                                    title="<fmt:message key="invalid.registration.password"/>"
                                    required
                                    value="${registrationParameters.get("password")}"
                             />
-                            <%--<c:if test="${passwordError}">
-                                <label style="color: #9fcdff"><fmt:message key="invalid.registration.password"/></label>
-                            </c:if>--%>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -115,15 +108,12 @@
                         </label>
                         <div class="col-sm-8">
                             <input type="text" name="email" id="email" class="float-sm-left" style="width: 220px"
-                                   pattern="\w+([\.-]?\w+)*@\w+([\.-]?\w+)*\.\w{2,4}"
+                                   pattern="^[\w.+-]{3,30}@[\w.-]{2,15}\.[\p{Lower}]{2,4}$"
                                    maxlength="40"
                                    title="<fmt:message key="invalid.registration.email"/>"
                                    required
                                    value="${registrationParameters.get("email")}"
                             />
-                            <%--<c:if test="${emailError}">
-                                <label style="color: #9fcdff"><fmt:message key="invalid.registration.email"/></label>
-                            </c:if>--%>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -132,15 +122,12 @@
                         </label>
                         <div class="col-sm-8">
                             <input type="text" name="name" id="name" class="float-sm-left" style="width: 220px"
-                                   pattern="^([А-Я]{1}[а-яё]{1,20}|[A-Z]{1}[a-z]{3,20})$"
+                                   pattern="^[\p{L}]{3,25}$"
                                    maxlength="45"
                                    title="<fmt:message key="invalid.name"/>"
                                    required
                                    value="${registrationParameters.get("name")}"
                             />
-                            <%--<c:if test="${nameError}">
-                                <label style="color: #9fcdff"><fmt:message key="invalid.name"/></label>
-                            </c:if>--%>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -149,17 +136,13 @@
                         </label>
                         <div class="col-sm-8">
                             <input type="text" name="surname" id="surname" class="float-sm-left" style="width: 220px"
-                                   pattern="^([А-Я]{1}[а-яё]{1,20}|[A-Z]{1}[a-z]{3,20})$"
+                                   pattern="^[\p{L}]{3,25}$"
                                    maxlength="45"
                                    title="<fmt:message key="invalid.name"/>"
                                    required
                                    value="${registrationParameters.get("surname")}"
                             />
-                            <%--<c:if test="${surnameError}">
-                                <label style="color: #9fcdff"><fmt:message key="label.invalid.surname"/></label>
-                            </c:if>--%>
                         </div>
-
                     </div>
                     <br>
                     <br>

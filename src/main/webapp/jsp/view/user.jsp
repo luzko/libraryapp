@@ -195,7 +195,7 @@
 
                                             <input type="text" name="login" id="login" placeholder="${login}"
                                                    class="float-sm-left" style="width: 180px; height: 30px;"
-                                                   pattern="[A-Za-zА-Яа-я\d\-\_]{0,45}"
+                                                   pattern="^[\w.]{5,20}$"
                                                    maxlength="20"
                                                    required
                                             />
@@ -229,7 +229,7 @@
 
                                             <input type="text" name="name" id="name" placeholder="${userName}"
                                                    class="float-sm-left" style="width: 180px; height: 30px;"
-                                                   pattern="^([А-Я]{1}[а-яё]{1,20}|[A-Z]{1}[a-z]{3,20})$"
+                                                   pattern="^[\p{L}]{3,25}$"
                                                    maxlength="20"
                                                    required
                                             />
@@ -265,7 +265,7 @@
 
                                             <input type="text" name="surname" id="surname" placeholder="${userSurname}"
                                                    class="float-sm-left" style="width: 180px; height: 30px;"
-                                                   pattern="^([А-Я]{1}[а-яё]{1,20}|[A-Z]{1}[a-z]{3,20})$"
+                                                   pattern="^[\p{L}]{3,25}$"
                                                    maxlength="20"
                                                    required
                                             />
