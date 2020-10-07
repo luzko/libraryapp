@@ -1,28 +1,17 @@
 package com.luzko.libraryapp.config;
 
-import com.luzko.libraryapp.exception.PropertiesException;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 public final class ConfigurationManager {
-    public static final Logger logger = LogManager.getLogger(ConfigurationManager.class);
-
-    private static final String MAIL_RESOURCE = "mail.properties";
-    private static final String MESS_RESOURCE = "message.properties";
+    private static final String MAIL_RESOURCE = "prop.mail";
+    private static final String MESSAGE_RESOURCE = "prop.message";
     private static Properties mailProperties;
     private static Properties messageProperties;
 
     static {
-        try {
-            loadProperties();
-        } catch (PropertiesException e) {
-            logger.log(Level.ERROR, "Properties error", e);
-        }
+        loadProperties();
     }
 
     private ConfigurationManager() {
@@ -37,17 +26,22 @@ public final class ConfigurationManager {
         return messageProperties.getProperty(key);
     }
 
-    private static void loadProperties() throws PropertiesException {
-        try {
-            mailProperties = new Properties();
-            InputStream mailStream = ConfigurationManager.class.getClassLoader().getResourceAsStream(MAIL_RESOURCE);
-            mailProperties.load(mailStream);
+    private static void loadProperties() {
+        ResourceBundle resourceBundleMail = ResourceBundle.getBundle(MAIL_RESOURCE);
+        ResourceBundle resourceBundleMessage = ResourceBundle.getBundle(MESSAGE_RESOURCE);
 
-            messageProperties = new Properties();
-            InputStream messageLoad = ConfigurationManager.class.getClassLoader().getResourceAsStream(MESS_RESOURCE);
-            messageProperties.load(messageLoad);
-        } catch (IOException e) {
-            throw new PropertiesException(e);
+        mailProperties = convertResourceBundleToProperties(resourceBundleMail);
+        messageProperties = convertResourceBundleToProperties(resourceBundleMessage);
+    }
+
+    private static Properties convertResourceBundleToProperties(ResourceBundle resourceBundle) {
+        Properties properties = new Properties();
+        Enumeration<String> keys = resourceBundle.getKeys();
+
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            properties.put(key, resourceBundle.getString(key));
         }
+        return properties;
     }
 }

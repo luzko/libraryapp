@@ -6,6 +6,7 @@ public class PagePath {
     }
 
     //view
+    public static final String INDEX = "/index.jsp";
     public static final String HOME = "/jsp/view/home.jsp";
     public static final String LOGIN = "/jsp/view/login.jsp";
     public static final String REGISTRATION = "/jsp/view/registration.jsp";

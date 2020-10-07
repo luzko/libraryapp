@@ -12,7 +12,7 @@ public class LogoutCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         request.getSession().invalidate();
-        router.setPagePath(PagePath.HOME);
+        router.setPagePath(PagePath.INDEX);
         router.setRouterType(RouterType.REDIRECT);
         return router;
     }
