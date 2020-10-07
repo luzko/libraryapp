@@ -6,7 +6,6 @@ public class StatementSql {
     }
 
     //user query
-
     public static final String ADD_USER =
             "INSERT INTO users(login, password, role_id_fk, name, surname, email, user_status_id_fk, confirm) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -42,7 +41,6 @@ public class StatementSql {
             "UPDATE users SET surname = ? WHERE login LIKE ?";
 
     //book query
-
     public static final String FIND_ALL_BOOKS =
             "SELECT b.book_id, b.title, b.year, b.pages, b.description, b.number_copies, b.category_id_fk, " +
                     "GROUP_CONCAT(DISTINCT a.author ORDER BY a.author SEPARATOR ', ') authors FROM books b " +

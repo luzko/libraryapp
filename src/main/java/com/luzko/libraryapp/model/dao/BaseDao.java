@@ -9,10 +9,6 @@ public interface BaseDao<T extends BaseEntity> {
 
     boolean add(T baseEntity) throws DaoException;
 
-    boolean remove(long id) throws DaoException;
-
-    boolean update(T baseEntity) throws DaoException;
-
     T findById(long id) throws DaoException;
 
     List<T> findAll() throws DaoException;
