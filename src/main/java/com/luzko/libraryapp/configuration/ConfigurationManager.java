@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.config;
+package com.luzko.libraryapp.configuration;
 
 import java.util.Enumeration;
 import java.util.Properties;

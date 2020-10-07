@@ -59,7 +59,7 @@ public class LibraryController extends HttpServlet {
 
     @Override
     public void destroy() {
-        super.destroy();
         ConnectionPool.getInstance().destroy();
+        super.destroy();
     }
 }

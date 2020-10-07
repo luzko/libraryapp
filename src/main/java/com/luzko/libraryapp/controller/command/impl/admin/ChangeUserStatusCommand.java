@@ -1,6 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl.admin;
 
-import com.luzko.libraryapp.config.ConfigurationManager;
+import com.luzko.libraryapp.configuration.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.command.Command;
