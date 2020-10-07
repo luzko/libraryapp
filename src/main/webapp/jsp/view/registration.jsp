@@ -144,11 +144,11 @@
                             />
                         </div>
                     </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
+                    <br/>
+                    <br/>
+                    <label style="color: red;">${errorDataMessage}</label>
+                    <br/>
+                    <br/>
                     <div class="form-group row">
                         <div class="col-sm-12">
                             <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
@@ -158,7 +158,7 @@
                     </div>
                 </form>
             </div>
-            <br>
+            <br/>
         </div>
     </div>
 </section>

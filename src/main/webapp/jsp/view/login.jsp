@@ -22,7 +22,6 @@
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
-
 </head>
 <body id="page-top">
 
@@ -37,7 +36,6 @@
                 </button>
             </div>
         </form>
-
         <form class="form-inline"
               method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="registration_page"/>
@@ -49,10 +47,7 @@
         </form>
     </div>
 </nav>
-
-
 <section id="about" class="registration-section text-center">
-
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
@@ -68,9 +63,6 @@
                                    maxlength="45"
                                    title="<fmt:message key="invalid.login"/>"
                                    required/>
-                            <c:if test="${errorLoginPasswordMessage}">
-                                <label style="color: red;"><fmt:message key="invalid.registration.login"/></label>
-                            </c:if>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -84,14 +76,12 @@
                                    maxlength="45"
                                    title="<fmt:message key="invalid.registration.password"/>"
                                    required/>
-                            <c:if test="${passwordError}">
-                                <label style="color: red;"><fmt:message key="invalid.registration.password"/></label>
-                            </c:if>
                         </div>
                     </div>
                     <br>
                     <br>
                     <label style="color: red;">${errorLoginPasswordMessage}</label>
+                    <label style="color: red;">${errorMessage}</label>
                     <br>
                     <br>
                     <div class="form-group row">
