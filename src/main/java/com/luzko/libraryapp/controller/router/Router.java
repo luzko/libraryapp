@@ -4,6 +4,15 @@ public class Router {
     private RouterType routerType;
     private String pagePath;
 
+    public Router() {
+
+    }
+
+    public Router(RouterType routerType, String pagePath) {
+        this.routerType = routerType;
+        this.pagePath = pagePath;
+    }
+
     public RouterType getRouterType() {
         return routerType;
     }

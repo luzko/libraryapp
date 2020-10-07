@@ -33,21 +33,21 @@ public class LibraryController extends HttpServlet {
         processRequest(request, response);
     }
 
-    //TODO добавить объект, что не гонять request вне контроллера..
-
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
         Optional<Command> commandOptional = ActionProvider.defineCommand(commandName);
-        if(commandOptional.isPresent()) {
-            Router router = commandOptional.get().execute(request, response);
-            if (router.getRouterType().equals(RouterType.FORWARD)) {
-                request.getRequestDispatcher(router.getPagePath()).forward(request, response);
-            } else {
-                response.sendRedirect(router.getPagePath());
-            }
+        Router router;
+
+        if (commandOptional.isPresent()) {
+            router = commandOptional.get().execute(request);
         } else {
-            //TODO данной команды не существет..
-            request.getRequestDispatcher(PagePath.ERROR).forward(request, response);
+            router = new Router(RouterType.FORWARD, PagePath.ERROR);
+        }
+
+        if (router.getRouterType().equals(RouterType.FORWARD)) {
+            request.getRequestDispatcher(router.getPagePath()).forward(request, response);
+        } else {
+            response.sendRedirect(router.getPagePath());
         }
     }
 
