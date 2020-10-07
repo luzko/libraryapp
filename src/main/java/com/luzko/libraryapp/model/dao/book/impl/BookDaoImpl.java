@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.model.dao.book.impl;
 
+import com.luzko.libraryapp.builder.BookBuilder;
 import com.luzko.libraryapp.connection.ConnectionPool;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.dao.ColumnName;
@@ -58,15 +59,16 @@ public class BookDaoImpl implements BookDao {
     }
 
     private Optional<Book> createBook(ResultSet resultSet) throws SQLException {
-        Book book = new Book();
-        book.setBookId(resultSet.getLong(ColumnName.BOOK_ID));
-        book.setTitle(resultSet.getString(ColumnName.TITLE));
-        book.setYear(resultSet.getInt(ColumnName.YEAR));
-        book.setPages(resultSet.getInt(ColumnName.PAGES));
-        book.setDescription(resultSet.getString(ColumnName.DESCRIPTION));
-        book.setNumberCopies(resultSet.getInt(ColumnName.NUMBER_COPIES));
-        book.setCategory(Category.defineRoleById(resultSet.getInt(ColumnName.CATEGORY_ID_FK)));
-        book.setAuthors(resultSet.getString(ColumnName.AUTHORS));
+        BookBuilder bookBuilder = new BookBuilder()
+                .setBookId(resultSet.getLong(ColumnName.BOOK_ID))
+                .setTitle(resultSet.getString(ColumnName.TITLE))
+                .setYear(resultSet.getInt(ColumnName.YEAR))
+                .setPages(resultSet.getInt(ColumnName.PAGES))
+                .setDescription(resultSet.getString(ColumnName.DESCRIPTION))
+                .setNumberCopies(resultSet.getInt(ColumnName.NUMBER_COPIES))
+                .setCategory(Category.defineRoleById(resultSet.getInt(ColumnName.CATEGORY_ID_FK)))
+                .setAuthors(resultSet.getString(ColumnName.AUTHORS));
+        Book book = new Book(bookBuilder);
         Optional<Book> bookOptional = Optional.empty();
         if (book.getCategory() != null) {
             bookOptional = Optional.of(book);

@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.model.dao.user.impl;
 
+import com.luzko.libraryapp.builder.UserBuilder;
 import com.luzko.libraryapp.connection.ConnectionPool;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.dao.ColumnName;
@@ -184,14 +185,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     private Optional<User> createUser(ResultSet resultSet) throws SQLException {
-        User user = new User();
-        user.setUserId(resultSet.getLong(ColumnName.USER_ID));
-        user.setLogin(resultSet.getString(ColumnName.LOGIN));
-        user.setUserRole(UserRole.defineRoleById(resultSet.getInt(ColumnName.ROLE_ID_FK)));
-        user.setName(resultSet.getString(ColumnName.NAME));
-        user.setSurname(resultSet.getString(ColumnName.SURNAME));
-        user.setEmail(resultSet.getString(ColumnName.EMAIL));
-        user.setUserStatus(UserStatus.defineStatusById(resultSet.getInt(ColumnName.USER_STATUS_ID_FK)));
+        UserBuilder userBuilder = new UserBuilder()
+                .setUserId(resultSet.getLong(ColumnName.USER_ID))
+                .setLogin(resultSet.getString(ColumnName.LOGIN))
+                .setUserRole(UserRole.defineRoleById(resultSet.getInt(ColumnName.ROLE_ID_FK)))
+                .setName(resultSet.getString(ColumnName.NAME))
+                .setSurname(resultSet.getString(ColumnName.SURNAME))
+                .setEmail(resultSet.getString(ColumnName.EMAIL))
+                .setUserStatus(UserStatus.defineStatusById(resultSet.getInt(ColumnName.USER_STATUS_ID_FK)));
+        User user = new User(userBuilder);
         Optional<User> userOptional = Optional.empty();
         if (user.getUserRole() != null && user.getUserStatus() != null) {
             userOptional = Optional.of(user);
