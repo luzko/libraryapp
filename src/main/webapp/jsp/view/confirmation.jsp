@@ -102,6 +102,7 @@
 <%--<ctg:end-page/>--%>
 
 <script type="text/javascript">
+    <%@include file="../../js/xxsProtection.js"%>
     <%@include file="../../vendor/jquery/jquery.min.js" %>
     <%@include file="../../vendor/bootstrap/js/bootstrap.bundle.min.js" %>
     <%@include file="../../vendor/jquery-easing/jquery.easing.min.js" %>

@@ -296,5 +296,8 @@
 
 <%--<ctg:end-page/>--%>
 
+<script type="text/javascript">
+    <%@include file="../../js/xxsProtection.js"%>
+</script>
 </body>
 </html>
