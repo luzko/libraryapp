@@ -8,7 +8,6 @@ import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.model.entity.user.UserStatus;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class UserPageCommand implements Command {
     @Override
@@ -30,7 +29,8 @@ public class UserPageCommand implements Command {
                 router.setRouterType(RouterType.FORWARD);
             }
             default -> {
-                //TODO error..
+                router.setPagePath(PagePath.ERROR);
+                router.setRouterType(RouterType.REDIRECT);
             }
         }
         return router;

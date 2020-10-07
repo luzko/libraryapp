@@ -30,6 +30,7 @@ public class RequestParameter {
     public static final String PATH_SURNAME_CHANGES = "message.user.surname.error";
     public static final String PATH_NAME_CHANGES = "message.user.name.error";
     public static final String PATH_LOGIN_CHANGES = "message.user.login.error";
+    public static final String PATH_STATUS_CHANGES = "message.user.status.error";
 
     //user
     public static final String NAME = "name";
