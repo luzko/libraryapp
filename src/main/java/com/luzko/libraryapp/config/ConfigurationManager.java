@@ -26,6 +26,7 @@ public final class ConfigurationManager {
         return messageProperties.getProperty(key);
     }
 
+
     private static void loadProperties() {
         ResourceBundle resourceBundleMail = ResourceBundle.getBundle(MAIL_RESOURCE);
         ResourceBundle resourceBundleMessage = ResourceBundle.getBundle(MESSAGE_RESOURCE);

@@ -25,7 +25,7 @@ public class LibraryController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        //ConnectionPool.getInstance().init();
+        ConnectionPool.getInstance().init();
     }
 
     @Override
@@ -60,6 +60,6 @@ public class LibraryController extends HttpServlet {
     @Override
     public void destroy() {
         super.destroy();
-        ConnectionPool.getInstance().destroyPool();
+        ConnectionPool.getInstance().destroy();
     }
 }
