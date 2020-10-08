@@ -9,7 +9,6 @@ import com.luzko.libraryapp.model.dao.book.BookDao;
 import com.luzko.libraryapp.model.entity.book.Book;
 import com.luzko.libraryapp.model.entity.book.Category;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,7 +46,7 @@ public class BookDaoImpl implements BookDao {
         List<Book> bookList = new ArrayList<>();
         if (resultSet != null) {
             while (resultSet.next()) {
-                Optional<Book> bookOptional = createBook(resultSet);
+                Optional<Book> bookOptional = createBookOverview(resultSet);
                 bookOptional.ifPresent(bookList::add);
             }
         }
@@ -63,11 +62,25 @@ public class BookDaoImpl implements BookDao {
                 .setBookId(resultSet.getLong(ColumnName.BOOK_ID))
                 .setTitle(resultSet.getString(ColumnName.TITLE))
                 .setYear(resultSet.getInt(ColumnName.YEAR))
-                .setPages(resultSet.getInt(ColumnName.PAGES))
+                .setPage(resultSet.getInt(ColumnName.PAGES))
                 .setDescription(resultSet.getString(ColumnName.DESCRIPTION))
-                .setNumberCopies(resultSet.getInt(ColumnName.NUMBER_COPIES))
+                .setNumberCopy(resultSet.getInt(ColumnName.NUMBER_COPIES))
                 .setCategory(Category.defineRoleById(resultSet.getInt(ColumnName.CATEGORY_ID_FK)))
-                .setAuthors(resultSet.getString(ColumnName.AUTHORS));
+                .setAuthor(resultSet.getString(ColumnName.AUTHORS));
+        Book book = new Book(bookBuilder);
+        Optional<Book> bookOptional = Optional.empty();
+        if (book.getCategory() != null) {
+            bookOptional = Optional.of(book);
+        }
+        return bookOptional;
+    }
+
+    private Optional<Book> createBookOverview(ResultSet resultSet) throws SQLException {
+        BookBuilder bookBuilder = new BookBuilder()
+                .setBookId(resultSet.getLong(ColumnName.BOOK_ID))
+                .setTitle(resultSet.getString(ColumnName.TITLE))
+                .setCategory(Category.defineRoleById(resultSet.getInt(ColumnName.CATEGORY_ID_FK)))
+                .setAuthor(resultSet.getString(ColumnName.AUTHORS));
         Book book = new Book(bookBuilder);
         Optional<Book> bookOptional = Optional.empty();
         if (book.getCategory() != null) {

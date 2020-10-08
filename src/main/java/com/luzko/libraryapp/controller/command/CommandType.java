@@ -21,7 +21,8 @@ public enum CommandType {
     SETTINGS(new ProfileSettingPageCommand()),
     CHANGE_PROFILE_LOGIN(new ChangeProfileLoginCommand()),
     CHANGE_PROFILE_NAME(new ChangeProfileNameCommand()),
-    CHANGE_PROFILE_SURNAME(new ChangeProfileSurnameCommand());
+    CHANGE_PROFILE_SURNAME(new ChangeProfileSurnameCommand()),
+    BOOK_OVERVIEW(new BookOverviewCommand());
 
     private final Command command;
 

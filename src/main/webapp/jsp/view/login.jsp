@@ -4,7 +4,6 @@
 <%--<%@ taglib prefix="ctg" uri="customtags" %>--%>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="prop.pagecontent"/>
-
 <html>
 <head>
     <meta charset="utf-8">

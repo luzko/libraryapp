@@ -101,7 +101,7 @@
                                 <div class="container">
                                     <form class="form-inline" name="Simple"
                                           action="${pageContext.request.contextPath}/controller" method="GET">
-                                        <input type="hidden" name="command" value="registration_page"/>
+                                        <input type="hidden" name="command" value=""/>
                                         <button type="submit" class="btn btn-outline-secondary"><fmt:message
                                                 key="submit.new.book"/>
                                         </button>
@@ -109,6 +109,9 @@
                                 </div>
                             </nav>
                         </c:if>
+                        <div style="color: red;">
+                            ${overviewError}
+                        </div>
                         <div class="d-flex justify-content-around"><h2>Books</h2></div>
                         <table class="table table-bordered table-hover">
 
@@ -126,7 +129,6 @@
                                     <div class="d-flex justify-content-around"><fmt:message
                                             key="submit.book.category"/></div>
                                 </th>
-
                             </tr>
                             </thead>
                             <tbody>
@@ -141,7 +143,7 @@
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span
                                                 class="badge badge-outline-primary"> <c:out
-                                                value="${book.authors}"/></span></h4></div>
+                                                value="${book.author}"/></span></h4></div>
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span
@@ -150,8 +152,7 @@
                                     </td>
                                     <form action="${pageContext.request.contextPath}/controller" method="post">
                                         <input type="hidden" name="command" value="book_overview"/>
-                                        <input type="hidden" name="login" value="${user.login}"/>
-                                        <input type="hidden" name="status" value="${user.userStatus}">
+                                        <input type="hidden" name="book_id" value="${book.bookId}"/>
                                         <th scope="row">
                                             <div class="d-flex justify-content-around">
                                                 <input style="background-color: green; color: white; line-height: 5px;"

@@ -31,6 +31,7 @@ public class RequestParameter {
     public static final String PATH_NAME_CHANGES = "message.user.name.error";
     public static final String PATH_LOGIN_CHANGES = "message.user.login.error";
     public static final String PATH_STATUS_CHANGES = "message.user.status.error";
+    public static final String PATH_BOOK_OVERVIEW = "message.book.overview";
 
     //user
     public static final String NAME = "name";
@@ -56,4 +57,12 @@ public class RequestParameter {
     //view
     public static final String ALL_USERS = "allUsers";
     public static final String ALL_BOOKS = "allBooks";
+
+    //book
+    public static final String BOOK = "book";
+    public static final String BOOK_ID = "book_id";
+    public static final String OVERVIEW_ERROR = "overviewError";
+    public static final String TYPE_OVERVIEW_PAGE = "typeOverview";
+    public static final String SEE_OVERVIEW_PAGE = "seeOverview";
+
 }

@@ -9,11 +9,11 @@ public class Book extends BaseEntity {
     private Long bookId;
     private String title;
     private int year;
-    private int pages;
+    private int page;
     private String description;
-    private int numberCopies;
+    private int numberCopy;
     private Category category;
-    private String authors;
+    private String author;
 
     public Book() {
 
@@ -23,11 +23,11 @@ public class Book extends BaseEntity {
         this.bookId = builder.getBookId();
         this.title = builder.getTitle();
         this.year = builder.getYear();
-        this.pages = builder.getPages();
+        this.page = builder.getPage();
         this.description = builder.getDescription();
-        this.numberCopies = builder.getNumberCopies();
+        this.numberCopy = builder.getNumberCopy();
         this.category = builder.getCategory();
-        this.authors = builder.getAuthors();
+        this.author = builder.getAuthor();
     }
 
     public Long getBookId() {
@@ -54,12 +54,12 @@ public class Book extends BaseEntity {
         this.year = year;
     }
 
-    public int getPages() {
-        return pages;
+    public int getPage() {
+        return page;
     }
 
-    public void setPages(int pages) {
-        this.pages = pages;
+    public void setPage(int page) {
+        this.page = page;
     }
 
     public String getDescription() {
@@ -70,12 +70,12 @@ public class Book extends BaseEntity {
         this.description = description;
     }
 
-    public int getNumberCopies() {
-        return numberCopies;
+    public int getNumberCopy() {
+        return numberCopy;
     }
 
-    public void setNumberCopies(int numberCopies) {
-        this.numberCopies = numberCopies;
+    public void setNumberCopy(int numberCopy) {
+        this.numberCopy = numberCopy;
     }
 
     public Category getCategory() {
@@ -86,12 +86,12 @@ public class Book extends BaseEntity {
         this.category = category;
     }
 
-    public String getAuthors() {
-        return authors;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAuthors(String authors) {
-        this.authors = authors;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
 
@@ -106,7 +106,7 @@ public class Book extends BaseEntity {
 
         Book book = (Book) o;
 
-        if (year != book.year || pages != book.pages || numberCopies != book.numberCopies || category != book.category) {
+        if (year != book.year || page != book.page || numberCopy != book.numberCopy || category != book.category) {
             return false;
         }
 
@@ -122,7 +122,7 @@ public class Book extends BaseEntity {
             return false;
         }
 
-        return authors != null ? authors.equals(book.authors) : book.authors == null;
+        return author != null ? author.equals(book.author) : book.author == null;
     }
 
     @Override
@@ -130,11 +130,11 @@ public class Book extends BaseEntity {
         int result = bookId != null ? bookId.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + year;
-        result = 31 * result + pages;
+        result = 31 * result + page;
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + numberCopies;
+        result = 31 * result + numberCopy;
         result = 31 * result + (category != null ? category.hashCode() : 0);
-        result = 31 * result + (authors != null ? authors.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
         return result;
     }
 
@@ -144,11 +144,11 @@ public class Book extends BaseEntity {
                 .add("bookId=" + bookId)
                 .add("title='" + title + "'")
                 .add("year=" + year)
-                .add("pages=" + pages)
+                .add("pages=" + page)
                 .add("description='" + description + "'")
-                .add("numberCopies=" + numberCopies)
+                .add("numberCopies=" + numberCopy)
                 .add("category=" + category)
-                .add("authors='" + authors + "'")
+                .add("authors='" + author + "'")
                 .toString();
     }
 }

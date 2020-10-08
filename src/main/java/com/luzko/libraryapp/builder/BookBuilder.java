@@ -6,11 +6,11 @@ public class BookBuilder {
     private Long bookId;
     private String title;
     private int year;
-    private int pages;
+    private int page;
     private String description;
-    private int numberCopies;
+    private int numberCopy;
     private Category category;
-    private String authors;
+    private String author;
 
     public Long getBookId() {
         return bookId;
@@ -39,12 +39,12 @@ public class BookBuilder {
         return this;
     }
 
-    public int getPages() {
-        return pages;
+    public int getPage() {
+        return page;
     }
 
-    public BookBuilder setPages(int pages) {
-        this.pages = pages;
+    public BookBuilder setPage(int page) {
+        this.page = page;
         return this;
     }
 
@@ -57,12 +57,12 @@ public class BookBuilder {
         return this;
     }
 
-    public int getNumberCopies() {
-        return numberCopies;
+    public int getNumberCopy() {
+        return numberCopy;
     }
 
-    public BookBuilder setNumberCopies(int numberCopies) {
-        this.numberCopies = numberCopies;
+    public BookBuilder setNumberCopy(int numberCopy) {
+        this.numberCopy = numberCopy;
         return this;
     }
 
@@ -75,12 +75,12 @@ public class BookBuilder {
         return this;
     }
 
-    public String getAuthors() {
-        return authors;
+    public String getAuthor() {
+        return author;
     }
 
-    public BookBuilder setAuthors(String authors) {
-        this.authors = authors;
+    public BookBuilder setAuthor(String author) {
+        this.author = author;
         return this;
     }
 }
