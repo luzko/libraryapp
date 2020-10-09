@@ -1,6 +1,5 @@
 package com.luzko.libraryapp.filter;
 
-import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.model.entity.user.UserRole;
 
 import javax.servlet.*;
@@ -31,21 +30,17 @@ public class PageSecurityFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String[] list = request.getRequestURI().split(DELIMITER_PATH);
-        String userRole = (String) request.getSession().getAttribute(RequestParameter.USER_ROLE);
+        UserRole userRole = (UserRole) request.getSession().getAttribute("userRole");
 
         String page = null;
         if (list[list.length - 1].contains(EXTENSION_FILE)) {
             page = list[list.length - 1];
         }
 
-        if (userRole == null) {
-            userRole = "";
-        }
-
-        boolean isErrorPageRedirect = (userRole.isEmpty() && !AvailabilityPage.availableGustPage.contains(page)) ||
-                (userRole.equals(UserRole.READER.toString()) && !AvailabilityPage.availableReaderPage.contains(page)) ||
-                (userRole.equals(UserRole.LIBRARIAN.toString()) && !AvailabilityPage.availableLibrarianPage.contains(page)) ||
-                (userRole.equals(UserRole.ADMIN.toString()) && !AvailabilityPage.availableAdminPage.contains(page));
+        boolean isErrorPageRedirect = (userRole == null && !AvailabilityPage.availableGustPage.contains(page)) ||
+                (UserRole.READER.equals(userRole) && !AvailabilityPage.availableReaderPage.contains(page)) ||
+                (UserRole.LIBRARIAN.equals(userRole) && !AvailabilityPage.availableLibrarianPage.contains(page)) ||
+                (UserRole.ADMIN.equals(userRole) && !AvailabilityPage.availableAdminPage.contains(page));
 
         if (isErrorPageRedirect) {
             response.sendRedirect(request.getContextPath() + indexPath);

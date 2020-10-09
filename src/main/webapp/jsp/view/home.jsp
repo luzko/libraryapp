@@ -28,9 +28,7 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
 
-
-        <form class="form-inline"
-              method="POST" action="${pageContext.request.contextPath}/controller">
+        <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="library_page"/>
             <div>
                 <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
@@ -48,8 +46,7 @@
             </div>
         </form>
 
-        <form class="form-inline"
-              action="${pageContext.request.contextPath}/controller" method="post">
+        <form class="form-inline" action="${pageContext.request.contextPath}/controller" method="post">
             <c:if test="${login != null}">
                 <c:choose>
                     <c:when test="${userRole == 'ADMIN'}">

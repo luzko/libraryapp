@@ -46,7 +46,7 @@ public class LibraryController extends HttpServlet {
         if (commandOptional.isPresent()) {
             router = commandOptional.get().execute(request);
         } else {
-            logger.log(Level.WARN, "Unknown command: {}", commandName);
+            logger.log(Level.WARN, "Unknown command: {}", commandName); //TODO library...
             router = new Router(RouterType.FORWARD, PagePath.ERROR);
         }
 
