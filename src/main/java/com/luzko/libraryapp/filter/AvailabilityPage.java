@@ -14,22 +14,20 @@ public class AvailabilityPage {
     private static final String REGISTRATION = "registration.jsp";
     private static final String USER = "user.jsp";
     private static final String ADMIN = "admin.jsp";
-    private static final String LIBRARY = "library.jsp";
     private static final String CONFIRMATION = "confirmation.jsp";
     private static final String BLOCKED = "blocked.jsp";
-    private static final String BOOK_OVERVIEW = "bookoverview.jsp";
     private static final String CREATE_BOOK = "createbook.jsp";
 
     public static List<String> availableGustPage = List.of(
-            INDEX, HOME, LOGIN, REGISTRATION, LIBRARY, BOOK_OVERVIEW
+            INDEX, HOME, LOGIN, REGISTRATION
     );
     public static List<String> availableReaderPage = List.of(
-            INDEX, HOME, LOGIN, REGISTRATION, LIBRARY, BOOK_OVERVIEW, USER, CONFIRMATION, BLOCKED
+            INDEX, HOME, USER, CONFIRMATION, BLOCKED
     );
     public static List<String> availableLibrarianPage = List.of(
-            INDEX, HOME, LOGIN, REGISTRATION, LIBRARY, BOOK_OVERVIEW, USER, CONFIRMATION, BLOCKED
+            INDEX, HOME, USER, CONFIRMATION, BLOCKED
     );
     public static List<String> availableAdminPage = List.of(
-            INDEX, HOME, LOGIN, REGISTRATION, LIBRARY, BOOK_OVERVIEW, ADMIN, CREATE_BOOK
+            INDEX, HOME, REGISTRATION, ADMIN, CREATE_BOOK
     );
 }

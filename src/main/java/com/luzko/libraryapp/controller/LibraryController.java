@@ -6,10 +6,6 @@ import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.controller.router.Router;
 import com.luzko.libraryapp.controller.router.RouterType;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +16,6 @@ import java.util.Optional;
 
 @WebServlet(urlPatterns = {"/controller/*"})
 public class LibraryController extends HttpServlet {
-    public static final Logger logger = LogManager.getLogger(LibraryController.class);
 
     @Override
     public void init() throws ServletException {
@@ -46,7 +41,6 @@ public class LibraryController extends HttpServlet {
         if (commandOptional.isPresent()) {
             router = commandOptional.get().execute(request);
         } else {
-            logger.log(Level.WARN, "Unknown command: {}", commandName); //TODO library...
             router = new Router(RouterType.FORWARD, PagePath.ERROR);
         }
 
