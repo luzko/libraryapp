@@ -4,7 +4,7 @@ import com.fasterxml.uuid.Generators;
 
 import java.util.UUID;
 
-public class ConfirmCodeGenerator {
+public final class ConfirmCodeGenerator {
     private ConfirmCodeGenerator() {
 
     }

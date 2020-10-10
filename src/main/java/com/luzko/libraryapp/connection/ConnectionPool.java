@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.connection;
 
+import com.luzko.libraryapp.util.ConfigurationManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +17,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
     private static final Logger logger = LogManager.getLogger(ConnectionPool.class);
-    private static final String PROPERTIES_FILENAME = "prop.database";
     private static final String DRIVER_NAME = "driver";
     private static final String URL = "url";
     private static final int POOL_SIZE = 8;
@@ -29,7 +29,7 @@ public class ConnectionPool {
     private final Lock initLock;
 
     private ConnectionPool() {
-        properties = defineProperties();
+        properties = ConfigurationManager.getDatabaseProperties();
         availableConnections = new LinkedBlockingQueue<>(POOL_SIZE);
         givenConnections = new ArrayDeque<>();
         isInitialized = new AtomicBoolean(false);
@@ -128,16 +128,5 @@ public class ConnectionPool {
         } else {
             logger.log(Level.WARN, "Invalid connection");
         }
-    }
-
-    private Properties defineProperties() {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(PROPERTIES_FILENAME);
-        Properties connectionPoolProperties = new Properties();
-        Enumeration<String> keys = resourceBundle.getKeys();
-        while (keys.hasMoreElements()) {
-            String key = keys.nextElement();
-            connectionPoolProperties.put(key, resourceBundle.getString(key));
-        }
-        return connectionPoolProperties;
     }
 }

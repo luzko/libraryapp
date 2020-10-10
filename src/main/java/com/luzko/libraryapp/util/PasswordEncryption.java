@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class PasswordEncryption {
+public final class PasswordEncryption {
     private static final Logger logger = LogManager.getLogger(PasswordEncryption.class);
     private static final String ENCRYPTION_ALGORITHM = "SHA-1";
 
