@@ -4,13 +4,13 @@ import com.luzko.libraryapp.util.ConfigurationManager;
 
 import java.util.Properties;
 
-public class EmailSenderUtil {
+public class EmailSender {
     private static final Properties properties = ConfigurationManager.getMailProperties();
     private static final String MAIL_USER_NAME = "mail.user.name";
     private static final String EMAIL_SUBJECT = "Libraryapp confirmation";
     private static final String EMAIL_BODY = "Confirmation code: ";
 
-    private EmailSenderUtil() {
+    private EmailSender() {
 
     }
 
@@ -22,7 +22,7 @@ public class EmailSenderUtil {
         sendMessage(properties.getProperty(MAIL_USER_NAME), login + " : " + subject, text);
     }
 
-    public static void sendMessage(String toEmail, String mailSubject, String mailText) {
+    private static void sendMessage(String toEmail, String mailSubject, String mailText) {
         EmailSenderThread emailSender = new EmailSenderThread(toEmail, mailSubject, mailText, properties);
         Thread thread = new Thread(emailSender);
         thread.start();

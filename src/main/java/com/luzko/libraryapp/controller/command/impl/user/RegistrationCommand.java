@@ -13,6 +13,7 @@ import com.luzko.libraryapp.model.entity.user.UserRole;
 import com.luzko.libraryapp.service.user.UserService;
 import com.luzko.libraryapp.util.ConfirmCodeGenerator;
 
+import com.luzko.libraryapp.util.mail.EmailSender;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,9 +36,14 @@ public class RegistrationCommand implements Command {
         try {
             if (userService.isLoginUnique(registrationParameter.get(ColumnName.LOGIN))) {
                 if (userService.registration(registrationParameter, isLibrarian)) {
-                    //TODO логика по отсылки письма с подтверждем.. Редирект на страницу подтверждения, isLibrarian на админа
-
-                    router.setPagePath(PagePath.INDEX);
+                    EmailSender.sendMessageConfirm(
+                            registrationParameter.get(ColumnName.EMAIL), registrationParameter.get(ColumnName.CONFIRM_CODE)
+                    );
+                    if (isLibrarian) {
+                        router.setPagePath(PagePath.ADMIN);
+                    } else {
+                        router.setPagePath(PagePath.LOGIN);
+                    }
                     router.setRouterType(RouterType.REDIRECT);
                 } else {
                     request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,

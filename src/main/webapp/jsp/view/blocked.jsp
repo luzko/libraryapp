@@ -65,11 +65,11 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-body">
-                                        <div class="form-group"><label for="theme"
+                                        <div class="form-group"><label for="subject"
                                                                        class="form-control-label"><fmt:message
                                                 key="text.blocked.theme"/></label> <input type="text"
                                                                                           class="form-control"
-                                                                                          id="theme" name="theme"></div>
+                                                                                          id="subject" name="subject"></div>
                                         <div class="form-group"><label for="message"
                                                                        class="form-control-label"><fmt:message
                                                 key="text.blocked.message"/> </label> <textarea class="form-control"

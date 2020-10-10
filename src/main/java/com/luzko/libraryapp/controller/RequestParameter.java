@@ -65,4 +65,8 @@ public class RequestParameter {
     public static final String TYPE_OVERVIEW_PAGE = "typeOverview";
     public static final String SEE_OVERVIEW_PAGE = "seeOverview";
 
+    //message
+    public static final String SUBJECT = "subject";
+    public static final String MESSAGE = "message";
+
 }

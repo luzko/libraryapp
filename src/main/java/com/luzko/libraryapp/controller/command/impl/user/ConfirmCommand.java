@@ -32,7 +32,6 @@ public class ConfirmCommand implements Command {
                 router.setPagePath(PagePath.USER);
                 router.setRouterType(RouterType.REDIRECT);
             } else {
-                //TODO повторная отсылка пароля сразу же??
                 request.getSession().setAttribute(RequestParameter.PARAM_CONFIRM_ERROR,
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_INCORRECT_CODE));
                 router.setRouterType(RouterType.REDIRECT);
