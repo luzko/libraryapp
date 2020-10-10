@@ -14,42 +14,34 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class EmailSenderThread implements Runnable {
+    private static final Logger logger = LogManager.getLogger(EmailSenderThread.class);
+    private static final String MAIL_USER_NAME = "mail.user.name";
+
     private MimeMessage message;
-    private final String sendToEmail;
+    private final String toEmail;
     private final String mailSubject;
     private final String mailText;
     private final Properties properties;
-    private static final Logger LOGGER = LogManager.getLogger();
-    private static final String TEXT_TYPE = "text/html";
 
-    public EmailSenderThread(String sendToEmail, String mailSubject, String mailText, Properties properties) {
-        this.sendToEmail = sendToEmail;
+    public EmailSenderThread(String toEmail, String mailSubject, String mailText, Properties properties) {
+        this.toEmail = toEmail;
         this.mailSubject = mailSubject;
         this.mailText = mailText;
         this.properties = properties;
     }
 
     private void initMessage() {
-        //Session mailSession = com.borikov.bullfinch.util.EmailSessionCreator.createSession(properties);
-        //Session mailSession = EmailSessionCreator.createSession(properties);
         Session mailSession = com.luzko.libraryapp.util.mail.EmailSessionCreator.createSession(properties);
         try {
             message = new MimeMessage(mailSession);
-            //от кого
-            message.setFrom(new InternetAddress("libraryapp.app@gmail.com"));
-            //кому
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(sendToEmail));
-            //тема сообщения
+            message.setFrom(new InternetAddress(properties.getProperty(MAIL_USER_NAME)));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject(mailSubject);
-            //текст
             message.setText(mailText);
-            //message.setSubject(mailSubject);
-            //message.setContent(mailText, TEXT_TYPE);
-            //message.setRecipient(Message.RecipientType.TO, new InternetAddress(sendToEmail));
         } catch (AddressException e) {
-            LOGGER.log(Level.ERROR, "Invalid address: {}", sendToEmail, e);
+            logger.log(Level.ERROR, "Invalid address: {}", toEmail, e);
         } catch (MessagingException e) {
-            LOGGER.log(Level.ERROR, "Error generating or sending message: ", e);
+            logger.log(Level.ERROR, "Error sending message", e);
         }
     }
 
@@ -59,7 +51,7 @@ public class EmailSenderThread implements Runnable {
         try {
             Transport.send(message);
         } catch (MessagingException e) {
-            LOGGER.log(Level.ERROR, "Error generating or sending message: ", e);
+            logger.log(Level.ERROR, "Error sending message", e);
         }
     }
 }
