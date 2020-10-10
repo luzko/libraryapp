@@ -14,15 +14,20 @@ import com.luzko.libraryapp.service.user.UserService;
 import com.luzko.libraryapp.util.PasswordEncryption;
 import com.luzko.libraryapp.validator.UserValidator;
 import com.luzko.libraryapp.validator.ValueValidator;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
+    private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     @Override
     public boolean verifyUser(String login, String password) throws ServiceException {
+        logger.log(Level.INFO, "Verify user execute: {}, {}", login, password);
         boolean isCredentialCorrect = false;
         UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
         if (userValidator.isLoginValid(login) && userValidator.isPasswordValid(password)) {
@@ -42,6 +47,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findByLogin(String login) throws ServiceException {
+        logger.log(Level.INFO, "Find by login execute: {}", login);
         Optional<User> userOptional = Optional.empty();
         UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
         if (userValidator.isLoginValid(login)) {
@@ -57,6 +63,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean registration(Map<String, String> registrationParameters, boolean isLibrarian) throws ServiceException {
+        logger.log(Level.INFO, "Registration execute");
         boolean isRegistered = false;
         UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
         UserDao userDao = DaoFactory.getInstance().getUserDAO();
@@ -86,6 +93,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() throws ServiceException {
+        logger.log(Level.INFO, "Find all execute");
         UserDao userDao = DaoFactory.getInstance().getUserDAO();
         try {
             return userDao.findAll();
@@ -96,6 +104,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean changeUserStatus(String login, String userStatus) throws ServiceException {
+        logger.log(Level.INFO, "Change user status execute: {}, {}", login, userStatus);
         boolean isChangeStatus = false;
         ValueValidator valueValidator = ValidatorFactory.getInstance().getValueValidator();
         if (valueValidator.isValidValue(userStatus)) {
@@ -113,6 +122,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isLoginUnique(String login) throws ServiceException {
+        logger.log(Level.INFO, "Check unique login execute: {}", login);
         boolean isLoginUnique = false;
         UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
         if (userValidator.isLoginValid(login)) {
@@ -128,6 +138,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isCodeConfirmCorrect(String login, String codeConfirm) throws ServiceException {
+        logger.log(Level.INFO, "Check code confirmation execute: {}, {}", login, codeConfirm);
         boolean isCodeConfirmCorrect = false;
         ValueValidator valueValidator = ValidatorFactory.getInstance().getValueValidator();
         if (valueValidator.isValidValue(codeConfirm)) {
@@ -146,6 +157,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUserLoginChange(String login, String newLogin) throws ServiceException {
+        logger.log(Level.INFO, "Change user login execute: {}, {}", login, newLogin);
         boolean isUserLoginChange = false;
         UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
         if (userValidator.isLoginValid(newLogin)) {
@@ -163,6 +175,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUserNameChange(String login, String newName) throws ServiceException {
+        logger.log(Level.INFO, "Change name execute: {}, {}", login, newName);
         boolean isUserNameChange = false;
         UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
         if (userValidator.isNameValid(newName)) {
@@ -178,6 +191,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUserSurnameChange(String login, String newSurname) throws ServiceException {
+        logger.log(Level.INFO, "Change surname execute: {}, {}", login, newSurname);
         boolean isUserSurnameChange = false;
         UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
         if (userValidator.isNameValid(newSurname)) {
