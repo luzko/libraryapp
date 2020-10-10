@@ -30,4 +30,10 @@ public class AvailabilityPage {
     public static List<String> availableAdminPage = List.of(
             INDEX, HOME, REGISTRATION, ADMIN, CREATE_BOOK
     );
+    public static List<String> availableBlockedPage = List.of(
+            INDEX, HOME, BLOCKED
+    );
+    public static List<String> availableUnconfirmedPage = List.of(
+            INDEX, HOME, CONFIRMATION
+    );
 }

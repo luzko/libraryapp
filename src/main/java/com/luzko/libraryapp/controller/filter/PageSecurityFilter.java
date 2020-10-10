@@ -1,6 +1,8 @@
 package com.luzko.libraryapp.controller.filter;
 
+import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.model.entity.user.UserRole;
+import com.luzko.libraryapp.model.entity.user.UserStatus;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -30,7 +32,8 @@ public class PageSecurityFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String[] list = request.getRequestURI().split(DELIMITER_PATH);
-        UserRole userRole = (UserRole) request.getSession().getAttribute("userRole");
+        UserRole userRole = (UserRole) request.getSession().getAttribute(RequestParameter.USER_ROLE);
+        UserStatus userStatus = (UserStatus) request.getSession().getAttribute(RequestParameter.USER_ROLE);
 
         String page = null;
         if (list[list.length - 1].contains(EXTENSION_FILE)) {
@@ -41,6 +44,14 @@ public class PageSecurityFilter implements Filter {
                 (UserRole.READER.equals(userRole) && !AvailabilityPage.availableReaderPage.contains(page)) ||
                 (UserRole.LIBRARIAN.equals(userRole) && !AvailabilityPage.availableLibrarianPage.contains(page)) ||
                 (UserRole.ADMIN.equals(userRole) && !AvailabilityPage.availableAdminPage.contains(page));
+
+        if(!isErrorPageRedirect && userStatus == UserStatus.BLOCKED) {
+            isErrorPageRedirect = !AvailabilityPage.availableBlockedPage.contains(page);
+        }
+
+        if(!isErrorPageRedirect && userStatus == UserStatus.UNCONFIRMED) {
+            isErrorPageRedirect = !AvailabilityPage.availableUnconfirmedPage.contains(page);
+        }
 
         if (isErrorPageRedirect) {
             response.sendRedirect(request.getContextPath() + indexPath);
