@@ -1,6 +1,6 @@
 package com.luzko.libraryapp.service.user.impl;
 
-import com.luzko.libraryapp.builder.UserBuilder;
+import com.luzko.libraryapp.model.builder.UserBuilder;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.DaoFactory;

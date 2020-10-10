@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.filter;
+package com.luzko.libraryapp.controller.filter;
 
 import com.luzko.libraryapp.controller.RequestParameter;
 

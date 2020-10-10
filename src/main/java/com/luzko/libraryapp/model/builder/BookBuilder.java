@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.builder;
+package com.luzko.libraryapp.model.builder;
 
 import com.luzko.libraryapp.model.entity.book.Category;
 

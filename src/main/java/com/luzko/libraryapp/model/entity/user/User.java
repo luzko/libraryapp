@@ -1,6 +1,6 @@
 package com.luzko.libraryapp.model.entity.user;
 
-import com.luzko.libraryapp.builder.UserBuilder;
+import com.luzko.libraryapp.model.builder.UserBuilder;
 import com.luzko.libraryapp.model.entity.BaseEntity;
 
 public class User extends BaseEntity {

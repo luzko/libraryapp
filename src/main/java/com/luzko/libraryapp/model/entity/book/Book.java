@@ -1,6 +1,6 @@
 package com.luzko.libraryapp.model.entity.book;
 
-import com.luzko.libraryapp.builder.BookBuilder;
+import com.luzko.libraryapp.model.builder.BookBuilder;
 import com.luzko.libraryapp.model.entity.BaseEntity;
 
 import java.util.StringJoiner;
