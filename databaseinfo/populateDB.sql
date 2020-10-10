@@ -63,14 +63,18 @@ VALUES ('Active'),
        ('Unconfirmed');
 
 INSERT INTO users (login, password, role_id_fk, name, surname, email, user_status_id_fk, confirm)
-VALUES ('adminius', '1161e6ffd3637b302a5cd74076283a7bd1fc20d3', 1, 'not required', 'not required', 'not required', '1', '0'),
-       ('librarianius', '3da541559918a808c2402bba5012f6c60b27661c', 2, 'Мария', 'Шилковская', 'test@gmail.com', '1', '0'),
-       ('user1', '9878e362285eb314cfdbaa8ee8c300c285856810', 3, 'Дмитрий', 'Уласовец', 'user1@gmail.com', '1', '0');
+VALUES ('adminius', 'c8849d6204a0d114a2c0e526b7759d51ae6f7e0f', 1, 'not required', 'not required', 'not required', '1', '0'),
+       ('librarianius', 'adc0bbac0ace2ce1580955d519d5c42eef9c5ca1', 2, 'Мария', 'Шилковская', 'test@gmail.com', '1', '0'),
+       ('user1', '7928afb4387d9e4d26a30b222ea07211c17eb72a', 3, 'Дмитрий', 'Уласовец', 'user1@gmail.com', '1', '0');
 
 INSERT INTO order_statuses (status)
 VALUES ('New'),
        ('Approved'),
        ('Denied');
 
-INSERT INTO orders (user_id_fk, book_id_fk, order_status_id_fk, order_date, return_date)
-VALUES (3, 1, 3, 1599854214000, 1599911154000);
+INSERT INTO order_types (type)
+VALUES ('Reading room'),
+       ('Home');
+
+INSERT INTO orders (user_id_fk, book_id_fk, order_status_id_fk, order_types_id_fk, order_date, return_date)
+VALUES (3, 1, 3, 2, 1599854214000, 1599911154000);

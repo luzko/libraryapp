@@ -21,6 +21,7 @@ CREATE TABLE books
     description 	VARCHAR(500) 				NOT NULL,
     number_copies   TINYINT UNSIGNED			NOT NULL,
     category_id_fk  TINYINT UNSIGNED 			NOT NULL,
+    enabled			 BOOL 			 			NOT NULL DEFAULT TRUE,
     PRIMARY KEY (book_id),
     UNIQUE KEY  (title, year, pages),
     FOREIGN KEY (category_id_fk) REFERENCES categories (category_id) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -92,6 +93,15 @@ CREATE TABLE order_statuses
     PRIMARY KEY (order_status_id)
 );
 
+DROP TABLE IF EXISTS order_types;
+CREATE TABLE order_types
+(
+	order_types_id TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
+    type VARCHAR(20) NOT NULL,
+    UNIQUE KEY (type),
+    PRIMARY KEY (order_types_id)
+);
+
 DROP TABLE IF EXISTS orders;
 CREATE TABLE orders
 (
@@ -99,11 +109,13 @@ CREATE TABLE orders
     user_id_fk 	 INT UNSIGNED 				 NOT NULL,
     book_id_fk   INT UNSIGNED 			     NOT NULL,
     order_status_id_fk TINYINT UNSIGNED 	 NOT NULL,
-    reading_room BOOL 			 			 NOT NULL DEFAULT FALSE,
+    order_types_id_fk TINYINT UNSIGNED NOT NULL,
     order_date 	 BIGINT  		 			 NOT NULL,
     return_date  BIGINT  		 			 NOT NULL,
+    enabled			 BOOL 			 			NOT NULL DEFAULT TRUE,
     PRIMARY KEY (order_id),
     FOREIGN KEY (user_id_fk) REFERENCES users (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     FOREIGN KEY (book_id_fk) REFERENCES books (book_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    FOREIGN KEY (order_status_id_fk) REFERENCES order_statuses (order_status_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    FOREIGN KEY (order_status_id_fk) REFERENCES order_statuses (order_status_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    FOREIGN KEY (order_types_id_fk) REFERENCES order_types (order_types_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
