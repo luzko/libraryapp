@@ -1,4 +1,7 @@
 package com.luzko.libraryapp.service.order.imlp;
 
-public class OrderServiceImpl {
+import com.luzko.libraryapp.service.order.OrderService;
+
+public class OrderServiceImpl implements OrderService {
+
 }
