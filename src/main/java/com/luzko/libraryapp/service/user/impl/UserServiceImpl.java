@@ -62,19 +62,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean registration(Map<String, String> registrationParameters, boolean isLibrarian) throws ServiceException {
+    public boolean registration(Map<String, String> registrationParameter, boolean isLibrarian) throws ServiceException {
         logger.log(Level.INFO, "Registration execute");
         boolean isRegistered = false;
         UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
         UserDao userDao = DaoFactory.getInstance().getUserDAO();
-        if (userValidator.isValidRegistrationParameters(registrationParameters)) {
+        if (userValidator.isValidRegistrationParameter(registrationParameter)) {
             try {
-                String login = registrationParameters.get(ColumnName.LOGIN);
-                String encryptedPassword = PasswordEncryption.encrypt(registrationParameters.get(ColumnName.PASSWORD));
-                String name = registrationParameters.get(ColumnName.NAME);
-                String surname = registrationParameters.get(ColumnName.SURNAME);
-                String email = registrationParameters.get(ColumnName.EMAIL);
-                String codeConfirm = registrationParameters.get(ColumnName.CONFIRM_CODE);
+                String login = registrationParameter.get(ColumnName.LOGIN);
+                String encryptedPassword = PasswordEncryption.encrypt(registrationParameter.get(ColumnName.PASSWORD));
+                String name = registrationParameter.get(ColumnName.NAME);
+                String surname = registrationParameter.get(ColumnName.SURNAME);
+                String email = registrationParameter.get(ColumnName.EMAIL);
+                String codeConfirm = registrationParameter.get(ColumnName.CONFIRM_CODE);
                 UserRole userRole = isLibrarian ? UserRole.LIBRARIAN : UserRole.READER;
                 UserBuilder userBuilder = new UserBuilder()
                         .setLogin(login)

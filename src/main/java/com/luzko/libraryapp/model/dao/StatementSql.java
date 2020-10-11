@@ -59,6 +59,9 @@ public class StatementSql {
                     "LEFT JOIN authors a on a.author_id = ba.author_id_fk " +
                     "WHERE b.enabled = TRUE AND b.book_id LIKE ? GROUP BY b.book_id";
 
+    public static final String FIND_COUNT_BY_PARAMETER =
+            "SELECT count(book_id) as count FROM books WHERE title LIKE ? AND year LIKE ? AND pages LIKE ?";
+
     //author query
     public static final String FIND_ALL_AUTHORS =
             "SELECT author_id, author FROM authors";
@@ -71,6 +74,7 @@ public class StatementSql {
 
     public static final String FINE_COUNT_BY_NAME =
             "SELECT count(author_id) as count FROM authors WHERE author LIKE ?";
+
 }
 
 

@@ -11,30 +11,30 @@ public class UserValidator {
     private static final String NAME_PATTERN = "^[\\p{L}]{3,25}$";
     private static final String EMAIL_PATTERN = "^[\\w.+-]{3,30}@[\\w.-]{2,15}\\.[\\p{Lower}]{2,4}$";
 
-    public boolean isValidRegistrationParameters(Map<String, String> registrationParameters) {
-        boolean isValidParameters = true;
-        if (!isLoginValid(registrationParameters.get(ColumnName.LOGIN))) {
-            isValidParameters = false;
-            registrationParameters.put(ColumnName.LOGIN, EMPTY_VALUE);
+    public boolean isValidRegistrationParameter(Map<String, String> registrationParameter) {
+        boolean isValidParameter = true;
+        if (!isLoginValid(registrationParameter.get(ColumnName.LOGIN))) {
+            isValidParameter = false;
+            registrationParameter.put(ColumnName.LOGIN, EMPTY_VALUE);
         }
-        if (!isPasswordValid(registrationParameters.get(ColumnName.PASSWORD))) {
-            isValidParameters = false;
-            registrationParameters.put(ColumnName.PASSWORD, EMPTY_VALUE);
+        if (!isPasswordValid(registrationParameter.get(ColumnName.PASSWORD))) {
+            isValidParameter = false;
+            registrationParameter.put(ColumnName.PASSWORD, EMPTY_VALUE);
         }
-        if (!isNameValid(registrationParameters.get(ColumnName.NAME))) {
-            isValidParameters = false;
-            registrationParameters.put(ColumnName.NAME, EMPTY_VALUE);
+        if (!isNameValid(registrationParameter.get(ColumnName.NAME))) {
+            isValidParameter = false;
+            registrationParameter.put(ColumnName.NAME, EMPTY_VALUE);
         }
-        if (!isNameValid(registrationParameters.get(ColumnName.SURNAME))) {
-            isValidParameters = false;
-            registrationParameters.put(ColumnName.SURNAME, EMPTY_VALUE);
+        if (!isNameValid(registrationParameter.get(ColumnName.SURNAME))) {
+            isValidParameter = false;
+            registrationParameter.put(ColumnName.SURNAME, EMPTY_VALUE);
         }
 
-        if (!isEmailValid(registrationParameters.get(ColumnName.EMAIL))) {
-            isValidParameters = false;
-            registrationParameters.put(ColumnName.EMAIL, EMPTY_VALUE);
+        if (!isEmailValid(registrationParameter.get(ColumnName.EMAIL))) {
+            isValidParameter = false;
+            registrationParameter.put(ColumnName.EMAIL, EMPTY_VALUE);
         }
-        return isValidParameters;
+        return isValidParameter;
     }
 
     public boolean isLoginValid(String login) {

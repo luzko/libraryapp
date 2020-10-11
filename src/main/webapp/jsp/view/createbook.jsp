@@ -93,10 +93,11 @@
                                 <div class="col-sm-8 ">
                                     <input type="text" name="title" id="title" class="float-sm-left"
                                            style="width: 220px"
-                                           pattern="^[\p{L} ]{3,25}$"
+                                           pattern="^[\p{L} ]{5,25}$"
                                            maxlength="25"
                                            title="<fmt:message key="label.invalid.title"/>"
                                            required
+                                           value="${bookParameter.get("title")}"
                                     />
                                 </div>
                             </div>
@@ -111,6 +112,7 @@
                                            maxlength="4"
                                            title="<fmt:message key="label.invalid.year"/>"
                                            required
+                                           value="${bookParameter.get("year")}"
                                     />
                                 </div>
                             </div>
@@ -121,10 +123,11 @@
                                 <div class="col-sm-8 ">
                                     <input type="text" name="pages" id="pages" class="float-sm-left"
                                            style="width: 220px"
-                                           pattern="^[0-9]{4}$"
+                                           pattern="^[0-9]{1-4}$"
                                            maxlength="4"
                                            title="<fmt:message key="label.invalid.pages"/>"
                                            required
+                                           value="${bookParameter.get("pages")}"
                                     />
                                 </div>
                             </div>
@@ -135,10 +138,11 @@
                                 <div class="col-sm-8 ">
                                     <input type="text" name="number" id="number" class="float-sm-left"
                                            style="width: 220px"
-                                           pattern="^[0-9]{2}$"
+                                           pattern="^[0-9]{1-2}$"
                                            maxlength="2"
                                            title="<fmt:message key="label.invalid.number"/>"
                                            required
+                                           value="${bookParameter.get("number")}"
                                     />
                                 </div>
                             </div>
@@ -153,7 +157,7 @@
                                     <select id="dropdownCategory" class="float-sm-left" style="width: 220px">
                                         <c:forEach var="category" items="${allCategories}">
                                             <option value="<c:out value='${category}' />"
-                                                    <c:if test="${param.selectValue == category})"> selected </c:if>>
+                                                    <c:if test="${param.selectValue eq category.toString()}"> selected </c:if>>
                                                 <c:out value="${category.toString()}"/>
                                             </option>
                                         </c:forEach>
@@ -171,7 +175,7 @@
                                     <select id="dropdownAuthor" class="float-sm-left" style="width: 220px">
                                         <c:forEach var="author" items="${allAuthors}">
                                             <option value="<c:out value='${author}' />"
-                                                    <c:if test="${param.selectValue == author})"> selected </c:if>>
+                                                    <c:if test="${param.selectValue eq author.name}"> selected </c:if>>
                                                 <c:out value="${author.name}"/>
                                             </option>
                                         </c:forEach>
@@ -186,13 +190,13 @@
                                     <fmt:message key="label.description"/>
                                 </label>
                                 <div class="col-sm-8 ">
-                                    <input type="text" name="author" id="description" class="float-sm-left"
-                                           style="width: 220px"
-                                           pattern="------------------------------------"
-                                           maxlength="2"
-                                           title="<fmt:message key="label.invalid.description"/>"
-                                           required
-                                    />
+                                    <textarea type="text" name="description" id="description" class="float-sm-left"
+                                              style="width: 220px"
+                                              pattern="^[\p{L} ]{5,150}$"
+                                              maxlength="150"
+                                              title="<fmt:message key="label.invalid.description"/>"
+                                              required
+                                              value="${bookParameter.get("description")}"></textarea>
                                 </div>
                             </div>
                         </c:when>
@@ -214,9 +218,6 @@
                 </div>
                 <div style="color: green;">
                     ${createAuthorSuccess}
-                </div>
-                <div style="color: green;">
-                    ${createBookSuccess}
                 </div>
             </div>
             <br/>

@@ -12,7 +12,7 @@ public enum Category {
         return this.ordinal() + 1;
     }
 
-    public static Category defineRoleById(int id) {
+    public static Category defineCategoryById(int id) {
         for (Category category : Category.values()) {
             if (category.defineId() == id) {
                 return category;

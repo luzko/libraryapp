@@ -34,6 +34,8 @@ public class RequestParameter {
     public static final String PATH_BOOK_OVERVIEW = "message.book.overview";
     public static final String PATH_AUTHOR_DATA = "message.author.data";
     public static final String PATH_AUTHOR_CORRECT = "message.author.correct";
+    public static final String PATH_BOOK_CORRECT = "message.book.correct";
+    public static final String PATH_BOOK_DATA = "message.book.data";
 
     //user
     public static final String NAME = "name";
@@ -67,6 +69,8 @@ public class RequestParameter {
     public static final String TYPE_OVERVIEW_PAGE = "typeOverview";
     public static final String SEE_OVERVIEW_PAGE = "seeOverview";
     public static final String ALL_CATEGORIES = "allCategories";
+    public static final String BOOK_PARAMETER = "bookParameter";
+    public static final String CORRECT_BOOK_MESSAGE = "createBookSuccess";
 
     //message
     public static final String SUBJECT = "subject";

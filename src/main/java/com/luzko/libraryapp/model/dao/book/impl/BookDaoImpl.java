@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class BookDaoImpl implements BookDao {
@@ -42,6 +43,30 @@ public class BookDaoImpl implements BookDao {
         }
     }
 
+    @Override
+    public boolean isParameterUnique(String title, int year, int pages) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_BY_PARAMETER)) {
+            statement.setString(1, title);
+            statement.setInt(2, year);
+            statement.setInt(3, pages);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt(ColumnName.BOOK_COUNT);
+            return count == 0;
+        } catch (SQLException e) {
+            throw new DaoException("Parameter unique error", e);
+        }
+    }
+
+    @Override
+    public boolean add(Book book) throws DaoException {
+        //TODO
+        //TODO нужна транзакция, нужуен гугл..
+        //TODO
+        return false;
+    }
+
     private List<Book> createBooksFromResultSet(ResultSet resultSet) throws SQLException {
         List<Book> bookList = new ArrayList<>();
         if (resultSet != null) {
@@ -65,7 +90,7 @@ public class BookDaoImpl implements BookDao {
                 .setPage(resultSet.getInt(ColumnName.PAGES))
                 .setDescription(resultSet.getString(ColumnName.DESCRIPTION))
                 .setNumberCopy(resultSet.getInt(ColumnName.NUMBER_COPIES))
-                .setCategory(Category.defineRoleById(resultSet.getInt(ColumnName.CATEGORY_ID_FK)))
+                .setCategory(Category.defineCategoryById(resultSet.getInt(ColumnName.CATEGORY_ID_FK)))
                 .setAuthor(resultSet.getString(ColumnName.AUTHORS));
         Book book = new Book(bookBuilder);
         Optional<Book> bookOptional = Optional.empty();
@@ -79,7 +104,7 @@ public class BookDaoImpl implements BookDao {
         BookBuilder bookBuilder = new BookBuilder()
                 .setBookId(resultSet.getLong(ColumnName.BOOK_ID))
                 .setTitle(resultSet.getString(ColumnName.TITLE))
-                .setCategory(Category.defineRoleById(resultSet.getInt(ColumnName.CATEGORY_ID_FK)))
+                .setCategory(Category.defineCategoryById(resultSet.getInt(ColumnName.CATEGORY_ID_FK)))
                 .setAuthor(resultSet.getString(ColumnName.AUTHORS));
         Book book = new Book(bookBuilder);
         Optional<Book> bookOptional = Optional.empty();
