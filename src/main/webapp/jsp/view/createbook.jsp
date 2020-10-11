@@ -67,7 +67,7 @@
                                 <div class="col-sm-8">
                                     <input type="text" name="authorName" id="authorName" class="float-sm-left"
                                            style="width: 220px"
-                                           pattern="^[\p{L}]{3,25}$"
+                                           pattern="^[\p{L} ]{3,25}$"
                                            maxlength="45"
                                            title="<fmt:message key="invalid.name"/>"
                                            required
