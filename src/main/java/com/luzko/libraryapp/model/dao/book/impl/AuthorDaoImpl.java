@@ -1,11 +1,11 @@
-package com.luzko.libraryapp.model.dao.author.impl;
+package com.luzko.libraryapp.model.dao.book.impl;
 
 import com.luzko.libraryapp.connection.ConnectionPool;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.StatementSql;
-import com.luzko.libraryapp.model.dao.author.AuthorDao;
-import com.luzko.libraryapp.model.entity.author.Author;
+import com.luzko.libraryapp.model.dao.book.AuthorDao;
+import com.luzko.libraryapp.model.entity.book.Author;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

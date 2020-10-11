@@ -3,7 +3,10 @@ package com.luzko.libraryapp.controller.command;
 import com.luzko.libraryapp.controller.command.impl.admin.ChangeUserStatusCommand;
 import com.luzko.libraryapp.controller.command.impl.admin.CreateAuthorCommand;
 import com.luzko.libraryapp.controller.command.impl.admin.CreateBookCommand;
+import com.luzko.libraryapp.controller.command.impl.admin.CreateLibrarianCommand;
 import com.luzko.libraryapp.controller.command.impl.page.*;
+import com.luzko.libraryapp.controller.command.impl.reader.CreateHomeOrderCommand;
+import com.luzko.libraryapp.controller.command.impl.reader.CreateReadingRoomOrderCommand;
 import com.luzko.libraryapp.controller.command.impl.user.*;
 
 public enum CommandType {
@@ -17,6 +20,7 @@ public enum CommandType {
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
     REGISTRATION(new RegistrationCommand()),
+    CREATE_LIBRARIAN_COMMAND(new CreateLibrarianCommand()),
     LOCALE(new ChangeLocaleCommand()),
     CHANGE_USER_STATUS(new ChangeUserStatusCommand()),
     CONFIRM(new ConfirmCommand()),
@@ -27,7 +31,9 @@ public enum CommandType {
     CHANGE_PROFILE_SURNAME(new ChangeProfileSurnameCommand()),
     BOOK_OVERVIEW(new BookOverviewCommand()),
     CREATE_AUTHOR(new CreateAuthorCommand()),
-    CREATE_BOOK(new CreateBookCommand());
+    CREATE_BOOK(new CreateBookCommand()),
+    HOME_ORDER(new CreateHomeOrderCommand()),
+    READING_ROOM_COMMAND(new CreateReadingRoomOrderCommand());
 
     private final Command command;
 

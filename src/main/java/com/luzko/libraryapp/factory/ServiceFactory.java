@@ -1,7 +1,7 @@
 package com.luzko.libraryapp.factory;
 
-import com.luzko.libraryapp.service.author.AuthorService;
-import com.luzko.libraryapp.service.author.impl.AuthorServiceImpl;
+import com.luzko.libraryapp.service.book.AuthorService;
+import com.luzko.libraryapp.service.book.impl.AuthorServiceImpl;
 import com.luzko.libraryapp.service.book.BookService;
 import com.luzko.libraryapp.service.book.impl.BookServiceImpl;
 import com.luzko.libraryapp.service.user.UserService;

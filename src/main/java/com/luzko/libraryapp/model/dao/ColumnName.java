@@ -24,6 +24,7 @@ public class ColumnName {
     public static final String PAGES = "pages";
     public static final String DESCRIPTION = "description";
     public static final String NUMBER_COPIES = "number";
+    public static final String NUMBER = "number_copies";
     public static final String CATEGORY_ID_FK = "category_id_fk";
     public static final String CATEGORY = "category";
     public static final String AUTHORS = "authors";

@@ -89,7 +89,7 @@ public class BookDaoImpl implements BookDao {
                 .setYear(resultSet.getInt(ColumnName.YEAR))
                 .setPage(resultSet.getInt(ColumnName.PAGES))
                 .setDescription(resultSet.getString(ColumnName.DESCRIPTION))
-                .setNumberCopy(resultSet.getInt(ColumnName.NUMBER_COPIES))
+                .setNumberCopy(resultSet.getInt(ColumnName.NUMBER))
                 .setCategory(Category.defineCategoryById(resultSet.getInt(ColumnName.CATEGORY_ID_FK)))
                 .setAuthor(resultSet.getString(ColumnName.AUTHORS));
         Book book = new Book(bookBuilder);

@@ -1,7 +1,7 @@
-package com.luzko.libraryapp.service.author;
+package com.luzko.libraryapp.service.book;
 
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.entity.author.Author;
+import com.luzko.libraryapp.model.entity.book.Author;
 
 import java.util.List;
 import java.util.Optional;

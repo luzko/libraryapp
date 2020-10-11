@@ -30,9 +30,6 @@
 <body id="page-top">
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-
-
-        <%--<c:if test="${not empty type and type eq 'see'}">--%>
         <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="home_page"/>
             <div>
@@ -41,19 +38,6 @@
                 </button>
             </div>
         </form>
-        <%--</c:if>--%>
-
-        <%--<c:if test="${not empty type and type eq 'change'}">--%>
-        <%--TODO for admin!!!--%>
-        <%--<form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
-            <input type="hidden" name="command" value="user_page"/>
-            <div>
-                <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
-                    <fmt:message key="submit.book.overview"/>
-                </button>
-            </div>
-        </form>--%>
-        <%--</c:if>--%>
 
         <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="library_page"/>
@@ -64,16 +48,24 @@
             </div>
         </form>
 
-        <%--TODO for user etc--%>
-        <%--переделать верхник кнопки для разных случаев. книгу можно из библиотеки, админ, залогинен и т.д.--%>
-        <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
-            <input type="hidden" name="command" value="logout"/>
+        <c:if test="${login == null}">
+            <input type="hidden" name="command" value="login_page"/>
             <div>
                 <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
-                    <fmt:message key="label.logout"/>
+                    <fmt:message key="submit.logIn"/>
                 </button>
             </div>
-        </form>
+        </c:if>
+        <c:if test="${login != null}">
+            <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
+                <input type="hidden" name="command" value="logout"/>
+                <div>
+                    <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                        <fmt:message key="label.logout"/>
+                    </button>
+                </div>
+            </form>
+        </c:if>
     </div>
 </nav>
 
@@ -128,23 +120,25 @@
                 <div class="text-right">
                     <form class="form-inline" method="POST"
                           action="${pageContext.request.contextPath}/controller">
-                        <input type="hidden" name="command" value="settings"/>
+                        <input type="hidden" name="command" value="reading_room_order"/>
                         <div>
                             <button type="submit"
-                                    class="btn btn-primary js-scroll-trigger custom-button">
-                                <fmt:message key="submit.settings.profile"/>
+                                    class="btn btn-primary js-scroll-trigger custom-button"
+                                    style="width: 300px !important;">
+                                <fmt:message key="submit.order.reading.room"/>
                             </button>
                         </div>
                     </form>
                 </div>
-                <div class="text-right">
+                <div class="text-right" style="margin-left: 100px;">
                     <form class="form-inline" method="POST"
                           action="${pageContext.request.contextPath}/controller">
-                        <input type="hidden" name="command" value=""/>
+                        <input type="hidden" name="command" value="home_order"/>
                         <div>
                             <button type="submit"
-                                    class="btn btn-primary js-scroll-trigger custom-button">
-                                <fmt:message key="submit.order.book"/>
+                                    class="btn btn-primary js-scroll-trigger custom-button"
+                                    style="width: 300px !important;">
+                                <fmt:message key="submit.order.home"/>
                             </button>
                         </div>
                     </form>
@@ -153,150 +147,7 @@
         </div>
     </div>
     </c:if>
-
-    <%--<c:if test="${not empty type and type eq 'change'}">
-    <div style="margin-top: 100px">
-        <h1 style="color: #9fcdff"><fmt:message key="submit.settings.profile"/></h1>
     </div>
-
-    <div class="text_block">
-
-        <div class="col-lg-8" style="margin-bottom: 100px">
-                <%--<form class="form-inline" action="${pageContext.request.contextPath}/upload"
-                      enctype="multipart/form-data" method="post">
-                    <input type="hidden" name="command" value="change_profile_image"/>
-                    <input type="file" name="image" accept="image/jpeg,image/png"
-                           class="btn btn-outline-secondary" required/>
-                    <div>
-                        <button type="submit" class="btn btn-primary js-scroll-trigger custom-button"
-                                style="margin-top: 50px !important; margin-left: 80px;">
-                            <fmt:message key="submit.save"/>
-                        </button>
-                    </div>
-                </form>--%>
-
-    <%--<img class="img-fluid" src="${pageContext.request.contextPath}/${userImage}"--%>
-    <%--<img class="img-fluid" src="${pageContext.request.contextPath}/img/avatar.jpg"
-         style="margin-top: 60px; border-radius: 30px" width="300" height="300"/>
-
-</div>
-<div class="col-lg-8">
-    <div class="main">
-        <br/>
-        <div style="color: green;">
-                ${ChangedSave}
-        </div>
-        <br/>
-        <div class="field">
-            <form class="form-inline" action="${pageContext.request.contextPath}/controller"
-                  method="post" style="margin-top: 5px;">
-                <br/>
-                <input type="hidden" name="command" value="change_profile_login"/>
-
-                <div class="col-lg-2 text-left">
-                    <label class="col-sm-4 col-form-label float-sm-right" for="login"
-                           style="color: white">
-                        <fmt:message key="label.login"/>
-                    </label>
-                </div>
-                <div class="col-sm-8 text-left">
-
-                    <input type="text" name="login" id="login" placeholder="${login}"
-                           class="float-sm-left" style="width: 180px; height: 30px;"
-                           pattern="^[\w.]{5,20}$"
-                           maxlength="20"
-                           required
-                    />
-                </div>
-                <div class="col-lg-2 float-right">
-                    <button type="submit"
-                            class="btn btn-primary js-scroll-trigger custom-button">
-                        <fmt:message key="submit.save"/>
-                    </button>
-                </div>
-                <br/>
-                <div style="color: red;">
-                        ${loginError}
-                </div>
-                <br/>
-            </form>
-        </div>
-        <div class="field">
-            <form class="form-inline" action="${pageContext.request.contextPath}/controller"
-                  method="post">
-                <br/>
-                <input type="hidden" name="command" value="change_profile_name"/>
-
-                <div class="col-lg-2 text-left">
-                    <label class="col-sm-4 col-form-label float-sm-right" for="login"
-                           style="color: white">
-                        <fmt:message key="label.name"/>
-                    </label>
-                </div>
-                <div class="col-sm-8 text-left">
-
-                    <input type="text" name="name" id="name" placeholder="${userName}"
-                           class="float-sm-left" style="width: 180px; height: 30px;"
-                           pattern="^[\p{L}]{3,25}$"
-                           maxlength="20"
-                           required
-                    />
-                </div>
-
-                <div class="col-lg-2 float-right">
-                    <button type="submit"
-                            class="btn btn-primary js-scroll-trigger custom-button">
-                        <fmt:message key="submit.save"/>
-                    </button>
-                </div>
-                <br/>
-                <div style="color: red;">
-                        ${usernameError}
-                </div>
-                <br/>
-            </form>
-        </div>
-        <div class="field">
-            <form class="form-inline" action="${pageContext.request.contextPath}/controller"
-                  method="post">
-                <br/>
-                <input type="hidden" name="command" value="change_profile_surname"/>
-
-
-                <div class="col-lg-2 text-left">
-                    <label class="col-sm-4 col-form-label float-sm-right" for="login"
-                           style="color: white">
-                        <fmt:message key="label.surname"/>
-                    </label>
-                </div>
-                <div class="col-sm-8 text-left">
-
-                    <input type="text" name="surname" id="surname" placeholder="${userSurname}"
-                           class="float-sm-left" style="width: 180px; height: 30px;"
-                           pattern="^[\p{L}]{3,25}$"
-                           maxlength="20"
-                           required
-                    />
-                </div>
-
-                <div class="col-lg-2 float-right">
-                    <button type="submit"
-                            class="btn btn-primary js-scroll-trigger custom-button">
-                        <fmt:message key="submit.save"/>
-                    </button>
-                </div>
-                <br/>
-                <div style="color: red;">
-                        ${surnameError}
-                </div>
-                <br/>
-            </form>
-        </div>
-    </div>
-</div>
-</c:if>--%>
-    </div>
-    <!--</div>!-->
     </div>
     </div>
     </div>

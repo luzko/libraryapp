@@ -91,6 +91,8 @@ public class UserServiceImpl implements UserService {
         return isRegistered;
     }
 
+
+
     @Override
     public List<User> findAll() throws ServiceException {
         logger.log(Level.INFO, "Find all execute");

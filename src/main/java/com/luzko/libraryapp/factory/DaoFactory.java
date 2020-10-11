@@ -1,7 +1,7 @@
 package com.luzko.libraryapp.factory;
 
-import com.luzko.libraryapp.model.dao.author.AuthorDao;
-import com.luzko.libraryapp.model.dao.author.impl.AuthorDaoImpl;
+import com.luzko.libraryapp.model.dao.book.AuthorDao;
+import com.luzko.libraryapp.model.dao.book.impl.AuthorDaoImpl;
 import com.luzko.libraryapp.model.dao.book.BookDao;
 import com.luzko.libraryapp.model.dao.book.impl.BookDaoImpl;
 import com.luzko.libraryapp.model.dao.user.UserDao;

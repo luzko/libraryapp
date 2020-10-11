@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.model.entity.author;
+package com.luzko.libraryapp.model.entity.book;
 
 import com.luzko.libraryapp.model.entity.BaseEntity;
 

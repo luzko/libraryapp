@@ -1,12 +1,12 @@
-package com.luzko.libraryapp.service.author.impl;
+package com.luzko.libraryapp.service.book.impl;
 
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.DaoFactory;
 import com.luzko.libraryapp.factory.ValidatorFactory;
-import com.luzko.libraryapp.model.dao.author.AuthorDao;
-import com.luzko.libraryapp.model.entity.author.Author;
-import com.luzko.libraryapp.service.author.AuthorService;
+import com.luzko.libraryapp.model.dao.book.AuthorDao;
+import com.luzko.libraryapp.model.entity.book.Author;
+import com.luzko.libraryapp.service.book.AuthorService;
 import com.luzko.libraryapp.validator.BookValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
