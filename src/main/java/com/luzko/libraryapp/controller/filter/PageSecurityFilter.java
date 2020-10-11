@@ -14,7 +14,6 @@ import java.io.IOException;
 @WebFilter(urlPatterns = {"/jsp/view/*"}, initParams = {
         @WebInitParam(name = "ERROR_STEP", value = "/jsp/error/errorstep.jsp")
 })
-
 public class PageSecurityFilter implements Filter {
 
     private static final String DELIMITER_PATH = "/";

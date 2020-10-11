@@ -33,6 +33,7 @@ public class RequestParameter {
     public static final String PATH_STATUS_CHANGES = "message.user.status.error";
     public static final String PATH_BOOK_OVERVIEW = "message.book.overview";
     public static final String PATH_AUTHOR_DATA = "message.author.data";
+    public static final String PATH_AUTHOR_CORRECT = "message.author.correct";
 
     //user
     public static final String NAME = "name";
@@ -75,5 +76,5 @@ public class RequestParameter {
 
     //author
     public static final String CREATE_TYPE = "createType";
-
+    public static final String CORRECT_DATA_MESSAGE = "createAuthorSuccess";
 }

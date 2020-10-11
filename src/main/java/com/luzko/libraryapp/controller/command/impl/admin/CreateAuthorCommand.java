@@ -21,18 +21,21 @@ public class CreateAuthorCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
+        String createType = request.getParameter(RequestParameter.CREATE_TYPE);
         String authorName = request.getParameter(RequestParameter.AUTHOR_NAME);
         AuthorService authorService = ServiceFactory.getInstance().getAuthorService();
         try {
             if (authorService.add(authorName)) {
-                router.setPagePath(PagePath.LIBRARY);
+                request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE,
+                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_AUTHOR_CORRECT));
+                request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
             } else {
-                String createType = request.getParameter(RequestParameter.CREATE_TYPE);
-                request.setAttribute(RequestParameter.CREATE_TYPE, createType);
-                router.setPagePath(PagePath.CREATE_BOOK);
-                request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_INCORRECT_DATA));
+                request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
+                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_AUTHOR_DATA));
+                request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
             }
+            request.getSession().setAttribute(RequestParameter.CREATE_TYPE, createType);
+            router.setPagePath(PagePath.CREATE_BOOK);
             router.setRouterType(RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error create ", e);

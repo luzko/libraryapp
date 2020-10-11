@@ -38,6 +38,15 @@
         </form>
         <form class="form-inline"
               method="POST" action="${pageContext.request.contextPath}/controller">
+            <input type="hidden" name="command" value="library_page"/>
+            <div>
+                <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
+                    <fmt:message key="submit.library"/>
+                </button>
+            </div>
+        </form>
+        <form class="form-inline"
+              method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="admin_page"/>
             <div>
                 <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
@@ -53,11 +62,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-
                 <form action="${pageContext.request.contextPath}/controller" method="post">
-                    <input type="hidden" name="createType" value="${createType}">
                     <c:choose>
                         <c:when test="${createType == 'author'}">
+                            <input type="hidden" name="createType" value="author">
                             <input type="hidden" name="command" value="create_author"/>
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="authorName"
@@ -77,6 +85,7 @@
                         </c:when>
                         <c:when test="${createType == 'book'}">
                             <input type="hidden" name="command" value="create_book"/>
+                            <input type="hidden" name="createType" value="book">
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="login" style="color: white">
                                     <fmt:message key="label.login"/>
@@ -121,7 +130,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label float-sm-right" for="name" style="color: white">
+                                <label class="col-sm-4 col-form-label float-sm-right" for="name1" style="color: white">
                                     <fmt:message key="label.name"/>
                                 </label>
                                 <div class="col-sm-8">
@@ -152,7 +161,6 @@
                     </c:choose>
                     <br/>
                     <br/>
-                    <label style="color: red;">${errorDataMessage}</label>
                     <br/>
                     <br/>
                     <div class="form-group row">
@@ -163,6 +171,12 @@
                         </div>
                     </div>
                 </form>
+                    <div style="color: red;">
+                        ${errorDataMessage}
+                    </div>
+                    <div style="color: green;">
+                        ${createAuthorSuccess}
+                    </div>
             </div>
             <br/>
         </div>

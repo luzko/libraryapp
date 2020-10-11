@@ -57,7 +57,7 @@ public class StatementSql {
                     "GROUP_CONCAT(DISTINCT a.author ORDER BY a.author SEPARATOR ', ') authors FROM books b " +
                     "LEFT JOIN book_authors ba on b.book_id = ba.book_id_fk " +
                     "LEFT JOIN authors a on a.author_id = ba.author_id_fk " +
-                    "WHERE b.enabled = TRUE WHERE b.book_id LIKE ? GROUP BY b.book_id";
+                    "WHERE b.enabled = TRUE AND b.book_id LIKE ? GROUP BY b.book_id";
 
     //author query
     public static final String FIND_ALL_AUTHORS =
@@ -70,7 +70,7 @@ public class StatementSql {
             "INSERT INTO authors(author) VALUES (?)";
 
     public static final String FINE_COUNT_BY_NAME =
-            "SELECT count(author_id) as count FROM authors WHERE name LIKE ?";
+            "SELECT count(author_id) as count FROM authors WHERE author LIKE ?";
 }
 
 
