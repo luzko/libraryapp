@@ -66,15 +66,15 @@ public class RequestParameter {
     public static final String OVERVIEW_ERROR = "overviewError";
     public static final String TYPE_OVERVIEW_PAGE = "typeOverview";
     public static final String SEE_OVERVIEW_PAGE = "seeOverview";
-
-    //author
-    public static final String AUTHOR_NAME = "authorName";
+    public static final String ALL_CATEGORIES = "allCategories";
 
     //message
     public static final String SUBJECT = "subject";
     public static final String MESSAGE = "message";
 
     //author
+    public static final String AUTHOR_NAME = "authorName";
     public static final String CREATE_TYPE = "createType";
     public static final String CORRECT_DATA_MESSAGE = "createAuthorSuccess";
+    public static final String ALL_AUTHORS = "allAuthors";
 }

@@ -87,72 +87,110 @@
                             <input type="hidden" name="command" value="create_book"/>
                             <input type="hidden" name="createType" value="book">
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label float-sm-right" for="login" style="color: white">
-                                    <fmt:message key="label.login"/>
+                                <label class="col-sm-4 col-form-label float-sm-right" for="title" style="color: white">
+                                    <fmt:message key="label.title"/>
                                 </label>
                                 <div class="col-sm-8 ">
-                                    <input type="text" name="login" id="login" class="float-sm-left"
+                                    <input type="text" name="title" id="title" class="float-sm-left"
                                            style="width: 220px"
-                                           pattern="^[\w.]{5,20}$"
-                                           maxlength="20"
-                                           title="<fmt:message key="invalid.login"/>"
+                                           pattern="^[\p{L} ]{3,25}$"
+                                           maxlength="25"
+                                           title="<fmt:message key="label.invalid.title"/>"
                                            required
                                     />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label float-sm-right" for="password"
+                                <label class="col-sm-4 col-form-label float-sm-right" for="year" style="color: white">
+                                    <fmt:message key="label.year"/>
+                                </label>
+                                <div class="col-sm-8 ">
+                                    <input type="text" name="year" id="year" class="float-sm-left"
+                                           style="width: 220px"
+                                           pattern="^[0-9]{4}$"
+                                           maxlength="4"
+                                           title="<fmt:message key="label.invalid.year"/>"
+                                           required
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label float-sm-right" for="pages" style="color: white">
+                                    <fmt:message key="label.pages"/>
+                                </label>
+                                <div class="col-sm-8 ">
+                                    <input type="text" name="pages" id="pages" class="float-sm-left"
+                                           style="width: 220px"
+                                           pattern="^[0-9]{4}$"
+                                           maxlength="4"
+                                           title="<fmt:message key="label.invalid.pages"/>"
+                                           required
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label float-sm-right" for="pages" style="color: white">
+                                    <fmt:message key="label.number"/>
+                                </label>
+                                <div class="col-sm-8 ">
+                                    <input type="text" name="number" id="number" class="float-sm-left"
+                                           style="width: 220px"
+                                           pattern="^[0-9]{2}$"
+                                           maxlength="2"
+                                           title="<fmt:message key="label.invalid.number"/>"
+                                           required
+                                    />
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label float-sm-right" for="dropdownCategory"
                                        style="color: white">
-                                    <fmt:message key="label.password"/>
+                                    <fmt:message key="label.category"/>
                                 </label>
-                                <div class="col-sm-8">
-                                    <input type="password" name="password" id="password" class="float-sm-left"
-                                           style="width: 220px"
-                                           pattern="^(?=.*[\p{Lower}])(?=.*[\p{Upper}])(?=.*\d)[\p{Alnum}]{6,20}$"
-                                           maxlength="20"
-                                           title="<fmt:message key="invalid.registration.password"/>"
-                                           required
-                                    />
+                                <div class="col-sm-8 ">
+                                    <select id="dropdownCategory" class="float-sm-left" style="width: 220px">
+                                        <c:forEach var="category" items="${allCategories}">
+                                            <option value="<c:out value='${category}' />"
+                                                    <c:if test="${param.selectValue == category})"> selected </c:if>>
+                                                <c:out value="${category.toString()}"/>
+                                            </option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                             </div>
+
+
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label float-sm-right" for="email" style="color: white">
-                                    <fmt:message key="label.email"/>
-                                </label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="email" id="email" class="float-sm-left"
-                                           style="width: 220px"
-                                           pattern="^[\w.+-]{3,30}@[\w.-]{2,15}\.[\p{Lower}]{2,4}$"
-                                           maxlength="40"
-                                           title="<fmt:message key="invalid.registration.email"/>"
-                                           required
-                                    />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label float-sm-right" for="name1" style="color: white">
-                                    <fmt:message key="label.name"/>
-                                </label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="name" id="name1" class="float-sm-left" style="width: 220px"
-                                           pattern="^[\p{L}]{3,25}$"
-                                           maxlength="45"
-                                           title="<fmt:message key="invalid.name"/>"
-                                           required
-                                    />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label float-sm-right" for="surname"
+                                <label class="col-sm-4 col-form-label float-sm-right" for="dropdownAuthor"
                                        style="color: white">
-                                    <fmt:message key="label.surname"/>
+                                    <fmt:message key="label.author"/>
                                 </label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="surname" id="surname" class="float-sm-left"
+                                <div class="col-sm-8 ">
+                                    <select id="dropdownAuthor" class="float-sm-left" style="width: 220px">
+                                        <c:forEach var="author" items="${allAuthors}">
+                                            <option value="<c:out value='${author}' />"
+                                                    <c:if test="${param.selectValue == author})"> selected </c:if>>
+                                                <c:out value="${author.name}"/>
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label float-sm-right" for="description"
+                                       style="color: white">
+                                    <fmt:message key="label.description"/>
+                                </label>
+                                <div class="col-sm-8 ">
+                                    <input type="text" name="author" id="description" class="float-sm-left"
                                            style="width: 220px"
-                                           pattern="^[\p{L}]{3,25}$"
-                                           maxlength="45"
-                                           title="<fmt:message key="invalid.name"/>"
+                                           pattern="------------------------------------"
+                                           maxlength="2"
+                                           title="<fmt:message key="label.invalid.description"/>"
                                            required
                                     />
                                 </div>
@@ -171,12 +209,15 @@
                         </div>
                     </div>
                 </form>
-                    <div style="color: red;">
-                        ${errorDataMessage}
-                    </div>
-                    <div style="color: green;">
-                        ${createAuthorSuccess}
-                    </div>
+                <div style="color: red;">
+                    ${errorDataMessage}
+                </div>
+                <div style="color: green;">
+                    ${createAuthorSuccess}
+                </div>
+                <div style="color: green;">
+                    ${createBookSuccess}
+                </div>
             </div>
             <br/>
         </div>
