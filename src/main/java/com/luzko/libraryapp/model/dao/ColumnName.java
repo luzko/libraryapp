@@ -30,4 +30,5 @@ public class ColumnName {
     //author
     public static final String AUTHOR_ID = "author_id";
     public static final String AUTHOR = "author";
+    public static final String AUTHOR_COUNT = "count";
 }

@@ -5,7 +5,7 @@ import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.StatementSql;
 import com.luzko.libraryapp.model.dao.author.AuthorDao;
-import com.luzko.libraryapp.model.entity.book.Author;
+import com.luzko.libraryapp.model.entity.author.Author;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -48,6 +48,20 @@ public class AuthorDaoImpl implements AuthorDao {
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException("Add error", e);
+        }
+    }
+
+    @Override
+    public boolean isNameUnique(String name) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FINE_COUNT_BY_NAME)) {
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt(ColumnName.AUTHOR_COUNT);
+            return count == 0;
+        } catch (SQLException e) {
+            throw new DaoException("Name unique error", e);
         }
     }
 

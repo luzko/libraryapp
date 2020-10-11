@@ -55,25 +55,28 @@
             <div class="col-lg-8 mx-auto">
 
                 <form action="${pageContext.request.contextPath}/controller" method="post">
-                    <input type="hidden" name="command" value="create_book"/>
+                    <input type="hidden" name="createType" value="${createType}">
                     <c:choose>
                         <c:when test="${createType == 'author'}">
+                            <input type="hidden" name="command" value="create_author"/>
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label float-sm-right" for="name" style="color: white">
+                                <label class="col-sm-4 col-form-label float-sm-right" for="authorName"
+                                       style="color: white">
                                     <fmt:message key="label.name"/>
                                 </label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="name" id="name" class="float-sm-left" style="width: 220px"
+                                    <input type="text" name="authorName" id="authorName" class="float-sm-left"
+                                           style="width: 220px"
                                            pattern="^[\p{L}]{3,25}$"
                                            maxlength="45"
                                            title="<fmt:message key="invalid.name"/>"
                                            required
-                                           value="${registrationParameters.get("name")}"
                                     />
                                 </div>
                             </div>
                         </c:when>
                         <c:when test="${createType == 'book'}">
+                            <input type="hidden" name="command" value="create_book"/>
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="login" style="color: white">
                                     <fmt:message key="label.login"/>
@@ -85,7 +88,6 @@
                                            maxlength="20"
                                            title="<fmt:message key="invalid.login"/>"
                                            required
-                                           value="${registrationParameters.get("login")}"
                                     />
                                 </div>
                             </div>
@@ -101,7 +103,6 @@
                                            maxlength="20"
                                            title="<fmt:message key="invalid.registration.password"/>"
                                            required
-                                           value="${registrationParameters.get("password")}"
                                     />
                                 </div>
                             </div>
@@ -116,7 +117,6 @@
                                            maxlength="40"
                                            title="<fmt:message key="invalid.registration.email"/>"
                                            required
-                                           value="${registrationParameters.get("email")}"
                                     />
                                 </div>
                             </div>
@@ -130,7 +130,6 @@
                                            maxlength="45"
                                            title="<fmt:message key="invalid.name"/>"
                                            required
-                                           value="${registrationParameters.get("name")}"
                                     />
                                 </div>
                             </div>
@@ -146,7 +145,6 @@
                                            maxlength="45"
                                            title="<fmt:message key="invalid.name"/>"
                                            required
-                                           value="${registrationParameters.get("surname")}"
                                     />
                                 </div>
                             </div>

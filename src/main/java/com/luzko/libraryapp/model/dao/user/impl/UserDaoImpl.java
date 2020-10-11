@@ -96,7 +96,6 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
-
             int count = resultSet.getInt(ColumnName.COUNT);
             return count == 0;
         } catch (SQLException e) {

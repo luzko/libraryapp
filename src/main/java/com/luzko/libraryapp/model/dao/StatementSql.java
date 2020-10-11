@@ -69,6 +69,8 @@ public class StatementSql {
     public static final String ADD_AUTHOR =
             "INSERT INTO authors(author) VALUES (?)";
 
+    public static final String FINE_COUNT_BY_NAME =
+            "SELECT count(author_id) as count FROM authors WHERE name LIKE ?";
 }
 
 

@@ -5,7 +5,7 @@ import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.DaoFactory;
 import com.luzko.libraryapp.factory.ValidatorFactory;
 import com.luzko.libraryapp.model.dao.author.AuthorDao;
-import com.luzko.libraryapp.model.entity.book.Author;
+import com.luzko.libraryapp.model.entity.author.Author;
 import com.luzko.libraryapp.service.author.AuthorService;
 import com.luzko.libraryapp.validator.BookValidator;
 import org.apache.logging.log4j.Level;
@@ -26,7 +26,9 @@ public class AuthorServiceImpl implements AuthorService {
         AuthorDao authorDao = DaoFactory.getInstance().getAuthorDao();
         if (bookValidator.isValidAuthorName(name)) {
             try {
-                isAddAuthor = authorDao.add(name);
+                if (authorDao.isNameUnique(name)) {
+                    isAddAuthor = authorDao.add(name);
+                }
             } catch (DaoException e) {
                 throw new ServiceException("Add author error", e);
             }
