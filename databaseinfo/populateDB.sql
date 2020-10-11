@@ -63,7 +63,7 @@ VALUES ('Active'),
        ('Unconfirmed');
 
 INSERT INTO users (login, password, role_id_fk, name, surname, email, user_status_id_fk, confirm)
-VALUES ('adminius', 'c8849d6204a0d114a2c0e526b7759d51ae6f7e0f', 1, 'not required', 'not required', 'not required', '1', '0'),
+VALUES ('adminius', 'ccc0efccbeafae925ae3f2987bb170b644b4083d', 1, 'not required', 'not required', 'not required', '1', '0'),
        ('librarianius', 'adc0bbac0ace2ce1580955d519d5c42eef9c5ca1', 2, 'Мария', 'Шилковская', 'test@gmail.com', '1', '0'),
        ('user1', '7928afb4387d9e4d26a30b222ea07211c17eb72a', 3, 'Дмитрий', 'Уласовец', 'user1@gmail.com', '1', '0');
 

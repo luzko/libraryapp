@@ -101,9 +101,24 @@
                                 <div class="container">
                                     <form class="form-inline" name="Simple"
                                           action="${pageContext.request.contextPath}/controller" method="GET">
-                                        <input type="hidden" name="command" value=""/>
-                                        <button type="submit" class="btn btn-outline-secondary"><fmt:message
-                                                key="submit.new.book"/>
+                                        <input type="hidden" name="command" value="create_book_page"/>
+                                        <input type="hidden" name="createType" value="author"/>
+                                        <button type="submit" class="btn btn-outline-secondary" style="width: 300px;">
+                                            <fmt:message
+                                                    key="submit.new.author"/>
+                                        </button>
+                                    </form>
+                                </div>
+                            </nav>
+                            <nav class="navbar navbar-expand-lg navbar-light">
+                                <div class="container">
+                                    <form class="form-inline" name="Simple"
+                                          action="${pageContext.request.contextPath}/controller" method="GET">
+                                        <input type="hidden" name="command" value="create_book_page"/>
+                                        <input type="hidden" name="createType" value="book"/>
+                                        <button type="submit" class="btn btn-outline-secondary" style="width: 300px;">
+                                            <fmt:message
+                                                    key="submit.new.book"/>
                                         </button>
                                     </form>
                                 </div>

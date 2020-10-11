@@ -69,4 +69,7 @@ public class RequestParameter {
     public static final String SUBJECT = "subject";
     public static final String MESSAGE = "message";
 
+    //author
+    public static final String CREATE_TYPE = "createType";
+
 }

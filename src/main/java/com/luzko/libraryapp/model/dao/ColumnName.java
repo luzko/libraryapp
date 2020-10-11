@@ -26,4 +26,8 @@ public class ColumnName {
     public static final String NUMBER_COPIES = "number_copies";
     public static final String CATEGORY_ID_FK = "category_id_fk";
     public static final String AUTHORS = "authors";
+
+    //author
+    public static final String AUTHOR_ID = "author_id";
+    public static final String AUTHOR = "author";
 }

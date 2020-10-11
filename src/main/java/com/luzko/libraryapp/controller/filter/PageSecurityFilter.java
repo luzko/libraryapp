@@ -33,7 +33,7 @@ public class PageSecurityFilter implements Filter {
 
         String[] list = request.getRequestURI().split(DELIMITER_PATH);
         UserRole userRole = (UserRole) request.getSession().getAttribute(RequestParameter.USER_ROLE);
-        UserStatus userStatus = (UserStatus) request.getSession().getAttribute(RequestParameter.USER_ROLE);
+        UserStatus userStatus = (UserStatus) request.getSession().getAttribute(RequestParameter.USER_STATUS);
 
         String page = null;
         if (list[list.length - 1].contains(EXTENSION_FILE)) {
@@ -45,11 +45,11 @@ public class PageSecurityFilter implements Filter {
                 (UserRole.LIBRARIAN.equals(userRole) && !AvailabilityPage.availableLibrarianPage.contains(page)) ||
                 (UserRole.ADMIN.equals(userRole) && !AvailabilityPage.availableAdminPage.contains(page));
 
-        if(!isErrorPageRedirect && userStatus == UserStatus.BLOCKED) {
+        if (!isErrorPageRedirect && userStatus == UserStatus.BLOCKED) {
             isErrorPageRedirect = !AvailabilityPage.availableBlockedPage.contains(page);
         }
 
-        if(!isErrorPageRedirect && userStatus == UserStatus.UNCONFIRMED) {
+        if (!isErrorPageRedirect && userStatus == UserStatus.UNCONFIRMED) {
             isErrorPageRedirect = !AvailabilityPage.availableUnconfirmedPage.contains(page);
         }
 

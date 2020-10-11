@@ -7,7 +7,6 @@ import com.luzko.libraryapp.model.entity.user.User;
 import java.util.Optional;
 
 public interface UserDao extends BaseDao<User> {
-
     String findPasswordByLogin(String login) throws DaoException;
 
     Optional<User> findByLogin(String login) throws DaoException;
@@ -25,5 +24,4 @@ public interface UserDao extends BaseDao<User> {
     boolean changeUserName(String login, String newName) throws DaoException;
 
     boolean changeUserSurname(String login, String newSurname) throws DaoException;
-
 }

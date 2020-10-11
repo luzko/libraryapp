@@ -1,5 +1,7 @@
 package com.luzko.libraryapp.factory;
 
+import com.luzko.libraryapp.model.dao.author.AuthorDao;
+import com.luzko.libraryapp.model.dao.author.impl.AuthorDaoImpl;
 import com.luzko.libraryapp.model.dao.book.BookDao;
 import com.luzko.libraryapp.model.dao.book.impl.BookDaoImpl;
 import com.luzko.libraryapp.model.dao.user.UserDao;
@@ -8,10 +10,12 @@ import com.luzko.libraryapp.model.dao.user.impl.UserDaoImpl;
 public class DaoFactory {
     private final UserDao userDao;
     private final BookDao bookDao;
+    private final AuthorDao authorDao;
 
     private DaoFactory() {
         userDao = new UserDaoImpl();
         bookDao = new BookDaoImpl();
+        authorDao = new AuthorDaoImpl();
     }
 
     private static class DAOFactorySingletonHolder {
@@ -28,5 +32,9 @@ public class DaoFactory {
 
     public BookDao getBookDao() {
         return bookDao;
+    }
+
+    public AuthorDao getAuthorDao() {
+        return authorDao;
     }
 }

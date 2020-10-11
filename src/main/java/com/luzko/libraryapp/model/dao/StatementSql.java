@@ -59,6 +59,16 @@ public class StatementSql {
                     "LEFT JOIN authors a on a.author_id = ba.author_id_fk " +
                     "WHERE b.enabled = TRUE WHERE b.book_id LIKE ? GROUP BY b.book_id";
 
+    //author query
+    public static final String FIND_ALL_AUTHORS =
+            "SELECT author_id, author FROM authors";
+
+    public static final String FIND_AUTHOR_BY_ID =
+            "SELECT author_id, author FROM authors WHERE author_id LIKE ?";
+
+    public static final String ADD_AUTHOR =
+            "INSERT INTO authors(author) VALUES (?)";
+
 }
 
 
