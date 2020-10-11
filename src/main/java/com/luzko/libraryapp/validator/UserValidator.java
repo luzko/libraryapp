@@ -42,7 +42,6 @@ public class UserValidator {
         if (login != null && !login.isEmpty()) {
             isLoginCorrect = login.matches(LOGIN_PATTERN);
         }
-
         return isLoginCorrect;
     }
 
@@ -51,7 +50,6 @@ public class UserValidator {
         if (password != null && !password.isEmpty()) {
             isPasswordsCorrect = password.matches(PASSWORD_PATTERN);
         }
-
         return isPasswordsCorrect;
     }
 
@@ -60,7 +58,6 @@ public class UserValidator {
         if (name != null && !name.isEmpty()) {
             isNameCorrect = name.matches(NAME_PATTERN);
         }
-
         return isNameCorrect;
     }
 
@@ -69,7 +66,6 @@ public class UserValidator {
         if (email != null && !email.isEmpty()) {
             isEmailCorrect = email.matches(EMAIL_PATTERN);
         }
-
         return isEmailCorrect;
     }
 }

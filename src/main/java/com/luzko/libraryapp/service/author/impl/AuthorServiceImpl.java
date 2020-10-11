@@ -7,6 +7,7 @@ import com.luzko.libraryapp.factory.ValidatorFactory;
 import com.luzko.libraryapp.model.dao.author.AuthorDao;
 import com.luzko.libraryapp.model.entity.book.Author;
 import com.luzko.libraryapp.service.author.AuthorService;
+import com.luzko.libraryapp.validator.BookValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
