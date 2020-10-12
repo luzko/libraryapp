@@ -7,5 +7,5 @@ import com.luzko.libraryapp.model.entity.book.Book;
 public interface BookDao extends BaseDao<Book> {
     boolean isParameterUnique(String title, int year, int pages) throws DaoException;
 
-    boolean add(Book book) throws DaoException;
+    boolean add(Book book, int authorId) throws DaoException;
 }

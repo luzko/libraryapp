@@ -15,7 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public class BookDaoImpl implements BookDao {
@@ -60,10 +59,15 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public boolean add(Book book) throws DaoException {
-        //TODO
-        //TODO нужна транзакция, нужуен гугл..
-        //TODO
+    public boolean add(Book book, int authorId) throws DaoException {
+        /*
+            1. заинсертить книгу и заполнить все поля.
+            2. получить айдишник этой новой книги.
+            3. заинсертить новую свзяь, книга к автору.
+            все сделать в транзакции.
+         */
+
+
         return false;
     }
 

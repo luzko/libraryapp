@@ -154,11 +154,10 @@
                                     <fmt:message key="label.category"/>
                                 </label>
                                 <div class="col-sm-8 ">
-                                    <select id="dropdownCategory" class="float-sm-left" style="width: 220px">
-                                        <c:forEach var="category" items="${allCategories}">
-                                            <option value="<c:out value='${category}' />"
-                                                    <c:if test="${param.selectValue eq category.toString()}"> selected </c:if>>
-                                                <c:out value="${category.toString()}"/>
+                                    <select name = "category" id="dropdownCategory" class="float-sm-left" style="width: 220px">
+                                        <c:forEach var="categoryItem" items="${allCategories}">
+                                            <option value="${categoryItem.toString()}">
+                                                    ${categoryItem.toString()}
                                             </option>
                                         </c:forEach>
                                     </select>
@@ -172,11 +171,10 @@
                                     <fmt:message key="label.author"/>
                                 </label>
                                 <div class="col-sm-8 ">
-                                    <select id="dropdownAuthor" class="float-sm-left" style="width: 220px">
-                                        <c:forEach var="author" items="${allAuthors}">
-                                            <option value="<c:out value='${author}' />"
-                                                    <c:if test="${param.selectValue eq author.name}"> selected </c:if>>
-                                                <c:out value="${author.name}"/>
+                                    <select name = "author" id="dropdownAuthor" class="float-sm-left" style="width: 220px">
+                                        <c:forEach var="authorItem" items="${allAuthors}">
+                                            <option value="${authorItem.authorId}">
+                                                    ${authorItem.name}
                                             </option>
                                         </c:forEach>
                                     </select>

@@ -27,9 +27,6 @@ public class CreateBookCommand implements Command {
         String createType = request.getParameter(RequestParameter.CREATE_TYPE);
         BookService bookService = ServiceFactory.getInstance().getBookService();
         Map<String, String> bookParameter = fillBookParameter(request);
-        //TODO
-        System.out.println(bookParameter);
-        //TODO
         try {
             if (bookService.isParameterUnique(
                     bookParameter.get(ColumnName.TITLE), bookParameter.get(ColumnName.YEAR), bookParameter.get(ColumnName.PAGES))

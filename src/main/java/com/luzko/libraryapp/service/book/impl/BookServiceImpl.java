@@ -76,18 +76,17 @@ public class BookServiceImpl implements BookService {
                 String pages = bookParameter.get(ColumnName.PAGES);
                 String number = bookParameter.get(ColumnName.NUMBER_COPIES);
                 String category = bookParameter.get(ColumnName.CATEGORY);
-                String author = bookParameter.get(ColumnName.AUTHOR);
                 String description = bookParameter.get(ColumnName.DESCRIPTION);
+                int authorId = Integer.parseInt(bookParameter.get(ColumnName.AUTHOR));
                 BookBuilder bookBuilder = new BookBuilder()
                         .setTitle(title)
                         .setYear(Integer.parseInt(year))
                         .setPage(Integer.parseInt(pages))
                         .setNumberCopy(Integer.parseInt(number))
                         .setCategory(Category.valueOf(category))
-                        .setAuthor(author)
                         .setDescription(description);
                 Book book = new Book(bookBuilder);
-                isBookAdd = bookDao.add(book);
+                isBookAdd = bookDao.add(book, authorId);
             } catch (DaoException e) {
                 throw new ServiceException("Add book error", e);
             }
