@@ -5,7 +5,7 @@ import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.controller.router.Router;
 import com.luzko.libraryapp.controller.router.RouterType;
-import com.luzko.libraryapp.model.entity.user.UserStatus;
+import com.luzko.libraryapp.model.entity.UserStatus;
 
 import javax.servlet.http.HttpServletRequest;
 

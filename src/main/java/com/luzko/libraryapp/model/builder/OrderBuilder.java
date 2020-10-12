@@ -1,9 +1,9 @@
 package com.luzko.libraryapp.model.builder;
 
-import com.luzko.libraryapp.model.entity.book.Book;
-import com.luzko.libraryapp.model.entity.order.OrderStatus;
-import com.luzko.libraryapp.model.entity.order.OrderType;
-import com.luzko.libraryapp.model.entity.user.User;
+import com.luzko.libraryapp.model.entity.Book;
+import com.luzko.libraryapp.model.entity.OrderStatus;
+import com.luzko.libraryapp.model.entity.OrderType;
+import com.luzko.libraryapp.model.entity.User;
 
 import java.time.LocalDate;
 

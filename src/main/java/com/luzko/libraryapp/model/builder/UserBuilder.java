@@ -1,7 +1,7 @@
 package com.luzko.libraryapp.model.builder;
 
-import com.luzko.libraryapp.model.entity.user.UserRole;
-import com.luzko.libraryapp.model.entity.user.UserStatus;
+import com.luzko.libraryapp.model.entity.UserRole;
+import com.luzko.libraryapp.model.entity.UserStatus;
 
 public class UserBuilder {
     private Long userId;

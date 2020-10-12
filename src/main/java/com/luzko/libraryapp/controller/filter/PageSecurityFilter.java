@@ -1,8 +1,8 @@
 package com.luzko.libraryapp.controller.filter;
 
 import com.luzko.libraryapp.controller.RequestParameter;
-import com.luzko.libraryapp.model.entity.user.UserRole;
-import com.luzko.libraryapp.model.entity.user.UserStatus;
+import com.luzko.libraryapp.model.entity.UserRole;
+import com.luzko.libraryapp.model.entity.UserStatus;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

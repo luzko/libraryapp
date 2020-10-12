@@ -1,6 +1,6 @@
 package com.luzko.libraryapp.model.builder;
 
-import com.luzko.libraryapp.model.entity.book.Category;
+import com.luzko.libraryapp.model.entity.Category;
 
 public class BookBuilder {
     private Long bookId;

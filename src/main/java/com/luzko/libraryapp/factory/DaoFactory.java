@@ -1,13 +1,13 @@
 package com.luzko.libraryapp.factory;
 
-import com.luzko.libraryapp.model.dao.book.AuthorDao;
-import com.luzko.libraryapp.model.dao.book.impl.AuthorDaoImpl;
-import com.luzko.libraryapp.model.dao.book.BookDao;
-import com.luzko.libraryapp.model.dao.book.impl.BookDaoImpl;
-import com.luzko.libraryapp.model.dao.order.OrderDao;
-import com.luzko.libraryapp.model.dao.order.impl.OrderDaoImpl;
-import com.luzko.libraryapp.model.dao.user.UserDao;
-import com.luzko.libraryapp.model.dao.user.impl.UserDaoImpl;
+import com.luzko.libraryapp.model.dao.AuthorDao;
+import com.luzko.libraryapp.model.dao.impl.AuthorDaoImpl;
+import com.luzko.libraryapp.model.dao.BookDao;
+import com.luzko.libraryapp.model.dao.impl.BookDaoImpl;
+import com.luzko.libraryapp.model.dao.OrderDao;
+import com.luzko.libraryapp.model.dao.impl.OrderDaoImpl;
+import com.luzko.libraryapp.model.dao.UserDao;
+import com.luzko.libraryapp.model.dao.impl.UserDaoImpl;
 
 public class DaoFactory {
     private final UserDao userDao;

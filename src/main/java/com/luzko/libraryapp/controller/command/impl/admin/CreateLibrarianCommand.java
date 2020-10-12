@@ -8,7 +8,7 @@ import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.ServiceFactory;
 import com.luzko.libraryapp.model.dao.ColumnName;
-import com.luzko.libraryapp.service.user.UserService;
+import com.luzko.libraryapp.service.UserService;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.util.ConfirmCodeGenerator;
 import com.luzko.libraryapp.util.mail.EmailSender;

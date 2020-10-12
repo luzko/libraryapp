@@ -1,13 +1,13 @@
 package com.luzko.libraryapp.factory;
 
-import com.luzko.libraryapp.service.book.AuthorService;
-import com.luzko.libraryapp.service.book.impl.AuthorServiceImpl;
-import com.luzko.libraryapp.service.book.BookService;
-import com.luzko.libraryapp.service.book.impl.BookServiceImpl;
-import com.luzko.libraryapp.service.order.OrderService;
-import com.luzko.libraryapp.service.order.imlp.OrderServiceImpl;
-import com.luzko.libraryapp.service.user.UserService;
-import com.luzko.libraryapp.service.user.impl.UserServiceImpl;
+import com.luzko.libraryapp.service.AuthorService;
+import com.luzko.libraryapp.service.impl.AuthorServiceImpl;
+import com.luzko.libraryapp.service.BookService;
+import com.luzko.libraryapp.service.impl.BookServiceImpl;
+import com.luzko.libraryapp.service.OrderService;
+import com.luzko.libraryapp.service.impl.OrderServiceImpl;
+import com.luzko.libraryapp.service.UserService;
+import com.luzko.libraryapp.service.impl.UserServiceImpl;
 
 public class ServiceFactory {
     private final UserService userService;
