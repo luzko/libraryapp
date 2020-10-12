@@ -62,6 +62,13 @@ public class StatementSql {
     public static final String FIND_COUNT_BY_PARAMETER =
             "SELECT count(book_id) as count FROM books WHERE title LIKE ? AND year LIKE ? AND pages LIKE ?";
 
+    public static final String FIND_BOOK_BY_PARAMETER =
+            "SELECT book_id FROM books WHERE title LIKE ? AND year LIKE ? AND page LIKE ?";
+
+    public static final String ADD_BOOK =
+            "INSERT INTO books(title, year, pages, description, number_copies, category_id_fk) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+
     //author query
     public static final String FIND_ALL_AUTHORS =
             "SELECT author_id, author FROM authors";
@@ -74,6 +81,11 @@ public class StatementSql {
 
     public static final String FINE_COUNT_BY_NAME =
             "SELECT count(author_id) as count FROM authors WHERE author LIKE ?";
+
+    //book_authors
+    public static final String ADD_BOOK_AUTHORS =
+            "INSERT INTO book_authors(book_id_fk, author_id_fk) " +
+                    "VALUES (?, ?)";
 
 }
 

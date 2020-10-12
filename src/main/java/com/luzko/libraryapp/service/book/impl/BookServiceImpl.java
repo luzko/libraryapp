@@ -77,7 +77,7 @@ public class BookServiceImpl implements BookService {
                 String number = bookParameter.get(ColumnName.NUMBER_COPIES);
                 String category = bookParameter.get(ColumnName.CATEGORY);
                 String description = bookParameter.get(ColumnName.DESCRIPTION);
-                int authorId = Integer.parseInt(bookParameter.get(ColumnName.AUTHOR));
+                long authorId = Long.parseLong(bookParameter.get(ColumnName.AUTHOR));
                 BookBuilder bookBuilder = new BookBuilder()
                         .setTitle(title)
                         .setYear(Integer.parseInt(year))

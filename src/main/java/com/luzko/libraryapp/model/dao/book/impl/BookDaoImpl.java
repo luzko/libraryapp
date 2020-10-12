@@ -59,7 +59,8 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public boolean add(Book book, int authorId) throws DaoException {
+    public boolean add(Book book, long authorId) throws DaoException {
+        //TODO
         /*
             1. заинсертить книгу и заполнить все поля.
             2. получить айдишник этой новой книги.
@@ -67,8 +68,49 @@ public class BookDaoImpl implements BookDao {
             все сделать в транзакции.
          */
 
+        try (Connection connection = ConnectionPool.getInstance().getConnection()) {
+            connection.setAutoCommit(false);
 
-        return false;
+            boolean isBookAdd;
+            boolean isBookAuthorAdd = false;
+
+            try (PreparedStatement statement = connection.prepareStatement(StatementSql.ADD_BOOK)) {
+                statement.setString(1, book.getTitle());
+                statement.setInt(2, book.getYear());
+                statement.setInt(3, book.getPage());
+                statement.setString(4, book.getDescription());
+                statement.setInt(5, book.getNumberCopy());
+                statement.setInt(6, book.getCategory().defineId());
+                isBookAdd = statement.executeUpdate() > 0;
+            }
+
+            if (isBookAdd) {
+                long bookId;
+                try (PreparedStatement statement = connection.prepareStatement(StatementSql.ADD_BOOK)) {
+                    statement.setString(1, book.getTitle());
+                    statement.setInt(2, book.getYear());
+                    statement.setInt(3, book.getPage());
+                    ResultSet resultSet = statement.executeQuery();
+                    bookId = resultSet.getLong(ColumnName.BOOK_ID);
+                }
+                try (PreparedStatement statement = connection.prepareStatement(StatementSql.ADD_BOOK_AUTHORS)) {
+                    statement.setLong(1, bookId);
+                    statement.setInt(2, book.getYear());
+                    isBookAuthorAdd = statement.executeUpdate() > 0;
+                }
+            }
+
+            if (isBookAuthorAdd) {
+                connection.commit();
+            } else {
+                connection.rollback();
+            }
+
+            connection.setAutoCommit(true);
+            return isBookAuthorAdd;
+        } catch (SQLException e) {
+            throw new DaoException("Book add error", e);
+        }
     }
 
     private List<Book> createBooksFromResultSet(ResultSet resultSet) throws SQLException {
