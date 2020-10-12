@@ -154,7 +154,8 @@
                                     <fmt:message key="label.category"/>
                                 </label>
                                 <div class="col-sm-8 ">
-                                    <select name = "category" id="dropdownCategory" class="float-sm-left" style="width: 220px">
+                                    <select name="category" id="dropdownCategory" class="float-sm-left"
+                                            style="width: 220px">
                                         <c:forEach var="categoryItem" items="${allCategories}">
                                             <option value="${categoryItem.toString()}">
                                                     ${categoryItem.toString()}
@@ -171,7 +172,8 @@
                                     <fmt:message key="label.author"/>
                                 </label>
                                 <div class="col-sm-8 ">
-                                    <select name = "author" id="dropdownAuthor" class="float-sm-left" style="width: 220px">
+                                    <select name="author" id="dropdownAuthor" class="float-sm-left"
+                                            style="width: 220px">
                                         <c:forEach var="authorItem" items="${allAuthors}">
                                             <option value="${authorItem.authorId}">
                                                     ${authorItem.name}
@@ -201,6 +203,12 @@
                     </c:choose>
                     <br/>
                     <br/>
+                    <div style="color: red;">
+                        ${errorDataMessage}
+                    </div>
+                    <div style="color: green;">
+                        ${createAuthorSuccess}
+                    </div>
                     <br/>
                     <br/>
                     <div class="form-group row">
@@ -211,12 +219,6 @@
                         </div>
                     </div>
                 </form>
-                <div style="color: red;">
-                    ${errorDataMessage}
-                </div>
-                <div style="color: green;">
-                    ${createAuthorSuccess}
-                </div>
             </div>
             <br/>
         </div>
