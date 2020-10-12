@@ -22,16 +22,16 @@ public class ConnectionPool {
     private static final int POOL_SIZE = 8;
 
     private final Properties properties;
-    private final BlockingQueue<ProxyConnection> availableConnections;
-    private final Queue<ProxyConnection> givenConnections;
+    private final BlockingQueue<ProxyConnection> availableConnection;
+    private final Queue<ProxyConnection> givenConnection;
     private final AtomicBoolean isInitialized;
     private final AtomicBoolean isPoolClosing;
     private final Lock initLock;
 
     private ConnectionPool() {
         properties = ConfigurationManager.getDatabaseProperties();
-        availableConnections = new LinkedBlockingQueue<>(POOL_SIZE);
-        givenConnections = new ArrayDeque<>();
+        availableConnection = new LinkedBlockingQueue<>(POOL_SIZE);
+        givenConnection = new ArrayDeque<>();
         isInitialized = new AtomicBoolean(false);
         isPoolClosing = new AtomicBoolean(false);
         initLock = new ReentrantLock();
@@ -65,7 +65,7 @@ public class ConnectionPool {
         for (int i = 0; i < POOL_SIZE; i++) {
             try {
                 Connection connection = DriverManager.getConnection(properties.getProperty(URL), properties);
-                availableConnections.offer(new ProxyConnection(connection));
+                availableConnection.offer(new ProxyConnection(connection));
             } catch (SQLException e) {
                 logger.log(Level.ERROR, "Connection not created", e);
             }
@@ -74,10 +74,10 @@ public class ConnectionPool {
 
     public Connection getConnection() {
         ProxyConnection connection = null;
-        if (!isPoolClosing.get() && !availableConnections.isEmpty()) {
+        if (!isPoolClosing.get()) {
             try {
-                connection = availableConnections.take();
-                givenConnections.offer(connection);
+                connection = availableConnection.take();
+                givenConnection.offer(connection);
             } catch (InterruptedException e) {
                 logger.log(Level.ERROR, "Connection pool can't provide connection.", e);
             }
@@ -88,14 +88,13 @@ public class ConnectionPool {
     public void destroy() {
         isPoolClosing.set(true);
         initLock.lock();
-        for (ProxyConnection connection : availableConnections) {
-            closeConnection(connection);
+        for (int i = 0; i < availableConnection.size(); i++) {
+            try {
+                closeConnection(availableConnection.take());
+            } catch (InterruptedException e) {
+                logger.log(Level.ERROR, "Error destroy connection.", e);
+            }
         }
-        for (ProxyConnection connection : givenConnections) {
-            closeConnection(connection);
-        }
-        availableConnections.clear();
-        givenConnections.clear();
         deregisterDrivers();
         isInitialized.set(false);
         isPoolClosing.set(false);
@@ -122,8 +121,8 @@ public class ConnectionPool {
 
     public void releaseConnection(Connection connection) {
         if (connection instanceof ProxyConnection) {
-            if (givenConnections.remove(connection)) {
-                availableConnections.offer((ProxyConnection) connection);
+            if (givenConnection.remove(connection)) {
+                availableConnection.offer((ProxyConnection) connection);
             }
         } else {
             logger.log(Level.WARN, "Invalid connection");
