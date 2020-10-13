@@ -193,6 +193,7 @@
 <%--<ctg:end-page/>--%>
 
 <script type="text/javascript">
+    <%@include file="../../js/reloadProtection.js"%>
     <%@include file="../../js/xxsProtection.js"%>
 </script>
 </body>
