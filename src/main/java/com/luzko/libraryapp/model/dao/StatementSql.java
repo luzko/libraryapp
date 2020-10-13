@@ -89,10 +89,8 @@ public class StatementSql {
 
     //orders query
     public static final String FIND_ORDERS_BY_USER_ID =
-            "SELECT o.order_id, b.title, o.order_date, os.status, ot.type FROM orders o " +
+            "SELECT o.order_id, b.title, o.order_date, o.order_status_id_fk status, o.order_types_id_fk type FROM orders o " +
                     "LEFT JOIN books b on o.book_id_fk = b.book_id " +
-                    "LEFT JOIN order_statuses os ON o.order_status_id_fk = os.order_status_id " +
-                    "LEFT JOIN order_types ot ON o.order_types_id_fk = ot.order_types_id " +
                     "WHERE o.enabled = TRUE AND o.user_id_fk LIKE ?";
 
 }

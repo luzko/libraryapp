@@ -5,8 +5,6 @@ import com.luzko.libraryapp.model.entity.OrderStatus;
 import com.luzko.libraryapp.model.entity.OrderType;
 import com.luzko.libraryapp.model.entity.User;
 
-import java.time.LocalDate;
-
 public class OrderBuilder {
     private Long orderId;
     private User user;
@@ -61,20 +59,20 @@ public class OrderBuilder {
         return this;
     }
 
-    public LocalDate getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public OrderBuilder setOrderDate(LocalDate orderDate) {
+    public OrderBuilder setOrderDate(String orderDate) {
         this.orderDate = orderDate;
         return this;
     }
 
-    public LocalDate getReturnDate() {
+    public String getReturnDate() {
         return returnDate;
     }
 
-    public OrderBuilder setReturnDate(LocalDate returnDate) {
+    public OrderBuilder setReturnDate(String returnDate) {
         this.returnDate = returnDate;
         return this;
     }

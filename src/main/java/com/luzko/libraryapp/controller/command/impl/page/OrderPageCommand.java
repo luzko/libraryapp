@@ -22,19 +22,14 @@ public class OrderPageCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
-
         Router router = new Router();
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
-
-
         String orderType = request.getParameter(RequestParameter.ORDER_TYPE);
-
         try {
             if (orderType.equals(RequestParameter.USER_ORDERS)) {
                 Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
                 long userId = (long) userIdObject;
                 List<Order> orders = orderService.findByUserId(userId);
-                System.out.println(orders); //TODO
                 request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
                 router.setPagePath(PagePath.ORDERS);
                 router.setRouterType(RouterType.FORWARD);
@@ -44,7 +39,7 @@ public class OrderPageCommand implements Command {
                 //ERROR
             }
         } catch (ServiceException e) {
-            logger.log(Level.ERROR, "Error in library page", e);
+            logger.log(Level.ERROR, "Error in order page", e);
             router.setPagePath(PagePath.ERROR);
             router.setRouterType(RouterType.FORWARD);
         }

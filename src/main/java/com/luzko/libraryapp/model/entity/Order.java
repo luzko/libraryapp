@@ -13,12 +13,14 @@ public class Order extends BaseEntity {
     private String orderDate;
     private String returnDate;
 
-    public Order() {
-
-    }
-
-    public Order(OrderBuilder orderBuilder) {
-
+    public Order(OrderBuilder builder) {
+        this.orderId = builder.getOrderId();
+        this.user = builder.getUser();
+        this.book = builder.getBook();
+        this.orderStatus = builder.getOrderStatus();
+        this.orderType = builder.getOrderType();
+        this.orderDate = builder.getOrderDate();
+        this.returnDate = builder.getReturnDate();
     }
 
     public Long getOrderId() {

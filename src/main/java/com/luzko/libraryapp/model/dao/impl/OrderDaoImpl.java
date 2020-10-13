@@ -11,12 +11,12 @@ import com.luzko.libraryapp.model.entity.Book;
 import com.luzko.libraryapp.model.entity.Order;
 import com.luzko.libraryapp.model.entity.OrderStatus;
 import com.luzko.libraryapp.model.entity.OrderType;
+import com.luzko.libraryapp.util.DateUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,10 +36,11 @@ public class OrderDaoImpl implements OrderDao {
     public List<Order> findByUserId(long userId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ORDERS_BY_USER_ID)) {
+            statement.setLong(1, userId);
             ResultSet resultSet = statement.executeQuery();
             return createOrdersUserIdFromResultSet(resultSet);
         } catch (SQLException e) {
-            throw new DaoException("Find all error", e);
+            throw new DaoException("Find by id error", e);
         }
     }
 
@@ -55,7 +56,6 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     private Optional<Order> createOrderUserId(ResultSet resultSet) throws SQLException {
-
         BookBuilder bookBuilder = new BookBuilder()
                 .setTitle(resultSet.getString(ColumnName.BOOK_TITLE));
         Book book = new Book(bookBuilder);
@@ -63,30 +63,13 @@ public class OrderDaoImpl implements OrderDao {
                 .setOrderId(resultSet.getLong(ColumnName.ORDER_ID))
                 .setOrderStatus(OrderStatus.defineOrderStatusById(resultSet.getInt(ColumnName.ORDER_STATUS)))
                 .setOrderType(OrderType.defineOrderTypeById(resultSet.getInt(ColumnName.ORDER_TYPE)))
+                .setOrderDate(DateUtil.defineDateValue(resultSet.getLong(ColumnName.ORDER_DATE)))
                 .setBook(book);
-        //.setOrderDate()
-
-        return null;
+        Order order = new Order(orderBuilder);
+        Optional<Order> orderOptional = Optional.empty();
+        if (order.getOrderStatus() != null && order.getOrderType() != null) {
+            orderOptional = Optional.of(order);
+        }
+        return orderOptional;
     }
 }
-
-
-
-/*
-    private Optional<User> createUser(ResultSet resultSet) throws SQLException {
-        UserBuilder userBuilder = new UserBuilder()
-                .setUserId(resultSet.getLong(ColumnName.USER_ID))
-                .setLogin(resultSet.getString(ColumnName.LOGIN))
-                .setUserRole(UserRole.defineRoleById(resultSet.getInt(ColumnName.ROLE_ID_FK)))
-                .setName(resultSet.getString(ColumnName.NAME))
-                .setSurname(resultSet.getString(ColumnName.SURNAME))
-                .setEmail(resultSet.getString(ColumnName.EMAIL))
-                .setUserStatus(UserStatus.defineStatusById(resultSet.getInt(ColumnName.USER_STATUS_ID_FK)));
-        User user = new User(userBuilder);
-        Optional<User> userOptional = Optional.empty();
-        if (user.getUserRole() != null && user.getUserStatus() != null) {
-            userOptional = Optional.of(user);
-        }
-        return userOptional;
-    }
- */
