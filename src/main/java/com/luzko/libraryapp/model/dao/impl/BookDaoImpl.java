@@ -9,10 +9,7 @@ import com.luzko.libraryapp.model.dao.BookDao;
 import com.luzko.libraryapp.model.entity.Book;
 import com.luzko.libraryapp.model.entity.Category;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -60,56 +57,37 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public boolean add(Book book, long authorId) throws DaoException {
-        //TODO
-        /*
-            1. заинсертить книгу и заполнить все поля.
-            2. получить айдишник этой новой книги.
-            3. заинсертить новую свзяь, книга к автору.
-            все сделать в транзакции.
-         */
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        boolean isBookAdd = false;
 
-        try (Connection connection = ConnectionPool.getInstance().getConnection()) {
-            connection.setAutoCommit(false);
+        try (PreparedStatement statementBook = connection.prepareStatement(StatementSql.ADD_BOOK, Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement statementBookAuthors = connection.prepareStatement(StatementSql.ADD_BOOK_AUTHORS)) {
+            connectionSetAutoCommit(connection, false);
 
-            boolean isBookAdd;
-            boolean isBookAuthorAdd = false;
+            statementBook.setString(1, book.getTitle());
+            statementBook.setInt(2, book.getYear());
+            statementBook.setInt(3, book.getPage());
+            statementBook.setString(4, book.getDescription());
+            statementBook.setInt(5, book.getNumberCopy());
+            statementBook.setInt(6, book.getCategory().defineId());
 
-            try (PreparedStatement statement = connection.prepareStatement(StatementSql.ADD_BOOK)) {
-                statement.setString(1, book.getTitle());
-                statement.setInt(2, book.getYear());
-                statement.setInt(3, book.getPage());
-                statement.setString(4, book.getDescription());
-                statement.setInt(5, book.getNumberCopy());
-                statement.setInt(6, book.getCategory().defineId());
-                isBookAdd = statement.executeUpdate() > 0;
+            if (statementBook.executeUpdate() == 1) {
+                ResultSet generatedKey = statementBook.getGeneratedKeys();
+                generatedKey.next();
+                long bookId = generatedKey.getLong(1);
+                statementBookAuthors.setLong(1, bookId);
+                statementBookAuthors.setLong(2, authorId);
+                isBookAdd = statementBookAuthors.executeUpdate() > 0;
             }
 
-            if (isBookAdd) {
-                long bookId;
-                try (PreparedStatement statement = connection.prepareStatement(StatementSql.ADD_BOOK)) {
-                    statement.setString(1, book.getTitle());
-                    statement.setInt(2, book.getYear());
-                    statement.setInt(3, book.getPage());
-                    ResultSet resultSet = statement.executeQuery();
-                    bookId = resultSet.getLong(ColumnName.BOOK_ID);
-                }
-                try (PreparedStatement statement = connection.prepareStatement(StatementSql.ADD_BOOK_AUTHORS)) {
-                    statement.setLong(1, bookId);
-                    statement.setInt(2, book.getYear());
-                    isBookAuthorAdd = statement.executeUpdate() > 0;
-                }
-            }
-
-            if (isBookAuthorAdd) {
-                connection.commit();
-            } else {
-                connection.rollback();
-            }
-
-            connection.setAutoCommit(true);
-            return isBookAuthorAdd;
+            connectionCommitChanges(connection);
+            return isBookAdd;
         } catch (SQLException e) {
+            connectionsRollback(connection);
             throw new DaoException("Book add error", e);
+        } finally {
+            connectionSetAutoCommit(connection, true);
+            closeConnection(connection);
         }
     }
 
