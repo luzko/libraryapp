@@ -34,4 +34,11 @@ public class ColumnName {
     public static final String AUTHOR_ID = "author_id";
     public static final String AUTHOR = "author";
     public static final String AUTHOR_COUNT = "count";
+
+    //order
+    public static final String ORDER_ID = "order_id";
+    public static final String BOOK_TITLE = "title";
+    public static final String ORDER_DATE = "order_date";
+    public static final String ORDER_STATUS = "status";
+    public static final String ORDER_TYPE = "type";
 }

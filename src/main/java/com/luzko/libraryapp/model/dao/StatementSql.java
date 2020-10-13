@@ -5,7 +5,7 @@ public class StatementSql {
 
     }
 
-    //user query
+    //users query
     public static final String ADD_USER =
             "INSERT INTO users(login, password, role_id_fk, name, surname, email, user_status_id_fk, confirm) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -44,7 +44,7 @@ public class StatementSql {
     public static final String CHANGE_USER_SURNAME =
             "UPDATE users SET surname = ? WHERE login LIKE ?";
 
-    //book query
+    //books query
     public static final String FIND_ALL_BOOKS =
             "SELECT b.book_id, b.title, b.category_id_fk, " +
                     "GROUP_CONCAT(DISTINCT a.author ORDER BY a.author SEPARATOR ', ') authors FROM books b " +
@@ -55,8 +55,8 @@ public class StatementSql {
     public static final String FIND_BOOK_BY_ID =
             "SELECT b.book_id, b.title, b.year, b.pages, b.description, b.number_copies, b.category_id_fk, " +
                     "GROUP_CONCAT(DISTINCT a.author ORDER BY a.author SEPARATOR ', ') authors FROM books b " +
-                    "LEFT JOIN book_authors ba on b.book_id = ba.book_id_fk " +
-                    "LEFT JOIN authors a on a.author_id = ba.author_id_fk " +
+                    "LEFT JOIN book_authors ba ON b.book_id = ba.book_id_fk " +
+                    "LEFT JOIN authors a ON a.author_id = ba.author_id_fk " +
                     "WHERE b.enabled = TRUE AND b.book_id LIKE ? GROUP BY b.book_id";
 
     public static final String FIND_COUNT_BY_PARAMETER =
@@ -69,7 +69,7 @@ public class StatementSql {
             "INSERT INTO books(title, year, pages, description, number_copies, category_id_fk) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
 
-    //author query
+    //authors query
     public static final String FIND_ALL_AUTHORS =
             "SELECT author_id, author FROM authors";
 
@@ -82,10 +82,18 @@ public class StatementSql {
     public static final String FINE_COUNT_BY_NAME =
             "SELECT count(author_id) as count FROM authors WHERE author LIKE ?";
 
-    //book_authors
+    //book authors query
     public static final String ADD_BOOK_AUTHORS =
             "INSERT INTO book_authors(book_id_fk, author_id_fk) " +
                     "VALUES (?, ?)";
+
+    //orders query
+    public static final String FIND_ORDERS_BY_USER_ID =
+            "SELECT o.order_id, b.title, o.order_date, os.status, ot.type FROM orders o " +
+                    "LEFT JOIN books b on o.book_id_fk = b.book_id " +
+                    "LEFT JOIN order_statuses os ON o.order_status_id_fk = os.order_status_id " +
+                    "LEFT JOIN order_types ot ON o.order_types_id_fk = ot.order_types_id " +
+                    "WHERE o.enabled = TRUE AND o.user_id_fk LIKE ?";
 
 }
 

@@ -2,7 +2,6 @@ package com.luzko.libraryapp.model.entity;
 
 import com.luzko.libraryapp.model.builder.OrderBuilder;
 
-import java.time.LocalDate;
 import java.util.StringJoiner;
 
 public class Order extends BaseEntity {
@@ -11,8 +10,8 @@ public class Order extends BaseEntity {
     private Book book;
     private OrderStatus orderStatus;
     private OrderType orderType;
-    private LocalDate orderDate;
-    private LocalDate returnDate;
+    private String orderDate;
+    private String returnDate;
 
     public Order() {
 
@@ -62,19 +61,19 @@ public class Order extends BaseEntity {
         this.orderType = orderType;
     }
 
-    public LocalDate getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
-    public LocalDate getReturnDate() {
+    public String getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(LocalDate returnDate) {
+    public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
 
@@ -127,8 +126,8 @@ public class Order extends BaseEntity {
                 .add("book=" + book)
                 .add("orderStatus=" + orderStatus)
                 .add("orderType=" + orderType)
-                .add("orderDate=" + orderDate)
-                .add("returnDate=" + returnDate)
+                .add("orderDate='" + orderDate + "'")
+                .add("returnDate='" + returnDate + "'")
                 .toString();
     }
 }

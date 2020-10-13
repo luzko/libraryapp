@@ -13,8 +13,8 @@ public class OrderBuilder {
     private Book book;
     private OrderStatus orderStatus;
     private OrderType orderType;
-    private LocalDate orderDate;
-    private LocalDate returnDate;
+    private String orderDate;
+    private String returnDate;
 
     public Long getOrderId() {
         return orderId;

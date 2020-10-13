@@ -70,11 +70,13 @@ VALUES ('adminius', 'ccc0efccbeafae925ae3f2987bb170b644b4083d', 1, 'not required
 INSERT INTO order_statuses (status)
 VALUES ('New'),
        ('Approved'),
-       ('Denied');
+       ('Denied'),
+       ('Canceled'),
+       ('Returned');
 
 INSERT INTO order_types (type)
 VALUES ('Reading room'),
        ('Home');
 
 INSERT INTO orders (user_id_fk, book_id_fk, order_status_id_fk, order_types_id_fk, order_date, return_date)
-VALUES (3, 1, 3, 2, 1599854214000, 1599911154000);
+VALUES (3, 1, 5, 2, 1599854214000, 1599911154000);

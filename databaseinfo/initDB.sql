@@ -111,7 +111,7 @@ CREATE TABLE orders
     order_status_id_fk TINYINT UNSIGNED 	 NOT NULL,
     order_types_id_fk TINYINT UNSIGNED NOT NULL,
     order_date 	 BIGINT  		 			 NOT NULL,
-    return_date  BIGINT  		 			 NOT NULL,
+    return_date  BIGINT  		 			 NULL DEFAULT NULL,
     enabled			 BOOL 			 			NOT NULL DEFAULT TRUE,
     PRIMARY KEY (order_id),
     FOREIGN KEY (user_id_fk) REFERENCES users (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT,

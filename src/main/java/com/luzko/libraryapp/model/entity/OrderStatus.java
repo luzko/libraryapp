@@ -5,7 +5,8 @@ public enum OrderStatus {
     NEW,
     APPROVED,
     DENIED,
-    CANCELED;
+    CANCELED,
+    RETURNED;
 
     public int defineId() {
         return this.ordinal() + 1;
