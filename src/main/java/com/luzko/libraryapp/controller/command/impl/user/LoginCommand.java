@@ -62,6 +62,7 @@ public class LoginCommand implements Command {
         UserStatus userStatus = user.getUserStatus();
         Router router = new Router();
         HttpSession session = request.getSession();
+        session.setAttribute(RequestParameter.USER_ID, user.getUserId());
         session.setAttribute(RequestParameter.LOGIN, user.getLogin());
         session.setAttribute(RequestParameter.USER_ROLE, user.getUserRole());
         session.setAttribute(RequestParameter.USER_STATUS, userStatus);

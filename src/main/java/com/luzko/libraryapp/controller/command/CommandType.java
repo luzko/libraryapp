@@ -17,6 +17,7 @@ public enum CommandType {
     USER_PAGE(new UserPageCommand()),
     LIBRARY_PAGE(new LibraryPageCommand()),
     CREATE_BOOK_PAGE(new CreateBookPageCommand()),
+    ORDERS_PAGE(new OrderPageCommand()),
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
     REGISTRATION(new RegistrationCommand()),

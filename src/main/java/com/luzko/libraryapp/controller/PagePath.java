@@ -17,6 +17,7 @@ public class PagePath {
     public static final String BLOCKED = "/jsp/view/blocked.jsp";
     public static final String BOOK_OVERVIEW = "/jsp/view/bookoverview.jsp";
     public static final String CREATE_BOOK = "/jsp/view/createbook.jsp";
+    public static final String ORDERS = "/jsp/view/orders.jsp";
 
     //error
     public static final String ERROR = "/jsp/error/error.jsp";

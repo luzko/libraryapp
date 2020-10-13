@@ -130,7 +130,8 @@
                                 <div class="text-right">
                                     <form class="form-inline" method="POST"
                                           action="${pageContext.request.contextPath}/controller">
-                                        <input type="hidden" name="command" value=""/>
+                                        <input type="hidden" name="command" value="orders_page"/>
+                                        <input type="hidden" name="orderType" value="userOrders"/>
                                         <div>
                                             <button type="submit"
                                                     class="btn btn-primary js-scroll-trigger custom-button">

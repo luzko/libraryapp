@@ -38,6 +38,7 @@ public class RequestParameter {
     public static final String PATH_BOOK_DATA = "message.book.data";
 
     //user
+    public static final String USER_ID = "userId";
     public static final String NAME = "name";
     public static final String SURNAME = "surname";
     public static final String LOGIN = "login";
@@ -81,4 +82,9 @@ public class RequestParameter {
     public static final String CREATE_TYPE = "createType";
     public static final String CORRECT_DATA_MESSAGE = "createAuthorSuccess";
     public static final String ALL_AUTHORS = "allAuthors";
+
+    //order
+    public static final String ORDER_TYPE = "orderType";
+    public static final String USER_ORDERS = "userOrders";
+    public static final String BOOK_ORDERS = "bookOrders";
 }
