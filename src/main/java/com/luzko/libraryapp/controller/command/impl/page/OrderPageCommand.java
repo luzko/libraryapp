@@ -14,7 +14,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
 import java.util.List;
 
 public class OrderPageCommand implements Command {
@@ -31,12 +30,17 @@ public class OrderPageCommand implements Command {
                 long userId = (long) userIdObject;
                 List<Order> orders = orderService.findByUserId(userId);
                 request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
+                request.setAttribute(RequestParameter.ORDER_TYPE, orderType);
                 router.setPagePath(PagePath.ORDERS);
                 router.setRouterType(RouterType.FORWARD);
             } else if (orderType.equals(RequestParameter.BOOK_ORDERS)) {
+
+
+                request.setAttribute(RequestParameter.ORDER_TYPE, orderType);
                 //TODO
             } else {
-                //ERROR
+                router.setPagePath(PagePath.ERROR);
+                router.setRouterType(RouterType.FORWARD);
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in order page", e);

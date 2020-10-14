@@ -9,4 +9,7 @@ public interface OrderDao extends BaseDao<Order> {
 
     List<Order> findByUserId(long userId) throws DaoException;
 
+    boolean isCancel(long orderId) throws DaoException;
+
+    boolean isReturn(long orderId) throws DaoException;
 }

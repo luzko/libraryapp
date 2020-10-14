@@ -44,6 +44,29 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
+    @Override
+    public boolean isCancel(long orderId) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.CANCEL_ORDER)) {
+            statement.setLong(1, orderId);
+            return statement.executeUpdate() == 1;
+        } catch (SQLException e) {
+            throw new DaoException("Cancel order error", e);
+        }
+    }
+
+    @Override
+    public boolean isReturn(long orderId) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.RETURN_ORDER)) {
+            statement.setLong(1, DateUtil.defineCountMillisecondsFromNow());
+            statement.setLong(2, orderId);
+            return statement.executeUpdate() == 1;
+        } catch (SQLException e) {
+            throw new DaoException("Cancel order error", e);
+        }
+    }
+
     private List<Order> createOrdersUserIdFromResultSet(ResultSet resultSet) throws SQLException {
         List<Order> orderList = new ArrayList<>();
         if (resultSet != null) {

@@ -7,7 +7,9 @@ import java.util.List;
 
 
 public interface OrderService {
-
     List<Order> findByUserId(long userId) throws ServiceException;
 
+    boolean isCancel(String orderId) throws ServiceException;
+
+    boolean isReturn(String orderId) throws ServiceException;
 }

@@ -25,4 +25,28 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException("Find by user id", e);
         }
     }
+
+    @Override
+    public boolean isCancel(String orderIdString) throws ServiceException {
+        logger.log(Level.INFO, "Cancel order execute");
+        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        long orderId = Long.parseLong(orderIdString);
+        try {
+            return orderDao.isCancel(orderId);
+        } catch (DaoException e) {
+            throw new ServiceException("Cancel order error", e);
+        }
+    }
+
+    @Override
+    public boolean isReturn(String orderIdString) throws ServiceException {
+        logger.log(Level.INFO, "Return order execute");
+        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        long orderId = Long.parseLong(orderIdString);
+        try {
+            return orderDao.isReturn(orderId);
+        } catch (DaoException e) {
+            throw new ServiceException("Return order error", e);
+        }
+    }
 }

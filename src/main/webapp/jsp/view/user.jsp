@@ -115,31 +115,75 @@
                                         ${email}
                                     <br/><br/><br/>
                                 </h4>
-                                <div class="text-right">
-                                    <form class="form-inline" method="POST"
-                                          action="${pageContext.request.contextPath}/controller">
-                                        <input type="hidden" name="command" value="settings"/>
-                                        <div>
-                                            <button type="submit"
-                                                    class="btn btn-primary js-scroll-trigger custom-button">
-                                                <fmt:message key="submit.settings.profile"/>
-                                            </button>
+                                <c:choose>
+                                    <c:when test="${userRole == 'READER'}">
+                                        <div class="text-right">
+                                            <form class="form-inline" method="POST"
+                                                  action="${pageContext.request.contextPath}/controller">
+                                                <input type="hidden" name="command" value="settings"/>
+                                                <div>
+                                                    <button type="submit"
+                                                            class="btn btn-primary js-scroll-trigger custom-button">
+                                                        <fmt:message key="submit.settings.profile"/>
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="text-right">
-                                    <form class="form-inline" method="POST"
-                                          action="${pageContext.request.contextPath}/controller">
-                                        <input type="hidden" name="command" value="orders_page"/>
-                                        <input type="hidden" name="orderType" value="userOrders"/>
-                                        <div>
-                                            <button type="submit"
-                                                    class="btn btn-primary js-scroll-trigger custom-button">
-                                                <fmt:message key="submit.order.book"/>
-                                            </button>
+                                        <div class="text-right">
+                                            <form class="form-inline" method="POST"
+                                                  action="${pageContext.request.contextPath}/controller">
+                                                <input type="hidden" name="command" value="orders_page"/>
+                                                <input type="hidden" name="orderType" value="userOrders"/>
+                                                <div>
+                                                    <button type="submit"
+                                                            class="btn btn-primary js-scroll-trigger custom-button">
+                                                        <fmt:message key="submit.order.book"/>
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </form>
-                                </div>
+                                    </c:when>
+                                    <c:when test="${userRole == 'LIBRARIAN'}">
+                                        <div class="text-right">
+                                            <form class="form-inline" method="POST"
+                                                  action="${pageContext.request.contextPath}/controller">
+                                                <input type="hidden" name="command" value="settings"/>
+                                                <div>
+                                                    <button type="submit"
+                                                            class="btn btn-primary js-scroll-trigger custom-button">
+                                                        <fmt:message key="submit.settings.profile"/>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="text-right">
+                                            <form class="form-inline" method="POST"
+                                                  action="${pageContext.request.contextPath}/controller">
+                                                <input type="hidden" name="command" value=""/>
+                                                <input type="hidden" name="orderType" value="userOrders"/>
+                                                <div>
+                                                    <button type="submit"
+                                                            class="btn btn-primary js-scroll-trigger custom-button">
+                                                        <fmt:message key="submit.order.new"/>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="text-right">
+                                            <form class="form-inline" method="POST"
+                                                  action="${pageContext.request.contextPath}/controller">
+                                                <input type="hidden" name="command" value=""/>
+                                                <input type="hidden" name="orderType" value="userOrders"/>
+                                                <div>
+                                                    <button type="submit"
+                                                            class="btn btn-primary js-scroll-trigger custom-button">
+                                                        <fmt:message key="submit.order.all"/>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </c:when>
+                                </c:choose>
                             </div>
                         </div>
                     </div>

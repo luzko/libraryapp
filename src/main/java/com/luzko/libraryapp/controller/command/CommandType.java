@@ -5,8 +5,10 @@ import com.luzko.libraryapp.controller.command.impl.admin.CreateAuthorCommand;
 import com.luzko.libraryapp.controller.command.impl.admin.CreateBookCommand;
 import com.luzko.libraryapp.controller.command.impl.admin.CreateLibrarianCommand;
 import com.luzko.libraryapp.controller.command.impl.page.*;
+import com.luzko.libraryapp.controller.command.impl.reader.CancelOrderCommand;
 import com.luzko.libraryapp.controller.command.impl.reader.CreateHomeOrderCommand;
 import com.luzko.libraryapp.controller.command.impl.reader.CreateReadingRoomOrderCommand;
+import com.luzko.libraryapp.controller.command.impl.reader.ReturnOrderCommand;
 import com.luzko.libraryapp.controller.command.impl.user.*;
 
 public enum CommandType {
@@ -34,7 +36,9 @@ public enum CommandType {
     CREATE_AUTHOR(new CreateAuthorCommand()),
     CREATE_BOOK(new CreateBookCommand()),
     HOME_ORDER(new CreateHomeOrderCommand()),
-    READING_ROOM_COMMAND(new CreateReadingRoomOrderCommand());
+    READING_ROOM(new CreateReadingRoomOrderCommand()),
+    CANCEL_ORDER(new CancelOrderCommand()),
+    RETURN_ORDER(new ReturnOrderCommand());
 
     private final Command command;
 

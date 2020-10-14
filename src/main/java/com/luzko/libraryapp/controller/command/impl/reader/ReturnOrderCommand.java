@@ -16,8 +16,8 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class CancelOrderCommand implements Command {
-    private static final Logger logger = LogManager.getLogger(CancelOrderCommand.class);
+public class ReturnOrderCommand implements Command {
+    private static final Logger logger = LogManager.getLogger(ReturnOrderCommand.class);
 
     @Override
     public Router execute(HttpServletRequest request) {
@@ -26,7 +26,7 @@ public class CancelOrderCommand implements Command {
         String orderType = request.getParameter(RequestParameter.ORDER_TYPE);
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         try {
-            if (orderService.isCancel(orderId)) {
+            if (orderService.isReturn(orderId)) {
                 Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
                 long userId = (long) userIdObject;
                 List<Order> orders = orderService.findByUserId(userId);
@@ -38,7 +38,7 @@ public class CancelOrderCommand implements Command {
             }
             router.setRouterType(RouterType.FORWARD);
         } catch (ServiceException e) {
-            logger.log(Level.ERROR, "Error in cancel order", e);
+            logger.log(Level.ERROR, "Error in return order", e);
             router.setPagePath(PagePath.ERROR);
             router.setRouterType(RouterType.FORWARD);
         }
