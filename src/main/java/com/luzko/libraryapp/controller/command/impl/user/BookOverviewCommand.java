@@ -30,7 +30,6 @@ public class BookOverviewCommand implements Command {
             Optional<Book> bookOptional = bookService.findById(bookId);
             if (bookOptional.isPresent()) {
                 Book book = bookOptional.get();
-                request.getSession().setAttribute(RequestParameter.TYPE_OVERVIEW_PAGE, RequestParameter.SEE_OVERVIEW_PAGE);
                 request.getSession().setAttribute(RequestParameter.BOOK, book);
                 router.setPagePath(PagePath.BOOK_OVERVIEW);
             } else {

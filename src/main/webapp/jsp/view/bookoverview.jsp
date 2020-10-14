@@ -76,7 +76,7 @@
     <div class="masthead3">
         <div class="container  align-items-center">
             <div class="row justify-content-center no-gutters">
-                <c:if test="${ not empty typeOverview and typeOverview eq 'seeOverview' }">
+
                 <div style="margin-top: 100px">
                     <h1 style="color: #9fcdff">${book.title}</h1>
                 </div>
@@ -84,7 +84,7 @@
                     <tr>
                         <td width="300" valign="top">
                             <div class="col-lg-8">
-                                    <%--<img class="img-fluid" src="${pageContext.request.contextPath}/${userImage}"--%>
+                                <%--<img class="img-fluid" src="${pageContext.request.contextPath}/${userImage}"--%>
                                 <img class="img-fluid" src="${pageContext.request.contextPath}/img/book.jpg"
                                      style="margin-top: 60px; border-radius: 30px" width="300" height="300"/>
                             </div>
@@ -153,7 +153,8 @@
                             <form class="form-inline" method="POST"
                                   action="${pageContext.request.contextPath}/controller">
                                 <input type="hidden" name="command" value="orders_page"/>
-                                <input type="hidden" name="orderType" value="bookOrders"/>
+                                <input type="hidden" name="book_id" value="${book.bookId}"/>
+                                <input type="hidden" name="orderType" value="book"/>
                                 <div>
                                     <button type="submit"
                                             class="btn btn-primary js-scroll-trigger custom-button">
@@ -167,7 +168,7 @@
             </div>
         </div>
     </div>
-    </c:if>
+
     </div>
     </div>
     </div>

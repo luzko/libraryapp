@@ -133,7 +133,7 @@
                                             <form class="form-inline" method="POST"
                                                   action="${pageContext.request.contextPath}/controller">
                                                 <input type="hidden" name="command" value="orders_page"/>
-                                                <input type="hidden" name="orderType" value="userOrders"/>
+                                                <input type="hidden" name="orderType" value="user"/>
                                                 <div>
                                                     <button type="submit"
                                                             class="btn btn-primary js-scroll-trigger custom-button">
@@ -160,7 +160,7 @@
                                             <form class="form-inline" method="POST"
                                                   action="${pageContext.request.contextPath}/controller">
                                                 <input type="hidden" name="command" value=""/>
-                                                <input type="hidden" name="orderType" value="userOrders"/>
+                                                <input type="hidden" name="orderType" value="user"/>
                                                 <div>
                                                     <button type="submit"
                                                             class="btn btn-primary js-scroll-trigger custom-button">
@@ -173,7 +173,7 @@
                                             <form class="form-inline" method="POST"
                                                   action="${pageContext.request.contextPath}/controller">
                                                 <input type="hidden" name="command" value=""/>
-                                                <input type="hidden" name="orderType" value="userOrders"/>
+                                                <input type="hidden" name="orderType" value="user"/>
                                                 <div>
                                                     <button type="submit"
                                                             class="btn btn-primary js-scroll-trigger custom-button">

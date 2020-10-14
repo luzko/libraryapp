@@ -67,8 +67,6 @@ public class RequestParameter {
     public static final String BOOK = "book";
     public static final String BOOK_ID = "book_id";
     public static final String OVERVIEW_ERROR = "overviewError";
-    public static final String TYPE_OVERVIEW_PAGE = "typeOverview";
-    public static final String SEE_OVERVIEW_PAGE = "seeOverview";
     public static final String ALL_CATEGORIES = "allCategories";
     public static final String BOOK_PARAMETER = "bookParameter";
     public static final String CORRECT_BOOK_MESSAGE = "createBookSuccess";
@@ -85,8 +83,10 @@ public class RequestParameter {
 
     //order
     public static final String ORDER_TYPE = "orderType";
-    public static final String USER_ORDERS = "userOrders";
-    public static final String BOOK_ORDERS = "bookOrders";
+    public static final String USER_ORDER = "user";
+    public static final String BOOK_ORDER = "book";
+    public static final String NEW_ORDER = "new";
+    public static final String ALL_ORDER = "all";
     public static final String ALL_ORDERS = "allOrders";
     public static final String ORDER_ID = "orderId";
 }
