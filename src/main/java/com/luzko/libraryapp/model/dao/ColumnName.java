@@ -38,7 +38,10 @@ public class ColumnName {
     //order
     public static final String ORDER_ID = "order_id";
     public static final String BOOK_TITLE = "title";
+    public static final String USER_LOGIN = "login";
+    public static final String RETURN_DATE = "return_date";
     public static final String ORDER_DATE = "order_date";
     public static final String ORDER_STATUS = "status";
     public static final String ORDER_TYPE = "type";
+
 }

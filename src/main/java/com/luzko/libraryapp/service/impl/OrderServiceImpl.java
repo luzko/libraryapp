@@ -27,6 +27,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> findByBookId(String bookIdString) throws ServiceException {
+        logger.log(Level.INFO, "Find by book id execute: {}", bookIdString);
+        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        try {
+            long bookId = Long.parseLong(bookIdString);
+            return orderDao.findByBookId(bookId);
+        } catch (DaoException e) {
+            throw new ServiceException("Find by user id", e);
+        }
+    }
+
+    @Override
     public boolean isCancel(String orderIdString) throws ServiceException {
         logger.log(Level.INFO, "Cancel order execute");
         OrderDao orderDao = DaoFactory.getInstance().getOrderDao();

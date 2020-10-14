@@ -93,6 +93,11 @@ public class StatementSql {
                     "LEFT JOIN books b on o.book_id_fk = b.book_id " +
                     "WHERE o.enabled = TRUE AND o.user_id_fk LIKE ?";
 
+    public static final String FIND_ORDER_BY_BOOK_ID =
+            "SELECT o.order_id, u.login, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
+                    "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
+                    "WHERE o.enabled = TRUE AND o.book_id_fk LIKE ?";
+
     public static final String CANCEL_ORDER =
             "UPDATE orders SET order_status_id_fk = 4 WHERE order_id LIKE ?";
 
