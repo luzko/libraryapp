@@ -120,10 +120,8 @@ public class ConnectionPool {
     }
 
     public void releaseConnection(Connection connection) {
-        if (connection instanceof ProxyConnection) {
-            if (givenConnection.remove(connection)) {
-                availableConnection.offer((ProxyConnection) connection);
-            }
+        if (connection instanceof ProxyConnection && givenConnection.remove(connection)) {
+            availableConnection.offer((ProxyConnection) connection);
         } else {
             logger.log(Level.WARN, "Invalid connection");
         }
