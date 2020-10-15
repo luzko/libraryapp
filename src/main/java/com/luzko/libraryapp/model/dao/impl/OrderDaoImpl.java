@@ -81,16 +81,31 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
-    @Override
-    public boolean isReturn(long orderId) throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.RETURN_ORDER)) {
-            statement.setLong(1, DateUtil.defineCountMillisecondsFromNow());
-            statement.setLong(2, orderId);
-            return statement.executeUpdate() == 1;
+    public boolean isReturn(long orderId, long bookId) throws DaoException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        boolean isReturnBook = false;
+        try (PreparedStatement statementReturnOrder = connection.prepareStatement(StatementSql.RETURN_ORDER);
+             PreparedStatement statementReturnBook = connection.prepareStatement(StatementSql.RETURN_BOOK)) {
+            connectionSetAutoCommit(connection, false);
+            if (isOrderReturn(statementReturnOrder, orderId)) {
+                statementReturnBook.setLong(1, bookId);
+                isReturnBook = statementReturnBook.executeUpdate() == 1;
+            }
+            connectionCommitChanges(connection);
+            return isReturnBook;
         } catch (SQLException e) {
-            throw new DaoException("Cancel order error", e);
+            connectionsRollback(connection);
+            throw new DaoException("Order create error", e);
+        } finally {
+            connectionSetAutoCommit(connection, true);
+            closeConnection(connection);
         }
+    }
+
+    private boolean isOrderReturn(PreparedStatement statement, long orderId) throws SQLException {
+        statement.setLong(1, DateUtil.defineCountMillisecondsFromNow());
+        statement.setLong(2, orderId);
+        return statement.executeUpdate() == 1;
     }
 
     @Override
@@ -182,6 +197,7 @@ public class OrderDaoImpl implements OrderDao {
 
     private Optional<Order> createOrderUserId(ResultSet resultSet) throws SQLException {
         BookBuilder bookBuilder = new BookBuilder()
+                .setBookId(resultSet.getLong(ColumnName.BOOK_ID))
                 .setTitle(resultSet.getString(ColumnName.BOOK_TITLE));
         Book book = new Book(bookBuilder);
         OrderBuilder orderBuilder = new OrderBuilder()

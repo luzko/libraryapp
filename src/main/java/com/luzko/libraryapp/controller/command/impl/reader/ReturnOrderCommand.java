@@ -25,8 +25,9 @@ public class ReturnOrderCommand implements Command {
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
         String orderType = request.getParameter(RequestParameter.ORDER_TYPE);
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
+        String bookId = request.getParameter(RequestParameter.BOOK_ID);
         try {
-            if (orderService.isReturn(orderId)) {
+            if (orderService.isReturn(orderId, bookId)) {
                 Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
                 long userId = (long) userIdObject;
                 List<Order> orders = orderService.findByUserId(userId);

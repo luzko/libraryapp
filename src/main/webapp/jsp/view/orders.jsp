@@ -138,6 +138,8 @@
                                                         <input type="hidden" name="command" value="return_order"/>
                                                         <input type="hidden" name="orderId"
                                                                value="${orderItem.orderId}"/>
+                                                        <input type="hidden" name="book_id"
+                                                               value="${orderItem.book.bookId}"/>
                                                         <input type="hidden" name="orderType" value="user"/>
                                                         <th scope="row">
                                                             <div class="d-flex justify-content-around">

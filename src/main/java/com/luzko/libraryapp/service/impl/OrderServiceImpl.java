@@ -89,12 +89,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean isReturn(String orderIdString) throws ServiceException {
+    public boolean isReturn(String orderIdString, String bookIdString) throws ServiceException {
         logger.log(Level.INFO, "Return order execute");
         OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
         long orderId = Long.parseLong(orderIdString);
+        long bookId = Long.parseLong(bookIdString);
         try {
-            return orderDao.isReturn(orderId);
+            return orderDao.isReturn(orderId, bookId);
         } catch (DaoException e) {
             throw new ServiceException("Return order error", e);
         }

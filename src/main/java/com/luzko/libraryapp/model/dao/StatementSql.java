@@ -71,6 +71,8 @@ public class StatementSql {
             "INSERT INTO books(title, year, pages, description, number_copies, category_id_fk) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
 
+    public static final String RETURN_BOOK = "UPDATE books SET number_copies = number_copies + 1 WHERE book_id = ?";
+
     //authors query
     public static final String FIND_ALL_AUTHORS =
             "SELECT author_id, author FROM authors";
@@ -91,19 +93,19 @@ public class StatementSql {
 
     //orders query
     public static final String FIND_ALL_ORDERS =
-            "SELECT o.order_id, u.login, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type\n" +
+            "SELECT o.order_id, u.login, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
                     "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
                     "LEFT JOIN books b ON b.book_id = o.book_id_fk " +
                     "WHERE o.enabled = TRUE";
 
     public static final String FIND_NEW_ORDERS =
-            "SELECT o.order_id, u.login, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type\n" +
+            "SELECT o.order_id, u.login, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
                     "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
                     "LEFT JOIN books b ON b.book_id = o.book_id_fk " +
                     "WHERE o.enabled = TRUE AND order_status_id_fk = 1";
 
     public static final String FIND_ORDERS_BY_USER_ID =
-            "SELECT o.order_id, b.title, o.order_date, o.order_status_id_fk status, o.order_types_id_fk type FROM orders o " +
+            "SELECT o.order_id, b.book_id, b.title, o.order_date, o.order_status_id_fk status, o.order_types_id_fk type FROM orders o " +
                     "LEFT JOIN books b on o.book_id_fk = b.book_id " +
                     "WHERE o.enabled = TRUE AND o.user_id_fk LIKE ?";
 
