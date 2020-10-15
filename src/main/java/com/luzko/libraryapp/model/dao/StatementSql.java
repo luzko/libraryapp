@@ -88,6 +88,12 @@ public class StatementSql {
                     "VALUES (?, ?)";
 
     //orders query
+    public static final String FIND_ALL_ORDERS =
+            "SELECT o.order_id, u.login, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type\n" +
+                    "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
+                    "LEFT JOIN books b ON b.book_id = o.book_id_fk " +
+                    "WHERE o.enabled = TRUE";
+
     public static final String FIND_ORDERS_BY_USER_ID =
             "SELECT o.order_id, b.title, o.order_date, o.order_status_id_fk status, o.order_types_id_fk type FROM orders o " +
                     "LEFT JOIN books b on o.book_id_fk = b.book_id " +

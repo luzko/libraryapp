@@ -2,6 +2,8 @@ package com.luzko.libraryapp.model.entity;
 
 import com.luzko.libraryapp.model.builder.UserBuilder;
 
+import java.util.StringJoiner;
+
 public class User extends BaseEntity {
     private Long userId;
     private String login;
@@ -81,5 +83,57 @@ public class User extends BaseEntity {
         this.userStatus = userStatus;
     }
 
-    //TODO equals, hashcode, toString..... now fields change.....
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        User user = (User) o;
+
+        if (userId != null ? !userId.equals(user.userId) : user.userId != null) {
+            return false;
+        }
+        if (login != null ? !login.equals(user.login) : user.login != null) {
+            return false;
+        }
+        if (userRole != user.userRole || name != null ? !name.equals(user.name) : user.name != null) {
+            return false;
+        }
+        if (surname != null ? !surname.equals(user.surname) : user.surname != null) {
+            return false;
+        }
+        if (email != null ? !email.equals(user.email) : user.email != null) {
+            return false;
+        }
+        return userStatus == user.userStatus;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userId != null ? userId.hashCode() : 0;
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (userRole != null ? userRole.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (userStatus != null ? userStatus.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
+                .add("userId=" + userId)
+                .add("login='" + login + "'")
+                .add("userRole=" + userRole)
+                .add("name='" + name + "'")
+                .add("surname='" + surname + "'")
+                .add("email='" + email + "'")
+                .add("userStatus=" + userStatus)
+                .toString();
+    }
 }

@@ -215,6 +215,165 @@
                                     </tbody>
                                 </table>
                             </c:when>
+                            <c:when test="${orderType == 'all'}">
+                                <table class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.user.login"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.book.title"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.date"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.date.return"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.type"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.status"/></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${allOrders}" var="orderItem">
+                                        <tr class="table-success">
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"><c:out
+                                                        value="${orderItem.user.login}"/></span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"><c:out
+                                                        value="${orderItem.book.title}"/></span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"> <c:out
+                                                        value="${orderItem.orderDate}"/></span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"> <c:out
+                                                        value="${orderItem.returnDate}"/></span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"><c:out
+                                                        value="${orderItem.orderType}"/> </span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"><c:out
+                                                        value="${orderItem.orderStatus}"/> </span></h4></div>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </c:when>
+                            <c:when test="${orderType == 'new'}">
+                                <table class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.user.login"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.book.title"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.date"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.type"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.status"/></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${allOrders}" var="orderItem">
+                                        <tr class="table-success">
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"><c:out
+                                                        value="${orderItem.user.login}"/></span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"><c:out
+                                                        value="${orderItem.book.title}"/></span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"> <c:out
+                                                        value="${orderItem.orderDate}"/></span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"><c:out
+                                                        value="${orderItem.orderType}"/> </span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"><c:out
+                                                        value="${orderItem.orderStatus}"/> </span></h4></div>
+                                            </td>
+                                            <form action="${pageContext.request.contextPath}/controller"
+                                                  method="post">
+                                                <input type="hidden" name="command" value=""/>
+                                                <input type="hidden" name="orderId"
+                                                       value="${orderItem.orderId}"/>
+                                                <input type="hidden" name="orderType" value="user"/>
+                                                <th scope="row">
+                                                    <div class="d-flex justify-content-around">
+                                                        <input style="background-color: red; color: white; line-height: 5px;"
+                                                               class="btn btn-outline-success my-2 my-sm-0"
+                                                               type="submit"
+                                                               name="id"
+                                                               value="<fmt:message key="submit.order.approve"/>"/>
+                                                    </div>
+                                                </th>
+                                            </form>
+                                            <form action="${pageContext.request.contextPath}/controller"
+                                                  method="post">
+                                                <input type="hidden" name="command" value=""/>
+                                                <input type="hidden" name="orderId"
+                                                       value="${orderItem.orderId}"/>
+                                                <input type="hidden" name="orderType" value="user"/>
+                                                <th scope="row">
+                                                    <div class="d-flex justify-content-around">
+                                                        <input style="background-color: red; color: white; line-height: 5px;"
+                                                               class="btn btn-outline-success my-2 my-sm-0"
+                                                               type="submit"
+                                                               name="id"
+                                                               value="<fmt:message key="submit.order.deny"/>"/>
+                                                    </div>
+                                                </th>
+                                            </form>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </c:when>
                         </c:choose>
                     </div>
                 </form>

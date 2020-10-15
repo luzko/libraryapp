@@ -27,7 +27,13 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> findAll() throws DaoException {
-        return null;
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ALL_ORDERS)) {
+            ResultSet resultSet = statement.executeQuery();
+            return createOrdersFromResultSet(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException("Find all error", e);
+        }
     }
 
     @Override
@@ -77,6 +83,17 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
+    private List<Order> createOrdersFromResultSet(ResultSet resultSet) throws SQLException {
+        List<Order> orderList = new ArrayList<>();
+        if (resultSet != null) {
+            while (resultSet.next()) {
+                Optional<Order> orderOptional = createOrder(resultSet);
+                orderOptional.ifPresent(orderList::add);
+            }
+        }
+        return orderList;
+    }
+
     private List<Order> createOrdersUserIdFromResultSet(ResultSet resultSet) throws SQLException {
         List<Order> orderList = new ArrayList<>();
         if (resultSet != null) {
@@ -97,6 +114,34 @@ public class OrderDaoImpl implements OrderDao {
             }
         }
         return orderList;
+    }
+
+    private Optional<Order> createOrder(ResultSet resultSet) throws SQLException {
+        BookBuilder bookBuilder = new BookBuilder()
+                .setTitle(resultSet.getString(ColumnName.BOOK_TITLE));
+        Book book = new Book(bookBuilder);
+        UserBuilder userBuilder = new UserBuilder()
+                .setLogin(resultSet.getString(ColumnName.USER_LOGIN));
+        User user = new User(userBuilder);
+        OrderBuilder orderBuilder = new OrderBuilder()
+                .setOrderId(resultSet.getLong(ColumnName.ORDER_ID))
+                .setOrderStatus(OrderStatus.defineOrderStatusById(resultSet.getInt(ColumnName.ORDER_STATUS)))
+                .setOrderType(OrderType.defineOrderTypeById(resultSet.getInt(ColumnName.ORDER_TYPE)))
+                .setOrderDate(DateUtil.defineDateValue(resultSet.getLong(ColumnName.ORDER_DATE)))
+                .setUser(user)
+                .setBook(book);
+        long millisecondsReturn = resultSet.getLong(ColumnName.RETURN_DATE);
+        if (millisecondsReturn != 0) {
+            orderBuilder.setReturnDate(DateUtil.defineDateValue(millisecondsReturn));
+        } else {
+            orderBuilder.setReturnDate("-");
+        }
+        Order order = new Order(orderBuilder);
+        Optional<Order> orderOptional = Optional.empty();
+        if (order.getOrderStatus() != null && order.getOrderType() != null) {
+            orderOptional = Optional.of(order);
+        }
+        return orderOptional;
     }
 
     private Optional<Order> createOrderUserId(ResultSet resultSet) throws SQLException {

@@ -48,24 +48,28 @@ public class OrderPageCommand implements Command {
         Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
         long userId = (long) userIdObject;
         List<Order> orders = orderService.findByUserId(userId);
-        request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
-        router.setPagePath(PagePath.ORDERS);
-        router.setRouterType(RouterType.FORWARD);
+        defineOrdersList(router, orders, request);
     }
 
     private void bookOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
         List<Order> orders = orderService.findByBookId(bookId);
-        request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
-        router.setPagePath(PagePath.ORDERS);
-        router.setRouterType(RouterType.FORWARD);
+        defineOrdersList(router, orders, request);
     }
 
     private void newOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
 
+        //defineOrdersList(router, orders, request);
     }
 
     private void allOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
+        List<Order> orders = orderService.findAll();
+        defineOrdersList(router, orders, request);
+    }
 
+    private void defineOrdersList(Router router, List<Order> orders, HttpServletRequest request) {
+        request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
+        router.setPagePath(PagePath.ORDERS);
+        router.setRouterType(RouterType.FORWARD);
     }
 }

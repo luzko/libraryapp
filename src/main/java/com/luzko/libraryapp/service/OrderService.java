@@ -11,6 +11,8 @@ public interface OrderService {
 
     List<Order> findByBookId(String bookId) throws ServiceException;
 
+    List<Order> findAll() throws ServiceException;
+
     boolean isCancel(String orderId) throws ServiceException;
 
     boolean isReturn(String orderId) throws ServiceException;

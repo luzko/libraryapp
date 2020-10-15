@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderDao.findByUserId(userId);
         } catch (DaoException e) {
-            throw new ServiceException("Find by user id", e);
+            throw new ServiceException("Find by user id error", e);
         }
     }
 
@@ -34,7 +34,18 @@ public class OrderServiceImpl implements OrderService {
             long bookId = Long.parseLong(bookIdString);
             return orderDao.findByBookId(bookId);
         } catch (DaoException e) {
-            throw new ServiceException("Find by user id", e);
+            throw new ServiceException("Find by book id error", e);
+        }
+    }
+
+    @Override
+    public List<Order> findAll() throws ServiceException {
+        logger.log(Level.INFO, "Find all orders execute");
+        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        try {
+            return orderDao.findAll();
+        } catch (DaoException e) {
+            throw new ServiceException("Find all error", e);
         }
     }
 

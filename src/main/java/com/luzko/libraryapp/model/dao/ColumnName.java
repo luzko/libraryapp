@@ -5,7 +5,7 @@ public class ColumnName {
 
     }
 
-    //user
+    //users
     public static final String USER_ID = "user_id";
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
@@ -17,7 +17,7 @@ public class ColumnName {
     public static final String CONFIRM_CODE = "confirm";
     public static final String COUNT = "count";
 
-    //book
+    //books
     public static final String BOOK_ID = "book_id";
     public static final String TITLE = "title";
     public static final String YEAR = "year";
@@ -30,12 +30,12 @@ public class ColumnName {
     public static final String AUTHORS = "authors";
     public static final String BOOK_COUNT = "count";
 
-    //author
+    //authors
     public static final String AUTHOR_ID = "author_id";
     public static final String AUTHOR = "author";
     public static final String AUTHOR_COUNT = "count";
 
-    //order
+    //orders
     public static final String ORDER_ID = "order_id";
     public static final String BOOK_TITLE = "title";
     public static final String USER_LOGIN = "login";
@@ -43,5 +43,4 @@ public class ColumnName {
     public static final String ORDER_DATE = "order_date";
     public static final String ORDER_STATUS = "status";
     public static final String ORDER_TYPE = "type";
-
 }
