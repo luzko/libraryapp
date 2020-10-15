@@ -6,9 +6,8 @@ import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.StatementSql;
 import com.luzko.libraryapp.model.dao.UserDao;
-import com.luzko.libraryapp.model.entity.User;
-import com.luzko.libraryapp.model.entity.UserRole;
-import com.luzko.libraryapp.model.entity.UserStatus;
+import com.luzko.libraryapp.model.entity.*;
+import com.luzko.libraryapp.util.DateUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -144,6 +143,21 @@ public class UserDaoImpl implements UserDao {
             return changeUserAttribute(login, newSurname, StatementSql.CHANGE_USER_SURNAME);
         } catch (SQLException e) {
             throw new DaoException("Change user surname error", e);
+        }
+    }
+
+    @Override
+    public void giveBooksFromReadingRoom(long userId) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.GIVE_ALL_BOOK)) {
+            statement.setInt(1, OrderStatus.RETURNED.defineId());
+            statement.setLong(2, DateUtil.defineCountMillisecondsFromNow());
+            statement.setLong(3, userId);
+            statement.setInt(4, OrderStatus.APPROVED.defineId());
+            statement.setInt(5, OrderType.READING_ROOM.defineId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Change user status error", e);
         }
     }
 

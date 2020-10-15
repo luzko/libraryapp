@@ -129,5 +129,9 @@ public class StatementSql {
 
     public static final String CREATE_ORDER =
             "INSERT INTO orders (user_id_fk, book_id_fk, order_types_id_fk, order_date) VALUES (?, ?, ?, ?)";
+
+    public static final String GIVE_ALL_BOOK =
+            "UPDATE orders SET order_status_id_fk = ?, return_date = ? WHERE user_id_fk LIKE ? " +
+                    "AND order_status_id_fk LIKE ? AND order_types_id_fk LIKE ?";
 }
 

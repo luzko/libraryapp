@@ -23,4 +23,6 @@ public interface UserDao extends BaseDao<User> {
     boolean changeUserName(String login, String newName) throws DaoException;
 
     boolean changeUserSurname(String login, String newSurname) throws DaoException;
+
+    void giveBooksFromReadingRoom(long userId) throws DaoException;
 }

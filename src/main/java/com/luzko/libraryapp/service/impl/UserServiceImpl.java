@@ -91,8 +91,6 @@ public class UserServiceImpl implements UserService {
         return isRegistered;
     }
 
-
-
     @Override
     public List<User> findAll() throws ServiceException {
         logger.log(Level.INFO, "Find all execute");
@@ -205,5 +203,16 @@ public class UserServiceImpl implements UserService {
             }
         }
         return isUserSurnameChange;
+    }
+
+    @Override
+    public void giveBooksFromReadingRoom(long userId) throws ServiceException {
+        logger.log(Level.INFO, "Give book from reading room execute: {}", userId);
+        UserDao userDao = DaoFactory.getInstance().getUserDAO();
+        try {
+            userDao.giveBooksFromReadingRoom(userId);
+        } catch (DaoException e) {
+            throw new ServiceException("Give all book error", e);
+        }
     }
 }

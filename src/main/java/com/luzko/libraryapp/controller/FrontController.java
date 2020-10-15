@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @WebServlet(urlPatterns = {"/controller/*"})
-public class LibraryController extends HttpServlet {
+public class FrontController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
