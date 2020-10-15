@@ -346,6 +346,7 @@
                                                 <input type="hidden" name="orderType" value="new"/>
                                                 <input type="hidden" name="book_id"
                                                        value="${orderItem.book.bookId}"/>
+                                                <input type="hidden" name="userId" value="${orderItem.user.userId}">
                                                 <th scope="row">
                                                     <div class="d-flex justify-content-around">
                                                         <input style="background-color: green; color: white; line-height: 5px;"

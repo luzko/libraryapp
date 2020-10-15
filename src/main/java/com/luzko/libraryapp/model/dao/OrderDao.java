@@ -21,4 +21,6 @@ public interface OrderDao extends BaseDao<Order> {
     boolean isReturn(long orderId, long bookId) throws DaoException;
 
     boolean isDeny(long orderId) throws DaoException;
+
+    boolean isApprove(long orderId, long bookId, long userId) throws DaoException;
 }

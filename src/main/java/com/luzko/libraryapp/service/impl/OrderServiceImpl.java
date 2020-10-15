@@ -113,4 +113,18 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException("Return order error", e);
         }
     }
+
+    @Override
+    public boolean isApprove(String orderIdString, String bookIdString, String userIdString) throws ServiceException {
+        logger.log(Level.INFO, "Approve order execute");
+        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        long orderId = Long.parseLong(orderIdString);
+        long bookId = Long.parseLong(bookIdString);
+        long userId = Long.parseLong(userIdString);
+        try {
+            return orderDao.isApprove(orderId, bookId, userId);
+        } catch (DaoException e) {
+            throw new ServiceException("Approve order error", e);
+        }
+    }
 }

@@ -95,7 +95,35 @@ public class OrderDaoImpl implements OrderDao {
             return isReturnBook;
         } catch (SQLException e) {
             connectionsRollback(connection);
-            throw new DaoException("Order create error", e);
+            throw new DaoException("Order return error", e);
+        } finally {
+            connectionSetAutoCommit(connection, true);
+            closeConnection(connection);
+        }
+    }
+
+    @Override
+    public boolean isApprove(long orderId, long bookId, long userId) throws DaoException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        boolean isApproveBook = false;
+        try (PreparedStatement statementCountBook = connection.prepareStatement(StatementSql.COUNT_BOOK_BY_ID);
+             PreparedStatement statementCountOrders = connection.prepareStatement(StatementSql.COUNT_ORDERS_BY_ID);
+             PreparedStatement statementApproveBook = connection.prepareStatement(StatementSql.APPROVE_BOOK);
+             PreparedStatement statementApproveOrder = connection.prepareStatement(StatementSql.CHANGE_STATUS_ORDER)) {
+            connectionSetAutoCommit(connection, false);
+            int countBookById = countBookById(statementCountBook, bookId);
+            int countOrderByUser = countOrderByUser(statementCountOrders, userId);
+            if (countBookById > 0 && countOrderByUser < MAX_COUNT_NEW_ORDER) {
+                if (isChangeOrderStatus(statementApproveOrder, orderId, OrderStatus.APPROVED.defineId())) {
+                    statementApproveBook.setLong(1, bookId);
+                    isApproveBook = statementApproveBook.executeUpdate() == 1;
+                }
+            }
+            connectionCommitChanges(connection);
+            return isApproveBook;
+        } catch (SQLException e) {
+            connectionsRollback(connection);
+            throw new DaoException("Order Approve error", e);
         } finally {
             connectionSetAutoCommit(connection, true);
             closeConnection(connection);
@@ -130,7 +158,6 @@ public class OrderDaoImpl implements OrderDao {
             closeConnection(connection);
         }
     }
-
 
     private int countBookById(PreparedStatement statement, long bookId) throws SQLException {
         statement.setLong(1, bookId);
@@ -214,9 +241,11 @@ public class OrderDaoImpl implements OrderDao {
 
     private OrderBuilder createBaseOrder(ResultSet resultSet) throws SQLException {
         BookBuilder bookBuilder = new BookBuilder()
+                .setBookId(resultSet.getLong(ColumnName.BOOK_ID))
                 .setTitle(resultSet.getString(ColumnName.BOOK_TITLE));
         Book book = new Book(bookBuilder);
         UserBuilder userBuilder = new UserBuilder()
+                .setUserId(resultSet.getLong(ColumnName.USER_ID))
                 .setLogin(resultSet.getString(ColumnName.USER_LOGIN));
         User user = new User(userBuilder);
         return new OrderBuilder()
@@ -249,14 +278,23 @@ public class OrderDaoImpl implements OrderDao {
         return statement.executeUpdate() == 1;
     }
 
+    private boolean isOrderApprove(PreparedStatement statement, long orderId) throws SQLException {
+        statement.setLong(1, orderId);
+        return statement.executeUpdate() == 1;
+    }
+
     private boolean isChangeStatus(long orderId, int status) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.CHANGE_STATUS_ORDER)) {
-            statement.setInt(1, status);
-            statement.setLong(2, orderId);
-            return statement.executeUpdate() == 1;
+            return isChangeOrderStatus(statement, orderId, status);
         } catch (SQLException e) {
             throw new DaoException("Cancel order error", e);
         }
+    }
+
+    private boolean isChangeOrderStatus(PreparedStatement statement, long orderId, int status) throws SQLException {
+        statement.setInt(1, status);
+        statement.setLong(2, orderId);
+        return statement.executeUpdate() == 1;
     }
 }

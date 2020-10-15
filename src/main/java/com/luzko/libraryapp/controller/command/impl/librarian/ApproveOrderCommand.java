@@ -26,15 +26,9 @@ public class ApproveOrderCommand implements Command {
         String orderType = request.getParameter(RequestParameter.ORDER_TYPE);
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
-
-        System.out.println(1111);
-        System.out.println(orderId);
-        System.out.println(2222);
-        System.out.println(bookId);
-        System.out.println(3333);
-
-        /*try {
-            if (orderService.isApprove(orderId, bookId)) {
+        String userId = request.getParameter(RequestParameter.USER_ID);
+        try {
+            if (orderService.isApprove(orderId, bookId, userId)) {
                 List<Order> orders = orderService.findNew();
                 request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
                 request.setAttribute(RequestParameter.ORDER_TYPE, orderType);
@@ -47,7 +41,7 @@ public class ApproveOrderCommand implements Command {
             logger.log(Level.ERROR, "Error in deny order", e);
             router.setPagePath(PagePath.ERROR);
             router.setRouterType(RouterType.FORWARD);
-        }*/
+        }
         return router;
     }
 }

@@ -71,7 +71,11 @@ public class StatementSql {
             "INSERT INTO books(title, year, pages, description, number_copies, category_id_fk) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
 
-    public static final String RETURN_BOOK = "UPDATE books SET number_copies = number_copies + 1 WHERE book_id = ?";
+    public static final String RETURN_BOOK =
+            "UPDATE books SET number_copies = number_copies + 1 WHERE book_id = ?";
+
+    public static final String APPROVE_BOOK =
+            "UPDATE books SET number_copies = number_copies - 1 WHERE book_id = ?";
 
     //authors query
     public static final String FIND_ALL_AUTHORS =
@@ -93,13 +97,13 @@ public class StatementSql {
 
     //orders query
     public static final String FIND_ALL_ORDERS =
-            "SELECT o.order_id, u.login, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
+            "SELECT o.order_id, u.user_id, u.login, b.book_id, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
                     "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
                     "LEFT JOIN books b ON b.book_id = o.book_id_fk " +
                     "WHERE o.enabled = TRUE";
 
     public static final String FIND_NEW_ORDERS =
-            "SELECT o.order_id, u.login, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
+            "SELECT o.order_id, u.user_id, u.login, b.book_id, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
                     "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
                     "LEFT JOIN books b ON b.book_id = o.book_id_fk " +
                     "WHERE o.enabled = TRUE AND order_status_id_fk = 1";
