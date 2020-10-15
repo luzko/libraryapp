@@ -108,7 +108,7 @@ CREATE TABLE orders
 	order_id     INT UNSIGNED AUTO_INCREMENT NOT NULL,
     user_id_fk 	 INT UNSIGNED 				 NOT NULL,
     book_id_fk   INT UNSIGNED 			     NOT NULL,
-    order_status_id_fk TINYINT UNSIGNED 	 NOT NULL,
+    order_status_id_fk TINYINT UNSIGNED 	 NOT NULL DEFAULT 1,
     order_types_id_fk TINYINT UNSIGNED NOT NULL,
     order_date 	 BIGINT  		 			 NOT NULL,
     return_date  BIGINT  		 			 NULL DEFAULT NULL,

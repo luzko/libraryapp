@@ -65,6 +65,8 @@ public class StatementSql {
     public static final String FIND_BOOK_BY_PARAMETER =
             "SELECT book_id FROM books WHERE title LIKE ? AND year LIKE ? AND page LIKE ?";
 
+    public static final String COUNT_BOOK_BY_ID = "SELECT number_copies FROM books WHERE book_id = ?";
+
     public static final String ADD_BOOK =
             "INSERT INTO books(title, year, pages, description, number_copies, category_id_fk) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
@@ -115,5 +117,11 @@ public class StatementSql {
 
     public static final String RETURN_ORDER =
             "UPDATE orders SET order_status_id_fk = 5, return_date = ? WHERE order_id LIKE ?";
+
+    public static final String COUNT_ORDERS_BY_ID =
+            "SELECT count(order_id) as count FROM orders WHERE user_id_fk LIKE ? AND order_status_id_fk = 2";
+
+    public static final String CREATE_ORDER =
+            "INSERT INTO orders (user_id_fk, book_id_fk, order_types_id_fk, order_date) VALUES (?, ?, ?, ?)";
 }
 

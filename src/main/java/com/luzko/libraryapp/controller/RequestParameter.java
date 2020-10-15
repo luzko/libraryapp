@@ -83,6 +83,9 @@ public class RequestParameter {
 
     //order
     public static final String ORDER_TYPE = "orderType";
+    public static final String CREATE_ORDER_TYPE = "typeCreateOrder";
+    public static final String TYPE_HOME = "home";
+    public static final String TYPE_ROOM = "room";
     public static final String USER_ORDER = "user";
     public static final String BOOK_ORDER = "book";
     public static final String NEW_ORDER = "new";

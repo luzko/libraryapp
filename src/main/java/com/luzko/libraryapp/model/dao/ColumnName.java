@@ -43,4 +43,10 @@ public class ColumnName {
     public static final String ORDER_DATE = "order_date";
     public static final String ORDER_STATUS = "status";
     public static final String ORDER_TYPE = "type";
+
+    //orders views
+    public static final String BOOK = "book";
+    public static final String USER = "user";
+    public static final String NEW = "new";
+    public static final String ALL = "all";
 }

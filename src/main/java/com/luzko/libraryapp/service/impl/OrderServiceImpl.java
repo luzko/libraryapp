@@ -1,10 +1,12 @@
 package com.luzko.libraryapp.service.impl;
 
+import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.DaoFactory;
 import com.luzko.libraryapp.model.dao.OrderDao;
 import com.luzko.libraryapp.model.entity.Order;
+import com.luzko.libraryapp.model.entity.OrderType;
 import com.luzko.libraryapp.service.OrderService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -57,6 +59,20 @@ public class OrderServiceImpl implements OrderService {
             return orderDao.findNew();
         } catch (DaoException e) {
             throw new ServiceException("Find new error", e);
+        }
+    }
+
+    @Override
+    public boolean isCreateOrder(long userId, String bookIdString, String orderTypeString) throws ServiceException {
+        logger.log(Level.INFO, "Create order execute");
+        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        long bookId = Long.parseLong(bookIdString);
+        try {
+            OrderType orderType = orderTypeString.equals(RequestParameter.TYPE_HOME) ?
+                    OrderType.HOME : OrderType.READING_ROOM;
+            return orderDao.isCreateOrder(userId, bookId, orderType);
+        } catch (DaoException e) {
+            throw new ServiceException("Create order error", e);
         }
     }
 

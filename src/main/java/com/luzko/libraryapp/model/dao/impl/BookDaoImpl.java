@@ -59,19 +59,10 @@ public class BookDaoImpl implements BookDao {
     public boolean add(Book book, long authorId) throws DaoException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         boolean isBookAdd = false;
-
         try (PreparedStatement statementBook = connection.prepareStatement(StatementSql.ADD_BOOK, Statement.RETURN_GENERATED_KEYS);
              PreparedStatement statementBookAuthors = connection.prepareStatement(StatementSql.ADD_BOOK_AUTHORS)) {
             connectionSetAutoCommit(connection, false);
-
-            statementBook.setString(1, book.getTitle());
-            statementBook.setInt(2, book.getYear());
-            statementBook.setInt(3, book.getPage());
-            statementBook.setString(4, book.getDescription());
-            statementBook.setInt(5, book.getNumberCopy());
-            statementBook.setInt(6, book.getCategory().defineId());
-
-            if (statementBook.executeUpdate() == 1) {
+            if (countBook(statementBook, book) == 1) {
                 ResultSet generatedKey = statementBook.getGeneratedKeys();
                 generatedKey.next();
                 long bookId = generatedKey.getLong(1);
@@ -79,7 +70,6 @@ public class BookDaoImpl implements BookDao {
                 statementBookAuthors.setLong(2, authorId);
                 isBookAdd = statementBookAuthors.executeUpdate() > 0;
             }
-
             connectionCommitChanges(connection);
             return isBookAdd;
         } catch (SQLException e) {
@@ -89,6 +79,16 @@ public class BookDaoImpl implements BookDao {
             connectionSetAutoCommit(connection, true);
             closeConnection(connection);
         }
+    }
+
+    private int countBook(PreparedStatement statementBook, Book book) throws SQLException {
+        statementBook.setString(1, book.getTitle());
+        statementBook.setInt(2, book.getYear());
+        statementBook.setInt(3, book.getPage());
+        statementBook.setString(4, book.getDescription());
+        statementBook.setInt(5, book.getNumberCopy());
+        statementBook.setInt(6, book.getCategory().defineId());
+        return statementBook.executeUpdate();
     }
 
     private List<Book> createBooksFromResultSet(ResultSet resultSet) throws SQLException {

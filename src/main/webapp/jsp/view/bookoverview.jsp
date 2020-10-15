@@ -76,7 +76,6 @@
     <div class="masthead3">
         <div class="container  align-items-center">
             <div class="row justify-content-center no-gutters">
-
                 <div style="margin-top: 100px">
                     <h1 style="color: #9fcdff">${book.title}</h1>
                 </div>
@@ -124,7 +123,9 @@
                         <div class="text-right">
                             <form class="form-inline" method="POST"
                                   action="${pageContext.request.contextPath}/controller">
-                                <input type="hidden" name="command" value="reading_room_order"/>
+                                <input type="hidden" name="book_id" value="${book.bookId}"/>
+                                <input type="hidden" name="typeCreateOrder" value="room">
+                                <input type="hidden" name="command" value="create_order"/>
                                 <div>
                                     <button type="submit"
                                             class="btn btn-primary js-scroll-trigger custom-button"
@@ -137,7 +138,9 @@
                         <div class="text-right" style="margin-left: 100px;">
                             <form class="form-inline" method="POST"
                                   action="${pageContext.request.contextPath}/controller">
-                                <input type="hidden" name="command" value="home_order"/>
+                                <input type="hidden" name="book_id" value="${book.bookId}"/>
+                                <input type="hidden" name="typeCreateOrder" value="home">
+                                <input type="hidden" name="command" value="create_order"/>
                                 <div>
                                     <button type="submit"
                                             class="btn btn-primary js-scroll-trigger custom-button"
@@ -165,14 +168,19 @@
                         </div>
                     </c:when>
                 </c:choose>
+                <br/>
+                <br/>
+                <div style="color: red;">
+
+                </div>
+                <div style="color: green;">
+
+                </div>
             </div>
         </div>
     </div>
 
-    </div>
-    </div>
-    </div>
-    </div>
+
 </section>
 
 <%--<ctg:end-page/>--%>

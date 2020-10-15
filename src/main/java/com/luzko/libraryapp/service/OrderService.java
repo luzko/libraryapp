@@ -15,6 +15,8 @@ public interface OrderService {
 
     List<Order> findNew() throws ServiceException;
 
+    boolean isCreateOrder(long userId, String bookId, String typeOrder) throws ServiceException;
+
     boolean isCancel(String orderId) throws ServiceException;
 
     boolean isReturn(String orderId) throws ServiceException;
