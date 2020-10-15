@@ -156,8 +156,64 @@
                                     </tbody>
                                 </table>
                             </c:when>
-                            <c:when test="${orderType == '---'}">
-
+                            <c:when test="${orderType == 'book'}">
+                                <table class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.user.login"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.date"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.date.return"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.type"/></div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="d-flex justify-content-around"><fmt:message
+                                                    key="submit.order.status"/></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${allOrders}" var="orderItem">
+                                        <tr class="table-success">
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"><c:out
+                                                        value="${orderItem.user.login}"/></span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"> <c:out
+                                                        value="${orderItem.orderDate}"/></span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"> <c:out
+                                                        value="${orderItem.returnDate}"/></span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"><c:out
+                                                        value="${orderItem.orderType}"/> </span></h4></div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around"><h4><span
+                                                        class="badge badge-outline-primary"><c:out
+                                                        value="${orderItem.orderStatus}"/> </span></h4></div>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
                             </c:when>
                         </c:choose>
                     </div>

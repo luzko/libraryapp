@@ -56,7 +56,6 @@ public class OrderPageCommand implements Command {
     private void bookOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
         List<Order> orders = orderService.findByBookId(bookId);
-        System.out.println(orders); //TODO
         request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
         router.setPagePath(PagePath.ORDERS);
         router.setRouterType(RouterType.FORWARD);

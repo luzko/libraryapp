@@ -126,8 +126,13 @@ public class OrderDaoImpl implements OrderDao {
                 .setOrderStatus(OrderStatus.defineOrderStatusById(resultSet.getInt(ColumnName.ORDER_STATUS)))
                 .setOrderType(OrderType.defineOrderTypeById(resultSet.getInt(ColumnName.ORDER_TYPE)))
                 .setOrderDate(DateUtil.defineDateValue(resultSet.getLong(ColumnName.ORDER_DATE)))
-                .setReturnDate(DateUtil.defineDateValue(resultSet.getLong(ColumnName.RETURN_DATE)))
                 .setUser(user);
+        long millisecondsReturn = resultSet.getLong(ColumnName.RETURN_DATE);
+        if (millisecondsReturn != 0) {
+            orderBuilder.setReturnDate(DateUtil.defineDateValue(millisecondsReturn));
+        } else {
+            orderBuilder.setReturnDate("-");
+        }
         Order order = new Order(orderBuilder);
         Optional<Order> orderOptional = Optional.empty();
         if (order.getOrderStatus() != null && order.getOrderType() != null) {
