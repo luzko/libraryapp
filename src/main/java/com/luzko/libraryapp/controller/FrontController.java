@@ -37,7 +37,6 @@ public class FrontController extends HttpServlet {
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
         Optional<Command> commandOptional = ActionProvider.defineCommand(commandName);
         Router router;
-
         if (commandOptional.isPresent()) {
             router = commandOptional.get().execute(request);
         } else {
