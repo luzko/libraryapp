@@ -9,6 +9,7 @@ import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.Order;
 import com.luzko.libraryapp.service.OrderService;
+import com.luzko.libraryapp.util.ConfigurationManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,13 +30,16 @@ public class ApproveOrderCommand implements Command {
         String userId = request.getParameter(RequestParameter.USER_ID);
         try {
             if (orderService.isApprove(orderId, bookId, userId)) {
-                List<Order> orders = orderService.findNew();
-                request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
-                request.setAttribute(RequestParameter.ORDER_TYPE, orderType);
-                router.setPagePath(PagePath.ORDERS);
+                request.setAttribute(RequestParameter.ERROR_APPROVE,
+                        ConfigurationManager.getMessageProperty(RequestParameter.EMPTY));
             } else {
-                //TODO
+                request.setAttribute(RequestParameter.ERROR_APPROVE,
+                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_NOT_APPROVE_USER));
             }
+            List<Order> orders = orderService.findNew();
+            request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
+            request.setAttribute(RequestParameter.ORDER_TYPE, orderType);
+            router.setPagePath(PagePath.ORDERS);
             router.setRouterType(RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in deny order", e);

@@ -19,6 +19,7 @@ public class RequestParameter {
     public static final String ERROR_LOGIN_PASSWORD_MESSAGE = "errorLoginPasswordMessage";
     public static final String ERROR_DATA_MESSAGE = "errorDataMessage";
     public static final String PARAM_CONFIRM_ERROR = "confirmError";
+    public static final String ERROR_APPROVE = "approveError";
 
     //message error
     public static final String PATH_LOGIN_EXIST = "message.login.exist";
@@ -38,6 +39,7 @@ public class RequestParameter {
     public static final String PATH_BOOK_DATA = "message.book.data";
     public static final String PATH_ORDER_SUCCESS = "order.success";
     public static final String PATH_ORDER_ERROR = "order.error";
+    public static final String PATH_NOT_APPROVE_USER = "order.approve.error";
 
     //user
     public static final String USER_ID = "userId";

@@ -382,7 +382,11 @@
                     </div>
                 </form>
             </div>
-            <br>
+            <br/>
+            <br/>
+            <div style="color: red;">
+                ${approveError}
+            </div>
         </div>
     </div>
 </section>
