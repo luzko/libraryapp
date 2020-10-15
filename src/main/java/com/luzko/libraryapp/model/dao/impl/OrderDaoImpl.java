@@ -156,23 +156,13 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     private Optional<Order> createOrderView(ResultSet resultSet, String typeView) throws SQLException {
-        switch (typeView) {
-            case ColumnName.BOOK -> {
-                return createOrderBookId(resultSet);
-            }
-            case ColumnName.USER -> {
-                return createOrderUserId(resultSet);
-            }
-            case ColumnName.NEW -> {
-                return createNewOrder(resultSet);
-            }
-            case ColumnName.ALL -> {
-                return createOrder(resultSet);
-            }
-            default -> {
-                return Optional.empty();
-            }
-        }
+        return switch (typeView) {
+            case ColumnName.BOOK -> createOrderBookId(resultSet);
+            case ColumnName.USER -> createOrderUserId(resultSet);
+            case ColumnName.NEW -> createNewOrder(resultSet);
+            case ColumnName.ALL -> createOrder(resultSet);
+            default -> Optional.empty();
+        };
     }
 
     private Optional<Order> createOrder(ResultSet resultSet) throws SQLException {

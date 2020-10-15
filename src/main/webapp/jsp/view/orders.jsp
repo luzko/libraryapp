@@ -342,9 +342,10 @@
                                             <form action="${pageContext.request.contextPath}/controller"
                                                   method="post">
                                                 <input type="hidden" name="command" value="approve_order"/>
-                                                <input type="hidden" name="orderId"
-                                                       value="${orderItem.orderId}"/>
+                                                <input type="hidden" name="orderId" value="${orderItem.orderId}"/>
                                                 <input type="hidden" name="orderType" value="new"/>
+                                                <input type="hidden" name="book_id"
+                                                       value="${orderItem.book.bookId}"/>
                                                 <th scope="row">
                                                     <div class="d-flex justify-content-around">
                                                         <input style="background-color: green; color: white; line-height: 5px;"
