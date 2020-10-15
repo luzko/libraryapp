@@ -20,4 +20,6 @@ public interface OrderService {
     boolean isCancel(String orderId) throws ServiceException;
 
     boolean isReturn(String orderId, String bookId) throws ServiceException;
+
+    boolean isDeny(String orderId) throws ServiceException;
 }

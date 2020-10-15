@@ -72,15 +72,15 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public boolean isCancel(long orderId) throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.CANCEL_ORDER)) {
-            statement.setLong(1, orderId);
-            return statement.executeUpdate() == 1;
-        } catch (SQLException e) {
-            throw new DaoException("Cancel order error", e);
-        }
+        return isChangeStatus(orderId, OrderStatus.CANCELED.defineId());
     }
 
+    @Override
+    public boolean isDeny(long orderId) throws DaoException {
+        return isChangeStatus(orderId, OrderStatus.DENIED.defineId());
+    }
+
+    @Override
     public boolean isReturn(long orderId, long bookId) throws DaoException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         boolean isReturnBook = false;
@@ -100,12 +100,6 @@ public class OrderDaoImpl implements OrderDao {
             connectionSetAutoCommit(connection, true);
             closeConnection(connection);
         }
-    }
-
-    private boolean isOrderReturn(PreparedStatement statement, long orderId) throws SQLException {
-        statement.setLong(1, DateUtil.defineCountMillisecondsFromNow());
-        statement.setLong(2, orderId);
-        return statement.executeUpdate() == 1;
     }
 
     @Override
@@ -136,6 +130,7 @@ public class OrderDaoImpl implements OrderDao {
             closeConnection(connection);
         }
     }
+
 
     private int countBookById(PreparedStatement statement, long bookId) throws SQLException {
         statement.setLong(1, bookId);
@@ -256,5 +251,22 @@ public class OrderDaoImpl implements OrderDao {
             orderOptional = Optional.of(order);
         }
         return orderOptional;
+    }
+
+    private boolean isOrderReturn(PreparedStatement statement, long orderId) throws SQLException {
+        statement.setLong(1, DateUtil.defineCountMillisecondsFromNow());
+        statement.setLong(2, orderId);
+        return statement.executeUpdate() == 1;
+    }
+
+    private boolean isChangeStatus(long orderId, int status) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.CHANGE_STATUS_ORDER)) {
+            statement.setInt(1, status);
+            statement.setLong(2, orderId);
+            return statement.executeUpdate() == 1;
+        } catch (SQLException e) {
+            throw new DaoException("Cancel order error", e);
+        }
     }
 }

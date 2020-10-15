@@ -114,8 +114,8 @@ public class StatementSql {
                     "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
                     "WHERE o.enabled = TRUE AND o.book_id_fk LIKE ?";
 
-    public static final String CANCEL_ORDER =
-            "UPDATE orders SET order_status_id_fk = 4 WHERE order_id LIKE ?";
+    public static final String CHANGE_STATUS_ORDER =
+            "UPDATE orders SET order_status_id_fk = ? WHERE order_id LIKE ?";
 
     public static final String RETURN_ORDER =
             "UPDATE orders SET order_status_id_fk = 5, return_date = ? WHERE order_id LIKE ?";
