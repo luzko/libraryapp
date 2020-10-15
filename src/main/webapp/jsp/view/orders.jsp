@@ -341,7 +341,7 @@
                                             </td>
                                             <form action="${pageContext.request.contextPath}/controller"
                                                   method="post">
-                                                <input type="hidden" name="command" value=""/>
+                                                <input type="hidden" name="command" value="approve_order"/>
                                                 <input type="hidden" name="orderId"
                                                        value="${orderItem.orderId}"/>
                                                 <input type="hidden" name="orderType" value="user"/>
@@ -357,7 +357,7 @@
                                             </form>
                                             <form action="${pageContext.request.contextPath}/controller"
                                                   method="post">
-                                                <input type="hidden" name="command" value=""/>
+                                                <input type="hidden" name="command" value="deny_order"/>
                                                 <input type="hidden" name="orderId"
                                                        value="${orderItem.orderId}"/>
                                                 <input type="hidden" name="orderType" value="user"/>

@@ -4,6 +4,8 @@ import com.luzko.libraryapp.controller.command.impl.admin.ChangeUserStatusComman
 import com.luzko.libraryapp.controller.command.impl.admin.CreateAuthorCommand;
 import com.luzko.libraryapp.controller.command.impl.admin.CreateBookCommand;
 import com.luzko.libraryapp.controller.command.impl.admin.CreateLibrarianCommand;
+import com.luzko.libraryapp.controller.command.impl.librarian.ApproveOrderCommand;
+import com.luzko.libraryapp.controller.command.impl.librarian.DenyOrderCommand;
 import com.luzko.libraryapp.controller.command.impl.page.*;
 import com.luzko.libraryapp.controller.command.impl.reader.CancelOrderCommand;
 import com.luzko.libraryapp.controller.command.impl.reader.CreateOrderCommand;
@@ -36,7 +38,9 @@ public enum CommandType {
     CREATE_BOOK(new CreateBookCommand()),
     CREATE_ORDER(new CreateOrderCommand()),
     CANCEL_ORDER(new CancelOrderCommand()),
-    RETURN_ORDER(new ReturnOrderCommand());
+    RETURN_ORDER(new ReturnOrderCommand()),
+    APPROVE_ORDER(new ApproveOrderCommand()),
+    DENY_ORDER(new DenyOrderCommand());
 
     private final Command command;
 
