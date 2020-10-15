@@ -8,6 +8,7 @@ import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.ServiceFactory;
 import com.luzko.libraryapp.service.OrderService;
+import com.luzko.libraryapp.util.ConfigurationManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,10 +28,16 @@ public class CreateOrderCommand implements Command {
         long userId = (long) userIdObject;
         try {
             if (orderService.isCreateOrder(userId, bookId, typeOrder)) {
-
+                request.getSession().setAttribute(RequestParameter.ORDER_ERROR, RequestParameter.EMPTY);
+                request.getSession().setAttribute(RequestParameter.ORDER_SUCCESS,
+                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_SUCCESS));
             } else {
-
+                request.getSession().setAttribute(RequestParameter.ORDER_SUCCESS, RequestParameter.EMPTY);
+                request.getSession().setAttribute(RequestParameter.ORDER_ERROR,
+                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_ERROR));
             }
+            router.setPagePath(PagePath.BOOK_OVERVIEW);
+            router.setRouterType(RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error create order", e);
             router.setPagePath(PagePath.ERROR);

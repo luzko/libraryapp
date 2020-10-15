@@ -168,14 +168,14 @@
                         </div>
                     </c:when>
                 </c:choose>
-                <br/>
-                <br/>
-                <div style="color: red;">
-
-                </div>
-                <div style="color: green;">
-
-                </div>
+            </div>
+            <br/>
+            <br/>
+            <div style="color: red;">
+                ${orderError}
+            </div>
+            <div style="color: green;">
+                ${orderSuccess}
             </div>
         </div>
     </div>

@@ -36,6 +36,8 @@ public class RequestParameter {
     public static final String PATH_AUTHOR_CORRECT = "message.author.correct";
     public static final String PATH_BOOK_CORRECT = "message.book.correct";
     public static final String PATH_BOOK_DATA = "message.book.data";
+    public static final String PATH_ORDER_SUCCESS = "order.success";
+    public static final String PATH_ORDER_ERROR = "order.error";
 
     //user
     public static final String USER_ID = "userId";
@@ -92,4 +94,6 @@ public class RequestParameter {
     public static final String ALL_ORDER = "all";
     public static final String ALL_ORDERS = "allOrders";
     public static final String ORDER_ID = "orderId";
+    public static final String ORDER_ERROR = "orderError";
+    public static final String ORDER_SUCCESS = "orderSuccess";
 }
