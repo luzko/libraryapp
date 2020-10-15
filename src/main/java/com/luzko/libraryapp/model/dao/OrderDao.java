@@ -11,6 +11,8 @@ public interface OrderDao extends BaseDao<Order> {
 
     List<Order> findByBookId(long bookId) throws DaoException;
 
+    List<Order> findNew() throws DaoException;
+
     boolean isCancel(long orderId) throws DaoException;
 
     boolean isReturn(long orderId) throws DaoException;

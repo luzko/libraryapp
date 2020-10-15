@@ -58,8 +58,8 @@ public class OrderPageCommand implements Command {
     }
 
     private void newOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
-
-        //defineOrdersList(router, orders, request);
+        List<Order> orders = orderService.findNew();
+        defineOrdersList(router, orders, request);
     }
 
     private void allOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {

@@ -50,6 +50,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> findNew() throws ServiceException {
+        logger.log(Level.INFO, "Find new orders execute");
+        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        try {
+            return orderDao.findNew();
+        } catch (DaoException e) {
+            throw new ServiceException("Find new error", e);
+        }
+    }
+
+    @Override
     public boolean isCancel(String orderIdString) throws ServiceException {
         logger.log(Level.INFO, "Cancel order execute");
         OrderDao orderDao = DaoFactory.getInstance().getOrderDao();

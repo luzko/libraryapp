@@ -13,6 +13,8 @@ public interface OrderService {
 
     List<Order> findAll() throws ServiceException;
 
+    List<Order> findNew() throws ServiceException;
+
     boolean isCancel(String orderId) throws ServiceException;
 
     boolean isReturn(String orderId) throws ServiceException;
