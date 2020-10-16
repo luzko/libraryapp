@@ -4,9 +4,9 @@ import com.luzko.libraryapp.model.dao.ColumnName;
 
 import java.util.Map;
 
-public class BookValidator {
+public final class BookValidator {
     private static final int minYear = 1000;
-    private static final int maxYear = 2020;
+    private static final int maxYear = getCurrentYear();
     private static final int minPages = 10;
     private static final int maxPages = 9999;
     private static final int minNumber = 1;
@@ -16,7 +16,11 @@ public class BookValidator {
     private static final String TITLE_PATTERN = "^[\\p{L} ]{5,25}$";
     private static final String DESCRIPTION_PATTERN = "^[\\p{L} ]{5,150}$";
 
-    public boolean isValidBookParameter(Map<String, String> bookParameter) {
+    private BookValidator() {
+
+    }
+
+    public static boolean isValidBookParameter(Map<String, String> bookParameter) {
         boolean isValidParameter = true;
         if (!isValidTitle(bookParameter.get(ColumnName.TITLE))) {
             isValidParameter = false;
@@ -42,7 +46,7 @@ public class BookValidator {
         return isValidParameter;
     }
 
-    public boolean isValidAuthorName(String name) {
+    public static boolean isValidAuthorName(String name) {
         boolean isNameCorrect = false;
         if (name != null && !name.isEmpty()) {
             isNameCorrect = name.matches(NAME_PATTERN);
@@ -50,7 +54,7 @@ public class BookValidator {
         return isNameCorrect;
     }
 
-    public boolean isValidTitle(String title) {
+    public static boolean isValidTitle(String title) {
         boolean isTitleCorrect = false;
         if (title != null && !title.isEmpty()) {
             isTitleCorrect = title.matches(TITLE_PATTERN);
@@ -58,7 +62,7 @@ public class BookValidator {
         return isTitleCorrect;
     }
 
-    private boolean isValidDescription(String description) {
+    private static boolean isValidDescription(String description) {
         boolean isDescriptionCorrect = false;
         if (description != null && !description.isEmpty()) {
             isDescriptionCorrect = description.matches(DESCRIPTION_PATTERN);
@@ -66,15 +70,21 @@ public class BookValidator {
         return isDescriptionCorrect;
     }
 
-    public boolean isYearValid(int year) {
+    public static boolean isYearValid(int year) {
         return year >= minYear && year <= maxYear;
     }
 
-    public boolean isPagesValid(int pages) {
+    public static boolean isPagesValid(int pages) {
         return pages >= minPages && pages <= maxPages;
     }
 
-    private boolean isNumberCopiesValid(int numberCopies) {
+    private static boolean isNumberCopiesValid(int numberCopies) {
         return numberCopies >= minNumber && numberCopies <= maxNumber;
+    }
+
+    private static int getCurrentYear() {
+        java.util.Calendar calendar = java.util.Calendar.getInstance(java.util.TimeZone.getDefault(), java.util.Locale.getDefault());
+        calendar.setTime(new java.util.Date());
+        return calendar.get(java.util.Calendar.YEAR);
     }
 }
