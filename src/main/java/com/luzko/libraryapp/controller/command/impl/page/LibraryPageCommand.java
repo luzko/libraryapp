@@ -23,9 +23,14 @@ public class LibraryPageCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         BookService bookService = ServiceFactory.getInstance().getBookService();
-
+        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
+        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
+        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
         try {
             List<Book> books = bookService.findAll();
+            definePagination(request, books.size(), currentPage, recordsPerPage);
+            int recordsView = (currentPage - 1) * recordsPerPage;
+            books = books.subList(recordsView, Math.min(recordsView + recordsPerPage, books.size()));
             request.getSession().setAttribute(RequestParameter.ALL_BOOKS, books);
             router.setPagePath(PagePath.LIBRARY);
             router.setRouterType(RouterType.FORWARD);

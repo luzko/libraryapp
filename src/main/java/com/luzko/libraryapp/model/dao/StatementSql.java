@@ -50,7 +50,7 @@ public class StatementSql {
                     "GROUP_CONCAT(DISTINCT a.author ORDER BY a.author SEPARATOR ', ') authors FROM books b " +
                     "LEFT JOIN book_authors ba on b.book_id = ba.book_id_fk " +
                     "LEFT JOIN authors a on a.author_id = ba.author_id_fk " +
-                    "WHERE b.enabled = TRUE GROUP BY b.book_id";
+                    "WHERE b.enabled = TRUE GROUP BY b.book_id ORDER BY title";
 
     public static final String FIND_BOOK_BY_ID =
             "SELECT b.book_id, b.title, b.year, b.pages, b.description, b.number_copies, b.category_id_fk, " +

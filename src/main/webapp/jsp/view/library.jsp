@@ -181,6 +181,65 @@
                             </c:forEach>
                             </tbody>
                         </table>
+                        <div style="margin-left: 350px; margin-right: 350px;">
+                            <ul class="pagination">
+                                <c:if test="${currentPage != 1}">
+                                    <li class="page-item">
+                                        <form class="form-inline" method="POST"
+                                              action="${pageContext.request.contextPath}/controller">
+                                            <input type="hidden" name="command" value="library_page"/>
+                                            <input type="hidden" name="currentPage" value="${currentPage-1}"/>
+                                            <div>
+                                                <button type="submit"
+                                                        class="btn btn-primary js-scroll-trigger">
+                                                    <
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </li>
+                                </c:if>
+                                <c:forEach begin="1" end="${countPage}" var="i">
+                                    <c:choose>
+                                        <c:when test="${currentPage eq i}">
+                                            <li class="page-item active">
+                                                <a class="page-link">${i}</a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item">
+                                                <form class="form-inline" method="POST"
+                                                      action="${pageContext.request.contextPath}/controller">
+                                                    <input type="hidden" name="command" value="library_page"/>
+                                                    <input type="hidden" name="currentPage" value="${i}"/>
+                                                    <div>
+                                                        <button type="submit"
+                                                                class="btn btn-primary js-scroll-trigger">
+                                                                ${i}
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+
+                                <c:if test="${currentPage lt countPage}">
+                                    <li class="page-item">
+                                        <form class="form-inline" method="POST"
+                                              action="${pageContext.request.contextPath}/controller">
+                                            <input type="hidden" name="command" value="library_page"/>
+                                            <input type="hidden" name="currentPage" value="${currentPage+1}"/>
+                                            <div>
+                                                <button type="submit"
+                                                        class="btn btn-primary js-scroll-trigger">
+                                                    >
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </div>
                     </div>
                 </form>
             </div>
