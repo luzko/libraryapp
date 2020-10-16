@@ -206,11 +206,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void giveBooksFromReadingRoom(long userId) throws ServiceException {
-        logger.log(Level.INFO, "Give book from reading room execute: {}", userId);
+    public void giveBooksFromReadingRoom(Object userIdObject, Object userRoleObject) throws ServiceException {
+        logger.log(Level.INFO, "Give book from reading room execute: {}", userIdObject);
         UserDao userDao = DaoFactory.getInstance().getUserDAO();
+        long userId = (long) userIdObject;
+        UserRole userRole = (UserRole) userRoleObject;
         try {
-            userDao.giveBooksFromReadingRoom(userId);
+            if (userRole.equals(UserRole.READER)) {
+                userDao.giveBooksFromReadingRoom(userId);
+            }
         } catch (DaoException e) {
             throw new ServiceException("Give all book error", e);
         }

@@ -100,23 +100,23 @@ public class StatementSql {
             "SELECT o.order_id, u.user_id, u.login, b.book_id, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
                     "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
                     "LEFT JOIN books b ON b.book_id = o.book_id_fk " +
-                    "WHERE o.enabled = TRUE";
+                    "WHERE o.enabled = TRUE ORDER BY order_date DESC";
 
     public static final String FIND_NEW_ORDERS =
             "SELECT o.order_id, u.user_id, u.login, b.book_id, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
                     "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
                     "LEFT JOIN books b ON b.book_id = o.book_id_fk " +
-                    "WHERE o.enabled = TRUE AND order_status_id_fk = 1";
+                    "WHERE o.enabled = TRUE AND order_status_id_fk = 1 ORDER BY order_date";
 
     public static final String FIND_ORDERS_BY_USER_ID =
             "SELECT o.order_id, b.book_id, b.title, o.order_date, o.order_status_id_fk status, o.order_types_id_fk type FROM orders o " +
                     "LEFT JOIN books b on o.book_id_fk = b.book_id " +
-                    "WHERE o.enabled = TRUE AND o.user_id_fk LIKE ?";
+                    "WHERE o.enabled = TRUE AND o.user_id_fk LIKE ? ORDER BY order_date DESC";
 
     public static final String FIND_ORDER_BY_BOOK_ID =
             "SELECT o.order_id, u.login, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
                     "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
-                    "WHERE o.enabled = TRUE AND o.book_id_fk LIKE ?";
+                    "WHERE o.enabled = TRUE AND o.book_id_fk LIKE ? ORDER BY order_date DESC";
 
     public static final String CHANGE_STATUS_ORDER =
             "UPDATE orders SET order_status_id_fk = ? WHERE order_id LIKE ?";

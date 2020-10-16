@@ -29,5 +29,5 @@ public interface UserService {
 
     boolean isUserSurnameChange(String login, String newSurname) throws ServiceException;
 
-    void giveBooksFromReadingRoom(long userId) throws ServiceException;
+    void giveBooksFromReadingRoom(Object userId, Object userRole) throws ServiceException;
 }
