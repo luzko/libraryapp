@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(urlPatterns = {"/controller/*"})
+@WebServlet(urlPatterns = {"/controller/*"}, loadOnStartup = 1)
 public class FrontController extends HttpServlet {
 
     @Override
