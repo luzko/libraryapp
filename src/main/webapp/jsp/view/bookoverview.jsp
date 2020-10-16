@@ -172,6 +172,9 @@
             <br/>
             <br/>
             <div style="color: red;">
+                ${notFoundOrders}
+            </div>
+            <div style="color: red;">
                 ${orderError}
             </div>
             <div style="color: green;">

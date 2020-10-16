@@ -20,6 +20,7 @@ public class RequestParameter {
     public static final String ERROR_DATA_MESSAGE = "errorDataMessage";
     public static final String PARAM_CONFIRM_ERROR = "confirmError";
     public static final String ERROR_APPROVE = "approveError";
+    public static final String NOT_FOUND_ORDERS = "notFoundOrders";
 
     //message error
     public static final String PATH_LOGIN_EXIST = "message.login.exist";
@@ -40,6 +41,7 @@ public class RequestParameter {
     public static final String PATH_ORDER_SUCCESS = "order.success";
     public static final String PATH_ORDER_ERROR = "order.error";
     public static final String PATH_NOT_APPROVE_USER = "order.approve.error";
+    public static final String PATH_ORDER_NOT_FOUND = "order.not.found";
 
     //user
     public static final String USER_ID = "userId";

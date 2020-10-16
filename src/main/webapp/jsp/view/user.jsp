@@ -185,6 +185,9 @@
                                     </c:when>
                                 </c:choose>
                             </div>
+                            <div style="color: red;">
+                                    ${notFoundOrders}
+                            </div>
                         </div>
                     </div>
                     </c:if>
