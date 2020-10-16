@@ -98,14 +98,19 @@ public class LoginCommand implements Command {
                 router.setRouterType(RouterType.REDIRECT);
             }
             case ADMIN -> {
+                String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
+                int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
+                int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
                 List<User> users = userService.findAll();
-                request.getSession().setAttribute(RequestParameter.ALL_USERS, users);
+                definePagination(request, users.size(), currentPage, recordsPerPage);
+                int recordsView = (currentPage - 1) * recordsPerPage;
+                users = users.subList(recordsView, Math.min(recordsView + recordsPerPage, users.size()));
+                request.setAttribute(RequestParameter.ALL_USERS, users);
                 router.setPagePath(PagePath.ADMIN);
-                router.setRouterType(RouterType.REDIRECT);
+                router.setRouterType(RouterType.FORWARD);
             }
             default -> throw new CommandException("User role is incorrect");
         }
         return router;
     }
 }
-
