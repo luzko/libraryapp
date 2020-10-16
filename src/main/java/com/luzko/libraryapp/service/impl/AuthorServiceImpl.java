@@ -21,9 +21,8 @@ public class AuthorServiceImpl implements AuthorService {
     public boolean add(String name) throws ServiceException {
         logger.log(Level.INFO, "Add author execute: {}", name);
         boolean isAddAuthor = false;
-        BookValidator bookValidator = ValidatorFactory.getInstance().getBookValidator();
         AuthorDao authorDao = DaoFactory.getInstance().getAuthorDao();
-        if (bookValidator.isValidAuthorName(name)) {
+        if (BookValidator.isValidAuthorName(name)) {
             try {
                 if (authorDao.isNameUnique(name)) {
                     isAddAuthor = authorDao.add(name);

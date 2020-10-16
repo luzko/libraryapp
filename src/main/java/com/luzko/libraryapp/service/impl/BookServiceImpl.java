@@ -48,10 +48,9 @@ public class BookServiceImpl implements BookService {
     public boolean isParameterUnique(String title, String yearValue, String pagesValue) throws ServiceException {
         logger.log(Level.INFO, "Check unique parameter execute");
         boolean isParameterUnique = false;
-        BookValidator bookValidator = ValidatorFactory.getInstance().getBookValidator();
         int year = Integer.parseInt(yearValue);
         int pages = Integer.parseInt(pagesValue);
-        if (bookValidator.isValidTitle(title) && bookValidator.isYearValid(year) && bookValidator.isPagesValid(pages)) {
+        if (BookValidator.isValidTitle(title) && BookValidator.isYearValid(year) && BookValidator.isPagesValid(pages)) {
             BookDao bookDao = DaoFactory.getInstance().getBookDao();
             try {
                 isParameterUnique = bookDao.isParameterUnique(title, year, pages);
@@ -66,9 +65,8 @@ public class BookServiceImpl implements BookService {
     public boolean add(Map<String, String> bookParameter) throws ServiceException {
         logger.log(Level.INFO, "Add book execute");
         boolean isBookAdd = false;
-        BookValidator bookValidator = ValidatorFactory.getInstance().getBookValidator();
         BookDao bookDao = DaoFactory.getInstance().getBookDao();
-        if (bookValidator.isValidBookParameter(bookParameter)) {
+        if (BookValidator.isValidBookParameter(bookParameter)) {
             try {
                 String title = bookParameter.get(ColumnName.TITLE);
                 String year = bookParameter.get(ColumnName.YEAR);
