@@ -1,6 +1,7 @@
 <%@ page isErrorPage="true" contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ctg" uri="customtags"%>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="prop.pagecontent"/>
 <html>
@@ -37,7 +38,6 @@
         </form>
     </div>
 </nav>
-
 <header class="masthead2">
     <div class="container d-flex h-100 align-items-center">
         <div class="mx-auto text-center ">
@@ -46,6 +46,6 @@
         </div>
     </div>
 </header>
-
+<ctg:end-page/>
 </body>
 </html>

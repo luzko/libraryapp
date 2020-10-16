@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@ taglib prefix="ctg" uri="customtags" %>--%>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="prop.pagecontent"/>
 
@@ -53,10 +53,10 @@
             <div>
                 <div class="bd-example">
 
-                            <button type="submit" class="btn btn-primary js-scroll-trigger custom-button"
-                                    data-toggle="modal" data-target="#exampleModal">
-                                <fmt:message key="submit.mess.to.admin"/>
-                            </button>
+                    <button type="submit" class="btn btn-primary js-scroll-trigger custom-button"
+                            data-toggle="modal" data-target="#exampleModal">
+                        <fmt:message key="submit.mess.to.admin"/>
+                    </button>
 
                     <div class="modal fade" id="exampleModal" tabindex="-1"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -69,7 +69,8 @@
                                                                        class="form-control-label"><fmt:message
                                                 key="text.blocked.theme"/></label> <input type="text"
                                                                                           class="form-control"
-                                                                                          id="subject" name="subject"></div>
+                                                                                          id="subject" name="subject">
+                                        </div>
                                         <div class="form-group"><label for="message"
                                                                        class="form-control-label"><fmt:message
                                                 key="text.blocked.message"/> </label> <textarea class="form-control"
@@ -80,8 +81,9 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                             <fmt:message key="submit.close"/></button>
-                                        <button type="submit" class="btn btn-primary" style="background-color: green"><fmt:message
-                                                key="submit.send"/></button>
+                                        <button type="submit" class="btn btn-primary" style="background-color: green">
+                                            <fmt:message
+                                                    key="submit.send"/></button>
                                     </div>
                                 </div>
                             </div>
@@ -92,9 +94,7 @@
         </div>
     </div>
 </header>
-
-<%--<ctg:end-page/>--%>
-
+<ctg:end-page/>
 <script type="text/javascript">
     <%@include file="../../js/xxsProtection.js"%>
     <%@include file="../../js/reloadProtection.js"%>
