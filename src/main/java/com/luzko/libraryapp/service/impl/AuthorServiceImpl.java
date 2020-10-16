@@ -3,7 +3,6 @@ package com.luzko.libraryapp.service.impl;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.DaoFactory;
-import com.luzko.libraryapp.factory.ValidatorFactory;
 import com.luzko.libraryapp.model.dao.AuthorDao;
 import com.luzko.libraryapp.model.entity.Author;
 import com.luzko.libraryapp.service.AuthorService;

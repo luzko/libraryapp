@@ -4,7 +4,6 @@ import com.luzko.libraryapp.model.builder.UserBuilder;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.DaoFactory;
-import com.luzko.libraryapp.factory.ValidatorFactory;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.UserDao;
 import com.luzko.libraryapp.model.entity.User;
@@ -29,8 +28,7 @@ public class UserServiceImpl implements UserService {
     public boolean verifyUser(String login, String password) throws ServiceException {
         logger.log(Level.INFO, "Verify user execute: {}, {}", login, password);
         boolean isCredentialCorrect = false;
-        UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
-        if (userValidator.isLoginValid(login) && userValidator.isPasswordValid(password)) {
+        if (UserValidator.isLoginValid(login) && UserValidator.isPasswordValid(password)) {
             UserDao userDao = DaoFactory.getInstance().getUserDAO();
             try {
                 String userPassword = userDao.findPasswordByLogin(login);
@@ -49,8 +47,7 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findByLogin(String login) throws ServiceException {
         logger.log(Level.INFO, "Find by login execute: {}", login);
         Optional<User> userOptional = Optional.empty();
-        UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
-        if (userValidator.isLoginValid(login)) {
+        if (UserValidator.isLoginValid(login)) {
             UserDao userDao = DaoFactory.getInstance().getUserDAO();
             try {
                 userOptional = userDao.findByLogin(login);
@@ -65,9 +62,8 @@ public class UserServiceImpl implements UserService {
     public boolean registration(Map<String, String> registrationParameter, boolean isLibrarian) throws ServiceException {
         logger.log(Level.INFO, "Registration execute");
         boolean isRegistered = false;
-        UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
         UserDao userDao = DaoFactory.getInstance().getUserDAO();
-        if (userValidator.isValidRegistrationParameter(registrationParameter)) {
+        if (UserValidator.isValidRegistrationParameter(registrationParameter)) {
             try {
                 String login = registrationParameter.get(ColumnName.LOGIN);
                 String encryptedPassword = PasswordEncryption.encrypt(registrationParameter.get(ColumnName.PASSWORD));
@@ -106,8 +102,7 @@ public class UserServiceImpl implements UserService {
     public boolean changeUserStatus(String login, String userStatus) throws ServiceException {
         logger.log(Level.INFO, "Change user status execute: {}, {}", login, userStatus);
         boolean isChangeStatus = false;
-        ValueValidator valueValidator = ValidatorFactory.getInstance().getValueValidator();
-        if (valueValidator.isValidValue(userStatus)) {
+        if (ValueValidator.isValidValue(userStatus)) {
             UserDao userDao = DaoFactory.getInstance().getUserDAO();
             UserStatus status = UserStatus.valueOf(userStatus);
             try {
@@ -124,8 +119,7 @@ public class UserServiceImpl implements UserService {
     public boolean isLoginUnique(String login) throws ServiceException {
         logger.log(Level.INFO, "Check unique login execute: {}", login);
         boolean isLoginUnique = false;
-        UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
-        if (userValidator.isLoginValid(login)) {
+        if (UserValidator.isLoginValid(login)) {
             UserDao userDao = DaoFactory.getInstance().getUserDAO();
             try {
                 isLoginUnique = userDao.isLoginUnique(login);
@@ -140,8 +134,7 @@ public class UserServiceImpl implements UserService {
     public boolean isCodeConfirmCorrect(String login, String codeConfirm) throws ServiceException {
         logger.log(Level.INFO, "Check code confirmation execute: {}, {}", login, codeConfirm);
         boolean isCodeConfirmCorrect = false;
-        ValueValidator valueValidator = ValidatorFactory.getInstance().getValueValidator();
-        if (valueValidator.isValidValue(codeConfirm)) {
+        if (ValueValidator.isValidValue(codeConfirm)) {
             UserDao userDao = DaoFactory.getInstance().getUserDAO();
             try {
                 String code = userDao.findCodeConfirmByLogin(login);
@@ -159,8 +152,7 @@ public class UserServiceImpl implements UserService {
     public boolean isUserLoginChange(String login, String newLogin) throws ServiceException {
         logger.log(Level.INFO, "Change user login execute: {}, {}", login, newLogin);
         boolean isUserLoginChange = false;
-        UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
-        if (userValidator.isLoginValid(newLogin)) {
+        if (UserValidator.isLoginValid(newLogin)) {
             UserDao userDao = DaoFactory.getInstance().getUserDAO();
             try {
                 if (userDao.findByLogin(newLogin).isEmpty()) {
@@ -177,8 +169,7 @@ public class UserServiceImpl implements UserService {
     public boolean isUserNameChange(String login, String newName) throws ServiceException {
         logger.log(Level.INFO, "Change name execute: {}, {}", login, newName);
         boolean isUserNameChange = false;
-        UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
-        if (userValidator.isNameValid(newName)) {
+        if (UserValidator.isNameValid(newName)) {
             UserDao userDao = DaoFactory.getInstance().getUserDAO();
             try {
                 isUserNameChange = userDao.changeUserName(login, newName);
@@ -193,8 +184,7 @@ public class UserServiceImpl implements UserService {
     public boolean isUserSurnameChange(String login, String newSurname) throws ServiceException {
         logger.log(Level.INFO, "Change surname execute: {}, {}", login, newSurname);
         boolean isUserSurnameChange = false;
-        UserValidator userValidator = ValidatorFactory.getInstance().getUserValidator();
-        if (userValidator.isNameValid(newSurname)) {
+        if (UserValidator.isNameValid(newSurname)) {
             UserDao userDao = DaoFactory.getInstance().getUserDAO();
             try {
                 isUserSurnameChange = userDao.changeUserSurname(login, newSurname);
