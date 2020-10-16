@@ -8,7 +8,6 @@ import com.luzko.libraryapp.model.dao.OrderDao;
 import com.luzko.libraryapp.model.entity.Order;
 import com.luzko.libraryapp.model.entity.OrderType;
 import com.luzko.libraryapp.service.OrderService;
-import com.luzko.libraryapp.util.DateUtil;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -79,7 +78,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean isCancel(String orderIdString) throws ServiceException {
-        logger.log(Level.INFO, "Cancel order execute");
+        logger.log(Level.INFO, "Cancel order execute: {}", orderIdString);
         OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
         long orderId = Long.parseLong(orderIdString);
         try {
@@ -91,7 +90,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean isReturn(String orderIdString, String bookIdString) throws ServiceException {
-        logger.log(Level.INFO, "Return order execute");
+        logger.log(Level.INFO, "Return order execute: {}", orderIdString);
         OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
         long orderId = Long.parseLong(orderIdString);
         long bookId = Long.parseLong(bookIdString);
@@ -104,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean isDeny(String orderIdString) throws ServiceException {
-        logger.log(Level.INFO, "Deny order execute");
+        logger.log(Level.INFO, "Deny order execute: {}", orderIdString);
         OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
         long orderId = Long.parseLong(orderIdString);
         try {
