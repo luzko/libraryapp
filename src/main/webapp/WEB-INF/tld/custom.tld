@@ -4,10 +4,10 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
         version="2.0">
     <tlib-version>1.0</tlib-version>
-    <short-name>ctg</short-name>
-    <uri>customtags</uri>
+    <short-name>c-tag</short-name>
+    <uri>custom-tag</uri>
     <tag>
-        <name>end-page</name>
+        <name>footer</name>
         <tag-class>com.luzko.libraryapp.tag.CustomTag</tag-class>
         <body-content>scriptless</body-content>
     </tag>

@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="ctg" uri="customtags"%>
 <fmt:setLocale value="${locale}"/>
+<%@ taglib prefix="c-tag" uri="custom-tag" %>
 <fmt:setBundle basename="prop.pagecontent"/>
 
 <html>
@@ -100,7 +100,7 @@
         </div>
     </div>
 </header>
-<ctg:end-page/>
+<c-tag:footer/>
 <script type="text/javascript">
     <%@include file="../../js/xxsProtection.js"%>
     <%@include file="../../js/reloadProtection.js"%>
