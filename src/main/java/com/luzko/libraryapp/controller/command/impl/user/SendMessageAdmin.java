@@ -17,9 +17,7 @@ public class SendMessageAdmin implements Command {
         String login = (String) request.getSession().getAttribute(RequestParameter.LOGIN);
         String subject = request.getParameter(RequestParameter.SUBJECT);
         String message = request.getParameter(RequestParameter.MESSAGE);
-
         EmailSender.setMessageAdmin(login, subject, message);
-
         router.setPagePath(PagePath.BLOCKED);
         router.setRouterType(RouterType.REDIRECT);
         return router;
