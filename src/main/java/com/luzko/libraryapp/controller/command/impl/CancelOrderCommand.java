@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.controller.command.impl.reader;
+package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
@@ -16,8 +16,8 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class ReturnOrderCommand implements Command {
-    private static final Logger logger = LogManager.getLogger(ReturnOrderCommand.class);
+public class CancelOrderCommand implements Command {
+    private static final Logger logger = LogManager.getLogger(CancelOrderCommand.class);
 
     @Override
     public Router execute(HttpServletRequest request) {
@@ -25,9 +25,8 @@ public class ReturnOrderCommand implements Command {
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
         String orderType = request.getParameter(RequestParameter.ORDER_TYPE);
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
-        String bookId = request.getParameter(RequestParameter.BOOK_ID);
         try {
-            if (orderService.isReturn(orderId, bookId)) {
+            if (orderService.isCancel(orderId)) {
                 Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
                 long userId = (long) userIdObject;
                 List<Order> orders = orderService.findByUserId(userId);
@@ -39,7 +38,7 @@ public class ReturnOrderCommand implements Command {
             }
             router.setRouterType(RouterType.FORWARD);
         } catch (ServiceException e) {
-            logger.log(Level.ERROR, "Error in return order", e);
+            logger.log(Level.ERROR, "Error in cancel order", e);
             router.setPagePath(PagePath.ERROR);
             router.setRouterType(RouterType.FORWARD);
         }

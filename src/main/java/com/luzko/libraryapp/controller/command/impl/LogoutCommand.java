@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.controller.command.impl.user;
+package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.command.Command;

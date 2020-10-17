@@ -1,15 +1,7 @@
 package com.luzko.libraryapp.controller.command;
 
-import com.luzko.libraryapp.controller.command.impl.admin.ChangeUserStatusCommand;
-import com.luzko.libraryapp.controller.command.impl.admin.CreateAuthorCommand;
-import com.luzko.libraryapp.controller.command.impl.admin.CreateBookCommand;
-import com.luzko.libraryapp.controller.command.impl.librarian.ApproveOrderCommand;
-import com.luzko.libraryapp.controller.command.impl.librarian.DenyOrderCommand;
+import com.luzko.libraryapp.controller.command.impl.*;
 import com.luzko.libraryapp.controller.command.impl.page.*;
-import com.luzko.libraryapp.controller.command.impl.reader.CancelOrderCommand;
-import com.luzko.libraryapp.controller.command.impl.reader.CreateOrderCommand;
-import com.luzko.libraryapp.controller.command.impl.reader.ReturnOrderCommand;
-import com.luzko.libraryapp.controller.command.impl.user.*;
 
 public enum CommandType {
     LOGIN_PAGE(new LoginPageCommand()),
