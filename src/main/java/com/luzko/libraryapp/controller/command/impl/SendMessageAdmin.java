@@ -9,7 +9,6 @@ import com.luzko.libraryapp.util.mail.EmailSender;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 public class SendMessageAdmin implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
