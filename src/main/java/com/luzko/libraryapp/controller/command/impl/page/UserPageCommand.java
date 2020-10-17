@@ -16,23 +16,12 @@ public class UserPageCommand implements Command {
         UserStatus userStatus = (UserStatus) request.getSession().getAttribute(RequestParameter.USER_STATUS);
         request.getSession().setAttribute(RequestParameter.TYPE_PROFILE_PAGE, RequestParameter.SEE_PROFILE_PAGE);
         switch (userStatus) {
-            case ACTIVE -> {
-                router.setPagePath(PagePath.USER);
-                router.setRouterType(RouterType.FORWARD);
-            }
-            case BLOCKED -> {
-                router.setPagePath(PagePath.BLOCKED);
-                router.setRouterType(RouterType.FORWARD);
-            }
-            case UNCONFIRMED -> {
-                router.setPagePath(PagePath.CONFIRMATION);
-                router.setRouterType(RouterType.FORWARD);
-            }
-            default -> {
-                router.setPagePath(PagePath.ERROR);
-                router.setRouterType(RouterType.REDIRECT);
-            }
+            case ACTIVE -> router.setPagePath(PagePath.USER);
+            case BLOCKED -> router.setPagePath(PagePath.BLOCKED);
+            case UNCONFIRMED -> router.setPagePath(PagePath.CONFIRMATION);
+            default -> router.setPagePath(PagePath.ERROR);
         }
+        router.setRouterType(RouterType.FORWARD);
         return router;
     }
 }
