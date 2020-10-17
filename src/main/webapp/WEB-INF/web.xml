@@ -17,4 +17,10 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+    <jsp-config>
+        <taglib>
+            <taglib-uri>custom-tag</taglib-uri>
+            <taglib-location>/tld/custom.tld</taglib-location>
+        </taglib>
+    </jsp-config>
 </web-app>
