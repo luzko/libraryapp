@@ -48,7 +48,7 @@
 </nav>
 <section id="about" class="registration-section text-center">
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-top: 70px;">
             <div class="col-lg-8 mx-auto">
                 <form action="${pageContext.request.contextPath}/controller" method="post">
                     <div class="form-group row">

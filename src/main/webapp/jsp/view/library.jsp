@@ -90,7 +90,8 @@
     </div>
 </nav>
 
-<section id="about" class="registration-section text-center">
+<section id="about" class="registration-section text-center"
+         style="height: 1000px; background-color: rgba(22, 22, 22, 1);">
     <div class="masthead3">
         <div class="container-fluid  align-items-center">
             <div class="row justify-content-center ">
