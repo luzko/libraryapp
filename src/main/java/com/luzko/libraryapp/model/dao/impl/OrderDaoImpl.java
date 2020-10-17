@@ -20,8 +20,15 @@ public class OrderDaoImpl implements OrderDao {
     private static final int MAX_COUNT_NEW_ORDER = 2;
 
     @Override
-    public Optional<Order> findById(long id) throws DaoException {
-        return Optional.empty();
+    public Optional<Order> findById(long orderId) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ORDER_BY_ID)) {
+            statement.setLong(1, orderId);
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet != null && resultSet.next() ? createOrder(resultSet) : Optional.empty();
+        } catch (SQLException e) {
+            throw new DaoException("Find all error", e);
+        }
     }
 
     @Override
@@ -275,11 +282,6 @@ public class OrderDaoImpl implements OrderDao {
     private boolean isOrderReturn(PreparedStatement statement, long orderId) throws SQLException {
         statement.setLong(1, DateUtil.defineCountMillisecondsFromNow());
         statement.setLong(2, orderId);
-        return statement.executeUpdate() == 1;
-    }
-
-    private boolean isOrderApprove(PreparedStatement statement, long orderId) throws SQLException {
-        statement.setLong(1, orderId);
         return statement.executeUpdate() == 1;
     }
 

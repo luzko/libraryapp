@@ -118,6 +118,12 @@ public class StatementSql {
                     "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
                     "WHERE o.enabled = TRUE AND o.book_id_fk LIKE ? ORDER BY order_date DESC";
 
+    public static final String FIND_ORDER_BY_ID =
+            "SELECT o.order_id, u.user_id, u.login, b.book_id, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
+                    "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
+                    "LEFT JOIN books b ON b.book_id = o.book_id_fk " +
+                    "WHERE o.enabled = TRUE AND order_id = ? ORDER BY order_date DESC";
+
     public static final String CHANGE_STATUS_ORDER =
             "UPDATE orders SET order_status_id_fk = ? WHERE order_id LIKE ?";
 
