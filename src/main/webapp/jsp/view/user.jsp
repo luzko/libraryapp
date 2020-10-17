@@ -74,6 +74,38 @@
     </div>
 </nav>
 
+<div class="modal fade" id="exampleModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form class="form" action="${pageContext.request.contextPath}/controller" method="post">
+        <input type="hidden" name="command" value="send_message_admin"/>
+        <input type="hidden" name="typeMessage" value="active"/>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-group"><label for="subject"
+                                                   class="form-control-label"><fmt:message
+                            key="text.blocked.theme"/></label> <input type="text"
+                                                                      class="form-control"
+                                                                      id="subject" name="subject">
+                    </div>
+                    <div class="form-group"><label for="message"
+                                                   class="form-control-label"><fmt:message
+                            key="text.blocked.message"/> </label> <textarea class="form-control"
+                                                                            id="message"
+                                                                            name="message"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <fmt:message key="submit.close"/></button>
+                    <button type="submit" class="btn btn-primary" style="background-color: green">
+                        <fmt:message
+                                key="submit.send"/></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
 <section id="about" class="about-section text-center">
     <div class="masthead3">
@@ -123,6 +155,7 @@
                                                 <input type="hidden" name="command" value="settings"/>
                                                 <div>
                                                     <button type="submit"
+                                                            style="width: 250px !important;"
                                                             class="btn btn-primary js-scroll-trigger custom-button">
                                                         <fmt:message key="submit.settings.profile"/>
                                                     </button>
@@ -136,11 +169,24 @@
                                                 <input type="hidden" name="orderType" value="user"/>
                                                 <div>
                                                     <button type="submit"
+                                                            style="width: 250px !important;"
                                                             class="btn btn-primary js-scroll-trigger custom-button">
                                                         <fmt:message key="submit.order.book"/>
                                                     </button>
                                                 </div>
                                             </form>
+                                        </div>
+                                        <div class="text-right">
+                                            <div>
+                                                <div class="bd-example">
+                                                    <button type="submit"
+                                                            class="btn btn-primary js-scroll-trigger custom-button"
+                                                            style="width: 250px !important;"
+                                                            data-toggle="modal" data-target="#exampleModal">
+                                                        <fmt:message key="submit.mess.to.admin"/>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </c:when>
                                     <c:when test="${userRole == 'LIBRARIAN'}">
@@ -300,7 +346,6 @@
                                         <br/>
                                         <input type="hidden" name="command" value="change_profile_surname"/>
 
-
                                         <div class="col-lg-2 text-left">
                                             <label class="col-sm-4 col-form-label float-sm-right" for="login"
                                                    style="color: white">
@@ -343,6 +388,11 @@
 <script type="text/javascript">
     <%@include file="../../js/reloadProtection.js"%>
     <%@include file="../../js/xxsProtection.js"%>
+    <%@include file="../../vendor/jquery/jquery.min.js" %>
+    <%@include file="../../vendor/bootstrap/js/bootstrap.bundle.min.js" %>
+    <%@include file="../../vendor/jquery-easing/jquery.easing.min.js" %>
+    <%@include file="../../js/grayscale.min.js" %>
+    <%@include file="../../js/modal.js" %>
 </script>
 </body>
 </html>

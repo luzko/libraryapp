@@ -62,6 +62,7 @@
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <form class="form" action="${pageContext.request.contextPath}/controller" method="post">
                             <input type="hidden" name="command" value="send_message_admin"/>
+                            <input type="hidden" name="typeMessage" value="blocked"/>
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-body">

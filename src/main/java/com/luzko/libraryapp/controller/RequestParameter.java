@@ -105,4 +105,9 @@ public class RequestParameter {
     public static final String RECORD_PAGE = "5";
     public static final String CURRENT_PAGE = "currentPage";
     public static final String COUNT_PAGE = "countPage";
+
+    //message
+    public static final String TYPE_MESSAGE = "typeMessage";
+    public static final String ACTIVE = "active";
+    public static final String BLOCKED = "blocked";
 }
