@@ -26,12 +26,13 @@ public class ChangeUserStatusCommand implements Command {
         UserService userService = ServiceFactory.getInstance().getUserService();
         String login = request.getParameter(RequestParameter.LOGIN);
         String userStatus = request.getParameter(RequestParameter.USER_STATUS);
+
         try {
             boolean isChangeUserStatus = userService.changeUserStatus(login, userStatus);
             List<User> users = userService.findAll();
-            request.setAttribute(RequestParameter.ALL_USERS, users);
+            request.getSession().setAttribute(RequestParameter.ALL_USERS, users);
             router.setPagePath(PagePath.ADMIN);
-            router.setRouterType(RouterType.FORWARD);
+            router.setRouterType(RouterType.REDIRECT);
             if (!isChangeUserStatus) {
                 logger.log(Level.WARN, "User status is not change");
                 request.setAttribute(RequestParameter.ERROR_MESSAGE,
