@@ -32,27 +32,27 @@ public class CreateBookCommand implements Command {
                     bookParameter.get(ColumnName.TITLE), bookParameter.get(ColumnName.YEAR), bookParameter.get(ColumnName.PAGES))
             ) {
                 if (bookService.add(bookParameter)) {
-                    request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE,
+                    request.setAttribute(RequestParameter.CORRECT_DATA_MESSAGE,
                             ConfigurationManager.getMessageProperty(RequestParameter.PATH_BOOK_CORRECT));
                     request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
                 } else {
-                    request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
+                    request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
                             ConfigurationManager.getMessageProperty(RequestParameter.PATH_BOOK_DATA));
                     request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
                     request.setAttribute(RequestParameter.BOOK_PARAMETER, bookParameter);
                 }
                 request.getSession().setAttribute(RequestParameter.CREATE_TYPE, createType);
             } else {
-                request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
+                request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_LOGIN_EXIST));
-                request.setAttribute(RequestParameter.BOOK_PARAMETER, bookParameter);
+                request.getSession().setAttribute(RequestParameter.BOOK_PARAMETER, bookParameter);
             }
             router.setPagePath(PagePath.CREATE_BOOK);
             router.setRouterType(RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Create book command error", e);
             router.setPagePath(PagePath.ERROR);
-            router.setRouterType(RouterType.REDIRECT);
+            router.setRouterType(RouterType.FORWARD);
         }
         return router;
     }

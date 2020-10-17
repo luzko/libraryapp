@@ -3,7 +3,6 @@ package com.luzko.libraryapp.controller.command;
 import com.luzko.libraryapp.controller.command.impl.admin.ChangeUserStatusCommand;
 import com.luzko.libraryapp.controller.command.impl.admin.CreateAuthorCommand;
 import com.luzko.libraryapp.controller.command.impl.admin.CreateBookCommand;
-import com.luzko.libraryapp.controller.command.impl.admin.CreateLibrarianCommand;
 import com.luzko.libraryapp.controller.command.impl.librarian.ApproveOrderCommand;
 import com.luzko.libraryapp.controller.command.impl.librarian.DenyOrderCommand;
 import com.luzko.libraryapp.controller.command.impl.page.*;
@@ -24,7 +23,6 @@ public enum CommandType {
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
     REGISTRATION(new RegistrationCommand()),
-    CREATE_LIBRARIAN_COMMAND(new CreateLibrarianCommand()),
     LOCALE(new ChangeLocaleCommand()),
     CHANGE_USER_STATUS(new ChangeUserStatusCommand()),
     CONFIRM(new ConfirmCommand()),
