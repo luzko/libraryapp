@@ -227,7 +227,6 @@
 <c-tag:footer/>
 <script type="text/javascript">
     <%@include file="../../js/reloadProtection.js"%>
-    <%@include file="../../js/backProtection.js"%>
     <%@include file="../../js/xxsProtection.js"%>
 </script>
 </body>
