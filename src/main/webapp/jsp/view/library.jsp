@@ -127,7 +127,7 @@
                         <div style="color: red;">
                             ${overviewError}
                         </div>
-                        <div class="d-flex justify-content-around"><h2>text.site.books</h2></div>
+                        <div class="d-flex justify-content-around"><h2><fmt:message key="text.site.books"/></h2></div>
                         <table class="table table-bordered table-hover">
                             <thead class="thead-dark">
                             <tr>
@@ -162,7 +162,7 @@
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span
                                                 class="badge badge-outline-primary">
-                                            <fmt:message key="${book.category.localName}"/>
+                                            <fmt:message key="${book.category.localeName}"/>
                                         </span></h4></div>
                                     </td>
                                     <form action="${pageContext.request.contextPath}/controller" method="post">

@@ -92,7 +92,7 @@
                             <table style="width: 100%; margin-top: 60px; font-size: 15pt; color: white;">
                                 <tr>
                                     <td style="width: 30%"><fmt:message key="table.name.library.category"/>:</td>
-                                    <td><fmt:message key="${book.category.localName}"/></td>
+                                    <td><fmt:message key="${book.category.localeName}"/></td>
                                 </tr>
                                 <tr>
                                     <td style="width: 30%"><fmt:message key="table.name.library.author"/>:</td>

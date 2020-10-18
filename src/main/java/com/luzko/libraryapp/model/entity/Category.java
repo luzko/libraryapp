@@ -1,21 +1,21 @@
 package com.luzko.libraryapp.model.entity;
 
 public enum Category {
-    FANTASY("category.fantasy"),
-    HISTORY("category.history"),
-    AUTOBIOGRAPHY("category.autobiography"),
-    PHILOSOPHY("category.philosophy"),
-    NOVEL("category.novel"),
-    PSYCHOLOGY("category.psychology");
+    FANTASY(LocaleName.CATEGORY_FANTASY),
+    HISTORY(LocaleName.CATEGORY_HISTORY),
+    AUTOBIOGRAPHY(LocaleName.CATEGORY_AUTOBIOGRAPHY),
+    PHILOSOPHY(LocaleName.CATEGORY_PHILOSOPHY),
+    NOVEL(LocaleName.CATEGORY_NOVEL),
+    PSYCHOLOGY(LocaleName.CATEGORY_PSYCHOLOGY);
 
-    private final String localName;
+    private final String localeName;
 
     Category(String localName) {
-        this.localName = localName;
+        this.localeName = localName;
     }
 
-    public String getLocalName() {
-        return localName;
+    public String getLocaleName() {
+        return localeName;
     }
 
     public int defineId() {
