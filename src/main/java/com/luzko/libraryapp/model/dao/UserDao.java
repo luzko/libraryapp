@@ -18,11 +18,13 @@ public interface UserDao extends BaseDao<User> {
 
     String findCodeConfirmByLogin(String login) throws DaoException;
 
-    boolean changeUserLogin(String login, String newLogin) throws DaoException;
+    boolean isChangeUserLogin(String login, String newLogin) throws DaoException;
 
-    boolean changeUserName(String login, String newName) throws DaoException;
+    boolean isChangeUserName(String login, String newName) throws DaoException;
 
-    boolean changeUserSurname(String login, String newSurname) throws DaoException;
+    boolean isChangeUserSurname(String login, String newSurname) throws DaoException;
+
+    boolean isChangeUserAvatar(String login, String newAvatar) throws DaoException;
 
     void giveBooksFromReadingRoom(long userId) throws DaoException;
 }

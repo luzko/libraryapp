@@ -35,19 +35,14 @@ public class ChangeProfileImageCommand implements Command {
         try {
             String fileName = uploadFile(request);
             if (fileName != null && !fileName.isBlank()) {
-                //if (userService.changeProfileImage(login, fileName)) {
-                //TODO
-                    /*request.getSession().setAttribute(RequestParameter.CHANGE_SAVED,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_SAVE_CHANGES));
-                request.getSession().setAttribute(RequestParameter.NAME_ERROR, RequestParameter.EMPTY);
-                request.getSession().setAttribute(RequestParameter.USER_NAME, newName);*/
-                //TODO запись нового пути аватарки в сессию.
-                //} else {
-                //TODO
-                    /*request.getSession().setAttribute(RequestParameter.CHANGE_SAVED, RequestParameter.EMPTY);
-                    request.getSession().setAttribute(RequestParameter.LOGIN_ERROR,
-                            ConfigurationManager.getMessageProperty(RequestParameter.PATH_LOGIN_CHANGES));*/
-                //}
+                if (userService.isChangeProfileImage(login, fileName)) {
+                    request.getSession().setAttribute(RequestParameter.AVATAR, fileName);
+                    request.getSession().setAttribute(RequestParameter.AVATAR_ERROR,
+                            ConfigurationManager.getMessageProperty(RequestParameter.EMPTY));
+                } else {
+                    request.getSession().setAttribute(RequestParameter.AVATAR_ERROR,
+                            ConfigurationManager.getMessageProperty(RequestParameter.PATH_AVATAR_CHANGES));
+                }
                 router.setPagePath(PagePath.USER);
                 router.setRouterType(RouterType.REDIRECT);
             }

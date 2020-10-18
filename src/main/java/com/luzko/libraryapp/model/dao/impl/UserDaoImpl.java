@@ -119,7 +119,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean changeUserLogin(String login, String newLogin) throws DaoException {
+    public boolean isChangeUserLogin(String login, String newLogin) throws DaoException {
         try {
             return changeUserAttribute(login, newLogin, StatementSql.CHANGE_USER_LOGIN);
         } catch (
@@ -129,7 +129,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean changeUserName(String login, String newName) throws DaoException {
+    public boolean isChangeUserName(String login, String newName) throws DaoException {
         try {
             return changeUserAttribute(login, newName, StatementSql.CHANGE_USER_NAME);
         } catch (SQLException e) {
@@ -138,11 +138,20 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean changeUserSurname(String login, String newSurname) throws DaoException {
+    public boolean isChangeUserSurname(String login, String newSurname) throws DaoException {
         try {
             return changeUserAttribute(login, newSurname, StatementSql.CHANGE_USER_SURNAME);
         } catch (SQLException e) {
             throw new DaoException("Change user surname error", e);
+        }
+    }
+
+    @Override
+    public boolean isChangeUserAvatar(String login, String newAvatar) throws DaoException {
+        try {
+            return changeUserAttribute(login, newAvatar, StatementSql.CHANGE_USER_AVATAR);
+        } catch (SQLException e) {
+            throw new DaoException("Change user avatar error", e);
         }
     }
 

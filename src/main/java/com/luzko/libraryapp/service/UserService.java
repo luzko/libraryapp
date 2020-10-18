@@ -29,5 +29,7 @@ public interface UserService {
 
     boolean isUserSurnameChange(String login, String newSurname) throws ServiceException;
 
+    boolean isChangeProfileImage(String login, String newAvatar) throws ServiceException;
+
     void giveBooksFromReadingRoom(Object userId, Object userRole) throws ServiceException;
 }

@@ -44,6 +44,9 @@ public class StatementSql {
     public static final String CHANGE_USER_SURNAME =
             "UPDATE users SET surname = ? WHERE login LIKE ?";
 
+    public static final String CHANGE_USER_AVATAR =
+            "UPDATE users SET avatar = ? WHERE login like ?";
+
     //books query
     public static final String FIND_ALL_BOOKS =
             "SELECT b.book_id, b.title, b.category_id_fk, " +

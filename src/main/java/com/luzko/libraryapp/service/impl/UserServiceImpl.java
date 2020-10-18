@@ -156,7 +156,7 @@ public class UserServiceImpl implements UserService {
             UserDao userDao = DaoFactory.getInstance().getUserDAO();
             try {
                 if (userDao.findByLogin(newLogin).isEmpty()) {
-                    isUserLoginChange = userDao.changeUserLogin(login, newLogin);
+                    isUserLoginChange = userDao.isChangeUserLogin(login, newLogin);
                 }
             } catch (DaoException e) {
                 throw new ServiceException("User login change error", e);
@@ -172,7 +172,7 @@ public class UserServiceImpl implements UserService {
         if (UserValidator.isNameValid(newName)) {
             UserDao userDao = DaoFactory.getInstance().getUserDAO();
             try {
-                isUserNameChange = userDao.changeUserName(login, newName);
+                isUserNameChange = userDao.isChangeUserName(login, newName);
             } catch (DaoException e) {
                 throw new ServiceException("User name change error", e);
             }
@@ -187,12 +187,25 @@ public class UserServiceImpl implements UserService {
         if (UserValidator.isNameValid(newSurname)) {
             UserDao userDao = DaoFactory.getInstance().getUserDAO();
             try {
-                isUserSurnameChange = userDao.changeUserSurname(login, newSurname);
+                isUserSurnameChange = userDao.isChangeUserSurname(login, newSurname);
             } catch (DaoException e) {
                 throw new ServiceException("Surname change error", e);
             }
         }
         return isUserSurnameChange;
+    }
+
+    @Override
+    public boolean isChangeProfileImage(String login, String newAvatar) throws ServiceException {
+        logger.log(Level.INFO, "Change avatar execute: {}, {}", login, newAvatar);
+        boolean isAvatarChange = false;
+        UserDao userDao = DaoFactory.getInstance().getUserDAO();
+        try {
+            isAvatarChange = userDao.isChangeUserAvatar(login, newAvatar);
+        } catch (DaoException e) {
+            throw new ServiceException("Avatar change error", e);
+        }
+        return isAvatarChange;
     }
 
     @Override

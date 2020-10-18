@@ -247,7 +247,7 @@
                         <div class="col-lg-8" style="margin-bottom: 100px">
                             <div class="col-lg-8">
                                 <img class="img-fluid" src="/images/${avatar}"
-                                     style="margin-top: 100px; border-radius: 30px" width="300" height="300"/>
+                                     style="margin-top: 50px; border-radius: 30px" width="300" height="300"/>
                             </div>
 
 
@@ -264,9 +264,9 @@
                                 </div>
                             </form>
 
-                                <%--<img class="img-fluid" src="${pageContext.request.contextPath}/${userImage}"--%>
-                                <%--<img class="img-fluid" src="${pageContext.request.contextPath}/img/avatar.jpg"
-                                     style="margin-top: 60px; border-radius: 30px" width="300" height="300"/>--%>
+                               <div style="color: red;">
+                                   ${errorAvatar}
+                               </div>
 
                         </div>
                         <div class="col-lg-8">
