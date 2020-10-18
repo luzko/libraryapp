@@ -110,4 +110,9 @@ public class RequestParameter {
     public static final String TYPE_MESSAGE = "typeMessage";
     public static final String ACTIVE = "active";
     public static final String BLOCKED = "blocked";
+
+    //upload
+    public static final String CONTENT_TYPE = "Content-Type";
+    public static final String CONTENT_DISPOSITION = "Content-Disposition";
+    public static final String CONTENT_VALUE = "inline; filename=\"%s\"";
 }
