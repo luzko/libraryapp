@@ -1,8 +1,18 @@
 package com.luzko.libraryapp.model.entity;
 
 public enum OrderType {
-    READING_ROOM,
-    HOME;
+    READING_ROOM(LocaleName.TYPE_READING_ROOM),
+    HOME(LocaleName.TYPE_HOME);
+
+    private final String localeName;
+
+    OrderType(String localeName) {
+        this.localeName = localeName;
+    }
+
+    public String getLocaleName() {
+        return localeName;
+    }
 
     public int defineId() {
         return this.ordinal() + 1;

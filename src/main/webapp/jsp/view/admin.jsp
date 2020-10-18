@@ -124,8 +124,9 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span
-                                                class="badge badge-outline-primary"><c:out
-                                                value="${user.userRole}"/> </span></h4></div>
+                                                class="badge badge-outline-primary">
+                                        <fmt:message key="${user.userRole.localeName}"/>
+                                        </span></h4></div>
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span

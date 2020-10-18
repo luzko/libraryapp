@@ -105,13 +105,15 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
-                                                        class="badge badge-outline-primary"><c:out
-                                                        value="${orderItem.orderType}"/> </span></h4></div>
+                                                        class="badge badge-outline-primary">
+                                                     <fmt:message key="${orderItem.orderType.localeName}"/>
+                                                    </span></h4></div>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
-                                                        class="badge badge-outline-primary"><c:out
-                                                        value="${orderItem.orderStatus}"/> </span></h4></div>
+                                                        class="badge badge-outline-primary">
+                                                    <fmt:message key="${user.OrderStatus.localeName}"/>
+                                                </span></h4></div>
                                             </td>
                                             <c:choose>
                                                 <c:when test="${orderItem.orderStatus == 'NEW'}">
@@ -204,13 +206,15 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
-                                                        class="badge badge-outline-primary"><c:out
-                                                        value="${orderItem.orderType}"/> </span></h4></div>
+                                                        class="badge badge-outline-primary">
+                                                    <fmt:message key="${orderItem.orderType.localeName}"/>
+                                                </span></h4></div>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
-                                                        class="badge badge-outline-primary"><c:out
-                                                        value="${orderItem.orderStatus}"/> </span></h4></div>
+                                                        class="badge badge-outline-primary">
+                                                <fmt:message key="${user.OrderStatus.localeName}"/>
+                                                </span></h4></div>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -272,13 +276,15 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
-                                                        class="badge badge-outline-primary"><c:out
-                                                        value="${orderItem.orderType}"/> </span></h4></div>
+                                                        class="badge badge-outline-primary">
+                                                    <fmt:message key="${orderItem.orderType.localeName}"/>
+                                                </span></h4></div>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
-                                                        class="badge badge-outline-primary"><c:out
-                                                        value="${orderItem.orderStatus}"/> </span></h4></div>
+                                                        class="badge badge-outline-primary">
+                                                    <fmt:message key="${user.OrderStatus.localeName}"/>
+                                                </span></h4></div>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -331,13 +337,15 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
-                                                        class="badge badge-outline-primary"><c:out
-                                                        value="${orderItem.orderType}"/> </span></h4></div>
+                                                        class="badge badge-outline-primary">
+                                                  <fmt:message key="${orderItem.orderType.localeName}"/>
+                                                </span></h4></div>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
-                                                        class="badge badge-outline-primary"><c:out
-                                                        value="${orderItem.orderStatus}"/> </span></h4></div>
+                                                        class="badge badge-outline-primary">
+                                                    <fmt:message key="${user.OrderStatus.localeName}"/>
+                                                </span></h4></div>
                                             </td>
                                             <form action="${pageContext.request.contextPath}/controller"
                                                   method="post">

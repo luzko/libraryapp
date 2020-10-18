@@ -1,9 +1,19 @@
 package com.luzko.libraryapp.model.entity;
 
 public enum UserRole {
-    ADMIN,
-    LIBRARIAN,
-    READER;
+    ADMIN(LocaleName.ROLE_ADMIN),
+    LIBRARIAN(LocaleName.ROLE_LIBRARIAN),
+    READER(LocaleName.ROLE_READER);
+
+    private final String localeName;
+
+    UserRole(String localeName) {
+        this.localeName = localeName;
+    }
+
+    public String getLocaleName() {
+        return localeName;
+    }
 
     public int defineId() {
         return this.ordinal() + 1;
