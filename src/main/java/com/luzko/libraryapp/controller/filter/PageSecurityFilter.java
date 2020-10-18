@@ -29,12 +29,11 @@ public class PageSecurityFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-
         String[] list = request.getRequestURI().split(DELIMITER_PATH);
         UserRole userRole = (UserRole) request.getSession().getAttribute(RequestParameter.USER_ROLE);
         UserStatus userStatus = (UserStatus) request.getSession().getAttribute(RequestParameter.USER_STATUS);
-
         String page = null;
+
         if (list[list.length - 1].contains(EXTENSION_FILE)) {
             page = list[list.length - 1];
         }
