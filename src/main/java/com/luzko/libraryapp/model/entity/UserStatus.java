@@ -1,9 +1,19 @@
 package com.luzko.libraryapp.model.entity;
 
 public enum UserStatus {
-    ACTIVE,
-    BLOCKED,
-    UNCONFIRMED;
+    ACTIVE(LocaleName.USER_STATUS_ACTIVE),
+    BLOCKED(LocaleName.USER_STATUS_BLOCKED),
+    UNCONFIRMED(LocaleName.USER_STATUS_UNCONFIRMED);
+
+    private final String localeName;
+
+    UserStatus(String localeName) {
+        this.localeName = localeName;
+    }
+
+    public String getLocaleName() {
+        return localeName;
+    }
 
     public int defineId() {
         return this.ordinal() + 1;

@@ -129,8 +129,9 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span
-                                                class="badge badge-outline-primary"><c:out
-                                                value="${user.userStatus}"/> </span></h4></div>
+                                                class="badge badge-outline-primary">
+                                        <fmt:message key="${user.userStatus.localeName}"/>
+                                        </span></h4></div>
                                     </td>
                                     <c:choose>
                                         <c:when test="${user.userStatus == 'ACTIVE'}">

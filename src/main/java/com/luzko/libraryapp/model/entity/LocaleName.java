@@ -13,4 +13,9 @@ public class LocaleName {
     public static final String CATEGORY_NOVEL = "category.novel";
     public static final String CATEGORY_PSYCHOLOGY = "category.psychology";
 
+    //user status
+    public static final String USER_STATUS_ACTIVE = "user.status.active";
+    public static final String USER_STATUS_BLOCKED = "user.status.blocked";
+    public static final String USER_STATUS_UNCONFIRMED = "user.status.unconfirmed";
+
 }
