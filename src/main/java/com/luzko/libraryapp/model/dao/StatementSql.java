@@ -34,7 +34,6 @@ public class StatementSql {
     public static final String CHANGE_USER_STATUS =
             "UPDATE users SET user_status_id_fk = ? WHERE login LIKE ?";
 
-
     public static final String CHANGE_USER_LOGIN =
             "UPDATE users SET login = ? WHERE login LIKE ?";
 

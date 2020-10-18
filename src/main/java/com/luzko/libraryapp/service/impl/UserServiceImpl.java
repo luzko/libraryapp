@@ -201,7 +201,9 @@ public class UserServiceImpl implements UserService {
         boolean isAvatarChange = false;
         UserDao userDao = DaoFactory.getInstance().getUserDAO();
         try {
-            isAvatarChange = userDao.isChangeUserAvatar(login, newAvatar);
+            if (newAvatar != null && !newAvatar.isBlank()) {
+                isAvatarChange = userDao.isChangeUserAvatar(login, newAvatar);
+            }
         } catch (DaoException e) {
             throw new ServiceException("Avatar change error", e);
         }
