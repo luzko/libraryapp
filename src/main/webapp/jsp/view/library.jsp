@@ -161,8 +161,9 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-around"><h4><span
-                                                class="badge badge-outline-primary"><c:out
-                                                value="${book.category}"/> </span></h4></div>
+                                                class="badge badge-outline-primary">
+                                            <fmt:message key="${book.category.localName}"/>
+                                        </span></h4></div>
                                     </td>
                                     <form action="${pageContext.request.contextPath}/controller" method="post">
                                         <input type="hidden" name="command" value="book_overview"/>
