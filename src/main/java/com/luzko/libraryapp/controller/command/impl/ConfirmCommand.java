@@ -25,7 +25,6 @@ public class ConfirmCommand implements Command {
         UserService userService = ServiceFactory.getInstance().getUserService();
         String login = (String) request.getSession().getAttribute(RequestParameter.LOGIN);
         String codeConfirm = request.getParameter(RequestParameter.CODE);
-
         try {
             if (userService.isCodeConfirmCorrect(login, codeConfirm)) {
                 request.getSession().setAttribute(RequestParameter.USER_STATUS, UserStatus.ACTIVE);

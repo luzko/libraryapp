@@ -25,7 +25,6 @@ public class BookOverviewCommand implements Command {
         Router router = new Router();
         BookService bookService = ServiceFactory.getInstance().getBookService();
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
-
         try {
             Optional<Book> bookOptional = bookService.findById(bookId);
             if (bookOptional.isPresent()) {

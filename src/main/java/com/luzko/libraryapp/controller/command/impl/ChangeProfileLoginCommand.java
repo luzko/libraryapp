@@ -24,7 +24,6 @@ public class ChangeProfileLoginCommand implements Command {
         UserService userService = ServiceFactory.getInstance().getUserService();
         String login = (String) request.getSession().getAttribute(RequestParameter.LOGIN);
         String newLogin = request.getParameter(RequestParameter.LOGIN);
-
         try {
             if (userService.isUserLoginChange(login, newLogin)) {
                 request.getSession().setAttribute(RequestParameter.CHANGE_SAVED,

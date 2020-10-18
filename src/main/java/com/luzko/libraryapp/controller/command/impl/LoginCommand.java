@@ -31,7 +31,6 @@ public class LoginCommand implements Command {
         UserService userService = ServiceFactory.getInstance().getUserService();
         String login = request.getParameter(RequestParameter.LOGIN);
         String password = request.getParameter(RequestParameter.PASSWORD);
-
         try {
             if (userService.verifyUser(login, password)) {
                 Optional<User> userOptional = userService.findByLogin(login);

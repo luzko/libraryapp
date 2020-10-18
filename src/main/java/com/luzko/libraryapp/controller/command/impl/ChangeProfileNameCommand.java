@@ -24,7 +24,6 @@ public class ChangeProfileNameCommand implements Command {
         UserService userService = ServiceFactory.getInstance().getUserService();
         String login = (String) request.getSession().getAttribute(RequestParameter.LOGIN);
         String newName = request.getParameter(RequestParameter.NAME);
-
         try {
             if (userService.isUserNameChange(login, newName)) {
                 request.getSession().setAttribute(RequestParameter.CHANGE_SAVED,

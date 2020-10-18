@@ -24,7 +24,6 @@ public class ChangeProfileSurnameCommand implements Command {
         UserService userService = ServiceFactory.getInstance().getUserService();
         String login = (String) request.getSession().getAttribute(RequestParameter.LOGIN);
         String newSurname = request.getParameter(RequestParameter.SURNAME);
-
         try {
             if (userService.isUserSurnameChange(login, newSurname)) {
                 request.getSession().setAttribute(RequestParameter.CHANGE_SAVED,
