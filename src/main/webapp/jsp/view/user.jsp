@@ -119,8 +119,8 @@
 
                 <div class="text_block">
                     <div class="col-lg-8">
-                        <img class="img-fluid" src="/images/1.jpg"
-                             style="margin-top: 60px; border-radius: 30px" width="300" height="300"/>
+                        <img class="img-fluid" src="/images/avatar.jpg"
+                             style="margin-top: 100px; border-radius: 30px" width="300" height="300"/>
                     </div>
                     <div class="col-lg-8 text-center">
                         <div class="row">
