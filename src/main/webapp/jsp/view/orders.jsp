@@ -66,7 +66,7 @@
             <div class="row justify-content-center ">
                 <form method="get" action="${pageContext.request.contextPath}/controller">
                     <div class="jumbotron" style="margin-top: 0px;">
-                        <div class="d-flex justify-content-around"><h2>Orders</h2></div>
+                        <div class="d-flex justify-content-around"><h2>text.site.orders</h2></div>
                         <c:choose>
                             <c:when test="${orderType == 'user'}">
                                 <table class="table table-bordered table-hover">

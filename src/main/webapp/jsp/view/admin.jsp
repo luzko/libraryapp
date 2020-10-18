@@ -75,7 +75,6 @@
                         </nav>
                         <div class="d-flex justify-content-around"><h2><fmt:message key="text.site.users"/></h2></div>
                         <table class="table table-bordered table-hover">
-
                             <thead class="thead-dark">
                             <tr>
                                 <th scope="col">
