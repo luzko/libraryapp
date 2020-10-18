@@ -11,6 +11,7 @@ public class UserBuilder {
     private String surname;
     private String email;
     private UserStatus userStatus;
+    private String avatar;
 
     public Long getUserId() {
         return userId;
@@ -72,6 +73,15 @@ public class UserBuilder {
 
     public UserBuilder setUserStatus(UserStatus userStatus) {
         this.userStatus = userStatus;
+        return this;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public UserBuilder setUserAvatar(String avatar) {
+        this.avatar = avatar;
         return this;
     }
 }

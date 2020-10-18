@@ -12,6 +12,7 @@ public class User extends BaseEntity {
     private String surname;
     private String email;
     private UserStatus userStatus;
+    private String avatar;
 
     public User() {
 
@@ -25,6 +26,7 @@ public class User extends BaseEntity {
         this.surname = builder.getSurname();
         this.email = builder.getEmail();
         this.userStatus = builder.getUserStatus();
+        this.avatar = builder.getAvatar();
     }
 
     public long getUserId() {
@@ -83,6 +85,14 @@ public class User extends BaseEntity {
         this.userStatus = userStatus;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -100,7 +110,10 @@ public class User extends BaseEntity {
         if (login != null ? !login.equals(user.login) : user.login != null) {
             return false;
         }
-        if (userRole != user.userRole || name != null ? !name.equals(user.name) : user.name != null) {
+        if (userRole != user.userRole || userStatus != user.userStatus) {
+            return false;
+        }
+        if (name != null ? !name.equals(user.name) : user.name != null) {
             return false;
         }
         if (surname != null ? !surname.equals(user.surname) : user.surname != null) {
@@ -109,7 +122,8 @@ public class User extends BaseEntity {
         if (email != null ? !email.equals(user.email) : user.email != null) {
             return false;
         }
-        return userStatus == user.userStatus;
+
+        return avatar != null ? avatar.equals(user.avatar) : user.avatar == null;
     }
 
     @Override
@@ -121,6 +135,7 @@ public class User extends BaseEntity {
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (userStatus != null ? userStatus.hashCode() : 0);
+        result = 31 * result + (avatar != null ? avatar.hashCode() : 0);
         return result;
     }
 
@@ -134,6 +149,7 @@ public class User extends BaseEntity {
                 .add("surname='" + surname + "'")
                 .add("email='" + email + "'")
                 .add("userStatus=" + userStatus)
+                .add("avatar='" + avatar + "'")
                 .toString();
     }
 }
