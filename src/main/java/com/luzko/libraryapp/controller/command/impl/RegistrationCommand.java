@@ -11,7 +11,7 @@ import com.luzko.libraryapp.factory.ServiceFactory;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.entity.UserRole;
 import com.luzko.libraryapp.service.UserService;
-import com.luzko.libraryapp.util.ConfirmCodeGenerator;
+import com.luzko.libraryapp.util.CodeGenerator;
 
 import com.luzko.libraryapp.util.mail.EmailSender;
 import org.apache.logging.log4j.Level;
@@ -74,7 +74,7 @@ public class RegistrationCommand implements Command {
         registrationParameter.put(ColumnName.NAME, request.getParameter(ColumnName.NAME).trim());
         registrationParameter.put(ColumnName.SURNAME, request.getParameter(ColumnName.SURNAME).trim());
         registrationParameter.put(ColumnName.EMAIL, request.getParameter(ColumnName.EMAIL).trim());
-        registrationParameter.put(ColumnName.CONFIRM_CODE, ConfirmCodeGenerator.generate());
+        registrationParameter.put(ColumnName.CONFIRM_CODE, CodeGenerator.generate());
         return registrationParameter;
     }
 }

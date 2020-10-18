@@ -23,6 +23,7 @@ public enum CommandType {
     CHANGE_PROFILE_LOGIN(new ChangeProfileLoginCommand()),
     CHANGE_PROFILE_NAME(new ChangeProfileNameCommand()),
     CHANGE_PROFILE_SURNAME(new ChangeProfileSurnameCommand()),
+    CHANGE_PROFILE_IMAGE(new ChangeProfileImageCommand()),
     BOOK_OVERVIEW(new BookOverviewCommand()),
     CREATE_AUTHOR(new CreateAuthorCommand()),
     CREATE_BOOK(new CreateBookCommand()),

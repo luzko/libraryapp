@@ -246,7 +246,7 @@
                     <div class="text_block">
 
                         <div class="col-lg-8" style="margin-bottom: 100px">
-                                <%--<form class="form-inline" action="${pageContext.request.contextPath}/upload"
+                                <form class="form-inline" action="${pageContext.request.contextPath}/upload"
                                       enctype="multipart/form-data" method="post">
                                     <input type="hidden" name="command" value="change_profile_image"/>
                                     <input type="file" name="image" accept="image/jpeg,image/png"
@@ -257,11 +257,11 @@
                                             <fmt:message key="submit.save"/>
                                         </button>
                                     </div>
-                                </form>--%>
+                                </form>
 
                                 <%--<img class="img-fluid" src="${pageContext.request.contextPath}/${userImage}"--%>
-                            <img class="img-fluid" src="${pageContext.request.contextPath}/img/avatar.jpg"
-                                 style="margin-top: 60px; border-radius: 30px" width="300" height="300"/>
+                            <%--<img class="img-fluid" src="${pageContext.request.contextPath}/img/avatar.jpg"
+                                 style="margin-top: 60px; border-radius: 30px" width="300" height="300"/>--%>
 
                         </div>
                         <div class="col-lg-8">
