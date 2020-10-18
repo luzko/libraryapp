@@ -20,7 +20,7 @@ public class StatementSql {
             "SELECT count(user_id) as count FROM users WHERE login LIKE ?";
 
     public static final String FIND_USER_BY_LOGIN =
-            "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk " +
+            "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk, avatar " +
                     "FROM users WHERE login LIKE ?";
 
     public static final String FIND_USER_BY_ID =

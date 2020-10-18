@@ -15,6 +15,7 @@ public class ColumnName {
     public static final String EMAIL = "email";
     public static final String USER_STATUS_ID_FK = "user_status_id_fk";
     public static final String CONFIRM_CODE = "confirm";
+    public static final String AVATAR = "avatar";
     public static final String COUNT = "count";
 
     //books

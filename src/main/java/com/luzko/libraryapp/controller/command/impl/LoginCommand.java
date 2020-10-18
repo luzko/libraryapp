@@ -68,7 +68,7 @@ public class LoginCommand implements Command {
         session.setAttribute(RequestParameter.USER_NAME, user.getName());
         session.setAttribute(RequestParameter.USER_SURNAME, user.getSurname());
         session.setAttribute(RequestParameter.EMAIL, user.getEmail());
-
+        session.setAttribute(RequestParameter.AVATAR, user.getAvatar());
         session.setAttribute(RequestParameter.TYPE_PROFILE_PAGE, RequestParameter.SEE_PROFILE_PAGE);
 
         switch (userStatus) {

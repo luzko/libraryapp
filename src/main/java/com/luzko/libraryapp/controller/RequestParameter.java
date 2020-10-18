@@ -55,6 +55,7 @@ public class RequestParameter {
     public static final String USER_ROLE = "userRole";
     public static final String USER_STATUS = "status";
     public static final String REGISTRATION_PARAMETER = "registrationParameters";
+    public static final String AVATAR = "avatar";
 
     //profile
     public static final String TYPE_PROFILE_PAGE = "type";

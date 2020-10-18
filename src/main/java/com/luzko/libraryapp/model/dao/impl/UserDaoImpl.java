@@ -205,7 +205,8 @@ public class UserDaoImpl implements UserDao {
                 .setName(resultSet.getString(ColumnName.NAME))
                 .setSurname(resultSet.getString(ColumnName.SURNAME))
                 .setEmail(resultSet.getString(ColumnName.EMAIL))
-                .setUserStatus(UserStatus.defineStatusById(resultSet.getInt(ColumnName.USER_STATUS_ID_FK)));
+                .setUserStatus(UserStatus.defineStatusById(resultSet.getInt(ColumnName.USER_STATUS_ID_FK)))
+                .setUserAvatar(resultSet.getString(ColumnName.AVATAR));
         User user = new User(userBuilder);
         Optional<User> userOptional = Optional.empty();
         if (user.getUserRole() != null && user.getUserStatus() != null) {

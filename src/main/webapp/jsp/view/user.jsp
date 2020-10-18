@@ -119,7 +119,7 @@
 
                 <div class="text_block">
                     <div class="col-lg-8">
-                        <img class="img-fluid" src="/images/avatar.jpg"
+                        <img class="img-fluid" src="/images/${avatar}"
                              style="margin-top: 100px; border-radius: 30px" width="300" height="300"/>
                     </div>
                     <div class="col-lg-8 text-center">
@@ -245,6 +245,12 @@
                     <div class="text_block">
 
                         <div class="col-lg-8" style="margin-bottom: 100px">
+                            <div class="col-lg-8">
+                                <img class="img-fluid" src="/images/${avatar}"
+                                     style="margin-top: 100px; border-radius: 30px" width="300" height="300"/>
+                            </div>
+
+
                             <form class="form-inline" action="${pageContext.request.contextPath}/upload"
                                   enctype="multipart/form-data" method="post">
                                 <input type="hidden" name="command" value="change_profile_image"/>
