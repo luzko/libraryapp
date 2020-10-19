@@ -42,4 +42,46 @@ public class UserValidatorTest {
         boolean actual = UserValidator.isValidRegistrationParameter(invalidRegisterParameter);
         assertFalse(actual);
     }
+
+    @Test
+    public void isLoginValidPositiveTest() {
+        String inputValue = "user561";
+        boolean actual = UserValidator.isLoginValid(inputValue);
+        assertTrue(actual);
+    }
+
+    @Test
+    public void isLoginValidNegativeTest() {
+        String inputValue = "user";
+        boolean actual = UserValidator.isLoginValid(inputValue);
+        assertFalse(actual);
+    }
+
+    @Test
+    public void isPasswordValidPositiveTest() {
+        String inputValue = "adsfASDF1234";
+        boolean actual = UserValidator.isPasswordValid(inputValue);
+        assertTrue(actual);
+    }
+
+    @Test
+    public void isPasswordValidNegativeTest() {
+        String inputValue = "adsfadf";
+        boolean actual = UserValidator.isPasswordValid(inputValue);
+        assertFalse(actual);
+    }
+
+    @Test
+    public void isEmailValidPositiveTest() {
+        String inputValue = "asdfasdf@gmail.com";
+        boolean actual = UserValidator.isEmailValid(inputValue);
+        assertTrue(actual);
+    }
+
+    @Test
+    public void isEmailValidNegativeTest() {
+        String inputValue = "sf@@@mail.ru";
+        boolean actual = UserValidator.isEmailValid(inputValue);
+        assertFalse(actual);
+    }
 }

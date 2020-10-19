@@ -23,7 +23,6 @@ public final class BookValidator {
     public static boolean isValidBookParameter(Map<String, String> bookParameter) {
         boolean isValidParameter = true;
         if (!isValidTitle(bookParameter.get(ColumnName.TITLE))) {
-            System.out.println(11);
             isValidParameter = false;
             bookParameter.put(ColumnName.TITLE, EMPTY_VALUE);
         }
@@ -32,17 +31,14 @@ public final class BookValidator {
             bookParameter.put(ColumnName.YEAR, EMPTY_VALUE);
         }
         if (!isPagesValid(Integer.parseInt(bookParameter.get(ColumnName.PAGES)))) {
-            System.out.println(22);
             isValidParameter = false;
             bookParameter.put(ColumnName.PAGES, EMPTY_VALUE);
         }
         if (!isNumberCopiesValid(Integer.parseInt(bookParameter.get(ColumnName.NUMBER_COPIES)))) {
-            System.out.println(33);
             isValidParameter = false;
             bookParameter.put(ColumnName.NUMBER_COPIES, EMPTY_VALUE);
         }
         if (!isValidDescription(bookParameter.get(ColumnName.DESCRIPTION))) {
-            System.out.println(44);
             isValidParameter = false;
             bookParameter.put(ColumnName.DESCRIPTION, EMPTY_VALUE);
         }

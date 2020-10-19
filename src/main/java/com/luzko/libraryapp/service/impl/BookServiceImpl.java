@@ -65,10 +65,8 @@ public class BookServiceImpl implements BookService {
     public boolean add(Map<String, String> bookParameter) throws ServiceException {
         logger.log(Level.INFO, "Add book execute");
         boolean isBookAdd = false;
-        System.out.println(bookParameter);
         BookDao bookDao = DaoFactory.getInstance().getBookDao();
         if (BookValidator.isValidBookParameter(bookParameter)) {
-            System.out.println(1);
             try {
                 String title = bookParameter.get(ColumnName.TITLE);
                 String year = bookParameter.get(ColumnName.YEAR);
