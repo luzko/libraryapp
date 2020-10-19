@@ -27,14 +27,8 @@ public class DenyOrderCommand implements Command {
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         try {
             if (orderService.isDeny(orderId)) {
-                String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
-                int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
-                int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
-                List<Order> orders = orderService.findNew();
-                definePagination(request, orders.size(), currentPage, recordsPerPage);
-                int recordsView = (currentPage - 1) * recordsPerPage;
-                orders = orders.subList(recordsView, Math.min(recordsView + recordsPerPage, orders.size()));
-                request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
+                List<Order> orderList = defineOrderList(orderService, request);
+                request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orderList);
                 request.getSession().setAttribute(RequestParameter.ORDER_TYPE, orderType);
                 router.setPagePath(PagePath.ORDERS);
                 router.setRouterType(RouterType.REDIRECT);
@@ -48,5 +42,15 @@ public class DenyOrderCommand implements Command {
             router.setRouterType(RouterType.FORWARD);
         }
         return router;
+    }
+
+    private List<Order> defineOrderList(OrderService orderService, HttpServletRequest request) throws ServiceException {
+        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
+        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
+        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
+        List<Order> orderList = orderService.findNew();
+        definePagination(request, orderList.size(), currentPage, recordsPerPage);
+        int recordsView = (currentPage - 1) * recordsPerPage;
+        return orderList.subList(recordsView, Math.min(recordsView + recordsPerPage, orderList.size()));
     }
 }
