@@ -66,7 +66,7 @@
             <div class="row justify-content-center ">
                 <form method="get" action="${pageContext.request.contextPath}/controller">
                     <div class="jumbotron" style="margin-top: 0px;">
-                        <div class="d-flex justify-content-around"><h2>text.site.orders</h2></div>
+                        <div class="d-flex justify-content-around"><h2><fmt:message key="text.site.orders"/></h2></div>
                         <c:choose>
                             <c:when test="${orderType == 'user'}">
                                 <table class="table table-bordered table-hover">
@@ -112,7 +112,7 @@
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
                                                         class="badge badge-outline-primary">
-                                                    <fmt:message key="${user.OrderStatus.localeName}"/>
+                                                    <fmt:message key="${orderItem.OrderStatus.localeName}"/>
                                                 </span></h4></div>
                                             </td>
                                             <c:choose>
@@ -213,7 +213,7 @@
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
                                                         class="badge badge-outline-primary">
-                                                <fmt:message key="${user.OrderStatus.localeName}"/>
+                                                <fmt:message key="${orderItem.OrderStatus.localeName}"/>
                                                 </span></h4></div>
                                             </td>
                                         </tr>
@@ -283,7 +283,7 @@
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
                                                         class="badge badge-outline-primary">
-                                                    <fmt:message key="${user.OrderStatus.localeName}"/>
+                                                    <fmt:message key="${orderItem.OrderStatus.localeName}"/>
                                                 </span></h4></div>
                                             </td>
                                         </tr>
@@ -344,7 +344,7 @@
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
                                                         class="badge badge-outline-primary">
-                                                    <fmt:message key="${user.OrderStatus.localeName}"/>
+                                                    <fmt:message key="${orderItem.OrderStatus.localeName}"/>
                                                 </span></h4></div>
                                             </td>
                                             <form action="${pageContext.request.contextPath}/controller"
