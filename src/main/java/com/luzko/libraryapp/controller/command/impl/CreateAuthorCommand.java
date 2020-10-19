@@ -26,11 +26,11 @@ public class CreateAuthorCommand implements Command {
         AuthorService authorService = ServiceFactory.getInstance().getAuthorService();
         try {
             if (authorService.add(authorName)) {
-                request.setAttribute(RequestParameter.CORRECT_DATA_MESSAGE,
+                request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE,
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_AUTHOR_CORRECT));
                 request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
             } else {
-                request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
+                request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_AUTHOR_DATA));
                 request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
             }
