@@ -112,7 +112,7 @@
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
                                                         class="badge badge-outline-primary">
-                                                    <fmt:message key="${orderItem.OrderStatus.localeName}"/>
+                                                    <fmt:message key="${orderItem.orderStatus.localeName}"/>
                                                 </span></h4></div>
                                             </td>
                                             <c:choose>
@@ -213,7 +213,7 @@
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
                                                         class="badge badge-outline-primary">
-                                                <fmt:message key="${orderItem.OrderStatus.localeName}"/>
+                                                <fmt:message key="${orderItem.orderStatus.localeName}"/>
                                                 </span></h4></div>
                                             </td>
                                         </tr>
@@ -283,7 +283,7 @@
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
                                                         class="badge badge-outline-primary">
-                                                    <fmt:message key="${orderItem.OrderStatus.localeName}"/>
+                                                    <fmt:message key="${orderItem.orderStatus.localeName}"/>
                                                 </span></h4></div>
                                             </td>
                                         </tr>
@@ -344,7 +344,7 @@
                                             <td>
                                                 <div class="d-flex justify-content-around"><h4><span
                                                         class="badge badge-outline-primary">
-                                                    <fmt:message key="${orderItem.OrderStatus.localeName}"/>
+                                                    <fmt:message key="${orderItem.orderStatus.localeName}"/>
                                                 </span></h4></div>
                                             </td>
                                             <form action="${pageContext.request.contextPath}/controller"
@@ -387,15 +387,16 @@
                                 </table>
                             </c:when>
                         </c:choose>
-                        <div style="margin-left: 350px; margin-right: 350px;">
+                        <div style="margin-left: 400px; margin-right: 400px;">
                             <ul class="pagination">
                                 <c:if test="${countPage > 1}">
                                     <c:if test="${currentPage != 1}">
                                         <li class="page-item">
                                             <form class="form-inline" method="POST"
                                                   action="${pageContext.request.contextPath}/controller">
-                                                <input type="hidden" name="command" value="order_page"/>
+                                                <input type="hidden" name="command" value="orders_page"/>
                                                 <input type="hidden" name="currentPage" value="${currentPage-1}"/>
+                                                <input type="hidden" name="orderType" value="${orderType}"/>
                                                 <div>
                                                     <button type="submit"
                                                             class="btn btn-primary js-scroll-trigger">
@@ -416,8 +417,9 @@
                                                 <li class="page-item">
                                                     <form class="form-inline" method="POST"
                                                           action="${pageContext.request.contextPath}/controller">
-                                                        <input type="hidden" name="command" value="order_page"/>
+                                                        <input type="hidden" name="command" value="orders_page"/>
                                                         <input type="hidden" name="currentPage" value="${i}"/>
+                                                        <input type="hidden" name="orderType" value="${orderType}"/>
                                                         <div>
                                                             <button type="submit"
                                                                     class="btn btn-primary js-scroll-trigger">
@@ -434,8 +436,9 @@
                                         <li class="page-item">
                                             <form class="form-inline" method="POST"
                                                   action="${pageContext.request.contextPath}/controller">
-                                                <input type="hidden" name="command" value="order_page"/>
+                                                <input type="hidden" name="command" value="orders_page"/>
                                                 <input type="hidden" name="currentPage" value="${currentPage+1}"/>
+                                                <input type="hidden" name="orderType" value="${orderType}"/>
                                                 <div>
                                                     <button type="submit"
                                                             class="btn btn-primary js-scroll-trigger">

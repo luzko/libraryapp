@@ -37,7 +37,7 @@ public class CreateOrderCommand implements Command {
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_ERROR));
             }
             router.setPagePath(PagePath.BOOK_OVERVIEW);
-            router.setRouterType(RouterType.FORWARD);
+            router.setRouterType(RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error create order", e);
             router.setPagePath(PagePath.ERROR);

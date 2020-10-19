@@ -38,9 +38,9 @@ public class ApproveOrderCommand implements Command {
             }
             List<Order> orders = orderService.findNew();
             request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
-            request.setAttribute(RequestParameter.ORDER_TYPE, orderType);
+            request.getSession().setAttribute(RequestParameter.ORDER_TYPE, orderType);
             router.setPagePath(PagePath.ORDERS);
-            router.setRouterType(RouterType.FORWARD);
+            router.setRouterType(RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in deny order", e);
             router.setPagePath(PagePath.ERROR);

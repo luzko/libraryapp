@@ -32,7 +32,7 @@ public class ReturnOrderCommand implements Command {
                 long userId = (long) userIdObject;
                 List<Order> orders = orderService.findByUserId(userId);
                 request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
-                request.setAttribute(RequestParameter.ORDER_TYPE, orderType);
+                request.getSession().setAttribute(RequestParameter.ORDER_TYPE, orderType);
                 router.setPagePath(PagePath.ORDERS);
             } else {
                 router.setPagePath(PagePath.ERROR);
