@@ -21,22 +21,22 @@ public class AvailabilityPage {
     public static final String ORDERS = "orders.jsp";
     public static final String ADMIN = "admin.jsp";
 
-    public static List<String> availableGustPage = List.of(
+    public static final List<String> availableGustPageList = List.of(
             INDEX, HOME, LOGIN, REGISTRATION
     );
-    public static List<String> availableReaderPage = List.of(
+    public static final List<String> availableReaderPageList = List.of(
             INDEX, HOME, USER, CONFIRMATION, BLOCKED, BOOK_OVERVIEW, ORDERS
     );
-    public static List<String> availableLibrarianPage = List.of(
+    public static final List<String> availableLibrarianPageList = List.of(
             INDEX, HOME, USER, CONFIRMATION, BLOCKED, BOOK_OVERVIEW, ORDERS
     );
-    public static List<String> availableAdminPage = List.of(
+    public static final List<String> availableAdminPageList = List.of(
             INDEX, HOME, REGISTRATION, ADMIN, CREATE_BOOK
     );
-    public static List<String> availableBlockedPage = List.of(
+    public static final List<String> availableBlockedPageList = List.of(
             INDEX, HOME, BLOCKED
     );
-    public static List<String> availableUnconfirmedPage = List.of(
+    public static final List<String> availableUnconfirmedPageList = List.of(
             INDEX, HOME, CONFIRMATION
     );
 }

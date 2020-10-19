@@ -18,13 +18,14 @@ import java.io.IOException;
         @WebInitParam(name = "ERROR_STEP", value = "/jsp/error/errorstep.jsp")
 })
 public class PageSecurityFilter implements Filter {
+    private static final String ERROR_STEP = "ERROR_STEP";
     private static final String DELIMITER_PATH = "/";
     private static final String EXTENSION_FILE = ".jsp";
     private String indexPath;
 
     @Override
     public void init(FilterConfig filterConfig) {
-        indexPath = filterConfig.getInitParameter("ERROR_STEP");
+        indexPath = filterConfig.getInitParameter(ERROR_STEP);
     }
 
     @Override
@@ -40,16 +41,16 @@ public class PageSecurityFilter implements Filter {
             page = list[list.length - 1];
         }
 
-        boolean isErrorPageRedirect = (userRole == null && !AvailabilityPage.availableGustPage.contains(page)) ||
-                (UserRole.READER.equals(userRole) && !AvailabilityPage.availableReaderPage.contains(page)) ||
-                (UserRole.LIBRARIAN.equals(userRole) && !AvailabilityPage.availableLibrarianPage.contains(page)) ||
-                (UserRole.ADMIN.equals(userRole) && !AvailabilityPage.availableAdminPage.contains(page));
+        boolean isErrorPageRedirect = (userRole == null && !AvailabilityPage.availableGustPageList.contains(page)) ||
+                (UserRole.READER.equals(userRole) && !AvailabilityPage.availableReaderPageList.contains(page)) ||
+                (UserRole.LIBRARIAN.equals(userRole) && !AvailabilityPage.availableLibrarianPageList.contains(page)) ||
+                (UserRole.ADMIN.equals(userRole) && !AvailabilityPage.availableAdminPageList.contains(page));
 
         if (!isErrorPageRedirect && userStatus == UserStatus.BLOCKED) {
-            isErrorPageRedirect = !AvailabilityPage.availableBlockedPage.contains(page);
+            isErrorPageRedirect = !AvailabilityPage.availableBlockedPageList.contains(page);
         }
         if (!isErrorPageRedirect && userStatus == UserStatus.UNCONFIRMED) {
-            isErrorPageRedirect = !AvailabilityPage.availableUnconfirmedPage.contains(page);
+            isErrorPageRedirect = !AvailabilityPage.availableUnconfirmedPageList.contains(page);
         }
         if (isErrorPageRedirect) {
             response.sendRedirect(request.getContextPath() + indexPath);
