@@ -28,14 +28,8 @@ public class ChangeUserStatusCommand implements Command {
         String userStatus = request.getParameter(RequestParameter.USER_STATUS);
         try {
             boolean isChangeUserStatus = userService.isChangeUserStatus(login, userStatus);
-            String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
-            int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
-            int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
-            List<User> users = userService.findAll();
-            definePagination(request, users.size(), currentPage, recordsPerPage);
-            int recordsView = (currentPage - 1) * recordsPerPage;
-            users = users.subList(recordsView, Math.min(recordsView + recordsPerPage, users.size()));
-            request.getSession().setAttribute(RequestParameter.ALL_USERS, users);
+            List<User> userList = defineUserList(userService, request);
+            request.getSession().setAttribute(RequestParameter.ALL_USERS, userList);
             router.setPagePath(PagePath.ADMIN);
             router.setRouterType(RouterType.REDIRECT);
             if (!isChangeUserStatus) {
@@ -49,5 +43,15 @@ public class ChangeUserStatusCommand implements Command {
             router.setRouterType(RouterType.FORWARD);
         }
         return router;
+    }
+
+    private List<User> defineUserList(UserService userService, HttpServletRequest request) throws ServiceException {
+        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
+        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
+        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
+        List<User> userList = userService.findAll();
+        definePagination(request, userList.size(), currentPage, recordsPerPage);
+        int recordsView = (currentPage - 1) * recordsPerPage;
+        return userList.subList(recordsView, Math.min(recordsView + recordsPerPage, userList.size()));
     }
 }
