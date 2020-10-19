@@ -14,7 +14,6 @@ import java.util.Optional;
  * @param <T> the type parameter
  */
 public interface BaseDao<T extends BaseEntity> {
-
     /**
      * Find by id.
      *
