@@ -51,9 +51,9 @@ public class OrderPageCommand implements Command {
     private void userOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
         Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
         long userId = (long) userIdObject;
-        List<Order> orders = orderService.findByUserId(userId);
-        if (!orders.isEmpty()) {
-            defineOrdersList(router, orders, request);
+        List<Order> orderList = orderService.findByUserId(userId);
+        if (!orderList.isEmpty()) {
+            defineOrdersList(router, orderList, request);
         } else {
             request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
                     ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
@@ -64,9 +64,9 @@ public class OrderPageCommand implements Command {
 
     private void bookOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
-        List<Order> orders = orderService.findByBookId(bookId);
-        if (!orders.isEmpty()) {
-            defineOrdersList(router, orders, request);
+        List<Order> orderList = orderService.findByBookId(bookId);
+        if (!orderList.isEmpty()) {
+            defineOrdersList(router, orderList, request);
         } else {
             request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
                     ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
@@ -80,9 +80,9 @@ public class OrderPageCommand implements Command {
     }
 
     private void newOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
-        List<Order> orders = orderService.findNew();
-        if (!orders.isEmpty()) {
-            defineOrdersList(router, orders, request);
+        List<Order> orderList = orderService.findNew();
+        if (!orderList.isEmpty()) {
+            defineOrdersList(router, orderList, request);
         } else {
             request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
                     ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
@@ -92,9 +92,9 @@ public class OrderPageCommand implements Command {
     }
 
     private void allOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
-        List<Order> orders = orderService.findAll();
-        if (!orders.isEmpty()) {
-            defineOrdersList(router, orders, request);
+        List<Order> orderList = orderService.findAll();
+        if (!orderList.isEmpty()) {
+            defineOrdersList(router, orderList, request);
         } else {
             request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
                     ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
@@ -103,14 +103,14 @@ public class OrderPageCommand implements Command {
         }
     }
 
-    private void defineOrdersList(Router router, List<Order> orders, HttpServletRequest request) {
+    private void defineOrdersList(Router router, List<Order> orderList, HttpServletRequest request) {
         String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
         int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
         int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
-        definePagination(request, orders.size(), currentPage, recordsPerPage);
+        definePagination(request, orderList.size(), currentPage, recordsPerPage);
         int recordsView = (currentPage - 1) * recordsPerPage;
-        orders = orders.subList(recordsView, Math.min(recordsView + recordsPerPage, orders.size()));
-        request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
+        orderList = orderList.subList(recordsView, Math.min(recordsView + recordsPerPage, orderList.size()));
+        request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orderList);
         router.setPagePath(PagePath.ORDERS);
         router.setRouterType(RouterType.FORWARD);
     }
