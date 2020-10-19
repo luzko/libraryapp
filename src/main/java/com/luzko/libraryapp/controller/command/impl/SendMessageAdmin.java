@@ -18,11 +18,7 @@ public class SendMessageAdmin implements Command {
         String message = request.getParameter(RequestParameter.MESSAGE);
         String typeMessage = request.getParameter(RequestParameter.TYPE_MESSAGE);
         EmailSender.sendMessageAdmin(login, subject, message);
-        if (typeMessage.equals(RequestParameter.ACTIVE)) {
-            router.setPagePath(PagePath.USER);
-        } else {
-            router.setPagePath(PagePath.BLOCKED);
-        }
+        router.setPagePath(typeMessage.equals(RequestParameter.ACTIVE) ? PagePath.USER : PagePath.BLOCKED);
         router.setRouterType(RouterType.FORWARD);
         return router;
     }
