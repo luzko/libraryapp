@@ -28,10 +28,10 @@ public class CreateBookPageCommand implements Command {
         try {
             if (createType.equals(RequestParameter.BOOK)) {
                 AuthorService authorService = ServiceFactory.getInstance().getAuthorService();
-                List<Author> authors = authorService.findAll();
-                request.getSession().setAttribute(RequestParameter.ALL_AUTHORS, authors);
-                List<Category> categories = Arrays.asList(Category.values());
-                request.getSession().setAttribute(RequestParameter.ALL_CATEGORIES, categories);
+                List<Author> authorList = authorService.findAll();
+                request.getSession().setAttribute(RequestParameter.ALL_AUTHORS, authorList);
+                List<Category> categoryList = Arrays.asList(Category.values());
+                request.getSession().setAttribute(RequestParameter.ALL_CATEGORIES, categoryList);
             }
             request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
             request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);

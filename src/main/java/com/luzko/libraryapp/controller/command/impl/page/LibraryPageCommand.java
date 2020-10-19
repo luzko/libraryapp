@@ -22,16 +22,9 @@ public class LibraryPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
-        BookService bookService = ServiceFactory.getInstance().getBookService();
-        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
-        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
-        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
         try {
-            List<Book> books = bookService.findAll();
-            definePagination(request, books.size(), currentPage, recordsPerPage);
-            int recordsView = (currentPage - 1) * recordsPerPage;
-            books = books.subList(recordsView, Math.min(recordsView + recordsPerPage, books.size()));
-            request.getSession().setAttribute(RequestParameter.ALL_BOOKS, books);
+            List<Book> bookList = defineBookList(request);
+            request.getSession().setAttribute(RequestParameter.ALL_BOOKS, bookList);
             router.setPagePath(PagePath.LIBRARY);
             router.setRouterType(RouterType.FORWARD);
             return router;
@@ -41,5 +34,16 @@ public class LibraryPageCommand implements Command {
             router.setRouterType(RouterType.FORWARD);
         }
         return router;
+    }
+
+    private List<Book> defineBookList(HttpServletRequest request) throws ServiceException {
+        BookService bookService = ServiceFactory.getInstance().getBookService();
+        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
+        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
+        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
+        List<Book> bookList = bookService.findAll();
+        definePagination(request, bookList.size(), currentPage, recordsPerPage);
+        int recordsView = (currentPage - 1) * recordsPerPage;
+        return bookList.subList(recordsView, Math.min(recordsView + recordsPerPage, bookList.size()));
     }
 }

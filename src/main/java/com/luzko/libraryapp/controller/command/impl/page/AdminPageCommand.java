@@ -23,8 +23,8 @@ public class AdminPageCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         try {
-            List<User> users = defineUserList(request);
-            request.setAttribute(RequestParameter.ALL_USERS, users);
+            List<User> userList = defineUserList(request);
+            request.setAttribute(RequestParameter.ALL_USERS, userList);
             router.setPagePath(PagePath.ADMIN);
             router.setRouterType(RouterType.FORWARD);
         } catch (ServiceException e) {
@@ -40,9 +40,9 @@ public class AdminPageCommand implements Command {
         String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
         int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
         int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
-        List<User> users = userService.findAll();
-        definePagination(request, users.size(), currentPage, recordsPerPage);
+        List<User> userList = userService.findAll();
+        definePagination(request, userList.size(), currentPage, recordsPerPage);
         int recordsView = (currentPage - 1) * recordsPerPage;
-        return users.subList(recordsView, Math.min(recordsView + recordsPerPage, users.size()));
+        return userList.subList(recordsView, Math.min(recordsView + recordsPerPage, userList.size()));
     }
 }
