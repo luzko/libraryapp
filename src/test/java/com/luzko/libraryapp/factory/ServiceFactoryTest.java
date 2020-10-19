@@ -65,5 +65,4 @@ public class ServiceFactoryTest {
         Object actual = serviceFactory.getOrderService();
         assertFalse(actual instanceof UserServiceImpl);
     }
-
 }
