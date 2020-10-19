@@ -28,7 +28,7 @@ public class StatementSql {
                     "FROM users WHERE user_id LIKE ?";
 
     public static final String FIND_ALL_USERS =
-            "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk " +
+            "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk, avatar " +
                     "FROM users WHERE role_id_fk != 1 ORDER BY role_id_fk";
 
     public static final String CHANGE_USER_STATUS =

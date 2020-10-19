@@ -28,10 +28,16 @@ public class ChangeUserStatusCommand implements Command {
         String userStatus = request.getParameter(RequestParameter.USER_STATUS);
         try {
             boolean isChangeUserStatus = userService.changeUserStatus(login, userStatus);
+            String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
+            int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
+            int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
             List<User> users = userService.findAll();
-            request.getSession().setAttribute(RequestParameter.ALL_USERS, users);
+            definePagination(request, users.size(), currentPage, recordsPerPage);
+            int recordsView = (currentPage - 1) * recordsPerPage;
+            users = users.subList(recordsView, Math.min(recordsView + recordsPerPage, users.size()));
+            request.setAttribute(RequestParameter.ALL_USERS, users);
             router.setPagePath(PagePath.ADMIN);
-            router.setRouterType(RouterType.REDIRECT);
+            router.setRouterType(RouterType.FORWARD);
             if (!isChangeUserStatus) {
                 logger.log(Level.WARN, "User status is not change");
                 request.setAttribute(RequestParameter.ERROR_MESSAGE,

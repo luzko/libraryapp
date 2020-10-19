@@ -170,7 +170,7 @@
                             </c:forEach>
                             </tbody>
                         </table>
-                        <div style="margin-left: 350px; margin-right: 350px;">
+                        <div style="margin-left: 450px; margin-right: 450px;">
                             <ul class="pagination">
                                 <c:if test="${countPage > 1}">
                                     <c:if test="${currentPage != 1}">
