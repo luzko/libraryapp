@@ -192,8 +192,8 @@
                                 <div class="col-sm-8 ">
                                     <textarea type="text" name="description" id="description" class="float-sm-left"
                                               style="width: 220px"
-                                              pattern="^[\p{L} ]{5,150}$"
-                                              maxlength="150"
+                                              pattern="^[\p{L} ]{5,250}$"
+                                              maxlength="250"
                                               title="<fmt:message key="label.invalid.description"/>"
                                               required
                                               value="${bookParameter.get("description")}"></textarea>

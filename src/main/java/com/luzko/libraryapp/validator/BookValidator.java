@@ -14,7 +14,7 @@ public final class BookValidator {
     private static final String EMPTY_VALUE = "";
     private static final String NAME_PATTERN = "^[\\p{L} ]{3,25}$";
     private static final String TITLE_PATTERN = "^[\\p{L} ]{5,25}$";
-    private static final String DESCRIPTION_PATTERN = "^[\\p{L} ]{5,150}$";
+    private static final String XSS_PATTERN = "(?i)<script.*?>.*?</script.*?>";
 
     private BookValidator() {
 
@@ -23,6 +23,7 @@ public final class BookValidator {
     public static boolean isValidBookParameter(Map<String, String> bookParameter) {
         boolean isValidParameter = true;
         if (!isValidTitle(bookParameter.get(ColumnName.TITLE))) {
+            System.out.println(11);
             isValidParameter = false;
             bookParameter.put(ColumnName.TITLE, EMPTY_VALUE);
         }
@@ -31,18 +32,20 @@ public final class BookValidator {
             bookParameter.put(ColumnName.YEAR, EMPTY_VALUE);
         }
         if (!isPagesValid(Integer.parseInt(bookParameter.get(ColumnName.PAGES)))) {
+            System.out.println(22);
             isValidParameter = false;
             bookParameter.put(ColumnName.PAGES, EMPTY_VALUE);
         }
         if (!isNumberCopiesValid(Integer.parseInt(bookParameter.get(ColumnName.NUMBER_COPIES)))) {
+            System.out.println(33);
             isValidParameter = false;
             bookParameter.put(ColumnName.NUMBER_COPIES, EMPTY_VALUE);
         }
         if (!isValidDescription(bookParameter.get(ColumnName.DESCRIPTION))) {
+            System.out.println(44);
             isValidParameter = false;
             bookParameter.put(ColumnName.DESCRIPTION, EMPTY_VALUE);
         }
-
         return isValidParameter;
     }
 
@@ -65,7 +68,7 @@ public final class BookValidator {
     private static boolean isValidDescription(String description) {
         boolean isDescriptionCorrect = false;
         if (description != null && !description.isEmpty()) {
-            isDescriptionCorrect = description.matches(DESCRIPTION_PATTERN);
+            isDescriptionCorrect = !description.matches(XSS_PATTERN);
         }
         return isDescriptionCorrect;
     }
