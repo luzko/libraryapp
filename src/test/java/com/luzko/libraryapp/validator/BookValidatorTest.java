@@ -44,5 +44,44 @@ public class BookValidatorTest {
     }
 
     @Test
+    public void isValidTitlePositiveTest() {
+        String inputValue = "Дети подземелья";
+        boolean actual = BookValidator.isValidTitle(inputValue);
+        assertTrue(actual);
+    }
 
+    @Test
+    public void isValidTitleNegativeTest() {
+        String inputValue = "/.12 asd";
+        boolean actual = BookValidator.isValidTitle(inputValue);
+        assertFalse(actual);
+    }
+
+    @Test
+    public void isYearValidPositiveTest() {
+        int inputValue = 1999;
+        boolean actual = BookValidator.isYearValid(inputValue);
+        assertTrue(actual);
+    }
+
+    @Test
+    public void isYearValidNegativeTest() {
+        int inputValue = 3000;
+        boolean actual = BookValidator.isYearValid(inputValue);
+        assertFalse(actual);
+    }
+
+    @Test
+    public void isPagesValidPositiveTest() {
+        int inputValue = 100;
+        boolean actual = BookValidator.isPagesValid(inputValue);
+        assertTrue(actual);
+    }
+
+    @Test
+    public void inputValueNegativeTest() {
+        int inputValue = -5;
+        boolean actual = BookValidator.isPagesValid(inputValue);
+        assertFalse(actual);
+    }
 }
