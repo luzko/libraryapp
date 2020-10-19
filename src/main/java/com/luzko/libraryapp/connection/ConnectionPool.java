@@ -15,6 +15,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * The type Connection pool.
+ */
 public class ConnectionPool {
     private static final Logger logger = LogManager.getLogger(ConnectionPool.class);
     private static final String DRIVER_NAME = "driver";
@@ -38,13 +41,24 @@ public class ConnectionPool {
     }
 
     private static class ConnectionPoolSingletonHolder {
+        /**
+         * The Instance.
+         */
         static final ConnectionPool INSTANCE = new ConnectionPool();
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static ConnectionPool getInstance() {
         return ConnectionPoolSingletonHolder.INSTANCE;
     }
 
+    /**
+     * Init connection pool.
+     */
     public void init() {
         initLock.lock();
         if (!isInitialized.get()) {
@@ -72,6 +86,11 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Gets connection.
+     *
+     * @return the connection
+     */
     public Connection getConnection() {
         ProxyConnection connection = null;
         if (!isPoolClosing.get()) {
@@ -85,6 +104,9 @@ public class ConnectionPool {
         return connection;
     }
 
+    /**
+     * Destroy connection pool.
+     */
     public void destroy() {
         isPoolClosing.set(true);
         initLock.lock();
@@ -119,6 +141,11 @@ public class ConnectionPool {
         });
     }
 
+    /**
+     * Release connection.
+     *
+     * @param connection the connection
+     */
     public void releaseConnection(Connection connection) {
         if (connection instanceof ProxyConnection && givenConnection.remove(connection)) {
             availableConnection.offer((ProxyConnection) connection);
