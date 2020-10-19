@@ -1,6 +1,5 @@
 package com.luzko.libraryapp.controller;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,7 @@ public class ImageController extends HttpServlet {
     private static final int INDEX = 1;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String filename = request.getPathInfo().substring(INDEX);
         File file = new File(UPLOAD_DIRECTORY, filename);
         response.setHeader(RequestParameter.CONTENT_TYPE, getServletContext().getMimeType(filename));
