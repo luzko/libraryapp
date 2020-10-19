@@ -66,7 +66,6 @@
     </div>
 </nav>
 
-
 <section id="about" class="registration-section text-center">
     <div class="container">
         <div class="row">

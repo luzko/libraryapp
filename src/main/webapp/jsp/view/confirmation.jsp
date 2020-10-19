@@ -29,7 +29,6 @@
 </head>
 <body id="page-top">
 
-
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
         <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">

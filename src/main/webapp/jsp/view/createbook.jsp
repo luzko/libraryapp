@@ -57,7 +57,6 @@
     </div>
 </nav>
 
-
 <section id="about" class="registration-section text-center">
     <div class="container">
         <div class="row">
@@ -147,7 +146,6 @@
                                 </div>
                             </div>
 
-
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="dropdownCategory"
                                        style="color: white">
@@ -165,7 +163,6 @@
                                 </div>
                             </div>
 
-
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="dropdownAuthor"
                                        style="color: white">
@@ -182,7 +179,6 @@
                                     </select>
                                 </div>
                             </div>
-
 
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="description"
