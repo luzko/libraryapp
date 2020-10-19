@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Page security filter.
+ */
 @WebFilter(urlPatterns = {"/jsp/view/*"}, initParams = {
         @WebInitParam(name = "ERROR_STEP", value = "/jsp/error/errorstep.jsp")
 })
 public class PageSecurityFilter implements Filter {
-
     private static final String DELIMITER_PATH = "/";
     private static final String EXTENSION_FILE = ".jsp";
     private String indexPath;
@@ -46,11 +48,9 @@ public class PageSecurityFilter implements Filter {
         if (!isErrorPageRedirect && userStatus == UserStatus.BLOCKED) {
             isErrorPageRedirect = !AvailabilityPage.availableBlockedPage.contains(page);
         }
-
         if (!isErrorPageRedirect && userStatus == UserStatus.UNCONFIRMED) {
             isErrorPageRedirect = !AvailabilityPage.availableUnconfirmedPage.contains(page);
         }
-
         if (isErrorPageRedirect) {
             response.sendRedirect(request.getContextPath() + indexPath);
         }

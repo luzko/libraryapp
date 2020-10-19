@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Author dao.
+ */
 public class AuthorDaoImpl implements AuthorDao {
 
     @Override

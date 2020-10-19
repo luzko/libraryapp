@@ -9,6 +9,9 @@ import com.luzko.libraryapp.model.dao.impl.OrderDaoImpl;
 import com.luzko.libraryapp.model.dao.UserDao;
 import com.luzko.libraryapp.model.dao.impl.UserDaoImpl;
 
+/**
+ * The type Dao factory.
+ */
 public class DaoFactory {
     private final UserDao userDao;
     private final BookDao bookDao;
@@ -23,25 +26,53 @@ public class DaoFactory {
     }
 
     private static class DAOFactorySingletonHolder {
+        /**
+         * The Instance.
+         */
         static final DaoFactory INSTANCE = new DaoFactory();
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static DaoFactory getInstance() {
         return DAOFactorySingletonHolder.INSTANCE;
     }
 
+    /**
+     * Gets user dao.
+     *
+     * @return the user dao
+     */
     public UserDao getUserDAO() {
         return userDao;
     }
 
+    /**
+     * Gets book dao.
+     *
+     * @return the book dao
+     */
     public BookDao getBookDao() {
         return bookDao;
     }
 
+    /**
+     * Gets author dao.
+     *
+     * @return the author dao
+     */
     public AuthorDao getAuthorDao() {
         return authorDao;
     }
 
+    /**
+     * Gets order dao.
+     *
+     * @return the order dao
+     */
     public OrderDao getOrderDao() {
         return orderDao;
     }

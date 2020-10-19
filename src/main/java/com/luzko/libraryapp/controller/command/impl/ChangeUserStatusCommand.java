@@ -27,7 +27,7 @@ public class ChangeUserStatusCommand implements Command {
         String login = request.getParameter(RequestParameter.LOGIN);
         String userStatus = request.getParameter(RequestParameter.USER_STATUS);
         try {
-            boolean isChangeUserStatus = userService.changeUserStatus(login, userStatus);
+            boolean isChangeUserStatus = userService.isChangeUserStatus(login, userStatus);
             String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
             int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
             int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);

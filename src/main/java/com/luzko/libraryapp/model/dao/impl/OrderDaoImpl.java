@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Order dao.
+ */
 public class OrderDaoImpl implements OrderDao {
     private static final int MAX_COUNT_NEW_ORDER = 2;
 

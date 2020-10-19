@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * The type Encoding filter.
+ */
 @WebFilter(urlPatterns = {"/*"}, initParams = {
         @WebInitParam(name = "encoding", value = "UTF-8", description = "Encoding Parameter"),
         @WebInitParam(name = "locale", value = "en_US", description = "Locale Parameter")

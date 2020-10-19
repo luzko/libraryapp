@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type User dao.
+ */
 public class UserDaoImpl implements UserDao {
 
     @Override
@@ -180,7 +183,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean changeUserStatus(String login, int status) throws DaoException {
+    public boolean isChangeUserStatus(String login, int status) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.CHANGE_USER_STATUS)) {
             statement.setInt(1, status);

@@ -6,6 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
+/**
+ * The type Action provider.
+ */
 public class ActionProvider {
     private static final Logger logger = LogManager.getLogger(ActionProvider.class);
 
@@ -13,6 +16,12 @@ public class ActionProvider {
 
     }
 
+    /**
+     * Define command type.
+     *
+     * @param commandName the command name
+     * @return the optional
+     */
     public static Optional<Command> defineCommand(String commandName) {
         Optional<Command> command = Optional.empty();
         if (commandName != null && !commandName.isBlank()) {

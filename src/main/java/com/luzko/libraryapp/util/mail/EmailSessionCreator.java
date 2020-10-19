@@ -5,6 +5,9 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import java.util.Properties;
 
+/**
+ * The type Email session creator.
+ */
 public class EmailSessionCreator {
     private static final String MAIL_USER_NAME = "mail.user.name";
     private static final String MAIL_USER_PASSWORD = "mail.user.password";
@@ -13,6 +16,12 @@ public class EmailSessionCreator {
 
     }
 
+    /**
+     * Create email session.
+     *
+     * @param properties the properties
+     * @return the session
+     */
     public static Session createSession(Properties properties) {
         String userName = properties.getProperty(MAIL_USER_NAME);
         String userPassword = properties.getProperty(MAIL_USER_PASSWORD);

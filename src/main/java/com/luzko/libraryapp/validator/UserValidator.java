@@ -4,6 +4,9 @@ import com.luzko.libraryapp.model.dao.ColumnName;
 
 import java.util.Map;
 
+/**
+ * The type User validator.
+ */
 public final class UserValidator {
     private static final String EMPTY_VALUE = "";
     private static final String LOGIN_PATTERN = "^[\\w.]{5,20}$";
@@ -15,6 +18,12 @@ public final class UserValidator {
 
     }
 
+    /**
+     * Check valid registration parameter.
+     *
+     * @param registrationParameter the registration parameter
+     * @return the boolean
+     */
     public static boolean isValidRegistrationParameter(Map<String, String> registrationParameter) {
         boolean isValidParameter = true;
         if (!isLoginValid(registrationParameter.get(ColumnName.LOGIN))) {
@@ -33,7 +42,6 @@ public final class UserValidator {
             isValidParameter = false;
             registrationParameter.put(ColumnName.SURNAME, EMPTY_VALUE);
         }
-
         if (!isEmailValid(registrationParameter.get(ColumnName.EMAIL))) {
             isValidParameter = false;
             registrationParameter.put(ColumnName.EMAIL, EMPTY_VALUE);
@@ -41,6 +49,12 @@ public final class UserValidator {
         return isValidParameter;
     }
 
+    /**
+     * Check login valid.
+     *
+     * @param login the login
+     * @return the boolean
+     */
     public static boolean isLoginValid(String login) {
         boolean isLoginCorrect = false;
         if (login != null && !login.isEmpty()) {
@@ -49,6 +63,12 @@ public final class UserValidator {
         return isLoginCorrect;
     }
 
+    /**
+     * Check password valid.
+     *
+     * @param password the password
+     * @return the boolean
+     */
     public static boolean isPasswordValid(String password) {
         boolean isPasswordsCorrect = false;
         if (password != null && !password.isEmpty()) {
@@ -57,6 +77,12 @@ public final class UserValidator {
         return isPasswordsCorrect;
     }
 
+    /**
+     * Check name valid.
+     *
+     * @param name the name
+     * @return the boolean
+     */
     public static boolean isNameValid(String name) {
         boolean isNameCorrect = false;
         if (name != null && !name.isEmpty()) {
@@ -65,6 +91,12 @@ public final class UserValidator {
         return isNameCorrect;
     }
 
+    /**
+     * Check email valid.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public static boolean isEmailValid(String email) {
         boolean isEmailCorrect = false;
         if (email != null && !email.isEmpty()) {

@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The type User service.
+ */
 public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
@@ -99,7 +102,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean changeUserStatus(String login, String userStatus) throws ServiceException {
+    public boolean isChangeUserStatus(String login, String userStatus) throws ServiceException {
         logger.log(Level.INFO, "Change user status execute: {}, {}", login, userStatus);
         boolean isChangeStatus = false;
         if (ValueValidator.isValidValue(userStatus)) {
@@ -107,7 +110,7 @@ public class UserServiceImpl implements UserService {
             UserStatus status = UserStatus.valueOf(userStatus);
             try {
                 int statusCode = status == UserStatus.ACTIVE ? UserStatus.BLOCKED.defineId() : UserStatus.ACTIVE.defineId();
-                isChangeStatus = userDao.changeUserStatus(login, statusCode);
+                isChangeStatus = userDao.isChangeUserStatus(login, statusCode);
             } catch (DaoException e) {
                 throw new ServiceException("Change user status error", e);
             }
@@ -139,7 +142,7 @@ public class UserServiceImpl implements UserService {
             try {
                 String code = userDao.findCodeConfirmByLogin(login);
                 if (codeConfirm.equals(code)) {
-                    isCodeConfirmCorrect = userDao.changeUserStatus(login, UserStatus.ACTIVE.defineId());
+                    isCodeConfirmCorrect = userDao.isChangeUserStatus(login, UserStatus.ACTIVE.defineId());
                 }
             } catch (DaoException e) {
                 throw new ServiceException("Code confirmation error", e);

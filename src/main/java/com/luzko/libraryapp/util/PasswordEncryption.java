@@ -9,6 +9,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * The type Password encryption.
+ */
 public final class PasswordEncryption {
     private static final Logger logger = LogManager.getLogger(PasswordEncryption.class);
     private static final String ENCRYPTION_ALGORITHM = "SHA-1";
@@ -17,6 +20,12 @@ public final class PasswordEncryption {
 
     }
 
+    /**
+     * Encrypt the user password.
+     *
+     * @param password the password
+     * @return the string
+     */
     public static String encrypt(String password) {
         String encryptedPassword = null;
         try {

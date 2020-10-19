@@ -4,6 +4,9 @@ import com.luzko.libraryapp.model.dao.ColumnName;
 
 import java.util.Map;
 
+/**
+ * The type Book validator.
+ */
 public final class BookValidator {
     private static final int MIN_YEAR = 1000;
     private static final int MAX_YEAR = getCurrentYear();
@@ -20,6 +23,12 @@ public final class BookValidator {
 
     }
 
+    /**
+     * Check valid book parameter.
+     *
+     * @param bookParameter the book parameter
+     * @return the boolean
+     */
     public static boolean isValidBookParameter(Map<String, String> bookParameter) {
         boolean isValidParameter = true;
         if (!isValidTitle(bookParameter.get(ColumnName.TITLE))) {
@@ -45,6 +54,12 @@ public final class BookValidator {
         return isValidParameter;
     }
 
+    /**
+     * Check valid author name.
+     *
+     * @param name the name
+     * @return the boolean
+     */
     public static boolean isValidAuthorName(String name) {
         boolean isNameCorrect = false;
         if (name != null && !name.isEmpty()) {
@@ -53,6 +68,12 @@ public final class BookValidator {
         return isNameCorrect;
     }
 
+    /**
+     * Check valid title.
+     *
+     * @param title the title
+     * @return the boolean
+     */
     public static boolean isValidTitle(String title) {
         boolean isTitleCorrect = false;
         if (title != null && !title.isEmpty()) {
@@ -69,10 +90,22 @@ public final class BookValidator {
         return isDescriptionCorrect;
     }
 
+    /**
+     * Check year valid.
+     *
+     * @param year the year
+     * @return the boolean
+     */
     public static boolean isYearValid(int year) {
         return year >= MIN_YEAR && year <= MAX_YEAR;
     }
 
+    /**
+     * Check pages valid.
+     *
+     * @param pages the pages
+     * @return the boolean
+     */
     public static boolean isPagesValid(int pages) {
         return pages >= MIN_PAGES && pages <= MAX_PAGES;
     }
