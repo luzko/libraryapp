@@ -11,7 +11,6 @@ import java.util.Optional;
  * The interface User service.
  */
 public interface UserService {
-
     /**
      * Verify user.
      *
