@@ -22,15 +22,8 @@ public class AdminPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
-        UserService userService = ServiceFactory.getInstance().getUserService();
-        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
-        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
-        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
         try {
-            List<User> users = userService.findAll();
-            definePagination(request, users.size(), currentPage, recordsPerPage);
-            int recordsView = (currentPage - 1) * recordsPerPage;
-            users = users.subList(recordsView, Math.min(recordsView + recordsPerPage, users.size()));
+            List<User> users = defineUserList(request);
             request.setAttribute(RequestParameter.ALL_USERS, users);
             router.setPagePath(PagePath.ADMIN);
             router.setRouterType(RouterType.FORWARD);
@@ -40,5 +33,16 @@ public class AdminPageCommand implements Command {
             router.setRouterType(RouterType.FORWARD);
         }
         return router;
+    }
+
+    private List<User> defineUserList(HttpServletRequest request) throws ServiceException {
+        UserService userService = ServiceFactory.getInstance().getUserService();
+        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
+        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
+        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
+        List<User> users = userService.findAll();
+        definePagination(request, users.size(), currentPage, recordsPerPage);
+        int recordsView = (currentPage - 1) * recordsPerPage;
+        return users.subList(recordsView, Math.min(recordsView + recordsPerPage, users.size()));
     }
 }
