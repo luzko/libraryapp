@@ -39,11 +39,7 @@ public class RegistrationCommand implements Command {
                     EmailSender.sendMessageConfirm(
                             registrationParameter.get(ColumnName.EMAIL), registrationParameter.get(ColumnName.CONFIRM_CODE)
                     );
-                    if (isLibrarian) {
-                        router.setPagePath(PagePath.ADMIN);
-                    } else {
-                        router.setPagePath(PagePath.LOGIN);
-                    }
+                    router.setPagePath(isLibrarian ? PagePath.ADMIN : PagePath.LOGIN);
                     router.setRouterType(RouterType.REDIRECT);
                 } else {
                     request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
