@@ -14,13 +14,11 @@ public class ChangeLocaleCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         String locale = (String) request.getSession().getAttribute(RequestParameter.LOCALE);
-
         if (locale.equals(RequestParameter.RUS)) {
             request.getSession().setAttribute(RequestParameter.LOCALE, RequestParameter.ENG);
         } else if (locale.equals(RequestParameter.ENG)) {
             request.getSession().setAttribute(RequestParameter.LOCALE, RequestParameter.RUS);
         }
-
         router.setPagePath(PagePath.HOME);
         router.setRouterType(RouterType.FORWARD);
         return router;
