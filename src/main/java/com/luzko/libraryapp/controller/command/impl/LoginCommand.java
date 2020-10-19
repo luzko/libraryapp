@@ -60,17 +60,7 @@ public class LoginCommand implements Command {
     private Router defineRouterByStatus(User user, HttpServletRequest request) throws ServiceException, CommandException {
         UserStatus userStatus = user.getUserStatus();
         Router router = new Router();
-        HttpSession session = request.getSession();
-        session.setAttribute(RequestParameter.USER_ID, user.getUserId());
-        session.setAttribute(RequestParameter.LOGIN, user.getLogin());
-        session.setAttribute(RequestParameter.USER_ROLE, user.getUserRole());
-        session.setAttribute(RequestParameter.USER_STATUS, userStatus);
-        session.setAttribute(RequestParameter.USER_NAME, user.getName());
-        session.setAttribute(RequestParameter.USER_SURNAME, user.getSurname());
-        session.setAttribute(RequestParameter.EMAIL, user.getEmail());
-        session.setAttribute(RequestParameter.AVATAR, user.getAvatar());
-        session.setAttribute(RequestParameter.TYPE_PROFILE_PAGE, RequestParameter.SEE_PROFILE_PAGE);
-
+        defineDataSession(user, request);
         switch (userStatus) {
             case ACTIVE -> {
                 router = defineRouterByRole(user, request);
@@ -89,7 +79,6 @@ public class LoginCommand implements Command {
     }
 
     private Router defineRouterByRole(User user, HttpServletRequest request) throws ServiceException, CommandException {
-        UserService userService = ServiceFactory.getInstance().getUserService();
         UserRole userRole = user.getUserRole();
         Router router = new Router();
         switch (userRole) {
@@ -98,19 +87,37 @@ public class LoginCommand implements Command {
                 router.setRouterType(RouterType.REDIRECT);
             }
             case ADMIN -> {
-                String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
-                int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
-                int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
-                List<User> users = userService.findAll();
-                definePagination(request, users.size(), currentPage, recordsPerPage);
-                int recordsView = (currentPage - 1) * recordsPerPage;
-                users = users.subList(recordsView, Math.min(recordsView + recordsPerPage, users.size()));
-                request.getSession().setAttribute(RequestParameter.ALL_USERS, users);
+                List<User> userList = defineUserList(request);
+                request.getSession().setAttribute(RequestParameter.ALL_USERS, userList);
                 router.setPagePath(PagePath.ADMIN);
                 router.setRouterType(RouterType.FORWARD);
             }
             default -> throw new CommandException("User role is incorrect");
         }
         return router;
+    }
+
+    private List<User> defineUserList(HttpServletRequest request) throws ServiceException {
+        UserService userService = ServiceFactory.getInstance().getUserService();
+        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
+        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
+        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
+        List<User> userList = userService.findAll();
+        definePagination(request, userList.size(), currentPage, recordsPerPage);
+        int recordsView = (currentPage - 1) * recordsPerPage;
+        return userList.subList(recordsView, Math.min(recordsView + recordsPerPage, userList.size()));
+    }
+
+    private void defineDataSession(User user, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.setAttribute(RequestParameter.USER_ID, user.getUserId());
+        session.setAttribute(RequestParameter.LOGIN, user.getLogin());
+        session.setAttribute(RequestParameter.USER_ROLE, user.getUserRole());
+        session.setAttribute(RequestParameter.USER_STATUS, user.getUserStatus());
+        session.setAttribute(RequestParameter.USER_NAME, user.getName());
+        session.setAttribute(RequestParameter.USER_SURNAME, user.getSurname());
+        session.setAttribute(RequestParameter.EMAIL, user.getEmail());
+        session.setAttribute(RequestParameter.AVATAR, user.getAvatar());
+        session.setAttribute(RequestParameter.TYPE_PROFILE_PAGE, RequestParameter.SEE_PROFILE_PAGE);
     }
 }
