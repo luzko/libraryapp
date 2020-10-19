@@ -25,10 +25,8 @@ public class BookOverviewCommand implements Command {
         Router router = new Router();
         BookService bookService = ServiceFactory.getInstance().getBookService();
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
-        System.out.println(bookId);
         try {
             Optional<Book> bookOptional = bookService.findById(bookId);
-            System.out.println(bookOptional);
             if (bookOptional.isPresent()) {
                 Book book = bookOptional.get();
                 request.getSession().setAttribute(RequestParameter.BOOK, book);
@@ -38,6 +36,8 @@ public class BookOverviewCommand implements Command {
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_BOOK_OVERVIEW));
                 router.setPagePath(PagePath.LIBRARY);
             }
+            request.getSession().setAttribute(RequestParameter.ORDER_ERROR, RequestParameter.EMPTY);
+            request.getSession().setAttribute(RequestParameter.ORDER_SUCCESS, RequestParameter.EMPTY);
             router.setRouterType(RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in library page", e);

@@ -37,10 +37,10 @@ public class ChangeUserStatusCommand implements Command {
             users = users.subList(recordsView, Math.min(recordsView + recordsPerPage, users.size()));
             request.setAttribute(RequestParameter.ALL_USERS, users);
             router.setPagePath(PagePath.ADMIN);
-            router.setRouterType(RouterType.FORWARD);
+            router.setRouterType(RouterType.REDIRECT);
             if (!isChangeUserStatus) {
                 logger.log(Level.WARN, "User status is not change");
-                request.setAttribute(RequestParameter.ERROR_MESSAGE,
+                request.getSession().setAttribute(RequestParameter.ERROR_MESSAGE,
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_STATUS_CHANGES));
             }
         } catch (ServiceException e) {

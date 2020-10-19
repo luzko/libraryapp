@@ -10,7 +10,7 @@ public interface Command {
 
     default void definePagination(HttpServletRequest request, int countRecords, int currentPage, int recordPerPage) {
         int countPage = (int) Math.ceil((double) countRecords / recordPerPage);
-        request.setAttribute(RequestParameter.CURRENT_PAGE, currentPage);
-        request.setAttribute(RequestParameter.COUNT_PAGE, countPage);
+        request.getSession().setAttribute(RequestParameter.CURRENT_PAGE, currentPage);
+        request.getSession().setAttribute(RequestParameter.COUNT_PAGE, countPage);
     }
 }

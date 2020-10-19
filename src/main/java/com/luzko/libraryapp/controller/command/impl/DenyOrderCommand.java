@@ -27,14 +27,21 @@ public class DenyOrderCommand implements Command {
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         try {
             if (orderService.isDeny(orderId)) {
+                String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
+                int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
+                int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
                 List<Order> orders = orderService.findNew();
+                definePagination(request, orders.size(), currentPage, recordsPerPage);
+                int recordsView = (currentPage - 1) * recordsPerPage;
+                orders = orders.subList(recordsView, Math.min(recordsView + recordsPerPage, orders.size()));
                 request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
-                request.setAttribute(RequestParameter.ORDER_TYPE, orderType);
+                request.getSession().setAttribute(RequestParameter.ORDER_TYPE, orderType);
                 router.setPagePath(PagePath.ORDERS);
+                router.setRouterType(RouterType.REDIRECT);
             } else {
                 router.setPagePath(PagePath.ERROR);
+                router.setRouterType(RouterType.FORWARD);
             }
-            router.setRouterType(RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in deny order", e);
             router.setPagePath(PagePath.ERROR);

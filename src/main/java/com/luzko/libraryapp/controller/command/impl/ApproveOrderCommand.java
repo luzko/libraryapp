@@ -30,13 +30,19 @@ public class ApproveOrderCommand implements Command {
         String userId = request.getParameter(RequestParameter.USER_ID);
         try {
             if (orderService.isApprove(orderId, bookId, userId)) {
-                request.setAttribute(RequestParameter.ERROR_APPROVE,
+                request.getSession().setAttribute(RequestParameter.ERROR_APPROVE,
                         ConfigurationManager.getMessageProperty(RequestParameter.EMPTY));
             } else {
-                request.setAttribute(RequestParameter.ERROR_APPROVE,
+                request.getSession().setAttribute(RequestParameter.ERROR_APPROVE,
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_NOT_APPROVE_USER));
             }
+            String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
+            int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
+            int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
             List<Order> orders = orderService.findNew();
+            definePagination(request, orders.size(), currentPage, recordsPerPage);
+            int recordsView = (currentPage - 1) * recordsPerPage;
+            orders = orders.subList(recordsView, Math.min(recordsView + recordsPerPage, orders.size()));
             request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
             request.getSession().setAttribute(RequestParameter.ORDER_TYPE, orderType);
             router.setPagePath(PagePath.ORDERS);
