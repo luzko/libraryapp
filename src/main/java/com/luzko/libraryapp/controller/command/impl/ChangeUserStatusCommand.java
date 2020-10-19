@@ -35,7 +35,7 @@ public class ChangeUserStatusCommand implements Command {
             definePagination(request, users.size(), currentPage, recordsPerPage);
             int recordsView = (currentPage - 1) * recordsPerPage;
             users = users.subList(recordsView, Math.min(recordsView + recordsPerPage, users.size()));
-            request.setAttribute(RequestParameter.ALL_USERS, users);
+            request.getSession().setAttribute(RequestParameter.ALL_USERS, users);
             router.setPagePath(PagePath.ADMIN);
             router.setRouterType(RouterType.REDIRECT);
             if (!isChangeUserStatus) {

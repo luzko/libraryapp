@@ -36,7 +36,11 @@ public class PageAttributeFilter implements Filter {
             Object orderType = request.getSession().getAttribute(RequestParameter.ORDER_TYPE);
             if (orderType == null) {
                 response.sendRedirect(request.getContextPath() + indexPath);
+            } else {
+
             }
+        } else if(requestURI.contains(AvailabilityPage.ADMIN)) {
+
         }
         filterChain.doFilter(request, response);
     }

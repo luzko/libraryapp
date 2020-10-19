@@ -110,7 +110,7 @@ public class OrderPageCommand implements Command {
         definePagination(request, orders.size(), currentPage, recordsPerPage);
         int recordsView = (currentPage - 1) * recordsPerPage;
         orders = orders.subList(recordsView, Math.min(recordsView + recordsPerPage, orders.size()));
-        request.setAttribute(RequestParameter.ALL_ORDERS, orders);
+        request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
         router.setPagePath(PagePath.ORDERS);
         router.setRouterType(RouterType.FORWARD);
     }

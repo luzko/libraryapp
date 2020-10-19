@@ -41,6 +41,7 @@ public class RegistrationCommand implements Command {
                     );
                     if (isLibrarian) {
                         router.setPagePath(PagePath.ADMIN);
+                        System.out.println(1111111);
                     } else {
                         router.setPagePath(PagePath.LOGIN);
                     }
