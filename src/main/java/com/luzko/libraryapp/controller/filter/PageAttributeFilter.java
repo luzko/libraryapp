@@ -32,8 +32,12 @@ public class PageAttributeFilter implements Filter {
             if (book == null) {
                 response.sendRedirect(request.getContextPath() + indexPath);
             }
+        } else if (requestURI.contains(AvailabilityPage.ORDERS)) {
+            Object orderType = request.getSession().getAttribute(RequestParameter.ORDER_TYPE);
+            if (orderType == null) {
+                response.sendRedirect(request.getContextPath() + indexPath);
+            }
         }
-
         filterChain.doFilter(request, response);
     }
 }

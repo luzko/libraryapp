@@ -19,15 +19,16 @@ public class AvailabilityPage {
     private static final String CREATE_BOOK = "createbook.jsp";
 
     public static final String BOOK_OVERVIEW = "bookoverview.jsp";
+    public static final String ORDERS = "orders.jsp";
 
     public static List<String> availableGustPage = List.of(
             INDEX, HOME, LOGIN, REGISTRATION
     );
     public static List<String> availableReaderPage = List.of(
-            INDEX, HOME, USER, CONFIRMATION, BLOCKED, BOOK_OVERVIEW
+            INDEX, HOME, USER, CONFIRMATION, BLOCKED, BOOK_OVERVIEW, ORDERS
     );
     public static List<String> availableLibrarianPage = List.of(
-            INDEX, HOME, USER, CONFIRMATION, BLOCKED
+            INDEX, HOME, USER, CONFIRMATION, BLOCKED, BOOK_OVERVIEW, ORDERS
     );
     public static List<String> availableAdminPage = List.of(
             INDEX, HOME, REGISTRATION, ADMIN, CREATE_BOOK

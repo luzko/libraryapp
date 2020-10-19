@@ -28,7 +28,7 @@ public class OrderPageCommand implements Command {
         Router router = new Router();
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
         String orderType = request.getParameter(RequestParameter.ORDER_TYPE);
-        request.setAttribute(RequestParameter.ORDER_TYPE, orderType);
+        request.getSession().setAttribute(RequestParameter.ORDER_TYPE, orderType);
         try {
             switch (orderType) {
                 case RequestParameter.USER_ORDER -> userOrderOverview(router, orderService, request);
