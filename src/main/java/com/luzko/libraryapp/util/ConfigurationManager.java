@@ -24,26 +24,6 @@ public final class ConfigurationManager {
     }
 
     /**
-     * Gets database property.
-     *
-     * @param key the key
-     * @return the database property
-     */
-    public static String getDatabaseProperty(String key) {
-        return databaseProperties.getProperty(key);
-    }
-
-    /**
-     * Gets mail property.
-     *
-     * @param key the key
-     * @return the mail property
-     */
-    public static String getMailProperty(String key) {
-        return mailProperties.getProperty(key);
-    }
-
-    /**
      * Gets message property.
      *
      * @param key the key
