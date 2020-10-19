@@ -5,12 +5,12 @@ import com.luzko.libraryapp.model.dao.ColumnName;
 import java.util.Map;
 
 public final class BookValidator {
-    private static final int minYear = 1000;
-    private static final int maxYear = getCurrentYear();
-    private static final int minPages = 10;
-    private static final int maxPages = 9999;
-    private static final int minNumber = 1;
-    private static final int maxNumber = 99;
+    private static final int MIN_YEAR = 1000;
+    private static final int MAX_YEAR = getCurrentYear();
+    private static final int MIN_PAGES = 10;
+    private static final int MAX_PAGES = 9999;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 99;
     private static final String EMPTY_VALUE = "";
     private static final String NAME_PATTERN = "^[\\p{L} ]{3,25}$";
     private static final String TITLE_PATTERN = "^[\\p{L} ]{5,25}$";
@@ -70,15 +70,15 @@ public final class BookValidator {
     }
 
     public static boolean isYearValid(int year) {
-        return year >= minYear && year <= maxYear;
+        return year >= MIN_YEAR && year <= MAX_YEAR;
     }
 
     public static boolean isPagesValid(int pages) {
-        return pages >= minPages && pages <= maxPages;
+        return pages >= MIN_PAGES && pages <= MAX_PAGES;
     }
 
     private static boolean isNumberCopiesValid(int numberCopies) {
-        return numberCopies >= minNumber && numberCopies <= maxNumber;
+        return numberCopies >= MIN_NUMBER && numberCopies <= MAX_NUMBER;
     }
 
     private static int getCurrentYear() {
