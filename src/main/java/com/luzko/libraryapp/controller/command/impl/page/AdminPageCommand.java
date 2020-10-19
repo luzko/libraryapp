@@ -28,7 +28,7 @@ public class AdminPageCommand implements Command {
             router.setPagePath(PagePath.ADMIN);
             router.setRouterType(RouterType.FORWARD);
         } catch (ServiceException e) {
-            logger.log(Level.ERROR, "Error in library page", e);
+            logger.log(Level.ERROR, "Error in admin page", e);
             router.setPagePath(PagePath.ERROR);
             router.setRouterType(RouterType.FORWARD);
         }
