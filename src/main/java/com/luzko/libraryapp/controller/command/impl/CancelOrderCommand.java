@@ -27,16 +27,8 @@ public class CancelOrderCommand implements Command {
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         try {
             if (orderService.isCancel(orderId)) {
-                Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
-                long userId = (long) userIdObject;
-                String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
-                int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
-                int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
-                List<Order> orders = orderService.findByUserId(userId);
-                definePagination(request, orders.size(), currentPage, recordsPerPage);
-                int recordsView = (currentPage - 1) * recordsPerPage;
-                orders = orders.subList(recordsView, Math.min(recordsView + recordsPerPage, orders.size()));
-                request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orders);
+                List<Order> orderList = defineOrderList(orderService, request);
+                request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orderList);
                 request.getSession().setAttribute(RequestParameter.ORDER_TYPE, orderType);
                 router.setPagePath(PagePath.ORDERS);
                 router.setRouterType(RouterType.REDIRECT);
@@ -50,5 +42,17 @@ public class CancelOrderCommand implements Command {
             router.setRouterType(RouterType.FORWARD);
         }
         return router;
+    }
+
+    private List<Order> defineOrderList(OrderService orderService, HttpServletRequest request) throws ServiceException {
+        Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
+        long userId = (long) userIdObject;
+        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
+        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
+        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
+        List<Order> orderList = orderService.findByUserId(userId);
+        definePagination(request, orderList.size(), currentPage, recordsPerPage);
+        int recordsView = (currentPage - 1) * recordsPerPage;
+        return orderList.subList(recordsView, Math.min(recordsView + recordsPerPage, orderList.size()));
     }
 }
