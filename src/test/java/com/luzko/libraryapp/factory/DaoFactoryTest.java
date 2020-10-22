@@ -4,6 +4,7 @@ import com.luzko.libraryapp.model.dao.impl.AuthorDaoImpl;
 import com.luzko.libraryapp.model.dao.impl.BookDaoImpl;
 import com.luzko.libraryapp.model.dao.impl.OrderDaoImpl;
 import com.luzko.libraryapp.model.dao.impl.UserDaoImpl;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -64,5 +65,10 @@ public class DaoFactoryTest {
     public void getOrderDaoNegativeTest() {
         Object actual = daoFactory.getOrderDao();
         assertFalse(actual instanceof UserDaoImpl);
+    }
+
+    @AfterClass
+    public void tierDown() {
+        daoFactory = null;
     }
 }

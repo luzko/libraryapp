@@ -4,6 +4,7 @@ import com.luzko.libraryapp.service.impl.AuthorServiceImpl;
 import com.luzko.libraryapp.service.impl.BookServiceImpl;
 import com.luzko.libraryapp.service.impl.OrderServiceImpl;
 import com.luzko.libraryapp.service.impl.UserServiceImpl;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -64,5 +65,10 @@ public class ServiceFactoryTest {
     public void getOrderServiceNegativeTest() {
         Object actual = serviceFactory.getOrderService();
         assertFalse(actual instanceof UserServiceImpl);
+    }
+
+    @AfterClass
+    public void tierDown() {
+        serviceFactory = null;
     }
 }
