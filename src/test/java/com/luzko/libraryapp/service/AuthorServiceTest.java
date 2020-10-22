@@ -9,13 +9,13 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 
 @PrepareForTest(AuthorDaoImpl.class)
@@ -25,8 +25,12 @@ public class AuthorServiceTest {
 
     @BeforeClass
     public void setUp() {
-        daoMock = mock(AuthorDaoImpl.class);
         authorService = ServiceFactory.getInstance().getAuthorService();
+    }
+
+    @BeforeMethod
+    public void setUpMock() {
+        daoMock = mock(AuthorDaoImpl.class);
         Whitebox.setInternalState(AuthorDaoImpl.class, "INSTANCE", daoMock);
     }
 
@@ -56,6 +60,18 @@ public class AuthorServiceTest {
     }
 
     @Test
+    public void addExceptionTest() {
+        String name = "Alexandr Pushkin";
+        try {
+            when(daoMock.isNameUnique(any(String.class))).thenThrow(new DaoException());
+            when(daoMock.add(any(String.class))).thenReturn(true);
+            assertThrows(ServiceException.class, () -> authorService.add(name));
+        } catch (DaoException e) {
+            fail();
+        }
+    }
+
+    @Test
     public void findByIdPositiveTest() {
         int authorId = 1;
         Author author = new Author();
@@ -77,10 +93,21 @@ public class AuthorServiceTest {
         author.setAuthorId(authorId);
         Optional<Author> expectedAuthorOptional = Optional.of(author);
         try {
-            when(daoMock.findById(1)).thenReturn(Optional.empty());
+            when(daoMock.findById(authorId)).thenReturn(Optional.empty());
             Optional<Author> actualAuthorOptional = authorService.findById(authorId);
             assertNotEquals(actualAuthorOptional, expectedAuthorOptional);
         } catch (DaoException | ServiceException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void findByIdExceptionTest() {
+        int authorId = 1;
+        try {
+            when(daoMock.findById(authorId)).thenThrow(new DaoException());
+            assertThrows(ServiceException.class, () -> authorService.findById(authorId));
+        } catch (DaoException e) {
             fail();
         }
     }
@@ -107,6 +134,16 @@ public class AuthorServiceTest {
             List<Author> actualAuthorList = authorService.findAll();
             assertNotEquals(actualAuthorList, expectedAuthorList);
         } catch (DaoException | ServiceException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void findAllExceptionTest() {
+        try {
+            when(daoMock.findAll()).thenThrow(new DaoException());
+            assertThrows(ServiceException.class, () -> authorService.findAll());
+        } catch (DaoException e) {
             fail();
         }
     }
