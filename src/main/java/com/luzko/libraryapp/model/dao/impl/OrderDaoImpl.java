@@ -21,6 +21,15 @@ import java.util.Optional;
  */
 public class OrderDaoImpl implements OrderDao {
     private static final int MAX_COUNT_NEW_ORDER = 2;
+    private static final OrderDao INSTANCE = new OrderDaoImpl();
+
+    private OrderDaoImpl() {
+
+    }
+
+    public static OrderDao getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public Optional<Order> findById(long orderId) throws DaoException {

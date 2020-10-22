@@ -3,7 +3,6 @@ package com.luzko.libraryapp.service.impl;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.factory.DaoFactory;
 import com.luzko.libraryapp.model.dao.OrderDao;
 import com.luzko.libraryapp.model.entity.Order;
 import com.luzko.libraryapp.model.entity.OrderType;

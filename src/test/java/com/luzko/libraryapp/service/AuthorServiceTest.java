@@ -1,27 +1,60 @@
 package com.luzko.libraryapp.service;
 
+import com.luzko.libraryapp.exception.DaoException;
+import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.ServiceFactory;
 import com.luzko.libraryapp.model.dao.AuthorDao;
+import com.luzko.libraryapp.model.dao.impl.AuthorDaoImpl;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.testng.Assert.*;
 
-@PrepareForTest(AuthorDao.class)
+@PrepareForTest(AuthorDaoImpl.class)
 public class AuthorServiceTest {
-    private AuthorDao daoMock;
+    private AuthorDaoImpl daoMock;
     private AuthorService authorService;
 
     @BeforeClass
     public void setUp() {
-        daoMock = mock(AuthorDao.class);
+        //daoMock = Whitebox.newInstance(AuthorDaoImpl.class);
+        daoMock = mock(AuthorDaoImpl.class);
         authorService = ServiceFactory.getInstance().getAuthorService();
-        Whitebox.setInternalState(AuthorDao.class, "instance", daoMock);
+        //Whitebox.setInternalState(AuthorDao.class, "instance", daoMock);
+        //Whitebox.
     }
 
+    @Test
+    public void addPositiveTest() {
+        String inputValue = "Alexandr Pushkin";
+        try {
+            when(daoMock.isNameUnique(any(String.class))).thenReturn(true);
+            when(daoMock.add(any(String.class))).thenReturn(true);
+            boolean actual = authorService.add(inputValue);
+            assertTrue(actual);
+        } catch (DaoException | ServiceException e) {
+            fail();
+        }
+    }
 
+    @Test
+    public void addNegativeTest() {
+        String inputValue = null;
+        try {
+            when(daoMock.isNameUnique(any(String.class))).thenReturn(true);
+            when(daoMock.add(any(String.class))).thenReturn(true);
+            boolean actual = authorService.add(inputValue);
+            assertFalse(actual);
+        } catch (DaoException | ServiceException e) {
+            fail();
+        }
+    }
 
     @AfterClass
     public void tierDown() {

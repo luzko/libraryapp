@@ -19,6 +19,15 @@ import java.util.Optional;
  * The type Author dao.
  */
 public class AuthorDaoImpl implements AuthorDao {
+    private static final AuthorDao INSTANCE = new AuthorDaoImpl();
+
+    private AuthorDaoImpl() {
+
+    }
+
+    public static AuthorDao getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public Optional<Author> findById(long id) throws DaoException {

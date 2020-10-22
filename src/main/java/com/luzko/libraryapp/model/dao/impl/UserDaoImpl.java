@@ -21,6 +21,15 @@ import java.util.Optional;
  * The type User dao.
  */
 public class UserDaoImpl implements UserDao {
+    private static final UserDao INSTANCE = new UserDaoImpl();
+
+    private UserDaoImpl() {
+
+    }
+
+    public static UserDao getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public String findPasswordByLogin(String login) throws DaoException {

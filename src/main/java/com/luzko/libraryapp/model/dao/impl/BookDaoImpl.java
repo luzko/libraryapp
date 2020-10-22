@@ -18,6 +18,15 @@ import java.util.Optional;
  * The type Book dao.
  */
 public class BookDaoImpl implements BookDao {
+    private static final BookDao INSTANCE = new BookDaoImpl();
+
+    private BookDaoImpl() {
+
+    }
+
+    public static BookDao getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public Optional<Book> findById(long id) throws DaoException {
