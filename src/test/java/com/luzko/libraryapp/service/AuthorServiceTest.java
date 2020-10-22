@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 
 import java.util.*;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 
@@ -38,8 +37,8 @@ public class AuthorServiceTest {
     public void addPositiveTest() {
         String name = "Alexandr Pushkin";
         try {
-            when(daoMock.isNameUnique(any(String.class))).thenReturn(true);
-            when(daoMock.add(any(String.class))).thenReturn(true);
+            when(daoMock.isNameUnique(anyString())).thenReturn(true);
+            when(daoMock.add(anyString())).thenReturn(true);
             boolean actual = authorService.add(name);
             assertTrue(actual);
         } catch (DaoException | ServiceException e) {
@@ -51,7 +50,7 @@ public class AuthorServiceTest {
     public void addNegativeTest() {
         String name = null;
         try {
-            when(daoMock.add(any(String.class))).thenReturn(true);
+            when(daoMock.add(anyString())).thenReturn(true);
             boolean actual = authorService.add(name);
             assertFalse(actual);
         } catch (DaoException | ServiceException e) {
@@ -63,8 +62,8 @@ public class AuthorServiceTest {
     public void addExceptionTest() {
         String name = "Alexandr Pushkin";
         try {
-            when(daoMock.isNameUnique(any(String.class))).thenThrow(new DaoException());
-            when(daoMock.add(any(String.class))).thenReturn(true);
+            when(daoMock.isNameUnique(anyString())).thenThrow(new DaoException());
+            when(daoMock.add(anyString())).thenReturn(true);
             assertThrows(ServiceException.class, () -> authorService.add(name));
         } catch (DaoException e) {
             fail();
@@ -73,12 +72,12 @@ public class AuthorServiceTest {
 
     @Test
     public void findByIdPositiveTest() {
-        int authorId = 1;
+        long authorId = 1;
         Author author = new Author();
         author.setAuthorId(authorId);
         Optional<Author> expectedAuthorOptional = Optional.of(author);
         try {
-            when(daoMock.findById(1)).thenReturn(Optional.of(author));
+            when(daoMock.findById(authorId)).thenReturn(Optional.of(author));
             Optional<Author> actualAuthorOptional = authorService.findById(authorId);
             assertEquals(actualAuthorOptional, expectedAuthorOptional);
         } catch (DaoException | ServiceException e) {
@@ -88,7 +87,7 @@ public class AuthorServiceTest {
 
     @Test
     public void findByIdNegativeTest() {
-        int authorId = 1;
+        long authorId = 1;
         Author author = new Author();
         author.setAuthorId(authorId);
         Optional<Author> expectedAuthorOptional = Optional.of(author);
@@ -103,7 +102,7 @@ public class AuthorServiceTest {
 
     @Test
     public void findByIdExceptionTest() {
-        int authorId = 1;
+        long authorId = 1;
         try {
             when(daoMock.findById(authorId)).thenThrow(new DaoException());
             assertThrows(ServiceException.class, () -> authorService.findById(authorId));
