@@ -3,7 +3,6 @@ package com.luzko.libraryapp.service;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.ServiceFactory;
-import com.luzko.libraryapp.model.dao.AuthorDao;
 import com.luzko.libraryapp.model.dao.impl.AuthorDaoImpl;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.reflect.Whitebox;
@@ -23,11 +22,9 @@ public class AuthorServiceTest {
 
     @BeforeClass
     public void setUp() {
-        //daoMock = Whitebox.newInstance(AuthorDaoImpl.class);
         daoMock = mock(AuthorDaoImpl.class);
         authorService = ServiceFactory.getInstance().getAuthorService();
-        //Whitebox.setInternalState(AuthorDao.class, "instance", daoMock);
-        //Whitebox.
+        Whitebox.setInternalState(AuthorDaoImpl.class, "INSTANCE", daoMock);
     }
 
     @Test
