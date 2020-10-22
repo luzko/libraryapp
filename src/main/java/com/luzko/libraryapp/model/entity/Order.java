@@ -13,6 +13,10 @@ public class Order extends BaseEntity {
     private String orderDate;
     private String returnDate;
 
+    public Order() {
+
+    }
+
     public Order(OrderBuilder builder) {
         this.orderId = builder.getOrderId();
         this.user = builder.getUser();
