@@ -5,6 +5,7 @@ import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.UserDao;
+import com.luzko.libraryapp.model.dao.impl.UserDaoImpl;
 import com.luzko.libraryapp.model.entity.User;
 import com.luzko.libraryapp.model.entity.UserRole;
 import com.luzko.libraryapp.model.entity.UserStatus;
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService {
         logger.log(Level.INFO, "Verify user execute: {}, {}", login, password);
         boolean isCredentialCorrect = false;
         if (UserValidator.isLoginValid(login) && UserValidator.isPasswordValid(password)) {
-            UserDao userDao = DaoFactory.getInstance().getUserDAO();
+            UserDao userDao = UserDaoImpl.getInstance();
             try {
                 String userPassword = userDao.findPasswordByLogin(login);
                 if (userPassword != null && !userPassword.isEmpty()) {
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
         logger.log(Level.INFO, "Find by login execute: {}", login);
         Optional<User> userOptional = Optional.empty();
         if (UserValidator.isLoginValid(login)) {
-            UserDao userDao = DaoFactory.getInstance().getUserDAO();
+            UserDao userDao = UserDaoImpl.getInstance();
             try {
                 userOptional = userDao.findByLogin(login);
             } catch (DaoException e) {
@@ -64,7 +65,7 @@ public class UserServiceImpl implements UserService {
     public boolean registration(Map<String, String> registrationParameter, boolean isLibrarian) throws ServiceException {
         logger.log(Level.INFO, "Registration execute");
         boolean isRegistered = false;
-        UserDao userDao = DaoFactory.getInstance().getUserDAO();
+        UserDao userDao = UserDaoImpl.getInstance();
         if (UserValidator.isValidRegistrationParameter(registrationParameter)) {
             try {
                 String login = registrationParameter.get(ColumnName.LOGIN);
@@ -92,7 +93,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() throws ServiceException {
         logger.log(Level.INFO, "Find all execute");
-        UserDao userDao = DaoFactory.getInstance().getUserDAO();
+        UserDao userDao = UserDaoImpl.getInstance();
         try {
             return userDao.findAll();
         } catch (DaoException e) {
@@ -105,7 +106,7 @@ public class UserServiceImpl implements UserService {
         logger.log(Level.INFO, "Change user status execute: {}, {}", login, userStatus);
         boolean isChangeStatus = false;
         if (ValueValidator.isValidValue(userStatus)) {
-            UserDao userDao = DaoFactory.getInstance().getUserDAO();
+            UserDao userDao = UserDaoImpl.getInstance();
             UserStatus status = UserStatus.valueOf(userStatus);
             try {
                 int statusCode = status == UserStatus.ACTIVE ? UserStatus.BLOCKED.defineId() : UserStatus.ACTIVE.defineId();
@@ -122,7 +123,7 @@ public class UserServiceImpl implements UserService {
         logger.log(Level.INFO, "Check unique login execute: {}", login);
         boolean isLoginUnique = false;
         if (UserValidator.isLoginValid(login)) {
-            UserDao userDao = DaoFactory.getInstance().getUserDAO();
+            UserDao userDao = UserDaoImpl.getInstance();
             try {
                 isLoginUnique = userDao.isLoginUnique(login);
             } catch (DaoException e) {
@@ -137,7 +138,7 @@ public class UserServiceImpl implements UserService {
         logger.log(Level.INFO, "Check code confirmation execute: {}, {}", login, codeConfirm);
         boolean isCodeConfirmCorrect = false;
         if (ValueValidator.isValidValue(codeConfirm)) {
-            UserDao userDao = DaoFactory.getInstance().getUserDAO();
+            UserDao userDao = UserDaoImpl.getInstance();
             try {
                 String code = userDao.findCodeConfirmByLogin(login);
                 if (codeConfirm.equals(code)) {
@@ -155,7 +156,7 @@ public class UserServiceImpl implements UserService {
         logger.log(Level.INFO, "Change user login execute: {}, {}", login, newLogin);
         boolean isUserLoginChange = false;
         if (UserValidator.isLoginValid(newLogin)) {
-            UserDao userDao = DaoFactory.getInstance().getUserDAO();
+            UserDao userDao = UserDaoImpl.getInstance();
             try {
                 if (userDao.findByLogin(newLogin).isEmpty()) {
                     isUserLoginChange = userDao.isChangeUserLogin(login, newLogin);
@@ -172,7 +173,7 @@ public class UserServiceImpl implements UserService {
         logger.log(Level.INFO, "Change name execute: {}, {}", login, newName);
         boolean isUserNameChange = false;
         if (UserValidator.isNameValid(newName)) {
-            UserDao userDao = DaoFactory.getInstance().getUserDAO();
+            UserDao userDao = UserDaoImpl.getInstance();
             try {
                 isUserNameChange = userDao.isChangeUserName(login, newName);
             } catch (DaoException e) {
@@ -187,7 +188,7 @@ public class UserServiceImpl implements UserService {
         logger.log(Level.INFO, "Change surname execute: {}, {}", login, newSurname);
         boolean isUserSurnameChange = false;
         if (UserValidator.isNameValid(newSurname)) {
-            UserDao userDao = DaoFactory.getInstance().getUserDAO();
+            UserDao userDao = UserDaoImpl.getInstance();
             try {
                 isUserSurnameChange = userDao.isChangeUserSurname(login, newSurname);
             } catch (DaoException e) {
@@ -201,7 +202,7 @@ public class UserServiceImpl implements UserService {
     public boolean isChangeProfileImage(String login, String newAvatar) throws ServiceException {
         logger.log(Level.INFO, "Change avatar execute: {}, {}", login, newAvatar);
         boolean isAvatarChange = false;
-        UserDao userDao = DaoFactory.getInstance().getUserDAO();
+        UserDao userDao = UserDaoImpl.getInstance();
         try {
             if (newAvatar != null && !newAvatar.isBlank()) {
                 isAvatarChange = userDao.isChangeUserAvatar(login, newAvatar);
@@ -215,7 +216,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void giveBooksFromReadingRoom(Object userIdObject, Object userRoleObject) throws ServiceException {
         logger.log(Level.INFO, "Give book from reading room execute: {}", userIdObject);
-        UserDao userDao = DaoFactory.getInstance().getUserDAO();
+        UserDao userDao = UserDaoImpl.getInstance();
         long userId = (long) userIdObject;
         UserRole userRole = (UserRole) userRoleObject;
         try {

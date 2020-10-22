@@ -4,6 +4,7 @@ import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.dao.OrderDao;
+import com.luzko.libraryapp.model.dao.impl.OrderDaoImpl;
 import com.luzko.libraryapp.model.entity.Order;
 import com.luzko.libraryapp.model.entity.OrderType;
 import com.luzko.libraryapp.service.OrderService;
@@ -22,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> findByUserId(long userId) throws ServiceException {
         logger.log(Level.INFO, "Find by user id execute: {}", userId);
-        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
             return orderDao.findByUserId(userId);
         } catch (DaoException e) {
@@ -33,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> findByBookId(String bookIdString) throws ServiceException {
         logger.log(Level.INFO, "Find by book id execute: {}", bookIdString);
-        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
             long bookId = Long.parseLong(bookIdString);
             return orderDao.findByBookId(bookId);
@@ -45,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> findAll() throws ServiceException {
         logger.log(Level.INFO, "Find all orders execute");
-        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
             return orderDao.findAll();
         } catch (DaoException e) {
@@ -56,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> findNew() throws ServiceException {
         logger.log(Level.INFO, "Find new orders execute");
-        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
             return orderDao.findNew();
         } catch (DaoException e) {
@@ -67,7 +68,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean isCreateOrder(long userId, String bookIdString, String orderTypeString) throws ServiceException {
         logger.log(Level.INFO, "Create order execute");
-        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        OrderDao orderDao = OrderDaoImpl.getInstance();
         long bookId = Long.parseLong(bookIdString);
         try {
             OrderType orderType = orderTypeString.equals(RequestParameter.TYPE_HOME) ?
@@ -81,7 +82,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean isCancel(String orderIdString) throws ServiceException {
         logger.log(Level.INFO, "Cancel order execute: {}", orderIdString);
-        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        OrderDao orderDao = OrderDaoImpl.getInstance();
         long orderId = Long.parseLong(orderIdString);
         try {
             return orderDao.isCancel(orderId);
@@ -93,7 +94,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean isReturn(String orderIdString, String bookIdString) throws ServiceException {
         logger.log(Level.INFO, "Return order execute: {}", orderIdString);
-        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        OrderDao orderDao = OrderDaoImpl.getInstance();
         long orderId = Long.parseLong(orderIdString);
         long bookId = Long.parseLong(bookIdString);
         try {
@@ -106,7 +107,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean isDeny(String orderIdString) throws ServiceException {
         logger.log(Level.INFO, "Deny order execute: {}", orderIdString);
-        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        OrderDao orderDao = OrderDaoImpl.getInstance();
         long orderId = Long.parseLong(orderIdString);
         try {
             return orderDao.isDeny(orderId);
@@ -118,7 +119,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean isApprove(String orderIdString, String bookIdString, String userIdString) throws ServiceException {
         logger.log(Level.INFO, "Approve order execute");
-        OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+        OrderDao orderDao = OrderDaoImpl.getInstance();
         long orderId = Long.parseLong(orderIdString);
         long bookId = Long.parseLong(bookIdString);
         long userId = Long.parseLong(userIdString);

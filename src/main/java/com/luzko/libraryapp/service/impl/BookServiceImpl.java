@@ -5,6 +5,7 @@ import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.builder.BookBuilder;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.BookDao;
+import com.luzko.libraryapp.model.dao.impl.BookDaoImpl;
 import com.luzko.libraryapp.model.entity.Book;
 import com.luzko.libraryapp.model.entity.Category;
 import com.luzko.libraryapp.service.BookService;
@@ -26,7 +27,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Optional<Book> findById(String bookId) throws ServiceException {
         logger.log(Level.INFO, "Find by id execute: {}", bookId);
-        BookDao bookDao = DaoFactory.getInstance().getBookDao();
+        BookDao bookDao = BookDaoImpl.getInstance();
         try {
             long id = Long.parseLong(bookId);
             return bookDao.findById(id);
@@ -38,7 +39,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findAll() throws ServiceException {
         logger.log(Level.INFO, "Find all execute");
-        BookDao bookDao = DaoFactory.getInstance().getBookDao();
+        BookDao bookDao = BookDaoImpl.getInstance();
         try {
             return bookDao.findAll();
         } catch (DaoException e) {
@@ -53,7 +54,7 @@ public class BookServiceImpl implements BookService {
         int year = Integer.parseInt(yearValue);
         int pages = Integer.parseInt(pagesValue);
         if (BookValidator.isValidTitle(title) && BookValidator.isYearValid(year) && BookValidator.isPagesValid(pages)) {
-            BookDao bookDao = DaoFactory.getInstance().getBookDao();
+            BookDao bookDao = BookDaoImpl.getInstance();
             try {
                 isParameterUnique = bookDao.isParameterUnique(title, year, pages);
             } catch (DaoException e) {
@@ -67,7 +68,7 @@ public class BookServiceImpl implements BookService {
     public boolean add(Map<String, String> bookParameter) throws ServiceException {
         logger.log(Level.INFO, "Add book execute");
         boolean isBookAdd = false;
-        BookDao bookDao = DaoFactory.getInstance().getBookDao();
+        BookDao bookDao = BookDaoImpl.getInstance();
         if (BookValidator.isValidBookParameter(bookParameter)) {
             try {
                 String title = bookParameter.get(ColumnName.TITLE);

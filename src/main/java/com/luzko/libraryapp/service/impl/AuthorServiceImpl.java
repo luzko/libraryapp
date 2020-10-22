@@ -3,6 +3,7 @@ package com.luzko.libraryapp.service.impl;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.dao.AuthorDao;
+import com.luzko.libraryapp.model.dao.impl.AuthorDaoImpl;
 import com.luzko.libraryapp.model.entity.Author;
 import com.luzko.libraryapp.service.AuthorService;
 import com.luzko.libraryapp.validator.BookValidator;
@@ -23,7 +24,7 @@ public class AuthorServiceImpl implements AuthorService {
     public boolean add(String name) throws ServiceException {
         logger.log(Level.INFO, "Add author execute: {}", name);
         boolean isAddAuthor = false;
-        AuthorDao authorDao = DaoFactory.getInstance().getAuthorDao();
+        AuthorDao authorDao = AuthorDaoImpl.getInstance();
         if (BookValidator.isValidAuthorName(name)) {
             try {
                 if (authorDao.isNameUnique(name)) {
@@ -39,7 +40,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Optional<Author> findById(long id) throws ServiceException {
         logger.log(Level.INFO, "Find by id execute: {}", id);
-        AuthorDao authorDao = DaoFactory.getInstance().getAuthorDao();
+        AuthorDao authorDao = AuthorDaoImpl.getInstance();
         Optional<Author> authorOptional;
         try {
             authorOptional = authorDao.findById(id);
@@ -52,7 +53,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public List<Author> findAll() throws ServiceException {
         logger.log(Level.INFO, "Find all execute");
-        AuthorDao authorDao = DaoFactory.getInstance().getAuthorDao();
+        AuthorDao authorDao = AuthorDaoImpl.getInstance();
         try {
             return authorDao.findAll();
         } catch (DaoException e) {
