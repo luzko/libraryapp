@@ -1,6 +1,7 @@
 package com.luzko.libraryapp.validator;
 
 import com.luzko.libraryapp.model.dao.ColumnName;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -83,5 +84,11 @@ public class UserValidatorTest {
         String inputValue = "sf@@@mail.ru";
         boolean actual = UserValidator.isEmailValid(inputValue);
         assertFalse(actual);
+    }
+
+    @AfterClass
+    public void tierDown() {
+        validRegisterParameter = null;
+        invalidRegisterParameter = null;
     }
 }

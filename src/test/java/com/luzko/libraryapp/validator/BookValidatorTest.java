@@ -1,6 +1,7 @@
 package com.luzko.libraryapp.validator;
 
 import com.luzko.libraryapp.model.dao.ColumnName;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -83,5 +84,11 @@ public class BookValidatorTest {
         int inputValue = -5;
         boolean actual = BookValidator.isPagesValid(inputValue);
         assertFalse(actual);
+    }
+
+    @AfterClass
+    public void tierDown() {
+        validBookParameter = null;
+        invalidBookParameter = null;
     }
 }
