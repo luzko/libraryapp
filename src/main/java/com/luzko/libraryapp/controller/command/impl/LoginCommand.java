@@ -12,7 +12,7 @@ import com.luzko.libraryapp.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.User;
 import com.luzko.libraryapp.model.entity.UserRole;
 import com.luzko.libraryapp.model.entity.UserStatus;
-import com.luzko.libraryapp.service.UserService;
+import com.luzko.libraryapp.model.service.UserService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

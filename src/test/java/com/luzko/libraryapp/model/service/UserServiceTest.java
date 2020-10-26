@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.service;
+package com.luzko.libraryapp.model.service;
 
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;

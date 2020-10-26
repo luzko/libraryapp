@@ -1,13 +1,13 @@
 package com.luzko.libraryapp.factory;
 
-import com.luzko.libraryapp.service.AuthorService;
-import com.luzko.libraryapp.service.impl.AuthorServiceImpl;
-import com.luzko.libraryapp.service.BookService;
-import com.luzko.libraryapp.service.impl.BookServiceImpl;
-import com.luzko.libraryapp.service.OrderService;
-import com.luzko.libraryapp.service.impl.OrderServiceImpl;
-import com.luzko.libraryapp.service.UserService;
-import com.luzko.libraryapp.service.impl.UserServiceImpl;
+import com.luzko.libraryapp.model.service.AuthorService;
+import com.luzko.libraryapp.model.service.impl.AuthorServiceImpl;
+import com.luzko.libraryapp.model.service.BookService;
+import com.luzko.libraryapp.model.service.impl.BookServiceImpl;
+import com.luzko.libraryapp.model.service.OrderService;
+import com.luzko.libraryapp.model.service.impl.OrderServiceImpl;
+import com.luzko.libraryapp.model.service.UserService;
+import com.luzko.libraryapp.model.service.impl.UserServiceImpl;
 
 /**
  * The type Service factory.

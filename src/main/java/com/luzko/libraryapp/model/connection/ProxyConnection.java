@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.connection;
+package com.luzko.libraryapp.model.connection;
 
 import java.sql.*;
 import java.util.Map;

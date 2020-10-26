@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.service.impl;
+package com.luzko.libraryapp.model.service.impl;
 
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
@@ -8,7 +8,7 @@ import com.luzko.libraryapp.model.dao.BookDao;
 import com.luzko.libraryapp.model.dao.impl.BookDaoImpl;
 import com.luzko.libraryapp.model.entity.Book;
 import com.luzko.libraryapp.model.entity.Category;
-import com.luzko.libraryapp.service.BookService;
+import com.luzko.libraryapp.model.service.BookService;
 import com.luzko.libraryapp.validator.BookValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

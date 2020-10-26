@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.service.impl;
+package com.luzko.libraryapp.model.service.impl;
 
 import com.luzko.libraryapp.model.builder.UserBuilder;
 import com.luzko.libraryapp.exception.DaoException;
@@ -9,7 +9,7 @@ import com.luzko.libraryapp.model.dao.impl.UserDaoImpl;
 import com.luzko.libraryapp.model.entity.User;
 import com.luzko.libraryapp.model.entity.UserRole;
 import com.luzko.libraryapp.model.entity.UserStatus;
-import com.luzko.libraryapp.service.UserService;
+import com.luzko.libraryapp.model.service.UserService;
 import com.luzko.libraryapp.util.PasswordEncryption;
 import com.luzko.libraryapp.validator.UserValidator;
 import com.luzko.libraryapp.validator.ValueValidator;

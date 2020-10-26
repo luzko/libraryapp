@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.service.impl;
+package com.luzko.libraryapp.model.service.impl;
 
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.exception.DaoException;
@@ -7,7 +7,7 @@ import com.luzko.libraryapp.model.dao.OrderDao;
 import com.luzko.libraryapp.model.dao.impl.OrderDaoImpl;
 import com.luzko.libraryapp.model.entity.Order;
 import com.luzko.libraryapp.model.entity.OrderType;
-import com.luzko.libraryapp.service.OrderService;
+import com.luzko.libraryapp.model.service.OrderService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

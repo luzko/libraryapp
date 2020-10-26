@@ -8,7 +8,7 @@ import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.ServiceFactory;
 import com.luzko.libraryapp.model.dao.ColumnName;
-import com.luzko.libraryapp.service.BookService;
+import com.luzko.libraryapp.model.service.BookService;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

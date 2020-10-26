@@ -9,7 +9,7 @@ import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.Author;
 import com.luzko.libraryapp.model.entity.Category;
-import com.luzko.libraryapp.service.AuthorService;
+import com.luzko.libraryapp.model.service.AuthorService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

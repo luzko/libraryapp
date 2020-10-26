@@ -10,7 +10,7 @@ import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.factory.ServiceFactory;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.entity.UserRole;
-import com.luzko.libraryapp.service.UserService;
+import com.luzko.libraryapp.model.service.UserService;
 import com.luzko.libraryapp.util.CodeGenerator;
 
 import com.luzko.libraryapp.util.mail.EmailSender;
