@@ -2,7 +2,7 @@ package com.luzko.libraryapp.model.service;
 
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.factory.ServiceFactory;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.dao.impl.BookDaoImpl;
 import com.luzko.libraryapp.model.entity.Book;
 import org.powermock.core.classloader.annotations.PrepareForTest;

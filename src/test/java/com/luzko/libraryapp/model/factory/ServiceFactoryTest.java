@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.factory;
+package com.luzko.libraryapp.model.factory;
 
 import com.luzko.libraryapp.model.service.impl.AuthorServiceImpl;
 import com.luzko.libraryapp.model.service.impl.BookServiceImpl;

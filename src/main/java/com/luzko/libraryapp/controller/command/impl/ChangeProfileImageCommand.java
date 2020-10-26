@@ -5,7 +5,7 @@ import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.controller.router.Router;
 import com.luzko.libraryapp.controller.router.RouterType;
-import com.luzko.libraryapp.factory.ServiceFactory;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.UserService;
 import com.luzko.libraryapp.util.CodeGenerator;
 import com.luzko.libraryapp.util.ConfigurationManager;
