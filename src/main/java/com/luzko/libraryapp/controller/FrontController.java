@@ -3,8 +3,6 @@ package com.luzko.libraryapp.controller;
 import com.luzko.libraryapp.model.connection.ConnectionPool;
 import com.luzko.libraryapp.controller.command.ActionProvider;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.router.Router;
-import com.luzko.libraryapp.controller.router.RouterType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,10 +41,10 @@ public class FrontController extends HttpServlet {
         if (commandOptional.isPresent()) {
             router = commandOptional.get().execute(request);
         } else {
-            router = new Router(RouterType.FORWARD, PagePath.ERROR);
+            router = new Router(PagePath.ERROR);
         }
 
-        if (router.getRouterType().equals(RouterType.FORWARD)) {
+        if (router.getRouteType().equals(Router.RouteType.FORWARD)) {
             request.getRequestDispatcher(router.getPagePath()).forward(request, response);
         } else {
             response.sendRedirect(router.getPagePath());

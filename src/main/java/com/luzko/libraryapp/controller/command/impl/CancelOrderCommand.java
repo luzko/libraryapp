@@ -2,9 +2,8 @@ package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.router.Router;
-import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.Order;
@@ -31,15 +30,13 @@ public class CancelOrderCommand implements Command {
                 request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orderList);
                 request.getSession().setAttribute(RequestParameter.ORDER_TYPE, orderType);
                 router.setPagePath(PagePath.ORDERS);
-                router.setRouterType(RouterType.REDIRECT);
+                router.setRedirect();
             } else {
                 router.setPagePath(PagePath.ERROR);
-                router.setRouterType(RouterType.FORWARD);
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in cancel order", e);
             router.setPagePath(PagePath.ERROR);
-            router.setRouterType(RouterType.FORWARD);
         }
         return router;
     }

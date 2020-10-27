@@ -2,9 +2,8 @@ package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.router.Router;
-import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.AuthorService;
@@ -36,11 +35,10 @@ public class CreateAuthorCommand implements Command {
             }
             request.getSession().setAttribute(RequestParameter.CREATE_TYPE, createType);
             router.setPagePath(PagePath.CREATE_BOOK);
-            router.setRouterType(RouterType.REDIRECT);
+            router.setRedirect();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error create ", e);
             router.setPagePath(PagePath.ERROR);
-            router.setRouterType(RouterType.FORWARD);
         }
         return router;
     }

@@ -2,9 +2,8 @@ package com.luzko.libraryapp.controller.command.impl.page;
 
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.router.Router;
-import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.Author;
@@ -37,11 +36,9 @@ public class CreateBookPageCommand implements Command {
             request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
             request.setAttribute(RequestParameter.CREATE_TYPE, createType);
             router.setPagePath(PagePath.CREATE_BOOK);
-            router.setRouterType(RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in create book page", e);
             router.setPagePath(PagePath.ERROR);
-            router.setRouterType(RouterType.FORWARD);
         }
         return router;
     }

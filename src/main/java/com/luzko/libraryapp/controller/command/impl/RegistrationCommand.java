@@ -1,11 +1,10 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.router.Router;
-import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.dao.ColumnName;
@@ -40,25 +39,23 @@ public class RegistrationCommand implements Command {
                             registrationParameter.get(ColumnName.EMAIL), registrationParameter.get(ColumnName.CONFIRM_CODE)
                     );
                     router.setPagePath(isLibrarian ? PagePath.ADMIN : PagePath.LOGIN);
-                    router.setRouterType(RouterType.REDIRECT);
+                    router.setRedirect();
                 } else {
                     request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
                             ConfigurationManager.getMessageProperty(RequestParameter.PATH_INCORRECT_DATA));
                     request.setAttribute(RequestParameter.REGISTRATION_PARAMETER, registrationParameter);
                     router.setPagePath(PagePath.REGISTRATION);
-                    router.setRouterType(RouterType.FORWARD);
                 }
             } else {
                 request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_LOGIN_EXIST));
                 request.setAttribute(RequestParameter.REGISTRATION_PARAMETER, registrationParameter);
                 router.setPagePath(PagePath.REGISTRATION);
-                router.setRouterType(RouterType.FORWARD);
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Registration command error", e);
             router.setPagePath(PagePath.ERROR);
-            router.setRouterType(RouterType.REDIRECT);
+            router.setRedirect();
         }
         return router;
     }

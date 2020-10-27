@@ -1,7 +1,7 @@
 package com.luzko.libraryapp.controller.command;
 
 import com.luzko.libraryapp.controller.RequestParameter;
-import com.luzko.libraryapp.controller.router.Router;
+import com.luzko.libraryapp.controller.Router;
 
 import javax.servlet.http.HttpServletRequest;
 

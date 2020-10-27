@@ -2,8 +2,6 @@ package com.luzko.libraryapp.controller;
 
 import com.luzko.libraryapp.controller.command.ActionProvider;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.router.Router;
-import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.validator.ValueValidator;
 
 import javax.servlet.ServletException;
@@ -47,13 +45,13 @@ public class ImageController extends HttpServlet {
             if (ValueValidator.isValidValue(filename)) {
                 defineImagePath(filename, response);
             } else {
-                router = new Router(RouterType.FORWARD, PagePath.ERROR);
+                router = new Router(PagePath.ERROR);
             }
         }
 
-        if (router.getRouterType().equals(RouterType.FORWARD)) {
+        if (router.getRouteType().equals(Router.RouteType.FORWARD)) {
             request.getRequestDispatcher(router.getPagePath()).forward(request, response);
-        } else if (router.getRouterType().equals(RouterType.REDIRECT)) {
+        } else if (router.getRouteType().equals(Router.RouteType.REDIRECT)) {
             response.sendRedirect(router.getPagePath());
         }
     }

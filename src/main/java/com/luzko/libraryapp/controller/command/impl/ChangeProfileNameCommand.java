@@ -1,11 +1,10 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.router.Router;
-import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.UserService;
@@ -36,11 +35,10 @@ public class ChangeProfileNameCommand implements Command {
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_NAME_CHANGES));
             }
             router.setPagePath(PagePath.USER);
-            router.setRouterType(RouterType.REDIRECT);
+            router.setRedirect();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in change name", e);
             router.setPagePath(PagePath.ERROR);
-            router.setRouterType(RouterType.FORWARD);
         }
         return router;
     }

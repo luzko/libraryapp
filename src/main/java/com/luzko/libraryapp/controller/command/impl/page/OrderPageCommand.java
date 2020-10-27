@@ -2,9 +2,8 @@ package com.luzko.libraryapp.controller.command.impl.page;
 
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.router.Router;
-import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.Book;
@@ -35,15 +34,11 @@ public class OrderPageCommand implements Command {
                 case RequestParameter.BOOK_ORDER -> bookOrderOverview(router, orderService, request);
                 case RequestParameter.NEW_ORDER -> newOrderOverview(router, orderService, request);
                 case RequestParameter.ALL_ORDER -> allOrderOverview(router, orderService, request);
-                default -> {
-                    router.setPagePath(PagePath.ERROR);
-                    router.setRouterType(RouterType.FORWARD);
-                }
+                default -> router.setPagePath(PagePath.ERROR);
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in order page", e);
             router.setPagePath(PagePath.ERROR);
-            router.setRouterType(RouterType.FORWARD);
         }
         return router;
     }
@@ -58,7 +53,6 @@ public class OrderPageCommand implements Command {
             request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
                     ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
             router.setPagePath(PagePath.USER);
-            router.setRouterType(RouterType.FORWARD);
         }
     }
 
@@ -75,7 +69,6 @@ public class OrderPageCommand implements Command {
             Book book = bookOptional.get();
             request.getSession().setAttribute(RequestParameter.BOOK, book);
             router.setPagePath(PagePath.BOOK_OVERVIEW);
-            router.setRouterType(RouterType.FORWARD);
         }
     }
 
@@ -87,7 +80,6 @@ public class OrderPageCommand implements Command {
             request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
                     ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
             router.setPagePath(PagePath.USER);
-            router.setRouterType(RouterType.FORWARD);
         }
     }
 
@@ -99,7 +91,6 @@ public class OrderPageCommand implements Command {
             request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
                     ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
             router.setPagePath(PagePath.USER);
-            router.setRouterType(RouterType.FORWARD);
         }
     }
 
@@ -112,6 +103,5 @@ public class OrderPageCommand implements Command {
         orderList = orderList.subList(recordsView, Math.min(recordsView + recordsPerPage, orderList.size()));
         request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orderList);
         router.setPagePath(PagePath.ORDERS);
-        router.setRouterType(RouterType.FORWARD);
     }
 }

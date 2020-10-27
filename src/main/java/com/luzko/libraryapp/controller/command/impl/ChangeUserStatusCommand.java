@@ -1,11 +1,10 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.router.Router;
-import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.User;
@@ -31,7 +30,7 @@ public class ChangeUserStatusCommand implements Command {
             List<User> userList = defineUserList(userService, request);
             request.getSession().setAttribute(RequestParameter.ALL_USERS, userList);
             router.setPagePath(PagePath.ADMIN);
-            router.setRouterType(RouterType.REDIRECT);
+            router.setRedirect();
             if (!isChangeUserStatus) {
                 logger.log(Level.WARN, "User status is not change");
                 request.getSession().setAttribute(RequestParameter.ERROR_MESSAGE,
@@ -40,7 +39,6 @@ public class ChangeUserStatusCommand implements Command {
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in change status", e);
             router.setPagePath(PagePath.ERROR);
-            router.setRouterType(RouterType.FORWARD);
         }
         return router;
     }

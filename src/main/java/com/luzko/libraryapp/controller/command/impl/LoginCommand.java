@@ -1,11 +1,10 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.router.Router;
-import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.CommandException;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
@@ -41,18 +40,15 @@ public class LoginCommand implements Command {
                     request.setAttribute(RequestParameter.ERROR_MESSAGE,
                             ConfigurationManager.getMessageProperty(RequestParameter.PATH_INCORRECT_USER));
                     router.setPagePath(PagePath.ERROR);
-                    router.setRouterType(RouterType.FORWARD);
                 }
             } else {
                 request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE,
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_LOGIN_ERROR));
                 router.setPagePath(PagePath.LOGIN);
-                router.setRouterType(RouterType.FORWARD);
             }
         } catch (ServiceException | CommandException e) {
             logger.log(Level.ERROR, "Error in login", e);
             router.setPagePath(PagePath.ERROR);
-            router.setRouterType(RouterType.FORWARD);
         }
         return router;
     }
@@ -67,11 +63,11 @@ public class LoginCommand implements Command {
             }
             case BLOCKED -> {
                 router.setPagePath(PagePath.BLOCKED);
-                router.setRouterType(RouterType.REDIRECT);
+                router.setRedirect();
             }
             case UNCONFIRMED -> {
                 router.setPagePath(PagePath.CONFIRMATION);
-                router.setRouterType(RouterType.REDIRECT);
+                router.setRedirect();
             }
             default -> throw new CommandException("User status is incorrect");
         }
@@ -84,13 +80,12 @@ public class LoginCommand implements Command {
         switch (userRole) {
             case READER, LIBRARIAN -> {
                 router.setPagePath(PagePath.USER);
-                router.setRouterType(RouterType.REDIRECT);
+                router.setRedirect();
             }
             case ADMIN -> {
                 List<User> userList = defineUserList(request);
                 request.getSession().setAttribute(RequestParameter.ALL_USERS, userList);
                 router.setPagePath(PagePath.ADMIN);
-                router.setRouterType(RouterType.FORWARD);
             }
             default -> throw new CommandException("User role is incorrect");
         }

@@ -1,11 +1,10 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.router.Router;
-import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.UserStatus;
@@ -29,17 +28,15 @@ public class ConfirmCommand implements Command {
             if (userService.isCodeConfirmCorrect(login, codeConfirm)) {
                 request.getSession().setAttribute(RequestParameter.USER_STATUS, UserStatus.ACTIVE);
                 router.setPagePath(PagePath.USER);
-                router.setRouterType(RouterType.REDIRECT);
             } else {
                 request.getSession().setAttribute(RequestParameter.PARAM_CONFIRM_ERROR,
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_INCORRECT_CODE));
-                router.setRouterType(RouterType.REDIRECT);
                 router.setPagePath(PagePath.CONFIRMATION);
             }
+            router.setRedirect();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Confirm command error", e);
             router.setPagePath(PagePath.ERROR);
-            router.setRouterType(RouterType.REDIRECT);
         }
         return router;
     }

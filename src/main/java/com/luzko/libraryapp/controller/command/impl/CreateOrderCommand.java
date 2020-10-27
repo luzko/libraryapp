@@ -2,9 +2,8 @@ package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.controller.router.Router;
-import com.luzko.libraryapp.controller.router.RouterType;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.OrderService;
@@ -37,11 +36,10 @@ public class CreateOrderCommand implements Command {
                         ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_ERROR));
             }
             router.setPagePath(PagePath.BOOK_OVERVIEW);
-            router.setRouterType(RouterType.REDIRECT);
+            router.setRedirect();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error create order", e);
             router.setPagePath(PagePath.ERROR);
-            router.setRouterType(RouterType.FORWARD);
         }
         return router;
     }
