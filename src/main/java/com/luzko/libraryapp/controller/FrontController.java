@@ -27,16 +27,16 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         processRequest(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         processRequest(request, response);
     }
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
         Optional<Command> commandOptional = ActionProvider.defineCommand(commandName);
         Router router;
