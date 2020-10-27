@@ -84,10 +84,10 @@ public class StatementSql {
             "SELECT book_id FROM books WHERE title LIKE ? AND year LIKE ? AND page LIKE ?";
 
     public static final String COUNT_BOOK_BY_ID =
-            "SELECT number_copies FROM books WHERE book_id = ? AND b.enabled = TRUE";
+            "SELECT number_copies FROM books WHERE book_id = ? AND enabled = TRUE";
 
     public static final String FIND_COUNT_BOOK =
-            "SELECT count(*) count FROM books WHERE b.enabled = TRUE";
+            "SELECT count(*) count FROM books WHERE enabled = TRUE";
 
     public static final String ADD_BOOK =
             "INSERT INTO books(title, year, pages, description, number_copies, category_id_fk) " +
@@ -133,7 +133,11 @@ public class StatementSql {
     public static final String FIND_ORDERS_BY_USER_ID =
             "SELECT o.order_id, b.book_id, b.title, o.order_date, o.order_status_id_fk status, o.order_types_id_fk type FROM orders o " +
                     "LEFT JOIN books b on o.book_id_fk = b.book_id " +
-                    "WHERE o.enabled = TRUE AND o.user_id_fk LIKE ? ORDER BY order_date DESC";
+                    "WHERE o.enabled = TRUE AND o.user_id_fk LIKE ? ORDER BY order_date DESC " +
+                    "LIMIT ? OFFSET ?";
+
+    public static final String FIND_COUNT_ORDERS_BY_USER =
+            "SELECT count(order_id) FROM orders WHERE user_id_fk LIKE ? ORDER BY order_date DESC";
 
     public static final String FIND_ORDER_BY_BOOK_ID =
             "SELECT o.order_id, u.login, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +

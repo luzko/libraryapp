@@ -105,7 +105,6 @@ public class RequestParameter {
     public static final String ORDER_SUCCESS = "orderSuccess";
 
     //pagination
-    public static final String RECORD_PAGE = "5";
     public static final String CURRENT_PAGE = "currentPage";
     public static final String COUNT_PAGE = "countPage";
 

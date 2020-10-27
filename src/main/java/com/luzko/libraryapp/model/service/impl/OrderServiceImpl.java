@@ -21,11 +21,12 @@ public class OrderServiceImpl implements OrderService {
     private static final Logger logger = LogManager.getLogger(OrderServiceImpl.class);
 
     @Override
-    public List<Order> findByUserId(long userId) throws ServiceException {
-        logger.log(Level.INFO, "Find by user id execute: {}", userId);
+    public List<Order> findPartByUserId(Object userIdObject, int shownRecords, int recordsPerPage) throws ServiceException {
+        logger.log(Level.INFO, "Find by user id execute: {}", userIdObject);
         OrderDao orderDao = OrderDaoImpl.getInstance();
+        long userId = (long) userIdObject;
         try {
-            return orderDao.findByUserId(userId);
+            return orderDao.findPartByUserId(userId, shownRecords, recordsPerPage);
         } catch (DaoException e) {
             throw new ServiceException("Find by user id error", e);
         }
@@ -127,6 +128,18 @@ public class OrderServiceImpl implements OrderService {
             return orderDao.isApprove(orderId, bookId, userId);
         } catch (DaoException e) {
             throw new ServiceException("Approve order error", e);
+        }
+    }
+
+    @Override
+    public int findCountByUserId(Object userIdObject) throws ServiceException {
+        logger.log(Level.INFO, "Find count order by user");
+        OrderDao orderDao = OrderDaoImpl.getInstance();
+        long userId = (long) userIdObject;
+        try {
+            return orderDao.findCountByUserId(userId);
+        } catch (DaoException e) {
+            throw new ServiceException("Find count order by user error");
         }
     }
 }

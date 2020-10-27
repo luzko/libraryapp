@@ -17,6 +17,7 @@ import java.util.List;
 
 public class AdminPageCommand implements Command {
     private static final Logger logger = LogManager.getLogger(AdminPageCommand.class);
+    private static final int RECORDS_PER_PAGE = 5;
 
     @Override
     public Router execute(HttpServletRequest request) {
@@ -34,12 +35,8 @@ public class AdminPageCommand implements Command {
 
     private List<User> defineUserList(HttpServletRequest request) throws ServiceException {
         UserService userService = ServiceFactory.getInstance().getUserService();
-        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
-        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
-        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
         int countRecords = userService.findCountRecords();
-        definePagination(request, countRecords, currentPage, recordsPerPage);
-        int recordsShown = (currentPage - 1) * recordsPerPage;
-        return userService.findPart(recordsShown, recordsPerPage);
+        int shownRecords = shownRecordsPagination(countRecords, request);
+        return userService.findPart(shownRecords, RECORDS_PER_PAGE);
     }
 }

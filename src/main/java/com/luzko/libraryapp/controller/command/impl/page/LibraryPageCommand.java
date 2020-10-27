@@ -35,12 +35,8 @@ public class LibraryPageCommand implements Command {
 
     private List<Book> defineBookList(HttpServletRequest request) throws ServiceException {
         BookService bookService = ServiceFactory.getInstance().getBookService();
-        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
-        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
-        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
         int countRecords = bookService.findCountRecords();
-        definePagination(request, countRecords, currentPage, recordsPerPage);
-        int recordsShown = (currentPage - 1) * recordsPerPage;
-        return bookService.findPart(recordsShown, recordsPerPage);
+        int shownRecords = shownRecordsPagination(countRecords, request);
+        return bookService.findPart(shownRecords, RECORDS_PER_PAGE);
     }
 }

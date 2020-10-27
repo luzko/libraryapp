@@ -17,7 +17,7 @@ public interface OrderService {
      * @return the list
      * @throws ServiceException the service exception
      */
-    List<Order> findByUserId(long userId) throws ServiceException;
+    List<Order> findPartByUserId(Object userId, int shownRecords, int recordsPerPage) throws ServiceException;
 
     /**
      * Find by book id.
@@ -93,4 +93,6 @@ public interface OrderService {
      * @throws ServiceException the service exception
      */
     boolean isApprove(String orderId, String bookId, String userId) throws ServiceException;
+
+    int findCountByUserId(Object userId) throws ServiceException;
 }

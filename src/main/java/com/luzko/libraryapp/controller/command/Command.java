@@ -5,28 +5,20 @@ import com.luzko.libraryapp.controller.Router;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * The interface Command.
- */
 public interface Command {
-    /**
-     * Execute command action.
-     *
-     * @param request the request
-     * @return the router
-     */
+    int RECORDS_PER_PAGE = 5;
+
     Router execute(HttpServletRequest request);
 
-    /**
-     * Define parameter pagination.
-     *
-     * @param request       the request
-     * @param countRecords  the count records
-     * @param currentPage   the current page
-     * @param recordPerPage the record per page
-     */
-    default void definePagination(HttpServletRequest request, int countRecords, int currentPage, int recordPerPage) {
-        int countPage = (int) Math.ceil((double) countRecords / recordPerPage);
+    default int shownRecordsPagination(int countRecords, HttpServletRequest request) {
+        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
+        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
+        definePagination(countRecords, currentPage, request);
+        return (currentPage - 1) * RECORDS_PER_PAGE;
+    }
+
+    private void definePagination(int countRecords, int currentPage, HttpServletRequest request) {
+        int countPage = (int) Math.ceil((double) countRecords / RECORDS_PER_PAGE);
         request.getSession().setAttribute(RequestParameter.CURRENT_PAGE, currentPage);
         request.getSession().setAttribute(RequestParameter.COUNT_PAGE, countPage);
     }

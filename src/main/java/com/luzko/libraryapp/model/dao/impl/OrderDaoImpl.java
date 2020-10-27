@@ -66,10 +66,12 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> findByUserId(long userId) throws DaoException {
+    public List<Order> findPartByUserId(long userId, int shownRecords, int recordsPerPage) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ORDERS_BY_USER_ID)) {
             statement.setLong(1, userId);
+            statement.setInt(2, recordsPerPage);
+            statement.setInt(3, shownRecords);
             ResultSet resultSet = statement.executeQuery();
             return createOrdersFromResultSet(resultSet, ColumnName.USER);
         } catch (SQLException e) {
@@ -172,6 +174,19 @@ public class OrderDaoImpl implements OrderDao {
         } finally {
             setAutoCommit(connection, true);
             close(connection);
+        }
+    }
+
+    @Override
+    public int findCountByUserId(long userId) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_ORDERS_BY_USER)) {
+            statement.setLong(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(ColumnName.COUNT);
+        } catch (SQLException e) {
+            throw new DaoException("Find count all records", e);
         }
     }
 

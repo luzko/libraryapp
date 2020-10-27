@@ -17,7 +17,7 @@ public interface OrderDao extends BaseDao<Order> {
      * @return the list
      * @throws DaoException the dao exception
      */
-    List<Order> findByUserId(long userId) throws DaoException;
+    List<Order> findPartByUserId(long userId, int shownRecords, int recordsPerPage) throws DaoException;
 
     /**
      * Find by book id.
@@ -85,4 +85,6 @@ public interface OrderDao extends BaseDao<Order> {
      * @throws DaoException the dao exception
      */
     boolean isApprove(long orderId, long bookId, long userId) throws DaoException;
+
+    int findCountByUserId(long userId) throws DaoException;
 }
