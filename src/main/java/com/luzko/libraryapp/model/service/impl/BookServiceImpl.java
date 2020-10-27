@@ -48,6 +48,17 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> findPart(int recordsShown, int recordsPerPage) throws ServiceException {
+        logger.log(Level.INFO, "Find part execute");
+        BookDao bookDao = BookDaoImpl.getInstance();
+        try {
+            return bookDao.findPart(recordsShown, recordsPerPage);
+        } catch (DaoException e) {
+            throw new ServiceException("Find part error", e);
+        }
+    }
+
+    @Override
     public boolean isParameterUnique(String title, String yearValue, String pagesValue) throws ServiceException {
         logger.log(Level.INFO, "Check unique parameter execute");
         boolean isParameterUnique = false;
@@ -92,5 +103,16 @@ public class BookServiceImpl implements BookService {
             }
         }
         return isBookAdd;
+    }
+
+    @Override
+    public int findCountRecords() throws ServiceException {
+        logger.log(Level.INFO, "Find count all books");
+        BookDao bookDao = BookDaoImpl.getInstance();
+        try {
+            return bookDao.findCountRecords();
+        } catch (DaoException e) {
+            throw new ServiceException("Find count all records error");
+        }
     }
 }

@@ -49,6 +49,14 @@ public interface UserService {
     List<User> findAll() throws ServiceException;
 
     /**
+     * Find part.
+     *
+     * @return the list
+     * @throws ServiceException the service exception
+     */
+    List<User> findPart(int recordsShown, int recordsPerPage) throws ServiceException;
+
+    /**
      * Change user status.
      *
      * @param login      the login
@@ -125,4 +133,12 @@ public interface UserService {
      * @throws ServiceException the service exception
      */
     void giveBooksFromReadingRoom(Object userId, Object userRole) throws ServiceException;
+
+    /**
+     * Find count records.
+     *
+     * @return the int
+     * @throws ServiceException the service exception
+     */
+    int findCountRecords() throws ServiceException;
 }

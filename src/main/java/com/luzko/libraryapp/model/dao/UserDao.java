@@ -3,12 +3,23 @@ package com.luzko.libraryapp.model.dao;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.entity.User;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
  * The interface User dao.
  */
 public interface UserDao extends BaseDao<User> {
+    /**
+     * Find part.
+     *
+     * @param recordsShown   the records shown
+     * @param recordsPerPage the records per page
+     * @return the list
+     * @throws DaoException the dao exception
+     */
+    List<User> findPart(int recordsShown, int recordsPerPage) throws DaoException;
+
     /**
      * Find password by login.
      *
@@ -113,4 +124,12 @@ public interface UserDao extends BaseDao<User> {
      * @throws DaoException the dao exception
      */
     void giveBooksFromReadingRoom(long userId) throws DaoException;
+
+    /**
+     * Find count all records.
+     *
+     * @return the int
+     * @throws DaoException the dao exception
+     */
+    int findCountRecords() throws DaoException;
 }

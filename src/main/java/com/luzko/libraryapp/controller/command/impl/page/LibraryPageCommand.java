@@ -38,9 +38,9 @@ public class LibraryPageCommand implements Command {
         String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
         int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
         int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
-        List<Book> bookList = bookService.findAll();
-        definePagination(request, bookList.size(), currentPage, recordsPerPage);
-        int recordsView = (currentPage - 1) * recordsPerPage;
-        return bookList.subList(recordsView, Math.min(recordsView + recordsPerPage, bookList.size()));
+        int countRecords = bookService.findCountRecords();
+        definePagination(request, countRecords, currentPage, recordsPerPage);
+        int recordsShown = (currentPage - 1) * recordsPerPage;
+        return bookService.findPart(recordsShown, recordsPerPage);
     }
 }

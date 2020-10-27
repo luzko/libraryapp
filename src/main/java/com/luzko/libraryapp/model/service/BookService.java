@@ -29,6 +29,16 @@ public interface BookService {
     List<Book> findAll() throws ServiceException;
 
     /**
+     * Find part.
+     *
+     * @param recordsShown   the records shown
+     * @param recordsPerPage the records per page
+     * @return the list
+     * @throws ServiceException the service exception
+     */
+    List<Book> findPart(int recordsShown, int recordsPerPage) throws ServiceException;
+
+    /**
      * Check parameter is unique.
      *
      * @param title the title
@@ -47,4 +57,12 @@ public interface BookService {
      * @throws ServiceException the service exception
      */
     boolean add(Map<String, String> bookParameter) throws ServiceException;
+
+    /**
+     * Find count records.
+     *
+     * @return the int
+     * @throws ServiceException the service exception
+     */
+    int findCountRecords() throws ServiceException;
 }

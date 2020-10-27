@@ -37,9 +37,9 @@ public class AdminPageCommand implements Command {
         String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
         int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
         int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
-        List<User> userList = userService.findAll();
-        definePagination(request, userList.size(), currentPage, recordsPerPage);
-        int recordsView = (currentPage - 1) * recordsPerPage;
-        return userList.subList(recordsView, Math.min(recordsView + recordsPerPage, userList.size()));
+        int countRecords = userService.findCountRecords();
+        definePagination(request, countRecords, currentPage, recordsPerPage);
+        int recordsShown = (currentPage - 1) * recordsPerPage;
+        return userService.findPart(recordsShown, recordsPerPage);
     }
 }

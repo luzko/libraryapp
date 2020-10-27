@@ -52,6 +52,19 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
+    public List<Book> findPart(int recordsShown, int recordsPerPage) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PART_BOOKS)) {
+            statement.setInt(1, recordsPerPage);
+            statement.setInt(2, recordsShown);
+            ResultSet resultSet = statement.executeQuery();
+            return createBooksFromResultSet(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException("Find all error", e);
+        }
+    }
+
+    @Override
     public boolean isParameterUnique(String title, int year, int pages) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_BY_PARAMETER)) {
@@ -90,6 +103,18 @@ public class BookDaoImpl implements BookDao {
         } finally {
             setAutoCommit(connection, true);
             close(connection);
+        }
+    }
+
+    @Override
+    public int findCountRecords() throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_BOOK)) {
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(ColumnName.COUNT);
+        } catch (SQLException e) {
+            throw new DaoException("Find count all records", e);
         }
     }
 

@@ -102,6 +102,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findPart(int recordsShown, int recordsPerPage) throws ServiceException {
+        logger.log(Level.INFO, "Find part execute");
+        UserDao userDao = UserDaoImpl.getInstance();
+        try {
+            return userDao.findPart(recordsShown, recordsPerPage);
+        } catch (DaoException e) {
+            throw new ServiceException("Find part error", e);
+        }
+    }
+
+    @Override
     public boolean isChangeUserStatus(String login, String userStatus) throws ServiceException {
         logger.log(Level.INFO, "Change user status execute: {}, {}", login, userStatus);
         boolean isChangeStatus = false;
@@ -225,6 +236,17 @@ public class UserServiceImpl implements UserService {
             }
         } catch (DaoException e) {
             throw new ServiceException("Give all book error", e);
+        }
+    }
+
+    @Override
+    public int findCountRecords() throws ServiceException {
+        logger.log(Level.INFO, "Find count all users");
+        UserDao userDao = UserDaoImpl.getInstance();
+        try {
+            return userDao.findCountRecords();
+        } catch (DaoException e) {
+            throw new ServiceException("Find count all records error");
         }
     }
 }

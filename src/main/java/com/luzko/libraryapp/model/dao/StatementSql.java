@@ -31,6 +31,14 @@ public class StatementSql {
             "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk, avatar " +
                     "FROM users WHERE role_id_fk != 1 ORDER BY role_id_fk";
 
+    public static final String FIND_PART_USERS =
+            "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk, avatar " +
+                    "FROM users WHERE role_id_fk != 1 ORDER BY role_id_fk " +
+                    "LIMIT ? OFFSET ?";
+
+    public static final String FIND_COUNT_USER =
+            "SELECT count(*) count FROM users WHERE role_id_fk != 1";
+
     public static final String CHANGE_USER_STATUS =
             "UPDATE users SET user_status_id_fk = ? WHERE login LIKE ?";
 
@@ -54,6 +62,14 @@ public class StatementSql {
                     "LEFT JOIN authors a on a.author_id = ba.author_id_fk " +
                     "WHERE b.enabled = TRUE GROUP BY b.book_id ORDER BY title";
 
+    public static final String FIND_PART_BOOKS =
+            "SELECT b.book_id, b.title, b.category_id_fk, " +
+                    "GROUP_CONCAT(DISTINCT a.author ORDER BY a.author SEPARATOR ', ') authors FROM books b " +
+                    "LEFT JOIN book_authors ba on b.book_id = ba.book_id_fk " +
+                    "LEFT JOIN authors a on a.author_id = ba.author_id_fk " +
+                    "WHERE b.enabled = TRUE GROUP BY b.book_id ORDER BY title " +
+                    "LIMIT ? OFFSET ?";
+
     public static final String FIND_BOOK_BY_ID =
             "SELECT b.book_id, b.title, b.year, b.pages, b.description, b.number_copies, b.category_id_fk, " +
                     "GROUP_CONCAT(DISTINCT a.author ORDER BY a.author SEPARATOR ', ') authors FROM books b " +
@@ -67,7 +83,11 @@ public class StatementSql {
     public static final String FIND_BOOK_BY_PARAMETER =
             "SELECT book_id FROM books WHERE title LIKE ? AND year LIKE ? AND page LIKE ?";
 
-    public static final String COUNT_BOOK_BY_ID = "SELECT number_copies FROM books WHERE book_id = ?";
+    public static final String COUNT_BOOK_BY_ID =
+            "SELECT number_copies FROM books WHERE book_id = ? AND b.enabled = TRUE";
+
+    public static final String FIND_COUNT_BOOK =
+            "SELECT count(*) count FROM books WHERE b.enabled = TRUE";
 
     public static final String ADD_BOOK =
             "INSERT INTO books(title, year, pages, description, number_copies, category_id_fk) " +
@@ -89,7 +109,7 @@ public class StatementSql {
     public static final String ADD_AUTHOR =
             "INSERT INTO authors(author) VALUES (?)";
 
-    public static final String FINE_COUNT_BY_NAME =
+    public static final String FIND_COUNT_BY_NAME =
             "SELECT count(author_id) as count FROM authors WHERE author LIKE ?";
 
     //book authors query

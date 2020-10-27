@@ -66,7 +66,7 @@ public class AuthorDaoImpl implements AuthorDao {
     @Override
     public boolean isNameUnique(String name) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.FINE_COUNT_BY_NAME)) {
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_BY_NAME)) {
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();

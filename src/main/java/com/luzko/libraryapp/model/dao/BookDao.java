@@ -3,10 +3,22 @@ package com.luzko.libraryapp.model.dao;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.entity.Book;
 
+import java.util.List;
+
 /**
  * The interface Book dao.
  */
 public interface BookDao extends BaseDao<Book> {
+    /**
+     * Find part.
+     *
+     * @param recordsShown   the records shown
+     * @param recordsPerPage the records per page
+     * @return the list
+     * @throws DaoException the dao exception
+     */
+    List<Book> findPart(int recordsShown, int recordsPerPage) throws DaoException;
+
     /**
      * Check parameter is unique.
      *
@@ -27,4 +39,12 @@ public interface BookDao extends BaseDao<Book> {
      * @throws DaoException the dao exception
      */
     boolean add(Book book, long authorId) throws DaoException;
+
+    /**
+     * Find count records.
+     *
+     * @return the int
+     * @throws DaoException the dao exception
+     */
+    int findCountRecords() throws DaoException;
 }

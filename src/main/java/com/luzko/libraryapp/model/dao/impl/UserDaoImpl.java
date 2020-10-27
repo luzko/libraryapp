@@ -83,6 +83,19 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public List<User> findPart(int recordsShown, int recordsPerPage) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PART_USERS)) {
+            statement.setInt(1, recordsPerPage);
+            statement.setInt(2, recordsShown);
+            ResultSet resultSet = statement.executeQuery();
+            return createUsersFromResultSet(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException("Find all error", e);
+        }
+    }
+
+    @Override
     public boolean add(User user, String password, String codeConfirm) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.ADD_USER)) {
@@ -182,15 +195,6 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    private boolean changeUserAttribute(String login, String attribute, String sqlQuery) throws SQLException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
-            statement.setString(1, attribute);
-            statement.setString(2, login);
-            return statement.executeUpdate() == 1;
-        }
-    }
-
     @Override
     public boolean isChangeUserStatus(String login, int status) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -200,6 +204,27 @@ public class UserDaoImpl implements UserDao {
             return statement.executeUpdate() == 1;
         } catch (SQLException e) {
             throw new DaoException("Change user status error", e);
+        }
+    }
+
+    @Override
+    public int findCountRecords() throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_USER)) {
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(ColumnName.COUNT);
+        } catch (SQLException e) {
+            throw new DaoException("Find count all records", e);
+        }
+    }
+
+    private boolean changeUserAttribute(String login, String attribute, String sqlQuery) throws SQLException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
+            statement.setString(1, attribute);
+            statement.setString(2, login);
+            return statement.executeUpdate() == 1;
         }
     }
 
