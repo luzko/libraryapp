@@ -73,7 +73,7 @@ public class BookDaoImpl implements BookDao {
         boolean isBookAdd = false;
         try (PreparedStatement statementBook = connection.prepareStatement(StatementSql.ADD_BOOK, Statement.RETURN_GENERATED_KEYS);
              PreparedStatement statementBookAuthors = connection.prepareStatement(StatementSql.ADD_BOOK_AUTHORS)) {
-            connectionSetAutoCommit(connection, false);
+            setAutoCommit(connection, false);
             if (countBook(statementBook, book) == 1) {
                 ResultSet generatedKey = statementBook.getGeneratedKeys();
                 generatedKey.next();
@@ -82,14 +82,14 @@ public class BookDaoImpl implements BookDao {
                 statementBookAuthors.setLong(2, authorId);
                 isBookAdd = statementBookAuthors.executeUpdate() > 0;
             }
-            connectionCommitChanges(connection);
+            commit(connection);
             return isBookAdd;
         } catch (SQLException e) {
-            connectionsRollback(connection);
+            rollback(connection);
             throw new DaoException("Book add error", e);
         } finally {
-            connectionSetAutoCommit(connection, true);
-            closeConnection(connection);
+            setAutoCommit(connection, true);
+            close(connection);
         }
     }
 

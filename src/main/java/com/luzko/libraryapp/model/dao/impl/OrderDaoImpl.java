@@ -105,19 +105,19 @@ public class OrderDaoImpl implements OrderDao {
         boolean isReturnBook = false;
         try (PreparedStatement statementReturnOrder = connection.prepareStatement(StatementSql.RETURN_ORDER);
              PreparedStatement statementReturnBook = connection.prepareStatement(StatementSql.RETURN_BOOK)) {
-            connectionSetAutoCommit(connection, false);
+            setAutoCommit(connection, false);
             if (isOrderReturn(statementReturnOrder, orderId)) {
                 statementReturnBook.setLong(1, bookId);
                 isReturnBook = statementReturnBook.executeUpdate() == 1;
             }
-            connectionCommitChanges(connection);
+            commit(connection);
             return isReturnBook;
         } catch (SQLException e) {
-            connectionsRollback(connection);
+            rollback(connection);
             throw new DaoException("Order return error", e);
         } finally {
-            connectionSetAutoCommit(connection, true);
-            closeConnection(connection);
+            setAutoCommit(connection, true);
+            close(connection);
         }
     }
 
@@ -129,7 +129,7 @@ public class OrderDaoImpl implements OrderDao {
              PreparedStatement statementCountOrders = connection.prepareStatement(StatementSql.COUNT_ORDERS_BY_ID);
              PreparedStatement statementApproveBook = connection.prepareStatement(StatementSql.APPROVE_BOOK);
              PreparedStatement statementApproveOrder = connection.prepareStatement(StatementSql.CHANGE_STATUS_ORDER)) {
-            connectionSetAutoCommit(connection, false);
+            setAutoCommit(connection, false);
             int countBookById = countBookById(statementCountBook, bookId);
             int countOrderByUser = countOrderByUser(statementCountOrders, userId);
             if (countBookById > 0 && countOrderByUser < MAX_COUNT_NEW_ORDER &&
@@ -137,14 +137,14 @@ public class OrderDaoImpl implements OrderDao {
                 statementApproveBook.setLong(1, bookId);
                 isApproveBook = statementApproveBook.executeUpdate() == 1;
             }
-            connectionCommitChanges(connection);
+            commit(connection);
             return isApproveBook;
         } catch (SQLException e) {
-            connectionsRollback(connection);
+            rollback(connection);
             throw new DaoException("Order Approve error", e);
         } finally {
-            connectionSetAutoCommit(connection, true);
-            closeConnection(connection);
+            setAutoCommit(connection, true);
+            close(connection);
         }
     }
 
@@ -155,7 +155,7 @@ public class OrderDaoImpl implements OrderDao {
         try (PreparedStatement statementCountBook = connection.prepareStatement(StatementSql.COUNT_BOOK_BY_ID);
              PreparedStatement statementCountOrders = connection.prepareStatement(StatementSql.COUNT_ORDERS_BY_ID);
              PreparedStatement statementCreateOrder = connection.prepareStatement(StatementSql.CREATE_ORDER)) {
-            connectionSetAutoCommit(connection, false);
+            setAutoCommit(connection, false);
             int countBookById = countBookById(statementCountBook, bookId);
             if (countBookById > 0 && countOrderByUser(statementCountOrders, userId) < MAX_COUNT_NEW_ORDER) {
                 statementCreateOrder.setLong(1, userId);
@@ -164,14 +164,14 @@ public class OrderDaoImpl implements OrderDao {
                 statementCreateOrder.setLong(4, DateUtil.defineCountMillisecondsFromNow());
                 isCreateOrder = statementCreateOrder.executeUpdate() == 1;
             }
-            connectionCommitChanges(connection);
+            commit(connection);
             return isCreateOrder;
         } catch (SQLException e) {
-            connectionsRollback(connection);
+            rollback(connection);
             throw new DaoException("Order create error", e);
         } finally {
-            connectionSetAutoCommit(connection, true);
-            closeConnection(connection);
+            setAutoCommit(connection, true);
+            close(connection);
         }
     }
 

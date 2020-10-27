@@ -2,6 +2,10 @@ package com.luzko.libraryapp.model.dao;
 
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.entity.BaseEntity;
+import com.luzko.libraryapp.model.service.impl.AuthorServiceImpl;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,6 +18,11 @@ import java.util.Optional;
  * @param <T> the type parameter
  */
 public interface BaseDao<T extends BaseEntity> {
+    /**
+     * The constant logger.
+     */
+    Logger logger = LogManager.getLogger(AuthorServiceImpl.class);
+
     /**
      * Find by id.
      *
@@ -38,7 +47,7 @@ public interface BaseDao<T extends BaseEntity> {
      * @param value      the value
      * @throws DaoException the dao exception
      */
-    default void connectionSetAutoCommit(Connection connection, boolean value) throws DaoException {
+    default void setAutoCommit(Connection connection, boolean value) throws DaoException {
         if (connection != null) {
             try {
                 connection.setAutoCommit(value);
@@ -54,7 +63,7 @@ public interface BaseDao<T extends BaseEntity> {
      * @param connection the connection
      * @throws DaoException the dao exception
      */
-    default void connectionsRollback(Connection connection) throws DaoException {
+    default void rollback(Connection connection) throws DaoException {
         if (connection != null) {
             try {
                 connection.rollback();
@@ -70,7 +79,7 @@ public interface BaseDao<T extends BaseEntity> {
      * @param connection the connection
      * @throws DaoException the dao exception
      */
-    default void connectionCommitChanges(Connection connection) throws DaoException {
+    default void commit(Connection connection) throws DaoException {
         if (connection != null) {
             try {
                 connection.commit();
@@ -86,12 +95,12 @@ public interface BaseDao<T extends BaseEntity> {
      * @param connection the connection
      * @throws DaoException the dao exception
      */
-    default void closeConnection(Connection connection) throws DaoException {
+    default void close(Connection connection) throws DaoException {
         if (connection != null) {
             try {
                 connection.close();
             } catch (SQLException e) {
-                throw new DaoException("Connection couldn't be closed", e);
+                logger.log(Level.ERROR, "Connection couldn't be closed");
             }
         }
     }
