@@ -219,18 +219,20 @@ public class UserDaoImpl implements UserDao {
     }
 
     private Optional<User> createUser(ResultSet resultSet) throws SQLException {
-        UserBuilder userBuilder = new UserBuilder()
-                .setUserId(resultSet.getLong(ColumnName.USER_ID))
-                .setLogin(resultSet.getString(ColumnName.LOGIN))
-                .setUserRole(UserRole.defineRoleById(resultSet.getInt(ColumnName.ROLE_ID_FK)))
-                .setName(resultSet.getString(ColumnName.NAME))
-                .setSurname(resultSet.getString(ColumnName.SURNAME))
-                .setEmail(resultSet.getString(ColumnName.EMAIL))
-                .setUserStatus(UserStatus.defineStatusById(resultSet.getInt(ColumnName.USER_STATUS_ID_FK)))
-                .setUserAvatar(resultSet.getString(ColumnName.AVATAR));
-        User user = new User(userBuilder);
         Optional<User> userOptional = Optional.empty();
-        if (user.getUserRole() != null && user.getUserStatus() != null) {
+        Optional<UserRole> userRoleOptional = UserRole.defineRoleById(resultSet.getInt(ColumnName.ROLE_ID_FK));
+        Optional<UserStatus> userStatusOptional = UserStatus.defineStatusById(resultSet.getInt(ColumnName.USER_STATUS_ID_FK));
+        if (userRoleOptional.isPresent() && userStatusOptional.isPresent()) {
+            UserBuilder userBuilder = new UserBuilder()
+                    .setUserId(resultSet.getLong(ColumnName.USER_ID))
+                    .setLogin(resultSet.getString(ColumnName.LOGIN))
+                    .setUserRole(userRoleOptional.get())
+                    .setName(resultSet.getString(ColumnName.NAME))
+                    .setSurname(resultSet.getString(ColumnName.SURNAME))
+                    .setEmail(resultSet.getString(ColumnName.EMAIL))
+                    .setUserStatus(userStatusOptional.get())
+                    .setUserAvatar(resultSet.getString(ColumnName.AVATAR));
+            User user = new User(userBuilder);
             userOptional = Optional.of(user);
         }
         return userOptional;
