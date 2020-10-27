@@ -1,5 +1,7 @@
 package com.luzko.libraryapp.model.entity;
 
+import java.util.Arrays;
+import java.util.Optional;
 
 public enum OrderStatus {
     NEW(LocaleName.ORDER_STATUS_NEW),
@@ -22,12 +24,9 @@ public enum OrderStatus {
         return this.ordinal() + 1;
     }
 
-    public static OrderStatus defineOrderStatusById(int id) {
-        for (OrderStatus orderStatus : OrderStatus.values()) {
-            if (orderStatus.defineId() == id) {
-                return orderStatus;
-            }
-        }
-        return null;
+    public static Optional<OrderStatus> defineOrderStatusById(int id) {
+        return Arrays.stream(OrderStatus.values())
+                .filter(orderStatus -> orderStatus.defineId() == id)
+                .findFirst();
     }
 }

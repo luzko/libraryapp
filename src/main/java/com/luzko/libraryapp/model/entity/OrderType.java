@@ -1,5 +1,8 @@
 package com.luzko.libraryapp.model.entity;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum OrderType {
     READING_ROOM(LocaleName.TYPE_READING_ROOM),
     HOME(LocaleName.TYPE_HOME);
@@ -18,12 +21,9 @@ public enum OrderType {
         return this.ordinal() + 1;
     }
 
-    public static OrderType defineOrderTypeById(int id) {
-        for (OrderType orderType : OrderType.values()) {
-            if (orderType.defineId() == id) {
-                return orderType;
-            }
-        }
-        return null;
+    public static Optional<OrderType> defineOrderTypeById(int id) {
+        return Arrays.stream(OrderType.values())
+                .filter(orderType -> orderType.defineId() == id)
+                .findFirst();
     }
 }

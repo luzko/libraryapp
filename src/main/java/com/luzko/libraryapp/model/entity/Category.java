@@ -1,5 +1,8 @@
 package com.luzko.libraryapp.model.entity;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum Category {
     FANTASY(LocaleName.CATEGORY_FANTASY),
     HISTORY(LocaleName.CATEGORY_HISTORY),
@@ -22,12 +25,9 @@ public enum Category {
         return this.ordinal() + 1;
     }
 
-    public static Category defineCategoryById(int id) {
-        for (Category category : Category.values()) {
-            if (category.defineId() == id) {
-                return category;
-            }
-        }
-        return null;
+    public static Optional<Category> defineCategoryById(int id) {
+        return Arrays.stream(Category.values())
+                .filter(category -> category.defineId() == id)
+                .findFirst();
     }
 }

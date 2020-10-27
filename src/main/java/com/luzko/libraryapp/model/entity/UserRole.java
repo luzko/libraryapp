@@ -1,5 +1,8 @@
 package com.luzko.libraryapp.model.entity;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum UserRole {
     ADMIN(LocaleName.ROLE_ADMIN),
     LIBRARIAN(LocaleName.ROLE_LIBRARIAN),
@@ -19,12 +22,9 @@ public enum UserRole {
         return this.ordinal() + 1;
     }
 
-    public static UserRole defineRoleById(int id) {
-        for (UserRole userRole : UserRole.values()) {
-            if (userRole.defineId() == id) {
-                return userRole;
-            }
-        }
-        return null;
+    public static Optional<UserRole> defineRoleById(int id) {
+        return Arrays.stream(UserRole.values())
+                .filter(userRole -> userRole.defineId() == id)
+                .findFirst();
     }
 }
