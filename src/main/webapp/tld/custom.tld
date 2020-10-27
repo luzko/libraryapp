@@ -8,7 +8,7 @@
     <uri>custom-tag</uri>
     <tag>
         <name>footer</name>
-        <tag-class>com.luzko.libraryapp.tag.CustomTag</tag-class>
+        <tag-class>com.luzko.libraryapp.tag.FooterTag</tag-class>
         <body-content>scriptless</body-content>
     </tag>
 </taglib>

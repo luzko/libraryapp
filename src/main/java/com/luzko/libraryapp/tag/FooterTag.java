@@ -6,7 +6,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 @SuppressWarnings("serial")
-public class CustomTag extends TagSupport {
+public class FooterTag extends TagSupport {
     @Override
     public int doStartTag() throws JspTagException {
         try {
