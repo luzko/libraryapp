@@ -132,11 +132,10 @@ public class OrderDaoImpl implements OrderDao {
             connectionSetAutoCommit(connection, false);
             int countBookById = countBookById(statementCountBook, bookId);
             int countOrderByUser = countOrderByUser(statementCountOrders, userId);
-            if (countBookById > 0 && countOrderByUser < MAX_COUNT_NEW_ORDER) {
-                if (isChangeOrderStatus(statementApproveOrder, orderId, OrderStatus.APPROVED.defineId())) {
-                    statementApproveBook.setLong(1, bookId);
-                    isApproveBook = statementApproveBook.executeUpdate() == 1;
-                }
+            if (countBookById > 0 && countOrderByUser < MAX_COUNT_NEW_ORDER &&
+                    isChangeOrderStatus(statementApproveOrder, orderId, OrderStatus.APPROVED.defineId())) {
+                statementApproveBook.setLong(1, bookId);
+                isApproveBook = statementApproveBook.executeUpdate() == 1;
             }
             connectionCommitChanges(connection);
             return isApproveBook;
@@ -158,14 +157,12 @@ public class OrderDaoImpl implements OrderDao {
              PreparedStatement statementCreateOrder = connection.prepareStatement(StatementSql.CREATE_ORDER)) {
             connectionSetAutoCommit(connection, false);
             int countBookById = countBookById(statementCountBook, bookId);
-            if (countBookById > 0) {
-                if (countOrderByUser(statementCountOrders, userId) < MAX_COUNT_NEW_ORDER) {
-                    statementCreateOrder.setLong(1, userId);
-                    statementCreateOrder.setLong(2, bookId);
-                    statementCreateOrder.setInt(3, orderType.defineId());
-                    statementCreateOrder.setLong(4, DateUtil.defineCountMillisecondsFromNow());
-                    isCreateOrder = statementCreateOrder.executeUpdate() == 1;
-                }
+            if (countBookById > 0 && countOrderByUser(statementCountOrders, userId) < MAX_COUNT_NEW_ORDER) {
+                statementCreateOrder.setLong(1, userId);
+                statementCreateOrder.setLong(2, bookId);
+                statementCreateOrder.setInt(3, orderType.defineId());
+                statementCreateOrder.setLong(4, DateUtil.defineCountMillisecondsFromNow());
+                isCreateOrder = statementCreateOrder.executeUpdate() == 1;
             }
             connectionCommitChanges(connection);
             return isCreateOrder;
@@ -212,68 +209,77 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     private Optional<Order> createOrder(ResultSet resultSet) throws SQLException {
-        OrderBuilder orderBuilder = createBaseOrder(resultSet);
-        return fillReturnOrder(resultSet, orderBuilder);
+        Optional<OrderBuilder> builderOptional = createBaseOrder(resultSet);
+        return builderOptional.isPresent() ? fillReturnOrder(resultSet, builderOptional.get()) : Optional.empty();
     }
 
     private Optional<Order> createNewOrder(ResultSet resultSet) throws SQLException {
-        OrderBuilder orderBuilder = createBaseOrder(resultSet);
-        Order order = new Order(orderBuilder);
-        Optional<Order> orderOptional = Optional.empty();
-        if (order.getOrderStatus() != null && order.getOrderType() != null) {
-            orderOptional = Optional.of(order);
-        }
-        return orderOptional;
+        Optional<OrderBuilder> builderOptional = createBaseOrder(resultSet);
+        return builderOptional.map(Order::new);
     }
 
     private Optional<Order> createOrderUserId(ResultSet resultSet) throws SQLException {
-        BookBuilder bookBuilder = new BookBuilder()
-                .setBookId(resultSet.getLong(ColumnName.BOOK_ID))
-                .setTitle(resultSet.getString(ColumnName.BOOK_TITLE));
-        Book book = new Book(bookBuilder);
-        OrderBuilder orderBuilder = new OrderBuilder()
-                .setOrderId(resultSet.getLong(ColumnName.ORDER_ID))
-                .setOrderStatus(OrderStatus.defineOrderStatusById(resultSet.getInt(ColumnName.ORDER_STATUS)))
-                .setOrderType(OrderType.defineOrderTypeById(resultSet.getInt(ColumnName.ORDER_TYPE)))
-                .setOrderDate(DateUtil.defineDateValue(resultSet.getLong(ColumnName.ORDER_DATE)))
-                .setBook(book);
-        Order order = new Order(orderBuilder);
         Optional<Order> orderOptional = Optional.empty();
-        if (order.getOrderStatus() != null && order.getOrderType() != null) {
+        Optional<OrderStatus> orderStatusOptional = OrderStatus.defineOrderStatusById(resultSet.getInt(ColumnName.ORDER_STATUS));
+        Optional<OrderType> orderTypeOptional = OrderType.defineOrderTypeById(resultSet.getInt(ColumnName.ORDER_TYPE));
+        if (orderStatusOptional.isPresent() && orderTypeOptional.isPresent()) {
+            BookBuilder bookBuilder = new BookBuilder()
+                    .setBookId(resultSet.getLong(ColumnName.BOOK_ID))
+                    .setTitle(resultSet.getString(ColumnName.BOOK_TITLE));
+            Book book = new Book(bookBuilder);
+            OrderBuilder orderBuilder = new OrderBuilder()
+                    .setOrderId(resultSet.getLong(ColumnName.ORDER_ID))
+                    .setOrderStatus(orderStatusOptional.get())
+                    .setOrderType(orderTypeOptional.get())
+                    .setOrderDate(DateUtil.defineDateValue(resultSet.getLong(ColumnName.ORDER_DATE)))
+                    .setBook(book);
+            Order order = new Order(orderBuilder);
             orderOptional = Optional.of(order);
         }
         return orderOptional;
     }
 
     private Optional<Order> createOrderBookId(ResultSet resultSet) throws SQLException {
-        UserBuilder userBuilder = new UserBuilder()
-                .setLogin(resultSet.getString(ColumnName.USER_LOGIN));
-        User user = new User(userBuilder);
-        OrderBuilder orderBuilder = new OrderBuilder()
-                .setOrderId(resultSet.getLong(ColumnName.ORDER_ID))
-                .setOrderStatus(OrderStatus.defineOrderStatusById(resultSet.getInt(ColumnName.ORDER_STATUS)))
-                .setOrderType(OrderType.defineOrderTypeById(resultSet.getInt(ColumnName.ORDER_TYPE)))
-                .setOrderDate(DateUtil.defineDateValue(resultSet.getLong(ColumnName.ORDER_DATE)))
-                .setUser(user);
-        return fillReturnOrder(resultSet, orderBuilder);
+        Optional<Order> orderOptional = Optional.empty();
+        Optional<OrderStatus> orderStatusOptional = OrderStatus.defineOrderStatusById(resultSet.getInt(ColumnName.ORDER_STATUS));
+        Optional<OrderType> orderTypeOptional = OrderType.defineOrderTypeById(resultSet.getInt(ColumnName.ORDER_TYPE));
+        if (orderStatusOptional.isPresent() && orderTypeOptional.isPresent()) {
+            UserBuilder userBuilder = new UserBuilder()
+                    .setLogin(resultSet.getString(ColumnName.USER_LOGIN));
+            User user = new User(userBuilder);
+            OrderBuilder orderBuilder = new OrderBuilder()
+                    .setOrderId(resultSet.getLong(ColumnName.ORDER_ID))
+                    .setOrderStatus(orderStatusOptional.get())
+                    .setOrderType(orderTypeOptional.get())
+                    .setOrderDate(DateUtil.defineDateValue(resultSet.getLong(ColumnName.ORDER_DATE)))
+                    .setUser(user);
+            orderOptional = fillReturnOrder(resultSet, orderBuilder);
+        }
+        return orderOptional;
     }
 
-    private OrderBuilder createBaseOrder(ResultSet resultSet) throws SQLException {
-        BookBuilder bookBuilder = new BookBuilder()
-                .setBookId(resultSet.getLong(ColumnName.BOOK_ID))
-                .setTitle(resultSet.getString(ColumnName.BOOK_TITLE));
-        Book book = new Book(bookBuilder);
-        UserBuilder userBuilder = new UserBuilder()
-                .setUserId(resultSet.getLong(ColumnName.USER_ID))
-                .setLogin(resultSet.getString(ColumnName.USER_LOGIN));
-        User user = new User(userBuilder);
-        return new OrderBuilder()
-                .setOrderId(resultSet.getLong(ColumnName.ORDER_ID))
-                .setOrderStatus(OrderStatus.defineOrderStatusById(resultSet.getInt(ColumnName.ORDER_STATUS)))
-                .setOrderType(OrderType.defineOrderTypeById(resultSet.getInt(ColumnName.ORDER_TYPE)))
-                .setOrderDate(DateUtil.defineDateValue(resultSet.getLong(ColumnName.ORDER_DATE)))
-                .setUser(user)
-                .setBook(book);
+    private Optional<OrderBuilder> createBaseOrder(ResultSet resultSet) throws SQLException {
+        Optional<OrderBuilder> orderBuilderOptional = Optional.empty();
+        Optional<OrderStatus> orderStatusOptional = OrderStatus.defineOrderStatusById(resultSet.getInt(ColumnName.ORDER_STATUS));
+        Optional<OrderType> orderTypeOptional = OrderType.defineOrderTypeById(resultSet.getInt(ColumnName.ORDER_TYPE));
+        if (orderStatusOptional.isPresent() && orderTypeOptional.isPresent()) {
+            BookBuilder bookBuilder = new BookBuilder()
+                    .setBookId(resultSet.getLong(ColumnName.BOOK_ID))
+                    .setTitle(resultSet.getString(ColumnName.BOOK_TITLE));
+            Book book = new Book(bookBuilder);
+            UserBuilder userBuilder = new UserBuilder()
+                    .setUserId(resultSet.getLong(ColumnName.USER_ID))
+                    .setLogin(resultSet.getString(ColumnName.USER_LOGIN));
+            User user = new User(userBuilder);
+            orderBuilderOptional = Optional.of(new OrderBuilder()
+                    .setOrderId(resultSet.getLong(ColumnName.ORDER_ID))
+                    .setOrderStatus(orderStatusOptional.get())
+                    .setOrderType(orderTypeOptional.get())
+                    .setOrderDate(DateUtil.defineDateValue(resultSet.getLong(ColumnName.ORDER_DATE)))
+                    .setUser(user)
+                    .setBook(book));
+        }
+        return orderBuilderOptional;
     }
 
     private Optional<Order> fillReturnOrder(ResultSet resultSet, OrderBuilder orderBuilder) throws SQLException {
@@ -284,11 +290,7 @@ public class OrderDaoImpl implements OrderDao {
             orderBuilder.setReturnDate("-");
         }
         Order order = new Order(orderBuilder);
-        Optional<Order> orderOptional = Optional.empty();
-        if (order.getOrderStatus() != null && order.getOrderType() != null) {
-            orderOptional = Optional.of(order);
-        }
-        return orderOptional;
+        return Optional.of(order);
     }
 
     private boolean isOrderReturn(PreparedStatement statement, long orderId) throws SQLException {
