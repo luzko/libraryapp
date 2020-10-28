@@ -40,15 +40,13 @@ public interface UserService {
      */
     boolean registration(Map<String, String> registrationParameter, boolean isLibrarian) throws ServiceException;
 
-
-
     /**
      * Find part.
      *
      * @return the list
      * @throws ServiceException the service exception
      */
-    List<User> findPart(int recordsShown, int recordsPerPage) throws ServiceException;
+    List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws ServiceException;
 
     /**
      * Change user status.

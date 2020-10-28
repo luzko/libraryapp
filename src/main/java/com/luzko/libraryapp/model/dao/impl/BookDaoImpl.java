@@ -41,7 +41,7 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public List<Book> findPart(int recordsShown, int recordsPerPage) throws DaoException {
+    public List<Book> findPartOfAll(int recordsShown, int recordsPerPage) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PART_BOOKS)) {
             statement.setInt(1, recordsPerPage);

@@ -13,10 +13,9 @@ public interface OrderService {
 
     List<Order> findPartByUserId(Object userId, int shownRecords, int recordsPerPage) throws ServiceException;
 
-
     List<Order> findPartByBookId(String bookId, int shownRecords, int recordsPerPage) throws ServiceException;
 
-    List<Order> findPartNew(int shownRecords, int recordsPerPage) throws ServiceException;
+    List<Order> findPartOfNew(int shownRecords, int recordsPerPage) throws ServiceException;
 
     List<Order> findPartOfAll(int shownRecords, int recordsPerPage) throws ServiceException;
 
@@ -70,9 +69,9 @@ public interface OrderService {
      */
     boolean isApprove(String orderId, String bookId, String userId) throws ServiceException;
 
-    int findCountByUserId(Object userId) throws ServiceException;
+    int findCountUserId(Object userId) throws ServiceException;
 
-    int findCountByBookId(String bookId) throws ServiceException;
+    int findCountBookId(String bookId) throws ServiceException;
 
     int findCountNew() throws ServiceException;
 

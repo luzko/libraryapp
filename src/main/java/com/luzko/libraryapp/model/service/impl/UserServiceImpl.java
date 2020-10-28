@@ -91,11 +91,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findPart(int recordsShown, int recordsPerPage) throws ServiceException {
+    public List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws ServiceException {
         logger.log(Level.INFO, "Find part execute");
         UserDao userDao = UserDaoImpl.getInstance();
         try {
-            return userDao.findPart(recordsShown, recordsPerPage);
+            return userDao.findPartOfAll(recordsShown, recordsPerPage);
         } catch (DaoException e) {
             throw new ServiceException("Find part error", e);
         }

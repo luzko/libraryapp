@@ -37,6 +37,6 @@ public class LibraryPageCommand implements Command {
         BookService bookService = ServiceFactory.getInstance().getBookService();
         int countRecords = bookService.findCountRecords();
         int shownRecords = shownRecordsPagination(countRecords, request);
-        return bookService.findPart(shownRecords, RECORDS_PER_PAGE);
+        return bookService.findPartOfAll(shownRecords, RECORDS_PER_PAGE);
     }
 }

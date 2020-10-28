@@ -32,7 +32,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> findPartNew(int shownRecords, int recordsPerPage) throws DaoException {
+    public List<Order> findPartOfNew(int shownRecords, int recordsPerPage) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_NEW_ORDERS)) {
             statement.setInt(1, recordsPerPage);

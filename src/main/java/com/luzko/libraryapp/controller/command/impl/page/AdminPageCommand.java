@@ -37,6 +37,6 @@ public class AdminPageCommand implements Command {
         UserService userService = ServiceFactory.getInstance().getUserService();
         int countRecords = userService.findCountRecords();
         int shownRecords = shownRecordsPagination(countRecords, request);
-        return userService.findPart(shownRecords, RECORDS_PER_PAGE);
+        return userService.findPartOfAll(shownRecords, RECORDS_PER_PAGE);
     }
 }

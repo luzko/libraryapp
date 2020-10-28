@@ -13,14 +13,11 @@ public interface OrderDao extends BaseDao {
 
     List<Order> findPartByUserId(long userId, int shownRecords, int recordsPerPage) throws DaoException;
 
-
     List<Order> findPartByBookId(long bookId, int shownRecords, int recordsPerPage) throws DaoException;
 
-
-    List<Order> findPartNew(int shownRecords, int recordsPerPage) throws DaoException;
+    List<Order> findPartOfNew(int shownRecords, int recordsPerPage) throws DaoException;
 
     List<Order> findPartOfAll(int shownRecords, int recordsPerPage) throws DaoException;
-
 
     /**
      * Create order.

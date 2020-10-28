@@ -4,7 +4,6 @@ import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.entity.Author;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * The interface Author service.

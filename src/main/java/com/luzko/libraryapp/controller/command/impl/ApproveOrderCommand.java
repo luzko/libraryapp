@@ -50,6 +50,6 @@ public class ApproveOrderCommand implements Command {
     private List<Order> defineOrderList(OrderService orderService, HttpServletRequest request) throws ServiceException {
         int countRecords = orderService.findCountNew();
         int shownRecords = shownRecordsPagination(countRecords, request);
-        return orderService.findPartNew(shownRecords, RECORDS_PER_PAGE);
+        return orderService.findPartOfNew(shownRecords, RECORDS_PER_PAGE);
     }
 }

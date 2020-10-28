@@ -46,6 +46,6 @@ public class ChangeUserStatusCommand implements Command {
     private List<User> defineUserList(UserService userService, HttpServletRequest request) throws ServiceException {
         int countRecords = userService.findCountRecords();
         int shownRecords = shownRecordsPagination(countRecords, request);
-        return userService.findPart(shownRecords, RECORDS_PER_PAGE);
+        return userService.findPartOfAll(shownRecords, RECORDS_PER_PAGE);
     }
 }

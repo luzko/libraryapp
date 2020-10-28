@@ -45,7 +45,7 @@ public class OrderPageCommand implements Command {
 
     private void userOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
         Object userId = request.getSession().getAttribute(RequestParameter.USER_ID);
-        int countRecords = orderService.findCountByUserId(userId);
+        int countRecords = orderService.findCountUserId(userId);
         if (countRecords > 0) {
             int shownRecords = shownRecordsPagination(countRecords, request);
             List<Order> orderList = orderService.findPartByUserId(userId, shownRecords, RECORDS_PER_PAGE);
@@ -59,7 +59,7 @@ public class OrderPageCommand implements Command {
 
     private void bookOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
-        int countRecords = orderService.findCountByBookId(bookId);
+        int countRecords = orderService.findCountBookId(bookId);
         if (countRecords > 0) {
             int shownRecords = shownRecordsPagination(countRecords, request);
             List<Order> orderList = orderService.findPartByBookId(bookId, shownRecords, RECORDS_PER_PAGE);
@@ -79,7 +79,7 @@ public class OrderPageCommand implements Command {
         int countRecords = orderService.findCountNew();
         if (countRecords > 0) {
             int shownRecords = shownRecordsPagination(countRecords, request);
-            List<Order> orderList = orderService.findPartNew(shownRecords, RECORDS_PER_PAGE);
+            List<Order> orderList = orderService.findPartOfNew(shownRecords, RECORDS_PER_PAGE);
             defineOrdersAttribute(router, orderList, request);
         } else {
             request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,

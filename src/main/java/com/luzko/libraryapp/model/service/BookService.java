@@ -28,7 +28,7 @@ public interface BookService {
      * @return the list
      * @throws ServiceException the service exception
      */
-    List<Book> findPart(int recordsShown, int recordsPerPage) throws ServiceException;
+    List<Book> findPartOfAll(int recordsShown, int recordsPerPage) throws ServiceException;
 
     /**
      * Check parameter is unique.

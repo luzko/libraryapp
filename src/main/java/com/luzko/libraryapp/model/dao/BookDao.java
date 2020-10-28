@@ -20,7 +20,7 @@ public interface BookDao extends BaseDao {
      * @return the list
      * @throws DaoException the dao exception
      */
-    List<Book> findPart(int recordsShown, int recordsPerPage) throws DaoException;
+    List<Book> findPartOfAll(int recordsShown, int recordsPerPage) throws DaoException;
 
     /**
      * Check parameter is unique.
@@ -50,5 +50,4 @@ public interface BookDao extends BaseDao {
      * @throws DaoException the dao exception
      */
     int findCountRecords() throws DaoException;
-
 }

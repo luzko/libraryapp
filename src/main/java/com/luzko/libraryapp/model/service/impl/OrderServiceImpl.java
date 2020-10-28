@@ -45,11 +45,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findPartNew(int shownRecords, int recordsPerPage) throws ServiceException {
+    public List<Order> findPartOfNew(int shownRecords, int recordsPerPage) throws ServiceException {
         logger.log(Level.INFO, "Find new orders execute");
         OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
-            return orderDao.findPartNew(shownRecords, recordsPerPage);
+            return orderDao.findPartOfNew(shownRecords, recordsPerPage);
         } catch (DaoException e) {
             throw new ServiceException("Find new error", e);
         }
@@ -132,7 +132,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int findCountByUserId(Object userIdObject) throws ServiceException {
+    public int findCountUserId(Object userIdObject) throws ServiceException {
         logger.log(Level.INFO, "Find count order by user");
         OrderDao orderDao = OrderDaoImpl.getInstance();
         long userId = (long) userIdObject;
@@ -144,7 +144,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int findCountByBookId(String bookIdString) throws ServiceException {
+    public int findCountBookId(String bookIdString) throws ServiceException {
         OrderDao orderDao = OrderDaoImpl.getInstance();
         long bookId = Long.parseLong(bookIdString);
         try {

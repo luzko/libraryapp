@@ -9,6 +9,9 @@ import java.util.List;
  * The interface Author dao.
  */
 public interface AuthorDao extends BaseDao {
+
+    List<Author> findAll() throws DaoException;
+
     /**
      * Add.
      *
@@ -26,6 +29,4 @@ public interface AuthorDao extends BaseDao {
      * @throws DaoException the dao exception
      */
     boolean isNameUnique(String name) throws DaoException;
-
-    List<Author> findAll() throws DaoException;
 }
