@@ -42,14 +42,9 @@ public class CancelOrderCommand implements Command {
     }
 
     private List<Order> defineOrderList(OrderService orderService, HttpServletRequest request) throws ServiceException {
-        Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
-        long userId = (long) userIdObject;
-        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
-        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
-        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
-        List<Order> orderList = orderService.findByUserId(userId);
-        definePagination(request, orderList.size(), currentPage, recordsPerPage);
-        int recordsView = (currentPage - 1) * recordsPerPage;
-        return orderList.subList(recordsView, Math.min(recordsView + recordsPerPage, orderList.size()));
+        Object userId = request.getSession().getAttribute(RequestParameter.USER_ID);
+        int countRecords = orderService.findCountByUserId(userId);
+        int shownRecords = shownRecordsPagination(countRecords, request);
+        return orderService.findPartByUserId(userId, shownRecords, RECORDS_PER_PAGE);
     }
 }

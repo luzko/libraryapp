@@ -5,9 +5,11 @@ import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.exception.ServiceException;
+import com.luzko.libraryapp.model.entity.User;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.Order;
 import com.luzko.libraryapp.model.service.OrderService;
+import com.luzko.libraryapp.model.service.UserService;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -48,12 +50,8 @@ public class ApproveOrderCommand implements Command {
     }
 
     private List<Order> defineOrderList(OrderService orderService, HttpServletRequest request) throws ServiceException {
-        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
-        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
-        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
-        List<Order> orderList = orderService.findNew();
-        definePagination(request, orderList.size(), currentPage, recordsPerPage);
-        int recordsView = (currentPage - 1) * recordsPerPage;
-        return orderList.subList(recordsView, Math.min(recordsView + recordsPerPage, orderList.size()));
+        int countRecords = orderService.findCountNew();
+        int shownRecords = shownRecordsPagination(countRecords, request);
+        return orderService.findPartNew(shownRecords, RECORDS_PER_PAGE);
     }
 }
