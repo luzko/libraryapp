@@ -21,14 +21,6 @@ public interface BookService {
     Optional<Book> findById(String bookId) throws ServiceException;
 
     /**
-     * Find all.
-     *
-     * @return the list
-     * @throws ServiceException the service exception
-     */
-    List<Book> findAll() throws ServiceException;
-
-    /**
      * Find part.
      *
      * @param recordsShown   the records shown

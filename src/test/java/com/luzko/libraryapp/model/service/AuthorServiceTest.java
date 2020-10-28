@@ -22,7 +22,7 @@ public class AuthorServiceTest {
     private AuthorDaoImpl daoMock;
     private AuthorService authorService;
 
-    @BeforeClass
+    /*@BeforeClass
     public void setUp() {
         authorService = ServiceFactory.getInstance().getAuthorService();
     }
@@ -151,5 +151,5 @@ public class AuthorServiceTest {
     public void tierDown() {
         daoMock = null;
         authorService = null;
-    }
+    }*/
 }

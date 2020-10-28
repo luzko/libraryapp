@@ -91,17 +91,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() throws ServiceException {
-        logger.log(Level.INFO, "Find all execute");
-        UserDao userDao = UserDaoImpl.getInstance();
-        try {
-            return userDao.findAll();
-        } catch (DaoException e) {
-            throw new ServiceException("Find all error", e);
-        }
-    }
-
-    @Override
     public List<User> findPart(int recordsShown, int recordsPerPage) throws ServiceException {
         logger.log(Level.INFO, "Find part execute");
         UserDao userDao = UserDaoImpl.getInstance();

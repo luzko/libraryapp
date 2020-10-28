@@ -4,11 +4,14 @@ import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.entity.Book;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The interface Book dao.
  */
-public interface BookDao extends BaseDao<Book> {
+public interface BookDao extends BaseDao {
+    Optional<Book> findById(long bookId) throws DaoException;
+
     /**
      * Find part.
      *

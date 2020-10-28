@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * The interface Order dao.
  */
-public interface OrderDao extends BaseDao<Order> {
+public interface OrderDao extends BaseDao {
 
     List<Order> findPartByUserId(long userId, int shownRecords, int recordsPerPage) throws DaoException;
 

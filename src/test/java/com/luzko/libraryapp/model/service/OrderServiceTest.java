@@ -22,7 +22,7 @@ public class OrderServiceTest {
     private OrderDaoImpl daoMock;
     private OrderService orderService;
 
-    @BeforeClass
+    /*@BeforeClass
     public void setUp() {
         orderService = ServiceFactory.getInstance().getOrderService();
     }
@@ -167,11 +167,11 @@ public class OrderServiceTest {
         } catch (DaoException e) {
             fail();
         }
-    }*/
+    }
 
     @AfterClass
     public void tierDown() {
         daoMock = null;
         orderService = null;
-    }
+    }*/
 }

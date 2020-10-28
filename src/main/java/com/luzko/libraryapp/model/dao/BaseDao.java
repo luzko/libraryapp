@@ -12,34 +12,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * The interface Base dao.
- *
- * @param <T> the type parameter
- */
-public interface BaseDao<T extends BaseEntity> {
-    /**
-     * The constant logger.
-     */
+
+public interface BaseDao {
+
     Logger logger = LogManager.getLogger(AuthorServiceImpl.class);
-
-    /**
-     * Find by id.
-     *
-     * @param id the id
-     * @return the optional
-     * @throws DaoException the dao exception
-     */
-    Optional<T> findById(long id) throws DaoException;
-
-    /**
-     * Find all.
-     *
-     * @return the list
-     * @throws DaoException the dao exception
-     */
-    List<T> findAll() throws DaoException;
-
     /**
      * Connection set auto commit.
      *

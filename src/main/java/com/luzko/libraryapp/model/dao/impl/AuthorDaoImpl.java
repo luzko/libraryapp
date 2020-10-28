@@ -30,18 +30,6 @@ public class AuthorDaoImpl implements AuthorDao {
     }
 
     @Override
-    public Optional<Author> findById(long id) throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_AUTHOR_BY_ID)) {
-            statement.setLong(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            return createAuthorFromResultSet(resultSet);
-        } catch (SQLException e) {
-            throw new DaoException("Find by id error", e);
-        }
-    }
-
-    @Override
     public List<Author> findAll() throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ALL_AUTHORS)) {
@@ -86,10 +74,6 @@ public class AuthorDaoImpl implements AuthorDao {
             }
         }
         return authorList;
-    }
-
-    private Optional<Author> createAuthorFromResultSet(ResultSet resultSet) throws SQLException {
-        return resultSet != null && resultSet.next() ? createAuthor(resultSet) : Optional.empty();
     }
 
     private Optional<Author> createAuthor(ResultSet resultSet) throws SQLException {

@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * The interface User dao.
  */
-public interface UserDao extends BaseDao<User> {
+public interface UserDao extends BaseDao {
     /**
      * Find part.
      *

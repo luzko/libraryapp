@@ -22,7 +22,7 @@ public class BookServiceTest {
     private BookDaoImpl daoMock;
     private BookService bookService;
 
-    @BeforeClass
+    /*@BeforeClass
     public void setUp() {
         bookService = ServiceFactory.getInstance().getBookService();
     }
@@ -155,5 +155,5 @@ public class BookServiceTest {
     public void tierDown() {
         daoMock = null;
         bookService = null;
-    }
+    }*/
 }

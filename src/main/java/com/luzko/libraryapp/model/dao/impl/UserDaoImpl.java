@@ -48,18 +48,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> findById(long id) throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_USER_BY_ID)) {
-            statement.setLong(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            return createUserFromResultSet(resultSet);
-        } catch (SQLException e) {
-            throw new DaoException("Find by id error", e);
-        }
-    }
-
-    @Override
     public Optional<User> findByLogin(String login) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_USER_BY_LOGIN)) {
@@ -68,17 +56,6 @@ public class UserDaoImpl implements UserDao {
             return createUserFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new DaoException("Find by login error", e);
-        }
-    }
-
-    @Override
-    public List<User> findAll() throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ALL_USERS)) {
-            ResultSet resultSet = statement.executeQuery();
-            return createUsersFromResultSet(resultSet);
-        } catch (SQLException e) {
-            throw new DaoException("Find all error", e);
         }
     }
 

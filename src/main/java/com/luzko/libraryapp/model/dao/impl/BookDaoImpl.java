@@ -41,17 +41,6 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public List<Book> findAll() throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ALL_BOOKS)) {
-            ResultSet resultSet = statement.executeQuery();
-            return createBooksFromResultSet(resultSet);
-        } catch (SQLException e) {
-            throw new DaoException("Error in Find all", e);
-        }
-    }
-
-    @Override
     public List<Book> findPart(int recordsShown, int recordsPerPage) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PART_BOOKS)) {

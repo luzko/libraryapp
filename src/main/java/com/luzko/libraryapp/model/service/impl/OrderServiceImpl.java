@@ -45,17 +45,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findAll() throws ServiceException {
-        logger.log(Level.INFO, "Find all orders execute");
-        OrderDao orderDao = OrderDaoImpl.getInstance();
-        try {
-            return orderDao.findAll();
-        } catch (DaoException e) {
-            throw new ServiceException("Find all error", e);
-        }
-    }
-
-    @Override
     public List<Order> findPartNew(int shownRecords, int recordsPerPage) throws ServiceException {
         logger.log(Level.INFO, "Find new orders execute");
         OrderDao orderDao = OrderDaoImpl.getInstance();

@@ -32,29 +32,6 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Optional<Order> findById(long orderId) throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ORDER_BY_ID)) {
-            statement.setLong(1, orderId);
-            ResultSet resultSet = statement.executeQuery();
-            return resultSet != null && resultSet.next() ? createOrder(resultSet) : Optional.empty();
-        } catch (SQLException e) {
-            throw new DaoException("Find all error", e);
-        }
-    }
-
-    @Override
-    public List<Order> findAll() throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ALL_ORDERS)) {
-            ResultSet resultSet = statement.executeQuery();
-            return createOrdersFromResultSet(resultSet, ColumnName.ALL);
-        } catch (SQLException e) {
-            throw new DaoException("Find all error", e);
-        }
-    }
-
-    @Override
     public List<Order> findPartNew(int shownRecords, int recordsPerPage) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_NEW_ORDERS)) {

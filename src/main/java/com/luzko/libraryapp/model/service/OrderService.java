@@ -16,10 +16,6 @@ public interface OrderService {
 
     List<Order> findPartByBookId(String bookId, int shownRecords, int recordsPerPage) throws ServiceException;
 
-
-    List<Order> findAll() throws ServiceException;
-
-
     List<Order> findPartNew(int shownRecords, int recordsPerPage) throws ServiceException;
 
     List<Order> findPartOfAll(int shownRecords, int recordsPerPage) throws ServiceException;

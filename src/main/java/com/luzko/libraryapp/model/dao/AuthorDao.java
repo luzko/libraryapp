@@ -3,10 +3,12 @@ package com.luzko.libraryapp.model.dao;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.entity.Author;
 
+import java.util.List;
+
 /**
  * The interface Author dao.
  */
-public interface AuthorDao extends BaseDao<Author> {
+public interface AuthorDao extends BaseDao {
     /**
      * Add.
      *
@@ -24,4 +26,6 @@ public interface AuthorDao extends BaseDao<Author> {
      * @throws DaoException the dao exception
      */
     boolean isNameUnique(String name) throws DaoException;
+
+    List<Author> findAll() throws DaoException;
 }

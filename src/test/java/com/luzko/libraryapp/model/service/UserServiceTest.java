@@ -22,7 +22,7 @@ public class UserServiceTest {
     private UserDaoImpl daoMock;
     private UserService userService;
 
-    @BeforeClass
+    /*@BeforeClass
     public void setUp() {
         userService = ServiceFactory.getInstance().getUserService();
     }
@@ -262,5 +262,5 @@ public class UserServiceTest {
     public void tierDown() {
         daoMock = null;
         userService = null;
-    }
+    }*/
 }

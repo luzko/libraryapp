@@ -11,15 +11,6 @@ import java.util.Optional;
  */
 public interface AuthorService {
     /**
-     * Find by id.
-     *
-     * @param id the id
-     * @return the optional
-     * @throws ServiceException the service exception
-     */
-    Optional<Author> findById(long id) throws ServiceException;
-
-    /**
      * Find all.
      *
      * @return the list

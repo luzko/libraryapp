@@ -38,19 +38,6 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Optional<Author> findById(long id) throws ServiceException {
-        logger.log(Level.INFO, "Find by id execute: {}", id);
-        AuthorDao authorDao = AuthorDaoImpl.getInstance();
-        Optional<Author> authorOptional;
-        try {
-            authorOptional = authorDao.findById(id);
-        } catch (DaoException e) {
-            throw new ServiceException("Find by id error", e);
-        }
-        return authorOptional;
-    }
-
-    @Override
     public List<Author> findAll() throws ServiceException {
         logger.log(Level.INFO, "Find all execute");
         AuthorDao authorDao = AuthorDaoImpl.getInstance();

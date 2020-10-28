@@ -37,17 +37,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findAll() throws ServiceException {
-        logger.log(Level.INFO, "Find all execute");
-        BookDao bookDao = BookDaoImpl.getInstance();
-        try {
-            return bookDao.findAll();
-        } catch (DaoException e) {
-            throw new ServiceException("Find all error", e);
-        }
-    }
-
-    @Override
     public List<Book> findPart(int recordsShown, int recordsPerPage) throws ServiceException {
         logger.log(Level.INFO, "Find part execute");
         BookDao bookDao = BookDaoImpl.getInstance();
