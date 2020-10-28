@@ -94,13 +94,9 @@ public class LoginCommand implements Command {
 
     private List<User> defineUserList(HttpServletRequest request) throws ServiceException {
         UserService userService = ServiceFactory.getInstance().getUserService();
-        String currentPageString = request.getParameter(RequestParameter.CURRENT_PAGE);
-        int currentPage = currentPageString != null ? Integer.parseInt(currentPageString) : 1;
-        int recordsPerPage = Integer.parseInt(RequestParameter.RECORD_PAGE);
-        List<User> userList = userService.findAll();
-        definePagination(request, userList.size(), currentPage, recordsPerPage);
-        int recordsView = (currentPage - 1) * recordsPerPage;
-        return userList.subList(recordsView, Math.min(recordsView + recordsPerPage, userList.size()));
+        int countRecords = userService.findCountRecords();
+        int shownRecords = shownRecordsPagination(countRecords, request);
+        return userService.findPart(shownRecords, RECORDS_PER_PAGE);
     }
 
     private void defineDataSession(User user, HttpServletRequest request) {
