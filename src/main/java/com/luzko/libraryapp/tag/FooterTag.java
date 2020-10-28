@@ -21,7 +21,7 @@ public class FooterTag extends TagSupport {
                     "                    <div class=\"card-body text-center\">\n" +
                     "                        <h4 class=\"text-uppercase m-0\">address</h4>\n" +
                     "                        <hr class=\"my-4\">\n" +
-                    "                        <div>Minsk, st. Kuprevich, 1</div>\n" +
+                    "                        <div>Minsk, st. Kuprevicha, 1</div>\n" +
                     "                    </div>\n" +
                     "                </div>\n" +
                     "            </div>\n" +

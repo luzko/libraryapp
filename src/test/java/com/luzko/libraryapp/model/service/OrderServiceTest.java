@@ -33,7 +33,7 @@ public class OrderServiceTest {
         Whitebox.setInternalState(OrderDaoImpl.class, "INSTANCE", daoMock);
     }
 
-    @Test
+    /*@Test
     public void findByUserIdPositiveTest() {
         Order order = new Order();
         List<Order> expectedOrderList = List.of(order);
@@ -167,7 +167,7 @@ public class OrderServiceTest {
         } catch (DaoException e) {
             fail();
         }
-    }
+    }*/
 
     @AfterClass
     public void tierDown() {

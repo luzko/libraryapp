@@ -76,7 +76,7 @@ public interface OrderService {
 
     int findCountByUserId(Object userId) throws ServiceException;
 
-    int findCountByBookId(Object bookId) throws ServiceException;
+    int findCountByBookId(String bookId) throws ServiceException;
 
     int findCountNew() throws ServiceException;
 

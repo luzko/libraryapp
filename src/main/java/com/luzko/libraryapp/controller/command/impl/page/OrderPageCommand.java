@@ -28,6 +28,7 @@ public class OrderPageCommand implements Command {
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
         String orderType = request.getParameter(RequestParameter.ORDER_TYPE);
         request.getSession().setAttribute(RequestParameter.ORDER_TYPE, orderType);
+        System.out.println(orderType);
         try {
             switch (orderType) {
                 case RequestParameter.USER_ORDER -> userOrderOverview(router, orderService, request);
@@ -58,8 +59,12 @@ public class OrderPageCommand implements Command {
     }
 
     private void bookOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
+        System.out.println("1111111111");
+        System.out.println(request.getParameter(RequestParameter.BOOK_ID));
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
         int countRecords = orderService.findCountByBookId(bookId);
+        System.out.println("aaaaaaaaaaaaaaaaa");
+        System.out.println(countRecords);
         if (countRecords > 0) {
             int shownRecords = shownRecordsPagination(countRecords, request);
             List<Order> orderList = orderService.findPartByBookId(bookId, shownRecords, RECORDS_PER_PAGE);

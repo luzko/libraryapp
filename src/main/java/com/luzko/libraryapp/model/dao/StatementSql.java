@@ -17,7 +17,7 @@ public class StatementSql {
             "SELECT confirm FROM users WHERE login LIKE ?";
 
     public static final String FIND_COUNT_BY_LOGIN =
-            "SELECT count(user_id) as count FROM users WHERE login LIKE ?";
+            "SELECT count(user_id) count FROM users WHERE login LIKE ?";
 
     public static final String FIND_USER_BY_LOGIN =
             "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk, avatar " +
@@ -78,7 +78,7 @@ public class StatementSql {
                     "WHERE b.enabled = TRUE AND b.book_id LIKE ? GROUP BY b.book_id";
 
     public static final String FIND_COUNT_BY_PARAMETER =
-            "SELECT count(book_id) as count FROM books WHERE title LIKE ? AND year LIKE ? AND pages LIKE ?";
+            "SELECT count(book_id) count FROM books WHERE title LIKE ? AND year LIKE ? AND pages LIKE ?";
 
     public static final String FIND_BOOK_BY_PARAMETER =
             "SELECT book_id FROM books WHERE title LIKE ? AND year LIKE ? AND page LIKE ?";
@@ -110,7 +110,7 @@ public class StatementSql {
             "INSERT INTO authors(author) VALUES (?)";
 
     public static final String FIND_COUNT_BY_NAME =
-            "SELECT count(author_id) as count FROM authors WHERE author LIKE ?";
+            "SELECT count(author_id) count FROM authors WHERE author LIKE ?";
 
     //book authors query
     public static final String ADD_BOOK_AUTHORS =
@@ -131,7 +131,7 @@ public class StatementSql {
                     "WHERE o.enabled = TRUE ORDER BY order_date DESC LIMIT ? OFFSET ?";
 
     public static final String FIND_COUNT_ALL_ORDERS =
-            "SELECT count(order_id) FROM orders WHERE o.enabled = TRUE ORDER BY order_date DESC";
+            "SELECT count(order_id) count FROM orders WHERE enabled = TRUE ORDER BY order_date DESC";
 
     public static final String FIND_NEW_ORDERS =
             "SELECT o.order_id, u.user_id, u.login, b.book_id, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
@@ -141,7 +141,7 @@ public class StatementSql {
                     "LIMIT ? OFFSET ?";
 
     public static final String FIND_COUNT_NEW_ORDERS =
-            "SELECT count(order_id) FROM orders WHERE o.enabled = TRUE AND order_status_id_fk = 1 ORDER BY order_date";
+            "SELECT count(order_id) count FROM orders WHERE enabled = TRUE AND order_status_id_fk = 1 ORDER BY order_date";
 
     public static final String FIND_ORDERS_BY_USER_ID =
             "SELECT o.order_id, b.book_id, b.title, o.order_date, o.order_status_id_fk status, o.order_types_id_fk type FROM orders o " +
@@ -150,7 +150,7 @@ public class StatementSql {
                     "LIMIT ? OFFSET ?";
 
     public static final String FIND_COUNT_ORDERS_BY_USER =
-            "SELECT count(order_id) FROM orders WHERE user_id_fk LIKE ? ORDER BY order_date DESC";
+            "SELECT count(order_id) count FROM orders WHERE user_id_fk LIKE ? ORDER BY order_date DESC";
 
     public static final String FIND_ORDER_BY_BOOK_ID =
             "SELECT o.order_id, u.login, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
@@ -159,7 +159,7 @@ public class StatementSql {
                     "LIMIT ? OFFSET ?";
 
     public static final String FIND_COUNT_ORDERS_BY_BOOK =
-            "SELECT count(order_id) FROM orders WHERE book_id_fk LIKE ? ORDER BY order_date DESC";
+            "SELECT count(order_id) count FROM orders WHERE book_id_fk LIKE ? ORDER BY order_date DESC";
 
     public static final String FIND_ORDER_BY_ID =
             "SELECT o.order_id, u.user_id, u.login, b.book_id, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
@@ -174,7 +174,7 @@ public class StatementSql {
             "UPDATE orders SET order_status_id_fk = 5, return_date = ? WHERE order_id LIKE ?";
 
     public static final String COUNT_ORDERS_BY_ID =
-            "SELECT count(order_id) as count FROM orders WHERE user_id_fk LIKE ? AND order_status_id_fk = 2";
+            "SELECT count(order_id) count FROM orders WHERE user_id_fk LIKE ? AND order_status_id_fk = 2";
 
     public static final String CREATE_ORDER =
             "INSERT INTO orders (user_id_fk, book_id_fk, order_types_id_fk, order_date) VALUES (?, ?, ?, ?)";

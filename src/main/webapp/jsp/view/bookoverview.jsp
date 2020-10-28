@@ -81,7 +81,6 @@
                     <tr>
                         <td width="300" valign="top">
                             <div class="col-lg-8">
-                                <%--<img class="img-fluid" src="${pageContext.request.contextPath}/${userImage}"--%>
                                 <img class="img-fluid" src="${pageContext.request.contextPath}/img/book.jpg"
                                      style="margin-top: 60px; border-radius: 30px" width="300" height="300"/>
                             </div>

@@ -155,10 +155,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int findCountByBookId(Object bookIdObject) throws ServiceException {
-        logger.log(Level.INFO, "Find count order by book");
+    public int findCountByBookId(String bookIdString) throws ServiceException {
         OrderDao orderDao = OrderDaoImpl.getInstance();
-        long bookId = (long) bookIdObject;
+        long bookId = Long.parseLong(bookIdString);
         try {
             return orderDao.findCountByBookId(bookId);
         } catch (DaoException e) {
