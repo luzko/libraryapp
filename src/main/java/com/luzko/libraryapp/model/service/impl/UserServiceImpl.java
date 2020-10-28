@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
         logger.log(Level.INFO, "Find part execute");
         UserDao userDao = UserDaoImpl.getInstance();
         try {
-            return userDao.findPartOfAll(recordsShown, recordsPerPage);
+            return userDao.findPart(recordsShown, recordsPerPage);
         } catch (DaoException e) {
             throw new ServiceException("Find part error", e);
         }

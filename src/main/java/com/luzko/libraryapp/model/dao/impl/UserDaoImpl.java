@@ -60,7 +60,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws DaoException {
+    public List<User> findPart(int recordsShown, int recordsPerPage) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PART_USERS)) {
             statement.setInt(1, recordsPerPage);

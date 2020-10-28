@@ -17,7 +17,6 @@ import java.util.List;
 
 public class AdminPageCommand implements Command {
     private static final Logger logger = LogManager.getLogger(AdminPageCommand.class);
-    private static final int RECORDS_PER_PAGE = 5;
 
     @Override
     public Router execute(HttpServletRequest request) {

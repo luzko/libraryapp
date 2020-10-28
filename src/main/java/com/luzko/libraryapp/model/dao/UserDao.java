@@ -18,7 +18,7 @@ public interface UserDao extends BaseDao {
      * @return the list
      * @throws DaoException the dao exception
      */
-    List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws DaoException;
+    List<User> findPart(int recordsShown, int recordsPerPage) throws DaoException;
 
     /**
      * Find password by login.
