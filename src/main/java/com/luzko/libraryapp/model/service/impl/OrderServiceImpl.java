@@ -33,12 +33,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findByBookId(String bookIdString) throws ServiceException {
+    public List<Order> findPartByBookId(String bookIdString, int shownRecords, int recordsPerPage) throws ServiceException {
         logger.log(Level.INFO, "Find by book id execute: {}", bookIdString);
         OrderDao orderDao = OrderDaoImpl.getInstance();
+        long bookId = Long.parseLong(bookIdString);
         try {
-            long bookId = Long.parseLong(bookIdString);
-            return orderDao.findByBookId(bookId);
+            return orderDao.findPartByBookId(bookId, shownRecords, recordsPerPage);
         } catch (DaoException e) {
             throw new ServiceException("Find by book id error", e);
         }
@@ -56,13 +56,24 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findNew() throws ServiceException {
+    public List<Order> findPartNew(int shownRecords, int recordsPerPage) throws ServiceException {
         logger.log(Level.INFO, "Find new orders execute");
         OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
-            return orderDao.findNew();
+            return orderDao.findPartNew(shownRecords, recordsPerPage);
         } catch (DaoException e) {
             throw new ServiceException("Find new error", e);
+        }
+    }
+
+    @Override
+    public List<Order> findPartOfAll(int shownRecords, int recordsPerPage) throws ServiceException {
+        logger.log(Level.INFO, "Find all orders execute");
+        OrderDao orderDao = OrderDaoImpl.getInstance();
+        try {
+            return orderDao.findPartOfAll(shownRecords, recordsPerPage);
+        } catch (DaoException e) {
+            throw new ServiceException("Find all error", e);
         }
     }
 
@@ -140,6 +151,40 @@ public class OrderServiceImpl implements OrderService {
             return orderDao.findCountByUserId(userId);
         } catch (DaoException e) {
             throw new ServiceException("Find count order by user error");
+        }
+    }
+
+    @Override
+    public int findCountByBookId(Object bookIdObject) throws ServiceException {
+        logger.log(Level.INFO, "Find count order by book");
+        OrderDao orderDao = OrderDaoImpl.getInstance();
+        long bookId = (long) bookIdObject;
+        try {
+            return orderDao.findCountByBookId(bookId);
+        } catch (DaoException e) {
+            throw new ServiceException("Find count order by book error");
+        }
+    }
+
+    @Override
+    public int findCountNew() throws ServiceException {
+        logger.log(Level.INFO, "Find count new order");
+        OrderDao orderDao = OrderDaoImpl.getInstance();
+        try {
+            return orderDao.findCountNew();
+        } catch (DaoException e) {
+            throw new ServiceException("Find count new order error");
+        }
+    }
+
+    @Override
+    public int findCountAll() throws ServiceException {
+        logger.log(Level.INFO, "Find count all order");
+        OrderDao orderDao = OrderDaoImpl.getInstance();
+        try {
+            return orderDao.findCountAll();
+        } catch (DaoException e) {
+            throw new ServiceException("Find count all order error");
         }
     }
 }

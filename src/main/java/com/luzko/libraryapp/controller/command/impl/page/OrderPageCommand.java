@@ -49,8 +49,7 @@ public class OrderPageCommand implements Command {
         if (countRecords > 0) {
             int shownRecords = shownRecordsPagination(countRecords, request);
             List<Order> orderList = orderService.findPartByUserId(userId, shownRecords, RECORDS_PER_PAGE);
-            request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orderList);
-            router.setPagePath(PagePath.ORDERS);
+            defineOrdersAttribute(router, orderList, request);
         } else {
             request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
                     ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
@@ -60,10 +59,11 @@ public class OrderPageCommand implements Command {
 
     private void bookOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
-        //узнаем количество и если больше, чем 0, тогда вызываем метод.
-        //List<Order> orderList = orderService.findByBookId(bookId);
-        if (!orderList.isEmpty()) {
-            defineOrdersList(router, orderList, request);
+        int countRecords = orderService.findCountByBookId(bookId);
+        if (countRecords > 0) {
+            int shownRecords = shownRecordsPagination(countRecords, request);
+            List<Order> orderList = orderService.findPartByBookId(bookId, shownRecords, RECORDS_PER_PAGE);
+            defineOrdersAttribute(router, orderList, request);
         } else {
             request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
                     ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
@@ -76,10 +76,11 @@ public class OrderPageCommand implements Command {
     }
 
     private void newOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
-        //узнаем количество и если больше, чем 0, тогда вызываем метод.
-        //List<Order> orderList = orderService.findNew();
-        if (!orderList.isEmpty()) {
-            defineOrdersList(router, orderList, request);
+        int countRecords = orderService.findCountNew();
+        if (countRecords > 0) {
+            int shownRecords = shownRecordsPagination(countRecords, request);
+            List<Order> orderList = orderService.findPartNew(shownRecords, RECORDS_PER_PAGE);
+            defineOrdersAttribute(router, orderList, request);
         } else {
             request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
                     ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
@@ -88,14 +89,16 @@ public class OrderPageCommand implements Command {
     }
 
     private void allOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
-        //узнаем количество и если больше, чем 0, тогда вызываем метод.
-        //List<Order> orderList = orderService.findAll();
-        if (!orderList.isEmpty()) {
-            defineOrdersList(router, orderList, request);
-        } else {
-            request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
-                    ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
-            router.setPagePath(PagePath.USER);
+        int countRecords = orderService.findCountAll();
+        if (countRecords > 0) {
+            int shownRecords = shownRecordsPagination(countRecords, request);
+            List<Order> orderList = orderService.findPartOfAll(shownRecords, RECORDS_PER_PAGE);
+            defineOrdersAttribute(router, orderList, request);
         }
+    }
+
+    private void defineOrdersAttribute(Router router, List<Order> orderList, HttpServletRequest request) {
+        request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orderList);
+        router.setPagePath(PagePath.ORDERS);
     }
 }

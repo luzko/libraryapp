@@ -55,13 +55,28 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> findNew() throws DaoException {
+    public List<Order> findPartNew(int shownRecords, int recordsPerPage) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_NEW_ORDERS)) {
+            statement.setInt(1, recordsPerPage);
+            statement.setInt(2, shownRecords);
             ResultSet resultSet = statement.executeQuery();
             return createOrdersFromResultSet(resultSet, ColumnName.NEW);
         } catch (SQLException e) {
             throw new DaoException("Find new error", e);
+        }
+    }
+
+    @Override
+    public List<Order> findPartOfAll(int shownRecords, int recordsPerPage) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PART_ORDERS)) {
+            statement.setInt(1, recordsPerPage);
+            statement.setInt(2, shownRecords);
+            ResultSet resultSet = statement.executeQuery();
+            return createOrdersFromResultSet(resultSet, ColumnName.ALL);
+        } catch (SQLException e) {
+            throw new DaoException("Find all error", e);
         }
     }
 
@@ -80,10 +95,12 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> findByBookId(long bookId) throws DaoException {
+    public List<Order> findPartByBookId(long bookId, int shownRecords, int recordsPerPage) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ORDER_BY_BOOK_ID)) {
             statement.setLong(1, bookId);
+            statement.setInt(2, recordsPerPage);
+            statement.setInt(3, shownRecords);
             ResultSet resultSet = statement.executeQuery();
             return createOrdersFromResultSet(resultSet, ColumnName.BOOK);
         } catch (SQLException e) {
@@ -186,7 +203,44 @@ public class OrderDaoImpl implements OrderDao {
             resultSet.next();
             return resultSet.getInt(ColumnName.COUNT);
         } catch (SQLException e) {
-            throw new DaoException("Find count all records", e);
+            throw new DaoException("Find count record by user", e);
+        }
+    }
+
+    @Override
+    public int findCountByBookId(long bookId) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_ORDERS_BY_BOOK)) {
+            statement.setLong(1, bookId);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(ColumnName.COUNT);
+        } catch (SQLException e) {
+            throw new DaoException("Find count record by book", e);
+        }
+    }
+
+    @Override
+    public int findCountNew() throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_NEW_ORDERS)) {
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(ColumnName.COUNT);
+        } catch (SQLException e) {
+            throw new DaoException("Find count new order", e);
+        }
+    }
+
+    @Override
+    public int findCountAll() throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_ALL_ORDERS)) {
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(ColumnName.COUNT);
+        } catch (SQLException e) {
+            throw new DaoException("Find count all order", e);
         }
     }
 

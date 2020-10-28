@@ -10,39 +10,19 @@ import java.util.List;
  * The interface Order service.
  */
 public interface OrderService {
-    /**
-     * Find by user id.
-     *
-     * @param userId the user id
-     * @return the list
-     * @throws ServiceException the service exception
-     */
+
     List<Order> findPartByUserId(Object userId, int shownRecords, int recordsPerPage) throws ServiceException;
 
-    /**
-     * Find by book id.
-     *
-     * @param bookId the book id
-     * @return the list
-     * @throws ServiceException the service exception
-     */
-    List<Order> findByBookId(String bookId) throws ServiceException;
 
-    /**
-     * Find all.
-     *
-     * @return the list
-     * @throws ServiceException the service exception
-     */
+    List<Order> findPartByBookId(String bookId, int shownRecords, int recordsPerPage) throws ServiceException;
+
+
     List<Order> findAll() throws ServiceException;
 
-    /**
-     * Find new.
-     *
-     * @return the list
-     * @throws ServiceException the service exception
-     */
-    List<Order> findNew() throws ServiceException;
+
+    List<Order> findPartNew(int shownRecords, int recordsPerPage) throws ServiceException;
+
+    List<Order> findPartOfAll(int shownRecords, int recordsPerPage) throws ServiceException;
 
     /**
      * Create order.
@@ -95,4 +75,10 @@ public interface OrderService {
     boolean isApprove(String orderId, String bookId, String userId) throws ServiceException;
 
     int findCountByUserId(Object userId) throws ServiceException;
+
+    int findCountByBookId(Object bookId) throws ServiceException;
+
+    int findCountNew() throws ServiceException;
+
+    int findCountAll() throws ServiceException;
 }

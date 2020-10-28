@@ -10,31 +10,17 @@ import java.util.List;
  * The interface Order dao.
  */
 public interface OrderDao extends BaseDao<Order> {
-    /**
-     * Find by user id.
-     *
-     * @param userId the user id
-     * @return the list
-     * @throws DaoException the dao exception
-     */
+
     List<Order> findPartByUserId(long userId, int shownRecords, int recordsPerPage) throws DaoException;
 
-    /**
-     * Find by book id.
-     *
-     * @param bookId the book id
-     * @return the list
-     * @throws DaoException the dao exception
-     */
-    List<Order> findByBookId(long bookId) throws DaoException;
 
-    /**
-     * Find new.
-     *
-     * @return the list
-     * @throws DaoException the dao exception
-     */
-    List<Order> findNew() throws DaoException;
+    List<Order> findPartByBookId(long bookId, int shownRecords, int recordsPerPage) throws DaoException;
+
+
+    List<Order> findPartNew(int shownRecords, int recordsPerPage) throws DaoException;
+
+    List<Order> findPartOfAll(int shownRecords, int recordsPerPage) throws DaoException;
+
 
     /**
      * Create order.
@@ -87,4 +73,10 @@ public interface OrderDao extends BaseDao<Order> {
     boolean isApprove(long orderId, long bookId, long userId) throws DaoException;
 
     int findCountByUserId(long userId) throws DaoException;
+
+    int findCountByBookId(long bookId) throws DaoException;
+
+    int findCountNew() throws DaoException;
+
+    int findCountAll() throws DaoException;
 }

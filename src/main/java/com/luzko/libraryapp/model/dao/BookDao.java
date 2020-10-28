@@ -47,4 +47,5 @@ public interface BookDao extends BaseDao<Book> {
      * @throws DaoException the dao exception
      */
     int findCountRecords() throws DaoException;
+
 }
