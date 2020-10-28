@@ -23,14 +23,6 @@ public class StatementSql {
             "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk, avatar " +
                     "FROM users WHERE login LIKE ?";
 
-    public static final String FIND_USER_BY_ID =
-            "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk " +
-                    "FROM users WHERE user_id LIKE ?";
-
-    public static final String FIND_ALL_USERS =
-            "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk, avatar " +
-                    "FROM users WHERE role_id_fk != 1 ORDER BY role_id_fk";
-
     public static final String FIND_PART_USERS =
             "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk, avatar " +
                     "FROM users WHERE role_id_fk != 1 ORDER BY role_id_fk " +
@@ -55,13 +47,6 @@ public class StatementSql {
             "UPDATE users SET avatar = ? WHERE login like ?";
 
     //books query
-    public static final String FIND_ALL_BOOKS =
-            "SELECT b.book_id, b.title, b.category_id_fk, " +
-                    "GROUP_CONCAT(DISTINCT a.author ORDER BY a.author SEPARATOR ', ') authors FROM books b " +
-                    "LEFT JOIN book_authors ba on b.book_id = ba.book_id_fk " +
-                    "LEFT JOIN authors a on a.author_id = ba.author_id_fk " +
-                    "WHERE b.enabled = TRUE GROUP BY b.book_id ORDER BY title";
-
     public static final String FIND_PART_BOOKS =
             "SELECT b.book_id, b.title, b.category_id_fk, " +
                     "GROUP_CONCAT(DISTINCT a.author ORDER BY a.author SEPARATOR ', ') authors FROM books b " +
@@ -103,9 +88,6 @@ public class StatementSql {
     public static final String FIND_ALL_AUTHORS =
             "SELECT author_id, author FROM authors";
 
-    public static final String FIND_AUTHOR_BY_ID =
-            "SELECT author_id, author FROM authors WHERE author_id LIKE ?";
-
     public static final String ADD_AUTHOR =
             "INSERT INTO authors(author) VALUES (?)";
 
@@ -118,12 +100,6 @@ public class StatementSql {
                     "VALUES (?, ?)";
 
     //orders query
-    public static final String FIND_ALL_ORDERS =
-            "SELECT o.order_id, u.user_id, u.login, b.book_id, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
-                    "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
-                    "LEFT JOIN books b ON b.book_id = o.book_id_fk " +
-                    "WHERE o.enabled = TRUE ORDER BY order_date DESC";
-
     public static final String FIND_PART_ORDERS =
             "SELECT o.order_id, u.user_id, u.login, b.book_id, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
                     "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
@@ -160,12 +136,6 @@ public class StatementSql {
 
     public static final String FIND_COUNT_ORDERS_BY_BOOK =
             "SELECT count(order_id) count FROM orders WHERE book_id_fk LIKE ? ORDER BY order_date DESC";
-
-    public static final String FIND_ORDER_BY_ID =
-            "SELECT o.order_id, u.user_id, u.login, b.book_id, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
-                    "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
-                    "LEFT JOIN books b ON b.book_id = o.book_id_fk " +
-                    "WHERE o.enabled = TRUE AND order_id = ? ORDER BY order_date DESC";
 
     public static final String CHANGE_STATUS_ORDER =
             "UPDATE orders SET order_status_id_fk = ? WHERE order_id LIKE ?";
