@@ -100,7 +100,7 @@ public class StatementSql {
                     "VALUES (?, ?)";
 
     //orders query
-    public static final String FIND_PART_ORDERS =
+    public static final String FIND_ALL_ORDERS =
             "SELECT o.order_id, u.user_id, u.login, b.book_id, b.title, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
                     "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
                     "LEFT JOIN books b ON b.book_id = o.book_id_fk " +
@@ -119,7 +119,7 @@ public class StatementSql {
     public static final String FIND_COUNT_NEW_ORDERS =
             "SELECT count(order_id) count FROM orders WHERE enabled = TRUE AND order_status_id_fk = 1 ORDER BY order_date";
 
-    public static final String FIND_ORDERS_BY_USER_ID =
+    public static final String FIND_ORDERS_BY_USER =
             "SELECT o.order_id, b.book_id, b.title, o.order_date, o.order_status_id_fk status, o.order_types_id_fk type FROM orders o " +
                     "LEFT JOIN books b on o.book_id_fk = b.book_id " +
                     "WHERE o.enabled = TRUE AND o.user_id_fk LIKE ? ORDER BY order_date DESC " +
@@ -128,7 +128,7 @@ public class StatementSql {
     public static final String FIND_COUNT_ORDERS_BY_USER =
             "SELECT count(order_id) count FROM orders WHERE user_id_fk LIKE ? ORDER BY order_date DESC";
 
-    public static final String FIND_ORDER_BY_BOOK_ID =
+    public static final String FIND_ORDER_BY_BOOK =
             "SELECT o.order_id, u.login, o.order_date, o.return_date, o.order_status_id_fk status, o.order_types_id_fk type " +
                     "FROM orders o LEFT JOIN users u ON o.user_id_fk = u.user_id " +
                     "WHERE o.enabled = TRUE AND o.book_id_fk LIKE ? ORDER BY order_date DESC " +

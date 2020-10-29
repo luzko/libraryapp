@@ -25,14 +25,13 @@ public class BookServiceImpl implements BookService {
     private static final Logger logger = LogManager.getLogger(BookServiceImpl.class);
 
     @Override
-    public Optional<Book> findById(String bookId) throws ServiceException {
-        logger.log(Level.INFO, "Find by id execute: {}", bookId);
+    public int findCountRecords() throws ServiceException {
+        logger.log(Level.INFO, "Find count all books");
         BookDao bookDao = BookDaoImpl.getInstance();
         try {
-            long id = Long.parseLong(bookId);
-            return bookDao.findById(id);
+            return bookDao.findCount();
         } catch (DaoException e) {
-            throw new ServiceException("Find by id error", e);
+            throw new ServiceException("Find count all records error");
         }
     }
 
@@ -44,6 +43,17 @@ public class BookServiceImpl implements BookService {
             return bookDao.findPartOfAll(recordsShown, recordsPerPage);
         } catch (DaoException e) {
             throw new ServiceException("Find part error", e);
+        }
+    }
+
+    @Override
+    public Optional<Book> findById(long bookId) throws ServiceException {
+        logger.log(Level.INFO, "Find by id execute: {}", bookId);
+        BookDao bookDao = BookDaoImpl.getInstance();
+        try {
+            return bookDao.findById(bookId);
+        } catch (DaoException e) {
+            throw new ServiceException("Find by id error", e);
         }
     }
 
@@ -92,16 +102,5 @@ public class BookServiceImpl implements BookService {
             }
         }
         return isBookAdd;
-    }
-
-    @Override
-    public int findCountRecords() throws ServiceException {
-        logger.log(Level.INFO, "Find count all books");
-        BookDao bookDao = BookDaoImpl.getInstance();
-        try {
-            return bookDao.findCountRecords();
-        } catch (DaoException e) {
-            throw new ServiceException("Find count all records error");
-        }
     }
 }

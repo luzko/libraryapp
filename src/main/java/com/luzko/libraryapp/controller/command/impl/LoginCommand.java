@@ -94,7 +94,7 @@ public class LoginCommand implements Command {
 
     private List<User> defineUserList(HttpServletRequest request) throws ServiceException {
         UserService userService = ServiceFactory.getInstance().getUserService();
-        int countRecords = userService.findCountRecords();
+        int countRecords = userService.findCount();
         int shownRecords = shownRecordsPagination(countRecords, request);
         return userService.findPartOfAll(shownRecords, RECORDS_PER_PAGE);
     }

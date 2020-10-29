@@ -10,14 +10,13 @@ import java.util.List;
  * The interface Order service.
  */
 public interface OrderService {
+    int findCount(String typeOrder) throws ServiceException;
 
-    List<Order> findPartByUserId(Object userId, int shownRecords, int recordsPerPage) throws ServiceException;
+    int findCount(long paramId, String typeOrder) throws ServiceException;
 
-    List<Order> findPartByBookId(String bookId, int shownRecords, int recordsPerPage) throws ServiceException;
+    List<Order> findPart(String typeOrder, int shownRecords, int recordsPerPage) throws ServiceException;
 
-    List<Order> findPartOfNew(int shownRecords, int recordsPerPage) throws ServiceException;
-
-    List<Order> findPartOfAll(int shownRecords, int recordsPerPage) throws ServiceException;
+    List<Order> findPart(long paramId, String typeOrder, int shownRecords, int recordsPerPage) throws ServiceException;
 
     /**
      * Create order.
@@ -68,12 +67,4 @@ public interface OrderService {
      * @throws ServiceException the service exception
      */
     boolean isApprove(String orderId, String bookId, String userId) throws ServiceException;
-
-    int findCountUserId(Object userId) throws ServiceException;
-
-    int findCountBookId(String bookId) throws ServiceException;
-
-    int findCountNew() throws ServiceException;
-
-    int findCountAll() throws ServiceException;
 }

@@ -10,7 +10,13 @@ import java.util.Optional;
  * The interface Book dao.
  */
 public interface BookDao extends BaseDao {
-    Optional<Book> findById(long bookId) throws DaoException;
+    /**
+     * Find count records.
+     *
+     * @return the int
+     * @throws DaoException the dao exception
+     */
+    int findCount() throws DaoException;
 
     /**
      * Find part.
@@ -21,6 +27,8 @@ public interface BookDao extends BaseDao {
      * @throws DaoException the dao exception
      */
     List<Book> findPartOfAll(int recordsShown, int recordsPerPage) throws DaoException;
+
+    Optional<Book> findById(long bookId) throws DaoException;
 
     /**
      * Check parameter is unique.
@@ -42,12 +50,4 @@ public interface BookDao extends BaseDao {
      * @throws DaoException the dao exception
      */
     boolean add(Book book, long authorId) throws DaoException;
-
-    /**
-     * Find count records.
-     *
-     * @return the int
-     * @throws DaoException the dao exception
-     */
-    int findCountRecords() throws DaoException;
 }

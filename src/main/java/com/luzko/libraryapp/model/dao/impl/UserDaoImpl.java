@@ -32,6 +32,31 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public int findCount() throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_USER)) {
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(ColumnName.COUNT);
+        } catch (SQLException e) {
+            throw new DaoException("Find count all records", e);
+        }
+    }
+
+    @Override
+    public List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PART_USERS)) {
+            statement.setInt(1, recordsPerPage);
+            statement.setInt(2, recordsShown);
+            ResultSet resultSet = statement.executeQuery();
+            return createUsersFromResultSet(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException("Find all error", e);
+        }
+    }
+
+    @Override
     public String findPasswordByLogin(String login) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PASSWORD_BY_LOGIN)) {
@@ -56,19 +81,6 @@ public class UserDaoImpl implements UserDao {
             return createUserFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new DaoException("Find by login error", e);
-        }
-    }
-
-    @Override
-    public List<User> findPart(int recordsShown, int recordsPerPage) throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PART_USERS)) {
-            statement.setInt(1, recordsPerPage);
-            statement.setInt(2, recordsShown);
-            ResultSet resultSet = statement.executeQuery();
-            return createUsersFromResultSet(resultSet);
-        } catch (SQLException e) {
-            throw new DaoException("Find all error", e);
         }
     }
 
@@ -181,18 +193,6 @@ public class UserDaoImpl implements UserDao {
             return statement.executeUpdate() == 1;
         } catch (SQLException e) {
             throw new DaoException("Change user status error", e);
-        }
-    }
-
-    @Override
-    public int findCountRecords() throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_USER)) {
-            ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            return resultSet.getInt(ColumnName.COUNT);
-        } catch (SQLException e) {
-            throw new DaoException("Find count all records", e);
         }
     }
 

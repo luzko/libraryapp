@@ -29,14 +29,14 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public Optional<Book> findById(long id) throws DaoException {
+    public int findCount() throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_BOOK_BY_ID)) {
-            statement.setLong(1, id);
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_BOOK)) {
             ResultSet resultSet = statement.executeQuery();
-            return createBookFromResultSet(resultSet);
+            resultSet.next();
+            return resultSet.getInt(ColumnName.COUNT);
         } catch (SQLException e) {
-            throw new DaoException("Find by id error", e);
+            throw new DaoException("Find count all records", e);
         }
     }
 
@@ -50,6 +50,18 @@ public class BookDaoImpl implements BookDao {
             return createBooksFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new DaoException("Find all error", e);
+        }
+    }
+
+    @Override
+    public Optional<Book> findById(long id) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_BOOK_BY_ID)) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            return createBookFromResultSet(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException("Find by id error", e);
         }
     }
 
@@ -76,7 +88,7 @@ public class BookDaoImpl implements BookDao {
         try (PreparedStatement statementBook = connection.prepareStatement(StatementSql.ADD_BOOK, Statement.RETURN_GENERATED_KEYS);
              PreparedStatement statementBookAuthors = connection.prepareStatement(StatementSql.ADD_BOOK_AUTHORS)) {
             setAutoCommit(connection, false);
-            if (countBook(statementBook, book) == 1) {
+            if (addBook(statementBook, book) == 1) {
                 ResultSet generatedKey = statementBook.getGeneratedKeys();
                 generatedKey.next();
                 long bookId = generatedKey.getLong(1);
@@ -95,19 +107,7 @@ public class BookDaoImpl implements BookDao {
         }
     }
 
-    @Override
-    public int findCountRecords() throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_BOOK)) {
-            ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            return resultSet.getInt(ColumnName.COUNT);
-        } catch (SQLException e) {
-            throw new DaoException("Find count all records", e);
-        }
-    }
-
-    private int countBook(PreparedStatement statementBook, Book book) throws SQLException {
+    private int addBook(PreparedStatement statementBook, Book book) throws SQLException {
         statementBook.setString(1, book.getTitle());
         statementBook.setInt(2, book.getYear());
         statementBook.setInt(3, book.getPage());

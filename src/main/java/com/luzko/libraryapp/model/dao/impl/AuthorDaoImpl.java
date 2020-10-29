@@ -34,7 +34,7 @@ public class AuthorDaoImpl implements AuthorDao {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_ALL_AUTHORS)) {
             ResultSet resultSet = statement.executeQuery();
-            return createBooksFromResultSet(resultSet);
+            return createAuthorsFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new DaoException("Error in Find all", e);
         }
@@ -65,7 +65,7 @@ public class AuthorDaoImpl implements AuthorDao {
         }
     }
 
-    private List<Author> createBooksFromResultSet(ResultSet resultSet) throws SQLException {
+    private List<Author> createAuthorsFromResultSet(ResultSet resultSet) throws SQLException {
         List<Author> authorList = new ArrayList<>();
         if (resultSet != null) {
             while (resultSet.next()) {

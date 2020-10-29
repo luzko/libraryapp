@@ -12,13 +12,23 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * The type Author service.
  */
 public class AuthorServiceImpl implements AuthorService {
     private static final Logger logger = LogManager.getLogger(AuthorServiceImpl.class);
+
+    @Override
+    public List<Author> findAll() throws ServiceException {
+        logger.log(Level.INFO, "Find all execute");
+        AuthorDao authorDao = AuthorDaoImpl.getInstance();
+        try {
+            return authorDao.findAll();
+        } catch (DaoException e) {
+            throw new ServiceException("Find all error", e);
+        }
+    }
 
     @Override
     public boolean add(String name) throws ServiceException {
@@ -35,16 +45,5 @@ public class AuthorServiceImpl implements AuthorService {
             }
         }
         return isAddAuthor;
-    }
-
-    @Override
-    public List<Author> findAll() throws ServiceException {
-        logger.log(Level.INFO, "Find all execute");
-        AuthorDao authorDao = AuthorDaoImpl.getInstance();
-        try {
-            return authorDao.findAll();
-        } catch (DaoException e) {
-            throw new ServiceException("Find all error", e);
-        }
     }
 }

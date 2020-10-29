@@ -11,6 +11,14 @@ import java.util.Optional;
  */
 public interface UserDao extends BaseDao {
     /**
+     * Find count all records.
+     *
+     * @return the int
+     * @throws DaoException the dao exception
+     */
+    int findCount() throws DaoException;
+
+    /**
      * Find part.
      *
      * @param recordsShown   the records shown
@@ -18,7 +26,7 @@ public interface UserDao extends BaseDao {
      * @return the list
      * @throws DaoException the dao exception
      */
-    List<User> findPart(int recordsShown, int recordsPerPage) throws DaoException;
+    List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws DaoException;
 
     /**
      * Find password by login.
@@ -124,12 +132,4 @@ public interface UserDao extends BaseDao {
      * @throws DaoException the dao exception
      */
     void giveBooksFromReadingRoom(long userId) throws DaoException;
-
-    /**
-     * Find count all records.
-     *
-     * @return the int
-     * @throws DaoException the dao exception
-     */
-    int findCountRecords() throws DaoException;
 }

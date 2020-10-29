@@ -28,6 +28,28 @@ public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     @Override
+    public int findCount() throws ServiceException {
+        logger.log(Level.INFO, "Find count all users");
+        UserDao userDao = UserDaoImpl.getInstance();
+        try {
+            return userDao.findCount();
+        } catch (DaoException e) {
+            throw new ServiceException("Find count all records error");
+        }
+    }
+
+    @Override
+    public List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws ServiceException {
+        logger.log(Level.INFO, "Find part execute");
+        UserDao userDao = UserDaoImpl.getInstance();
+        try {
+            return userDao.findPartOfAll(recordsShown, recordsPerPage);
+        } catch (DaoException e) {
+            throw new ServiceException("Find part error", e);
+        }
+    }
+
+    @Override
     public boolean verifyUser(String login, String password) throws ServiceException {
         logger.log(Level.INFO, "Verify user execute: {}, {}", login, password);
         boolean isCredentialCorrect = false;
@@ -88,17 +110,6 @@ public class UserServiceImpl implements UserService {
             }
         }
         return isRegistered;
-    }
-
-    @Override
-    public List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws ServiceException {
-        logger.log(Level.INFO, "Find part execute");
-        UserDao userDao = UserDaoImpl.getInstance();
-        try {
-            return userDao.findPart(recordsShown, recordsPerPage);
-        } catch (DaoException e) {
-            throw new ServiceException("Find part error", e);
-        }
     }
 
     @Override
@@ -225,17 +236,6 @@ public class UserServiceImpl implements UserService {
             }
         } catch (DaoException e) {
             throw new ServiceException("Give all book error", e);
-        }
-    }
-
-    @Override
-    public int findCountRecords() throws ServiceException {
-        logger.log(Level.INFO, "Find count all users");
-        UserDao userDao = UserDaoImpl.getInstance();
-        try {
-            return userDao.findCountRecords();
-        } catch (DaoException e) {
-            throw new ServiceException("Find count all records error");
         }
     }
 }

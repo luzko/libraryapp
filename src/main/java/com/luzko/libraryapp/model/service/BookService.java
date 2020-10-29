@@ -12,13 +12,12 @@ import java.util.Optional;
  */
 public interface BookService {
     /**
-     * Find by id.
+     * Find count records.
      *
-     * @param bookId the book id
-     * @return the optional
+     * @return the int
      * @throws ServiceException the service exception
      */
-    Optional<Book> findById(String bookId) throws ServiceException;
+    int findCountRecords() throws ServiceException;
 
     /**
      * Find part.
@@ -29,6 +28,15 @@ public interface BookService {
      * @throws ServiceException the service exception
      */
     List<Book> findPartOfAll(int recordsShown, int recordsPerPage) throws ServiceException;
+
+    /**
+     * Find by id.
+     *
+     * @param bookId the book id
+     * @return the optional
+     * @throws ServiceException the service exception
+     */
+    Optional<Book> findById(long bookId) throws ServiceException;
 
     /**
      * Check parameter is unique.
@@ -49,12 +57,4 @@ public interface BookService {
      * @throws ServiceException the service exception
      */
     boolean add(Map<String, String> bookParameter) throws ServiceException;
-
-    /**
-     * Find count records.
-     *
-     * @return the int
-     * @throws ServiceException the service exception
-     */
-    int findCountRecords() throws ServiceException;
 }

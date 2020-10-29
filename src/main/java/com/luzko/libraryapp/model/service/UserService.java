@@ -12,6 +12,22 @@ import java.util.Optional;
  */
 public interface UserService {
     /**
+     * Find count records.
+     *
+     * @return the int
+     * @throws ServiceException the service exception
+     */
+    int findCount() throws ServiceException;
+
+    /**
+     * Find part.
+     *
+     * @return the list
+     * @throws ServiceException the service exception
+     */
+    List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws ServiceException;
+
+    /**
      * Verify user.
      *
      * @param login    the login
@@ -39,14 +55,6 @@ public interface UserService {
      * @throws ServiceException the service exception
      */
     boolean registration(Map<String, String> registrationParameter, boolean isLibrarian) throws ServiceException;
-
-    /**
-     * Find part.
-     *
-     * @return the list
-     * @throws ServiceException the service exception
-     */
-    List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws ServiceException;
 
     /**
      * Change user status.
@@ -125,12 +133,4 @@ public interface UserService {
      * @throws ServiceException the service exception
      */
     void giveBooksFromReadingRoom(Object userId, Object userRole) throws ServiceException;
-
-    /**
-     * Find count records.
-     *
-     * @return the int
-     * @throws ServiceException the service exception
-     */
-    int findCountRecords() throws ServiceException;
 }

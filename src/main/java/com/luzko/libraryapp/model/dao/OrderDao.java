@@ -11,13 +11,13 @@ import java.util.List;
  */
 public interface OrderDao extends BaseDao {
 
-    List<Order> findPartByUserId(long userId, int shownRecords, int recordsPerPage) throws DaoException;
+    int findCount(String typeOrder) throws DaoException;
 
-    List<Order> findPartByBookId(long bookId, int shownRecords, int recordsPerPage) throws DaoException;
+    int findCount(long paramId, String typeOrder) throws DaoException;
 
-    List<Order> findPartOfNew(int shownRecords, int recordsPerPage) throws DaoException;
+    List<Order> findPart(String typeOrder, int shownRecords, int recordsPerPage) throws DaoException;
 
-    List<Order> findPartOfAll(int shownRecords, int recordsPerPage) throws DaoException;
+    List<Order> findPart(long paramId, String typeOrder, int shownRecords, int recordsPerPage) throws DaoException;
 
     /**
      * Create order.
@@ -68,12 +68,4 @@ public interface OrderDao extends BaseDao {
      * @throws DaoException the dao exception
      */
     boolean isApprove(long orderId, long bookId, long userId) throws DaoException;
-
-    int findCountByUserId(long userId) throws DaoException;
-
-    int findCountByBookId(long bookId) throws DaoException;
-
-    int findCountNew() throws DaoException;
-
-    int findCountAll() throws DaoException;
 }
