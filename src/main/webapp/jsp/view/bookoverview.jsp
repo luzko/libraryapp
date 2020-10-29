@@ -164,6 +164,21 @@
                             </form>
                         </div>
                     </c:when>
+                    <c:when test="${userRole == 'ADMIN'}">
+                        <div class="text-right">
+                            <form class="form-inline" method="POST"
+                                  action="${pageContext.request.contextPath}/controller">
+                                <input type="hidden" name="command" value="remove_book"/>
+                                <input type="hidden" name="book_id" value="${book.bookId}"/>
+                                <div>
+                                    <button type="submit"
+                                            class="btn btn-primary js-scroll-trigger custom-button">
+                                        <fmt:message key="submit.remove.book"/>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </c:when>
                 </c:choose>
             </div>
             <br/>

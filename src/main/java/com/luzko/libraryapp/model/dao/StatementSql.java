@@ -63,13 +63,13 @@ public class StatementSql {
                     "WHERE b.enabled = TRUE AND b.book_id LIKE ? GROUP BY b.book_id";
 
     public static final String FIND_COUNT_BY_PARAMETER =
-            "SELECT count(book_id) count FROM books WHERE title LIKE ? AND year LIKE ? AND pages LIKE ?";
+            "SELECT count(book_id) count FROM books WHERE title LIKE ? AND year LIKE ? AND pages LIKE ? AND enabled = TRUE";
 
     public static final String FIND_BOOK_BY_PARAMETER =
-            "SELECT book_id FROM books WHERE title LIKE ? AND year LIKE ? AND page LIKE ?";
+            "SELECT book_id FROM books WHERE title LIKE ? AND year LIKE ? AND page LIKE ? AND enabled = TRUE";
 
     public static final String COUNT_BOOK_BY_ID =
-            "SELECT number_copies FROM books WHERE book_id = ? AND enabled = TRUE";
+            "SELECT number_copies FROM books WHERE book_id = ? AND enabled = TRUE AND enabled = TRUE";
 
     public static final String FIND_COUNT_BOOK =
             "SELECT count(*) count FROM books WHERE enabled = TRUE";
@@ -83,6 +83,9 @@ public class StatementSql {
 
     public static final String APPROVE_BOOK =
             "UPDATE books SET number_copies = number_copies - 1 WHERE book_id = ?";
+
+    public static final String REMOVE_BOOK =
+            "UPDATE books SET enabled = FALSE WHERE book_id = ?";
 
     //authors query
     public static final String FIND_ALL_AUTHORS =
@@ -141,7 +144,10 @@ public class StatementSql {
             "UPDATE orders SET order_status_id_fk = ? WHERE order_id LIKE ?";
 
     public static final String RETURN_ORDER =
-            "UPDATE orders SET order_status_id_fk = 5, return_date = ? WHERE order_id LIKE ?";
+            "UPDATE orders SET order_status_id_fk = 5, return_date LIKE ? WHERE order_id LIKE ?";
+
+    public static final String CANCEL_ORDER_BY_BOOK =
+            "UPDATE orders SET order_status_id_fk = 4 WHERE order_status_id_fk = 1 AND book_id_fk LIKE ?";
 
     public static final String COUNT_ORDERS_BY_ID =
             "SELECT count(order_id) count FROM orders WHERE user_id_fk LIKE ? AND order_status_id_fk = 2";

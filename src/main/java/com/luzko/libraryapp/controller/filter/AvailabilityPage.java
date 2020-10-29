@@ -31,7 +31,7 @@ public class AvailabilityPage {
             INDEX, HOME, USER, CONFIRMATION, BLOCKED, BOOK_OVERVIEW, ORDERS
     );
     public static final List<String> availableAdminPageList = List.of(
-            INDEX, HOME, REGISTRATION, ADMIN, CREATE_BOOK
+            INDEX, HOME, REGISTRATION, ADMIN, CREATE_BOOK, BOOK_OVERVIEW
     );
     public static final List<String> availableBlockedPageList = List.of(
             INDEX, HOME, BLOCKED

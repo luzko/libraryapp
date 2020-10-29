@@ -57,4 +57,6 @@ public interface BookService {
      * @throws ServiceException the service exception
      */
     boolean add(Map<String, String> bookParameter) throws ServiceException;
+
+    boolean remove(String bookId) throws ServiceException;
 }

@@ -107,14 +107,42 @@ public class BookDaoImpl implements BookDao {
         }
     }
 
-    private int addBook(PreparedStatement statementBook, Book book) throws SQLException {
-        statementBook.setString(1, book.getTitle());
-        statementBook.setInt(2, book.getYear());
-        statementBook.setInt(3, book.getPage());
-        statementBook.setString(4, book.getDescription());
-        statementBook.setInt(5, book.getNumberCopy());
-        statementBook.setInt(6, book.getCategory().defineId());
-        return statementBook.executeUpdate();
+    @Override
+    public boolean remove(long bookId) throws DaoException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        boolean isBookRemove = false;
+        try (PreparedStatement statementBook = connection.prepareStatement(StatementSql.REMOVE_BOOK);
+             PreparedStatement statementOrder = connection.prepareStatement(StatementSql.CANCEL_ORDER_BY_BOOK)) {
+            setAutoCommit(connection, false);
+            if (removeBook(statementBook, bookId) == 1) {
+                statementOrder.setLong(1, bookId);
+                statementOrder.executeUpdate();
+                isBookRemove = true;
+            }
+            commit(connection);
+            return isBookRemove;
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException("Book remove error", e);
+        } finally {
+            setAutoCommit(connection, true);
+            close(connection);
+        }
+    }
+
+    private int addBook(PreparedStatement statement, Book book) throws SQLException {
+        statement.setString(1, book.getTitle());
+        statement.setInt(2, book.getYear());
+        statement.setInt(3, book.getPage());
+        statement.setString(4, book.getDescription());
+        statement.setInt(5, book.getNumberCopy());
+        statement.setInt(6, book.getCategory().defineId());
+        return statement.executeUpdate();
+    }
+
+    private int removeBook(PreparedStatement statement, long bookId) throws SQLException {
+        statement.setLong(1, bookId);
+        return statement.executeUpdate();
     }
 
     private List<Book> createBooksFromResultSet(ResultSet resultSet) throws SQLException {

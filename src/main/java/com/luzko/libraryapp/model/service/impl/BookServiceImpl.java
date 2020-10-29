@@ -103,4 +103,16 @@ public class BookServiceImpl implements BookService {
         }
         return isBookAdd;
     }
+
+    @Override
+    public boolean remove(String bookIdString) throws ServiceException {
+        logger.log(Level.INFO, "Remove book: {}", bookIdString);
+        BookDao bookDao = BookDaoImpl.getInstance();
+        long bookId = Long.parseLong(bookIdString);
+        try {
+            return bookDao.remove(bookId);
+        } catch (DaoException e) {
+            throw new ServiceException("Remove book error", e);
+        }
+    }
 }

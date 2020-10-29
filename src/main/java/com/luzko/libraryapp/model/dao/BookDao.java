@@ -50,4 +50,6 @@ public interface BookDao extends BaseDao {
      * @throws DaoException the dao exception
      */
     boolean add(Book book, long authorId) throws DaoException;
+
+    boolean remove(long bookId) throws DaoException;
 }
