@@ -42,9 +42,10 @@ public class CancelOrderCommand implements Command {
     }
 
     private List<Order> defineOrderList(OrderService orderService, HttpServletRequest request) throws ServiceException {
-        Object userId = request.getSession().getAttribute(RequestParameter.USER_ID);
-        int countRecords = orderService.findCountUserId(userId);
+        Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
+        long userId = (long) userIdObject;
+        int countRecords = orderService.findCount(userId, RequestParameter.USER_ORDER);
         int shownRecords = shownRecordsPagination(countRecords, request);
-        return orderService.findPartByUserId(userId, shownRecords, RECORDS_PER_PAGE);
+        return orderService.findPart(userId, RequestParameter.USER_ORDER, shownRecords, RECORDS_PER_PAGE);
     }
 }

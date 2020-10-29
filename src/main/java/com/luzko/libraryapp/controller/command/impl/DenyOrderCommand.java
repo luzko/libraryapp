@@ -42,8 +42,8 @@ public class DenyOrderCommand implements Command {
     }
 
     private List<Order> defineOrderList(OrderService orderService, HttpServletRequest request) throws ServiceException {
-        int countRecords = orderService.findCountNew();
+        int countRecords = orderService.findCount(RequestParameter.NEW_ORDER);
         int shownRecords = shownRecordsPagination(countRecords, request);
-        return orderService.findPartOfNew(shownRecords, RECORDS_PER_PAGE);
+        return orderService.findPart(RequestParameter.NEW_ORDER, shownRecords, RECORDS_PER_PAGE);
     }
 }
