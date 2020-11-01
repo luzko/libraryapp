@@ -1,17 +1,24 @@
 package com.luzko.libraryapp.model.dao.impl;
 
-import com.luzko.libraryapp.model.connection.ConnectionPool;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.builder.BookBuilder;
 import com.luzko.libraryapp.model.builder.OrderBuilder;
 import com.luzko.libraryapp.model.builder.UserBuilder;
+import com.luzko.libraryapp.model.connection.ConnectionPool;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.OrderDao;
 import com.luzko.libraryapp.model.dao.StatementSql;
-import com.luzko.libraryapp.model.entity.*;
+import com.luzko.libraryapp.model.entity.Book;
+import com.luzko.libraryapp.model.entity.Order;
+import com.luzko.libraryapp.model.entity.OrderStatus;
+import com.luzko.libraryapp.model.entity.OrderType;
+import com.luzko.libraryapp.model.entity.User;
 import com.luzko.libraryapp.util.DateUtil;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

@@ -17,26 +17,26 @@ public class AvailabilityPage {
     private static final String BLOCKED = "blocked.jsp";
     private static final String CREATE_BOOK = "createbook.jsp";
 
-    public static final String BOOK_OVERVIEW = "bookoverview.jsp";
-    public static final String ORDERS = "orders.jsp";
-    public static final String ADMIN = "admin.jsp";
+    static final String BOOK_OVERVIEW = "bookoverview.jsp";
+    static final String ORDERS = "orders.jsp";
+    static final String ADMIN = "admin.jsp";
 
-    public static final List<String> availableGustPageList = List.of(
+    static final List<String> availableGustPageList = List.of(
             INDEX, HOME, LOGIN, REGISTRATION
     );
-    public static final List<String> availableReaderPageList = List.of(
+    static final List<String> availableReaderPageList = List.of(
             INDEX, HOME, USER, CONFIRMATION, BLOCKED, BOOK_OVERVIEW, ORDERS
     );
-    public static final List<String> availableLibrarianPageList = List.of(
+    static final List<String> availableLibrarianPageList = List.of(
             INDEX, HOME, USER, CONFIRMATION, BLOCKED, BOOK_OVERVIEW, ORDERS
     );
-    public static final List<String> availableAdminPageList = List.of(
+    static final List<String> availableAdminPageList = List.of(
             INDEX, HOME, REGISTRATION, ADMIN, CREATE_BOOK, BOOK_OVERVIEW
     );
-    public static final List<String> availableBlockedPageList = List.of(
+    static final List<String> availableBlockedPageList = List.of(
             INDEX, HOME, BLOCKED
     );
-    public static final List<String> availableUnconfirmedPageList = List.of(
+    static final List<String> availableUnconfirmedPageList = List.of(
             INDEX, HOME, CONFIRMATION
     );
 }
