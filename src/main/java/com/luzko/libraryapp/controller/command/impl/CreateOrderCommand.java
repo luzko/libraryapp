@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -23,17 +24,18 @@ public class CreateOrderCommand implements Command {
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
         String typeOrder = request.getParameter(RequestParameter.CREATE_ORDER_TYPE);
-        Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
+        Object userIdObject = request.getSession().getAttribute(AttributeName.USER_ID);
         long userId = (long) userIdObject;
         try {
             if (orderService.isCreateOrder(userId, bookId, typeOrder)) {
-                request.getSession().setAttribute(RequestParameter.ORDER_ERROR, RequestParameter.EMPTY);
-                request.getSession().setAttribute(RequestParameter.ORDER_SUCCESS,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_SUCCESS));
+                //request.getSession().setAttribute(AttributeName.ORDER_ERROR, RequestParameter.EMPTY);
+
+                request.getSession().setAttribute(AttributeName.ORDER_SUCCESS,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_ORDER_SUCCESS));
             } else {
-                request.getSession().setAttribute(RequestParameter.ORDER_SUCCESS, RequestParameter.EMPTY);
-                request.getSession().setAttribute(RequestParameter.ORDER_ERROR,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_ERROR));
+                //request.getSession().setAttribute(AttributeName.ORDER_SUCCESS, RequestParameter.EMPTY);
+                request.getSession().setAttribute(AttributeName.ORDER_ERROR,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_ORDER_ERROR));
             }
             router.setPagePath(PagePath.BOOK_OVERVIEW);
             router.setRedirect();

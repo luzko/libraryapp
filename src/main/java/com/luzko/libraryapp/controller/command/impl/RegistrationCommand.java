@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
@@ -30,7 +31,7 @@ public class RegistrationCommand implements Command {
         Router router = new Router();
         UserService userService = ServiceFactory.getInstance().getUserService();
         Map<String, String> registrationParameter = fillRegistrationParameter(request);
-        Object role = request.getSession().getAttribute(RequestParameter.USER_ROLE);
+        Object role = request.getSession().getAttribute(AttributeName.USER_ROLE);
         boolean isLibrarian = role == UserRole.ADMIN;
         try {
             if (userService.isLoginUnique(registrationParameter.get(ColumnName.LOGIN))) {
@@ -41,15 +42,15 @@ public class RegistrationCommand implements Command {
                     router.setPagePath(isLibrarian ? PagePath.ADMIN : PagePath.LOGIN);
                     router.setRedirect();
                 } else {
-                    request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
-                            ConfigurationManager.getMessageProperty(RequestParameter.PATH_INCORRECT_DATA));
-                    request.setAttribute(RequestParameter.REGISTRATION_PARAMETER, registrationParameter);
+                    request.setAttribute(AttributeName.ERROR_DATA_MESSAGE,
+                            ConfigurationManager.getMessageProperty(AttributeName.PATH_INCORRECT_DATA));
+                    request.setAttribute(AttributeName.REGISTRATION_PARAMETER, registrationParameter);
                     router.setPagePath(PagePath.REGISTRATION);
                 }
             } else {
-                request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_LOGIN_EXIST));
-                request.setAttribute(RequestParameter.REGISTRATION_PARAMETER, registrationParameter);
+                request.setAttribute(AttributeName.ERROR_DATA_MESSAGE,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_LOGIN_EXIST));
+                request.setAttribute(AttributeName.REGISTRATION_PARAMETER, registrationParameter);
                 router.setPagePath(PagePath.REGISTRATION);
             }
         } catch (ServiceException e) {
@@ -62,11 +63,11 @@ public class RegistrationCommand implements Command {
 
     private Map<String, String> fillRegistrationParameter(HttpServletRequest request) {
         Map<String, String> registrationParameter = new HashMap<>();
-        registrationParameter.put(ColumnName.LOGIN, request.getParameter(ColumnName.LOGIN).trim());
-        registrationParameter.put(ColumnName.PASSWORD, request.getParameter(ColumnName.PASSWORD).trim());
-        registrationParameter.put(ColumnName.NAME, request.getParameter(ColumnName.NAME).trim());
-        registrationParameter.put(ColumnName.SURNAME, request.getParameter(ColumnName.SURNAME).trim());
-        registrationParameter.put(ColumnName.EMAIL, request.getParameter(ColumnName.EMAIL).trim());
+        registrationParameter.put(ColumnName.LOGIN, request.getParameter(RequestParameter.LOGIN).trim());
+        registrationParameter.put(ColumnName.PASSWORD, request.getParameter(RequestParameter.PASSWORD).trim());
+        registrationParameter.put(ColumnName.NAME, request.getParameter(RequestParameter.NAME).trim());
+        registrationParameter.put(ColumnName.SURNAME, request.getParameter(RequestParameter.SURNAME).trim());
+        registrationParameter.put(ColumnName.EMAIL, request.getParameter(RequestParameter.EMAIL).trim());
         registrationParameter.put(ColumnName.CONFIRM_CODE, CodeGenerator.generate());
         return registrationParameter;
     }

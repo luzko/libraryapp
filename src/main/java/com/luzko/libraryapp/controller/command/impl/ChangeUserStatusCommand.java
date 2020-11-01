@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
@@ -28,13 +29,13 @@ public class ChangeUserStatusCommand implements Command {
         try {
             boolean isChangeUserStatus = userService.isChangeUserStatus(login, userStatus);
             List<User> userList = defineUserList(userService, request);
-            request.getSession().setAttribute(RequestParameter.ALL_USERS, userList);
+            request.getSession().setAttribute(AttributeName.ALL_USERS, userList);
             router.setPagePath(PagePath.ADMIN);
             router.setRedirect();
             if (!isChangeUserStatus) {
                 logger.log(Level.WARN, "User status is not change");
-                request.getSession().setAttribute(RequestParameter.ERROR_MESSAGE,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_STATUS_CHANGES));
+                request.getSession().setAttribute(AttributeName.ERROR_MESSAGE,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_STATUS_CHANGES));
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in change status", e);

@@ -35,9 +35,7 @@ public class FrontController extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        System.out.println(3);
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
-        System.out.println(commandName);
         Optional<Command> commandOptional = ActionProvider.defineCommand(commandName);
         Router router;
         if (commandOptional.isPresent()) {
@@ -51,7 +49,6 @@ public class FrontController extends HttpServlet {
         } else {
             response.sendRedirect(router.getPagePath());
         }
-        System.out.println(4);
     }
 
     @Override

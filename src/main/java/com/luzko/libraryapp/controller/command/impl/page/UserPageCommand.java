@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl.page;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -13,7 +14,7 @@ public class UserPageCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         UserStatus userStatus = (UserStatus) request.getSession().getAttribute(RequestParameter.USER_STATUS);
-        request.getSession().setAttribute(RequestParameter.TYPE_PROFILE_PAGE, RequestParameter.SEE_PROFILE_PAGE);
+        request.getSession().setAttribute(AttributeName.TYPE_PROFILE_PAGE, AttributeName.SEE_PROFILE_PAGE);
         switch (userStatus) {
             case ACTIVE -> router.setPagePath(PagePath.USER);
             case BLOCKED -> router.setPagePath(PagePath.BLOCKED);

@@ -1,10 +1,15 @@
 package com.luzko.libraryapp.controller.filter;
 
-import com.luzko.libraryapp.controller.RequestParameter;
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.model.entity.UserRole;
 import com.luzko.libraryapp.model.entity.UserStatus;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
@@ -33,8 +38,8 @@ public class PageSecurityFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String[] list = request.getRequestURI().split(DELIMITER_PATH);
-        UserRole userRole = (UserRole) request.getSession().getAttribute(RequestParameter.USER_ROLE);
-        UserStatus userStatus = (UserStatus) request.getSession().getAttribute(RequestParameter.USER_STATUS);
+        UserRole userRole = (UserRole) request.getSession().getAttribute(AttributeName.USER_ROLE);
+        UserStatus userStatus = (UserStatus) request.getSession().getAttribute(AttributeName.USER_STATUS);
         String page = null;
 
         if (list[list.length - 1].contains(EXTENSION_FILE)) {

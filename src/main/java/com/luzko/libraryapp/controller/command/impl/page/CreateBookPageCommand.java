@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl.page;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -25,15 +26,15 @@ public class CreateBookPageCommand implements Command {
         Router router = new Router();
         String createType = request.getParameter(RequestParameter.CREATE_TYPE);
         try {
-            if (createType.equals(RequestParameter.BOOK)) {
+            if (createType.equals(AttributeName.BOOK)) {
                 AuthorService authorService = ServiceFactory.getInstance().getAuthorService();
                 List<Author> authorList = authorService.findAll();
-                request.getSession().setAttribute(RequestParameter.ALL_AUTHORS, authorList);
+                request.getSession().setAttribute(AttributeName.ALL_AUTHORS, authorList);
                 List<Category> categoryList = Arrays.asList(Category.values());
-                request.getSession().setAttribute(RequestParameter.ALL_CATEGORIES, categoryList);
+                request.getSession().setAttribute(AttributeName.ALL_CATEGORIES, categoryList);
             }
-            request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
-            request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
+            //request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, AttributeName.EMPTY);
+            //request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, AttributeName.EMPTY);
             request.setAttribute(RequestParameter.CREATE_TYPE, createType);
             router.setPagePath(PagePath.CREATE_BOOK);
         } catch (ServiceException e) {

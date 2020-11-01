@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
@@ -21,18 +22,18 @@ public class ChangeProfileSurnameCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         UserService userService = ServiceFactory.getInstance().getUserService();
-        String login = (String) request.getSession().getAttribute(RequestParameter.LOGIN);
+        String login = (String) request.getSession().getAttribute(AttributeName.LOGIN);
         String newSurname = request.getParameter(RequestParameter.SURNAME);
         try {
             if (userService.isUserSurnameChange(login, newSurname)) {
-                request.getSession().setAttribute(RequestParameter.CHANGE_SAVED,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_SAVE_CHANGES));
-                request.getSession().setAttribute(RequestParameter.SURNAME_ERROR, RequestParameter.EMPTY);
-                request.getSession().setAttribute(RequestParameter.USER_SURNAME, newSurname);
+                request.getSession().setAttribute(AttributeName.CHANGE_SAVED,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_SAVE_CHANGES));
+                //request.getSession().setAttribute(AttributeName.SURNAME_ERROR, RequestParameter.EMPTY);
+                request.getSession().setAttribute(AttributeName.USER_SURNAME, newSurname);
             } else {
-                request.getSession().setAttribute(RequestParameter.CHANGE_SAVED, RequestParameter.EMPTY);
-                request.getSession().setAttribute(RequestParameter.NAME_ERROR,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_SURNAME_CHANGES));
+                //request.getSession().setAttribute(AttributeName.CHANGE_SAVED, RequestParameter.EMPTY);
+                request.getSession().setAttribute(AttributeName.NAME_ERROR,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_SURNAME_CHANGES));
             }
             router.setPagePath(PagePath.USER);
             router.setRedirect();

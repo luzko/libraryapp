@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -20,6 +21,7 @@ public class ReturnOrderCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
+        asdf(request);
         Router router = new Router();
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
         String orderType = request.getParameter(RequestParameter.ORDER_TYPE);
@@ -28,8 +30,8 @@ public class ReturnOrderCommand implements Command {
         try {
             if (orderService.isReturn(orderId, bookId)) {
                 List<Order> orderList = defineOrderList(orderService, request);
-                request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orderList);
-                request.getSession().setAttribute(RequestParameter.ORDER_TYPE, orderType);
+                request.getSession().setAttribute(AttributeName.ALL_ORDERS, orderList);
+                request.getSession().setAttribute(AttributeName.ORDER_TYPE, orderType);
                 router.setPagePath(PagePath.ORDERS);
                 router.setRedirect();
             } else {
@@ -43,10 +45,10 @@ public class ReturnOrderCommand implements Command {
     }
 
     private List<Order> defineOrderList(OrderService orderService, HttpServletRequest request) throws ServiceException {
-        Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
+        Object userIdObject = request.getSession().getAttribute(AttributeName.USER_ID);
         long userId = (long) userIdObject;
-        int countRecords = orderService.findCount(userId, RequestParameter.USER_ORDER);
+        int countRecords = orderService.findCount(userId, AttributeName.USER_ORDER);
         int shownRecords = shownRecordsPagination(countRecords, request);
-        return orderService.findPart(userId, RequestParameter.USER_ORDER, shownRecords, RECORDS_PER_PAGE);
+        return orderService.findPart(userId, AttributeName.USER_ORDER, shownRecords, RECORDS_PER_PAGE);
     }
 }

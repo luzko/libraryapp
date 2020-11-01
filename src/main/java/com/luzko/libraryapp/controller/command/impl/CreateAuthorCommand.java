@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -25,15 +26,15 @@ public class CreateAuthorCommand implements Command {
         AuthorService authorService = ServiceFactory.getInstance().getAuthorService();
         try {
             if (authorService.add(authorName)) {
-                request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_AUTHOR_CORRECT));
-                request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
+                request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_AUTHOR_CORRECT));
+                //request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
             } else {
-                request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_AUTHOR_DATA));
-                request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
+                request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_AUTHOR_DATA));
+                //request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
             }
-            request.getSession().setAttribute(RequestParameter.CREATE_TYPE, createType);
+            request.getSession().setAttribute(AttributeName.CREATE_TYPE, createType);
             router.setPagePath(PagePath.CREATE_BOOK);
             router.setRedirect();
         } catch (ServiceException e) {

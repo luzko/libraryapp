@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -33,16 +34,16 @@ public class ChangeProfileImageCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         UserService userService = ServiceFactory.getInstance().getUserService();
-        String login = (String) request.getSession().getAttribute(RequestParameter.LOGIN);
+        String login = (String) request.getSession().getAttribute(AttributeName.LOGIN);
         try {
             String fileName = defineFileName(request);
             if (userService.isChangeProfileImage(login, fileName)) {
-                request.getSession().setAttribute(RequestParameter.AVATAR, fileName);
-                request.getSession().setAttribute(RequestParameter.AVATAR_ERROR,
-                        ConfigurationManager.getMessageProperty(RequestParameter.EMPTY));
+                request.getSession().setAttribute(AttributeName.AVATAR, fileName);
+                //request.getSession().setAttribute(AttributeName.AVATAR_ERROR,
+                //        ConfigurationManager.getMessageProperty(RequestParameter.EMPTY));
             } else {
-                request.getSession().setAttribute(RequestParameter.AVATAR_ERROR,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_AVATAR_CHANGES));
+                request.getSession().setAttribute(AttributeName.AVATAR_ERROR,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_AVATAR_CHANGES));
             }
             router.setPagePath(PagePath.USER);
             router.setRedirect();

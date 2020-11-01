@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.listener;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
@@ -22,8 +23,8 @@ public class SessionListener implements HttpSessionListener {
     @Override
     public void sessionDestroyed(HttpSessionEvent sessionEvent) {
         UserService userService = ServiceFactory.getInstance().getUserService();
-        Object userId = sessionEvent.getSession().getAttribute(RequestParameter.USER_ID);
-        Object userRole = sessionEvent.getSession().getAttribute(RequestParameter.USER_ROLE);
+        Object userId = sessionEvent.getSession().getAttribute(AttributeName.USER_ID);
+        Object userRole = sessionEvent.getSession().getAttribute(AttributeName.USER_ROLE);
         try {
             userService.giveBooksFromReadingRoom(userId, userRole);
         } catch (ServiceException e) {

@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
@@ -22,15 +23,15 @@ public class ConfirmCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         UserService userService = ServiceFactory.getInstance().getUserService();
-        String login = (String) request.getSession().getAttribute(RequestParameter.LOGIN);
+        String login = (String) request.getSession().getAttribute(AttributeName.LOGIN);
         String codeConfirm = request.getParameter(RequestParameter.CODE);
         try {
             if (userService.isCodeConfirmCorrect(login, codeConfirm)) {
-                request.getSession().setAttribute(RequestParameter.USER_STATUS, UserStatus.ACTIVE);
+                request.getSession().setAttribute(AttributeName.USER_STATUS, UserStatus.ACTIVE);
                 router.setPagePath(PagePath.USER);
             } else {
-                request.getSession().setAttribute(RequestParameter.PARAM_CONFIRM_ERROR,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_INCORRECT_CODE));
+                request.getSession().setAttribute(AttributeName.PARAM_CONFIRM_ERROR,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_INCORRECT_CODE));
                 router.setPagePath(PagePath.CONFIRMATION);
             }
             router.setRedirect();

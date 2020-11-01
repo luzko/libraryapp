@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -31,20 +32,20 @@ public class CreateBookCommand implements Command {
                     bookParameter.get(ColumnName.TITLE), bookParameter.get(ColumnName.YEAR), bookParameter.get(ColumnName.PAGES))
             ) {
                 if (bookService.add(bookParameter)) {
-                    request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE,
-                            ConfigurationManager.getMessageProperty(RequestParameter.PATH_BOOK_CORRECT));
-                    request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
+                    request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE,
+                            ConfigurationManager.getMessageProperty(AttributeName.PATH_BOOK_CORRECT));
+                    //request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
                 } else {
-                    request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
-                            ConfigurationManager.getMessageProperty(RequestParameter.PATH_BOOK_DATA));
-                    request.getSession().setAttribute(RequestParameter.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
-                    request.setAttribute(RequestParameter.BOOK_PARAMETER, bookParameter);
+                    request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE,
+                            ConfigurationManager.getMessageProperty(AttributeName.PATH_BOOK_DATA));
+                    //request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
+                    request.setAttribute(AttributeName.BOOK_PARAMETER, bookParameter);
                 }
-                request.getSession().setAttribute(RequestParameter.CREATE_TYPE, createType);
+                request.getSession().setAttribute(AttributeName.CREATE_TYPE, createType);
             } else {
-                request.getSession().setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_LOGIN_EXIST));
-                request.getSession().setAttribute(RequestParameter.BOOK_PARAMETER, bookParameter);
+                request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_LOGIN_EXIST));
+                request.getSession().setAttribute(AttributeName.BOOK_PARAMETER, bookParameter);
             }
             router.setPagePath(PagePath.CREATE_BOOK);
             router.setRedirect();
@@ -57,13 +58,13 @@ public class CreateBookCommand implements Command {
 
     private Map<String, String> fillBookParameter(HttpServletRequest request) {
         Map<String, String> bookParameter = new HashMap<>();
-        bookParameter.put(ColumnName.TITLE, request.getParameter(ColumnName.TITLE));
-        bookParameter.put(ColumnName.YEAR, request.getParameter(ColumnName.YEAR));
-        bookParameter.put(ColumnName.PAGES, request.getParameter(ColumnName.PAGES));
-        bookParameter.put(ColumnName.NUMBER_COPIES, request.getParameter(ColumnName.NUMBER_COPIES));
-        bookParameter.put(ColumnName.CATEGORY, request.getParameter(ColumnName.CATEGORY));
-        bookParameter.put(ColumnName.AUTHOR, request.getParameter(ColumnName.AUTHOR));
-        bookParameter.put(ColumnName.DESCRIPTION, request.getParameter(ColumnName.DESCRIPTION));
+        bookParameter.put(ColumnName.TITLE, request.getParameter(RequestParameter.TITLE));
+        bookParameter.put(ColumnName.YEAR, request.getParameter(RequestParameter.YEAR));
+        bookParameter.put(ColumnName.PAGES, request.getParameter(RequestParameter.PAGES));
+        bookParameter.put(ColumnName.NUMBER_COPIES, request.getParameter(RequestParameter.NUMBER_COPIES));
+        bookParameter.put(ColumnName.CATEGORY, request.getParameter(RequestParameter.CATEGORY));
+        bookParameter.put(ColumnName.AUTHOR, request.getParameter(RequestParameter.AUTHOR));
+        bookParameter.put(ColumnName.DESCRIPTION, request.getParameter(RequestParameter.DESCRIPTION));
         return bookParameter;
     }
 }

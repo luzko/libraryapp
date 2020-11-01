@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
@@ -37,13 +38,13 @@ public class LoginCommand implements Command {
                     User user = userOptional.get();
                     router = defineRouterByStatus(user, request);
                 } else {
-                    request.setAttribute(RequestParameter.ERROR_MESSAGE,
-                            ConfigurationManager.getMessageProperty(RequestParameter.PATH_INCORRECT_USER));
+                    request.setAttribute(AttributeName.ERROR_MESSAGE,
+                            ConfigurationManager.getMessageProperty(AttributeName.PATH_INCORRECT_USER));
                     router.setPagePath(PagePath.ERROR);
                 }
             } else {
-                request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_LOGIN_ERROR));
+                request.setAttribute(AttributeName.ERROR_LOGIN_PASSWORD_MESSAGE,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_LOGIN_ERROR));
                 router.setPagePath(PagePath.LOGIN);
             }
         } catch (ServiceException | CommandException e) {
@@ -84,7 +85,7 @@ public class LoginCommand implements Command {
             }
             case ADMIN -> {
                 List<User> userList = defineUserList(request);
-                request.getSession().setAttribute(RequestParameter.ALL_USERS, userList);
+                request.getSession().setAttribute(AttributeName.ALL_USERS, userList);
                 router.setPagePath(PagePath.ADMIN);
             }
             default -> throw new CommandException("User role is incorrect");
@@ -101,14 +102,14 @@ public class LoginCommand implements Command {
 
     private void defineDataSession(User user, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.setAttribute(RequestParameter.USER_ID, user.getUserId());
-        session.setAttribute(RequestParameter.LOGIN, user.getLogin());
-        session.setAttribute(RequestParameter.USER_ROLE, user.getUserRole());
-        session.setAttribute(RequestParameter.USER_STATUS, user.getUserStatus());
-        session.setAttribute(RequestParameter.USER_NAME, user.getName());
-        session.setAttribute(RequestParameter.USER_SURNAME, user.getSurname());
-        session.setAttribute(RequestParameter.EMAIL, user.getEmail());
-        session.setAttribute(RequestParameter.AVATAR, user.getAvatar());
-        session.setAttribute(RequestParameter.TYPE_PROFILE_PAGE, RequestParameter.SEE_PROFILE_PAGE);
+        session.setAttribute(AttributeName.USER_ID, user.getUserId());
+        session.setAttribute(AttributeName.LOGIN, user.getLogin());
+        session.setAttribute(AttributeName.USER_ROLE, user.getUserRole());
+        session.setAttribute(AttributeName.USER_STATUS, user.getUserStatus());
+        session.setAttribute(AttributeName.USER_NAME, user.getName());
+        session.setAttribute(AttributeName.USER_SURNAME, user.getSurname());
+        session.setAttribute(AttributeName.EMAIL, user.getEmail());
+        session.setAttribute(AttributeName.AVATAR, user.getAvatar());
+        session.setAttribute(AttributeName.TYPE_PROFILE_PAGE, AttributeName.SEE_PROFILE_PAGE);
     }
 }

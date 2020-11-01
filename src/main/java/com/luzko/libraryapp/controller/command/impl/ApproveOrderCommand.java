@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -29,15 +30,15 @@ public class ApproveOrderCommand implements Command {
         String userId = request.getParameter(RequestParameter.USER_ID);
         try {
             if (orderService.isApprove(orderId, bookId, userId)) {
-                request.getSession().setAttribute(RequestParameter.ERROR_APPROVE,
-                        ConfigurationManager.getMessageProperty(RequestParameter.EMPTY));
+                //request.getSession().setAttribute(AttributeName.ERROR_APPROVE,
+                //        ConfigurationManager.getMessageProperty(AttributeName.EMPTY));
             } else {
-                request.getSession().setAttribute(RequestParameter.ERROR_APPROVE,
-                        ConfigurationManager.getMessageProperty(RequestParameter.PATH_NOT_APPROVE_USER));
+                request.getSession().setAttribute(AttributeName.ERROR_APPROVE,
+                        ConfigurationManager.getMessageProperty(AttributeName.PATH_NOT_APPROVE_USER));
             }
             List<Order> orderList = defineOrderList(orderService, request);
-            request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orderList);
-            request.getSession().setAttribute(RequestParameter.ORDER_TYPE, orderType);
+            request.getSession().setAttribute(AttributeName.ALL_ORDERS, orderList);
+            request.getSession().setAttribute(AttributeName.ORDER_TYPE, orderType);
             router.setPagePath(PagePath.ORDERS);
             router.setRedirect();
         } catch (ServiceException e) {
@@ -48,8 +49,8 @@ public class ApproveOrderCommand implements Command {
     }
 
     private List<Order> defineOrderList(OrderService orderService, HttpServletRequest request) throws ServiceException {
-        int countRecords = orderService.findCount(RequestParameter.NEW_ORDER);
+        int countRecords = orderService.findCount(AttributeName.NEW_ORDER);
         int shownRecords = shownRecordsPagination(countRecords, request);
-        return orderService.findPart(RequestParameter.NEW_ORDER, shownRecords, RECORDS_PER_PAGE);
+        return orderService.findPart(AttributeName.NEW_ORDER, shownRecords, RECORDS_PER_PAGE);
     }
 }

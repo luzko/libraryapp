@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl.page;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -27,13 +28,13 @@ public class OrderPageCommand implements Command {
         Router router = new Router();
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
         String orderType = request.getParameter(RequestParameter.ORDER_TYPE);
-        request.getSession().setAttribute(RequestParameter.ORDER_TYPE, orderType);
+        request.getSession().setAttribute(AttributeName.ORDER_TYPE, orderType);
         try {
             switch (orderType) {
-                case RequestParameter.USER_ORDER -> userOrderOverview(router, orderService, request);
-                case RequestParameter.BOOK_ORDER -> bookOrderOverview(router, orderService, request);
-                case RequestParameter.NEW_ORDER -> newOrderOverview(router, orderService, request);
-                case RequestParameter.ALL_ORDER -> allOrderOverview(router, orderService, request);
+                case AttributeName.USER_ORDER -> userOrderOverview(router, orderService, request);
+                case AttributeName.BOOK_ORDER -> bookOrderOverview(router, orderService, request);
+                case AttributeName.NEW_ORDER -> newOrderOverview(router, orderService, request);
+                case AttributeName.ALL_ORDER -> allOrderOverview(router, orderService, request);
                 default -> router.setPagePath(PagePath.ERROR);
             }
         } catch (ServiceException e) {
@@ -44,16 +45,16 @@ public class OrderPageCommand implements Command {
     }
 
     private void userOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
-        Object userIdObject = request.getSession().getAttribute(RequestParameter.USER_ID);
+        Object userIdObject = request.getSession().getAttribute(AttributeName.USER_ID);
         long userId = (long) userIdObject;
-        int countRecords = orderService.findCount(userId, RequestParameter.USER_ORDER);
+        int countRecords = orderService.findCount(userId, AttributeName.USER_ORDER);
         if (countRecords > 0) {
             int shownRecords = shownRecordsPagination(countRecords, request);
-            List<Order> orderList = orderService.findPart(userId, RequestParameter.USER_ORDER, shownRecords, RECORDS_PER_PAGE);
+            List<Order> orderList = orderService.findPart(userId, AttributeName.USER_ORDER, shownRecords, RECORDS_PER_PAGE);
             defineOrdersAttribute(router, orderList, request);
         } else {
-            request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
-                    ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
+            request.setAttribute(AttributeName.NOT_FOUND_ORDERS,
+                    ConfigurationManager.getMessageProperty(AttributeName.PATH_ORDER_NOT_FOUND));
             router.setPagePath(PagePath.USER);
         }
     }
@@ -61,46 +62,46 @@ public class OrderPageCommand implements Command {
     private void bookOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
         String bookIdString = request.getParameter(RequestParameter.BOOK_ID);
         long bookId = Long.parseLong(bookIdString);
-        int countRecords = orderService.findCount(bookId, RequestParameter.BOOK_ORDER);
+        int countRecords = orderService.findCount(bookId, AttributeName.BOOK_ORDER);
         if (countRecords > 0) {
             int shownRecords = shownRecordsPagination(countRecords, request);
-            List<Order> orderList = orderService.findPart(bookId, RequestParameter.BOOK_ORDER, shownRecords, RECORDS_PER_PAGE);
+            List<Order> orderList = orderService.findPart(bookId, AttributeName.BOOK_ORDER, shownRecords, RECORDS_PER_PAGE);
             defineOrdersAttribute(router, orderList, request);
         } else {
-            request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
-                    ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
+            request.setAttribute(AttributeName.NOT_FOUND_ORDERS,
+                    ConfigurationManager.getMessageProperty(AttributeName.PATH_ORDER_NOT_FOUND));
             BookService bookService = ServiceFactory.getInstance().getBookService();
             Optional<Book> bookOptional = bookService.findById(bookId);
             Book book = bookOptional.get();
-            request.getSession().setAttribute(RequestParameter.BOOK, book);
+            request.getSession().setAttribute(AttributeName.BOOK, book);
             router.setPagePath(PagePath.BOOK_OVERVIEW);
         }
     }
 
     private void newOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
-        int countRecords = orderService.findCount(RequestParameter.NEW_ORDER);
+        int countRecords = orderService.findCount(AttributeName.NEW_ORDER);
         if (countRecords > 0) {
             int shownRecords = shownRecordsPagination(countRecords, request);
-            List<Order> orderList = orderService.findPart(RequestParameter.NEW_ORDER, shownRecords, RECORDS_PER_PAGE);
+            List<Order> orderList = orderService.findPart(AttributeName.NEW_ORDER, shownRecords, RECORDS_PER_PAGE);
             defineOrdersAttribute(router, orderList, request);
         } else {
-            request.setAttribute(RequestParameter.NOT_FOUND_ORDERS,
-                    ConfigurationManager.getMessageProperty(RequestParameter.PATH_ORDER_NOT_FOUND));
+            request.setAttribute(AttributeName.NOT_FOUND_ORDERS,
+                    ConfigurationManager.getMessageProperty(AttributeName.PATH_ORDER_NOT_FOUND));
             router.setPagePath(PagePath.USER);
         }
     }
 
     private void allOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
-        int countRecords = orderService.findCount(RequestParameter.ALL_ORDER);
+        int countRecords = orderService.findCount(AttributeName.ALL_ORDER);
         if (countRecords > 0) {
             int shownRecords = shownRecordsPagination(countRecords, request);
-            List<Order> orderList = orderService.findPart(RequestParameter.ALL_ORDER, shownRecords, RECORDS_PER_PAGE);
+            List<Order> orderList = orderService.findPart(AttributeName.ALL_ORDER, shownRecords, RECORDS_PER_PAGE);
             defineOrdersAttribute(router, orderList, request);
         }
     }
 
     private void defineOrdersAttribute(Router router, List<Order> orderList, HttpServletRequest request) {
-        request.getSession().setAttribute(RequestParameter.ALL_ORDERS, orderList);
+        request.getSession().setAttribute(AttributeName.ALL_ORDERS, orderList);
         router.setPagePath(PagePath.ORDERS);
     }
 }

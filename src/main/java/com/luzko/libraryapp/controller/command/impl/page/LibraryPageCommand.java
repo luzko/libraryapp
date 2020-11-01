@@ -1,5 +1,6 @@
 package com.luzko.libraryapp.controller.command.impl.page;
 
+import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -23,7 +24,7 @@ public class LibraryPageCommand implements Command {
         Router router = new Router();
         try {
             List<Book> bookList = defineBookList(request);
-            request.getSession().setAttribute(RequestParameter.ALL_BOOKS, bookList);
+            request.getSession().setAttribute(AttributeName.ALL_BOOKS, bookList);
             router.setPagePath(PagePath.LIBRARY);
             return router;
         } catch (ServiceException e) {

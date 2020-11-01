@@ -1,8 +1,13 @@
 package com.luzko.libraryapp.controller.filter;
 
-import com.luzko.libraryapp.controller.RequestParameter;
+import com.luzko.libraryapp.controller.AttributeName;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +27,8 @@ public class EncodingFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-        code = filterConfig.getInitParameter(RequestParameter.ENCODING);
-        locale = filterConfig.getInitParameter(RequestParameter.LOCALE);
+        code = filterConfig.getInitParameter(AttributeName.ENCODING);
+        locale = filterConfig.getInitParameter(AttributeName.LOCALE);
     }
 
     @Override
@@ -35,9 +40,9 @@ public class EncodingFilter implements Filter {
         }
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
-        String sessionLocale = (String) session.getAttribute(RequestParameter.LOCALE);
+        String sessionLocale = (String) session.getAttribute(AttributeName.LOCALE);
         if (sessionLocale == null) {
-            session.setAttribute(RequestParameter.LOCALE, locale);
+            session.setAttribute(AttributeName.LOCALE, locale);
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
