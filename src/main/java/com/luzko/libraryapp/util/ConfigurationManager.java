@@ -9,14 +9,15 @@ import java.util.ResourceBundle;
  * The type Configuration manager.
  */
 public final class ConfigurationManager {
-    private static final String LOCALE_RU = "ru_RU";
+    private static final String LANGUAGE = "ru";
+    private static final String COUNTRY = "RU";
     private static final String DATABASE_RESOURCE = "prop.database";
     private static final String MAIL_RESOURCE = "prop.mail";
     private static final String MESSAGE_RESOURCE = "prop.message";
     private static Properties databaseProperties;
     private static Properties mailProperties;
-    private static Properties messagePropertiesEN;
-    private static Properties messagePropertiesRU;
+    private static Properties messagePropertiesEn;
+    private static Properties messagePropertiesRu;
 
     static {
         loadProperties();
@@ -33,8 +34,7 @@ public final class ConfigurationManager {
      * @return the message property
      */
     public static String getMessageProperty(String key, String locale) {
-        System.out.println(locale);
-        return locale.equals(LOCALE_RU) ? messagePropertiesRU.getProperty(key) : messagePropertiesEN.getProperty(key);
+        return locale.contains(LANGUAGE) ? messagePropertiesRu.getProperty(key) : messagePropertiesEn.getProperty(key);
     }
 
     /**
@@ -59,14 +59,13 @@ public final class ConfigurationManager {
         Locale.setDefault(Locale.US);
         ResourceBundle resourceBundleDatabase = ResourceBundle.getBundle(DATABASE_RESOURCE);
         ResourceBundle resourceBundleMail = ResourceBundle.getBundle(MAIL_RESOURCE);
-        ResourceBundle resourceBundleMessageEN = ResourceBundle.getBundle(MESSAGE_RESOURCE);
-        ResourceBundle resourceBundleMessageRU = ResourceBundle.getBundle(MESSAGE_RESOURCE, new Locale("ru", "RU"));
-        //TODO
+        ResourceBundle resourceBundleMessageEn = ResourceBundle.getBundle(MESSAGE_RESOURCE);
+        ResourceBundle resourceBundleMessageRu = ResourceBundle.getBundle(MESSAGE_RESOURCE, new Locale(LANGUAGE, COUNTRY));
 
         databaseProperties = convertResourceBundleToProperties(resourceBundleDatabase);
         mailProperties = convertResourceBundleToProperties(resourceBundleMail);
-        messagePropertiesEN = convertResourceBundleToProperties(resourceBundleMessageEN);
-        messagePropertiesRU = convertResourceBundleToProperties(resourceBundleMessageRU);
+        messagePropertiesEn = convertResourceBundleToProperties(resourceBundleMessageEn);
+        messagePropertiesRu = convertResourceBundleToProperties(resourceBundleMessageRu);
     }
 
     private static Properties convertResourceBundleToProperties(ResourceBundle resourceBundle) {
