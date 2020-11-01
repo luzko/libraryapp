@@ -1,6 +1,7 @@
 package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
+import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -27,11 +28,11 @@ public class CreateAuthorCommand implements Command {
         try {
             if (authorService.add(authorName)) {
                 request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_AUTHOR_CORRECT));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_AUTHOR_CORRECT));
                 //request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
             } else {
                 request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_AUTHOR_DATA));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_AUTHOR_DATA));
                 //request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
             }
             request.getSession().setAttribute(AttributeName.CREATE_TYPE, createType);

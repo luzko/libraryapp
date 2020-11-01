@@ -1,6 +1,7 @@
 package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
+import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -34,7 +35,7 @@ public class BookOverviewCommand implements Command {
                 router.setPagePath(PagePath.BOOK_OVERVIEW);
             } else {
                 request.getSession().setAttribute(AttributeName.OVERVIEW_ERROR,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_BOOK_OVERVIEW));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_OVERVIEW));
                 router.setPagePath(PagePath.LIBRARY);
             }
             //request.getSession().setAttribute(AttributeName.ORDER_ERROR, RequestParameter.EMPTY);

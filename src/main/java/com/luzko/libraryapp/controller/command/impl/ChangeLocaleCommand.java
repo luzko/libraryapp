@@ -1,8 +1,8 @@
 package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
+import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.PagePath;
-import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
 
@@ -14,10 +14,10 @@ public class ChangeLocaleCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         String locale = (String) request.getSession().getAttribute(AttributeName.LOCALE);
-        if (locale.equals(AttributeName.RUS)) {
-            request.getSession().setAttribute(AttributeName.LOCALE, AttributeName.ENG);
-        } else if (locale.equals(AttributeName.ENG)) {
-            request.getSession().setAttribute(AttributeName.LOCALE, AttributeName.RUS);
+        if (locale.equals(AttributeValue.RUS)) {
+            request.getSession().setAttribute(AttributeName.LOCALE, AttributeValue.ENG);
+        } else if (locale.equals(AttributeValue.ENG)) {
+            request.getSession().setAttribute(AttributeName.LOCALE, AttributeValue.RUS);
         }
         router.setPagePath(PagePath.HOME);
         return router;

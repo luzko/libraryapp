@@ -1,6 +1,7 @@
 package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
+import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
@@ -39,12 +40,12 @@ public class LoginCommand implements Command {
                     router = defineRouterByStatus(user, request);
                 } else {
                     request.setAttribute(AttributeName.ERROR_MESSAGE,
-                            ConfigurationManager.getMessageProperty(AttributeName.PATH_INCORRECT_USER));
+                            ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_USER));
                     router.setPagePath(PagePath.ERROR);
                 }
             } else {
                 request.setAttribute(AttributeName.ERROR_LOGIN_PASSWORD_MESSAGE,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_LOGIN_ERROR));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_ERROR));
                 router.setPagePath(PagePath.LOGIN);
             }
         } catch (ServiceException | CommandException e) {
@@ -110,6 +111,6 @@ public class LoginCommand implements Command {
         session.setAttribute(AttributeName.USER_SURNAME, user.getSurname());
         session.setAttribute(AttributeName.EMAIL, user.getEmail());
         session.setAttribute(AttributeName.AVATAR, user.getAvatar());
-        session.setAttribute(AttributeName.TYPE_PROFILE_PAGE, AttributeName.SEE_PROFILE_PAGE);
+        session.setAttribute(AttributeName.TYPE_PROFILE_PAGE, AttributeValue.SEE_PROFILE_PAGE);
     }
 }

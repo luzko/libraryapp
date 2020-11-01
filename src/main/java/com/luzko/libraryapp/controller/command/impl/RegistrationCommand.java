@@ -1,6 +1,7 @@
 package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
+import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
@@ -43,13 +44,13 @@ public class RegistrationCommand implements Command {
                     router.setRedirect();
                 } else {
                     request.setAttribute(AttributeName.ERROR_DATA_MESSAGE,
-                            ConfigurationManager.getMessageProperty(AttributeName.PATH_INCORRECT_DATA));
+                            ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_DATA));
                     request.setAttribute(AttributeName.REGISTRATION_PARAMETER, registrationParameter);
                     router.setPagePath(PagePath.REGISTRATION);
                 }
             } else {
                 request.setAttribute(AttributeName.ERROR_DATA_MESSAGE,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_LOGIN_EXIST));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_EXIST));
                 request.setAttribute(AttributeName.REGISTRATION_PARAMETER, registrationParameter);
                 router.setPagePath(PagePath.REGISTRATION);
             }

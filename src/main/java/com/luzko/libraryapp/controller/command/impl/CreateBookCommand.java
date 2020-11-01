@@ -1,6 +1,7 @@
 package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
+import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -33,18 +34,18 @@ public class CreateBookCommand implements Command {
             ) {
                 if (bookService.add(bookParameter)) {
                     request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE,
-                            ConfigurationManager.getMessageProperty(AttributeName.PATH_BOOK_CORRECT));
+                            ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_CORRECT));
                     //request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
                 } else {
                     request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE,
-                            ConfigurationManager.getMessageProperty(AttributeName.PATH_BOOK_DATA));
+                            ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_DATA));
                     //request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
                     request.setAttribute(AttributeName.BOOK_PARAMETER, bookParameter);
                 }
                 request.getSession().setAttribute(AttributeName.CREATE_TYPE, createType);
             } else {
                 request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_LOGIN_EXIST));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_EXIST));
                 request.getSession().setAttribute(AttributeName.BOOK_PARAMETER, bookParameter);
             }
             router.setPagePath(PagePath.CREATE_BOOK);

@@ -1,15 +1,16 @@
 package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
-import com.luzko.libraryapp.controller.Router;
-import com.luzko.libraryapp.util.ConfigurationManager;
+import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.User;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.UserService;
+import com.luzko.libraryapp.util.ConfigurationManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,7 +36,7 @@ public class ChangeUserStatusCommand implements Command {
             if (!isChangeUserStatus) {
                 logger.log(Level.WARN, "User status is not change");
                 request.getSession().setAttribute(AttributeName.ERROR_MESSAGE,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_STATUS_CHANGES));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_STATUS_CHANGES));
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in change status", e);

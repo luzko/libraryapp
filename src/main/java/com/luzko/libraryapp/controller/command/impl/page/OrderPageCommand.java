@@ -1,14 +1,15 @@
 package com.luzko.libraryapp.controller.command.impl.page;
 
 import com.luzko.libraryapp.controller.AttributeName;
+import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.Book;
 import com.luzko.libraryapp.model.entity.Order;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.BookService;
 import com.luzko.libraryapp.model.service.OrderService;
 import com.luzko.libraryapp.util.ConfigurationManager;
@@ -54,7 +55,7 @@ public class OrderPageCommand implements Command {
             defineOrdersAttribute(router, orderList, request);
         } else {
             request.setAttribute(AttributeName.NOT_FOUND_ORDERS,
-                    ConfigurationManager.getMessageProperty(AttributeName.PATH_ORDER_NOT_FOUND));
+                    ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_NOT_FOUND));
             router.setPagePath(PagePath.USER);
         }
     }
@@ -69,7 +70,7 @@ public class OrderPageCommand implements Command {
             defineOrdersAttribute(router, orderList, request);
         } else {
             request.setAttribute(AttributeName.NOT_FOUND_ORDERS,
-                    ConfigurationManager.getMessageProperty(AttributeName.PATH_ORDER_NOT_FOUND));
+                    ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_NOT_FOUND));
             BookService bookService = ServiceFactory.getInstance().getBookService();
             Optional<Book> bookOptional = bookService.findById(bookId);
             Book book = bookOptional.get();
@@ -86,7 +87,7 @@ public class OrderPageCommand implements Command {
             defineOrdersAttribute(router, orderList, request);
         } else {
             request.setAttribute(AttributeName.NOT_FOUND_ORDERS,
-                    ConfigurationManager.getMessageProperty(AttributeName.PATH_ORDER_NOT_FOUND));
+                    ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_NOT_FOUND));
             router.setPagePath(PagePath.USER);
         }
     }

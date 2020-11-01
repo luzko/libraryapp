@@ -1,14 +1,15 @@
 package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
-import com.luzko.libraryapp.controller.Router;
-import com.luzko.libraryapp.util.ConfigurationManager;
+import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.UserService;
+import com.luzko.libraryapp.util.ConfigurationManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,13 +28,13 @@ public class ChangeProfileNameCommand implements Command {
         try {
             if (userService.isUserNameChange(login, newName)) {
                 request.getSession().setAttribute(AttributeName.CHANGE_SAVED,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_SAVE_CHANGES));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_SAVE_CHANGES));
                 //request.getSession().setAttribute(AttributeName.NAME_ERROR, RequestParameter.EMPTY);
                 request.getSession().setAttribute(AttributeName.USER_NAME, newName);
             } else {
                 //request.getSession().setAttribute(AttributeName.CHANGE_SAVED, RequestParameter.EMPTY);
                 request.getSession().setAttribute(AttributeName.NAME_ERROR,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_NAME_CHANGES));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_NAME_CHANGES));
             }
             router.setPagePath(PagePath.USER);
             router.setRedirect();

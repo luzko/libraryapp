@@ -1,6 +1,7 @@
 package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
+import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -31,11 +32,11 @@ public class CreateOrderCommand implements Command {
                 //request.getSession().setAttribute(AttributeName.ORDER_ERROR, RequestParameter.EMPTY);
 
                 request.getSession().setAttribute(AttributeName.ORDER_SUCCESS,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_ORDER_SUCCESS));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_SUCCESS));
             } else {
                 //request.getSession().setAttribute(AttributeName.ORDER_SUCCESS, RequestParameter.EMPTY);
                 request.getSession().setAttribute(AttributeName.ORDER_ERROR,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_ORDER_ERROR));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_ERROR));
             }
             router.setPagePath(PagePath.BOOK_OVERVIEW);
             router.setRedirect();

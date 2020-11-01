@@ -1,6 +1,7 @@
 package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
+import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -43,7 +44,7 @@ public class ChangeProfileImageCommand implements Command {
                 //        ConfigurationManager.getMessageProperty(RequestParameter.EMPTY));
             } else {
                 request.getSession().setAttribute(AttributeName.AVATAR_ERROR,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_AVATAR_CHANGES));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_AVATAR_CHANGES));
             }
             router.setPagePath(PagePath.USER);
             router.setRedirect();

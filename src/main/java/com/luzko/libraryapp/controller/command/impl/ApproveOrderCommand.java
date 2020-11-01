@@ -1,6 +1,7 @@
 package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
+import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
@@ -34,7 +35,7 @@ public class ApproveOrderCommand implements Command {
                 //        ConfigurationManager.getMessageProperty(AttributeName.EMPTY));
             } else {
                 request.getSession().setAttribute(AttributeName.ERROR_APPROVE,
-                        ConfigurationManager.getMessageProperty(AttributeName.PATH_NOT_APPROVE_USER));
+                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_NOT_APPROVE_USER));
             }
             List<Order> orderList = defineOrderList(orderService, request);
             request.getSession().setAttribute(AttributeName.ALL_ORDERS, orderList);
