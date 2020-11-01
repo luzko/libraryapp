@@ -27,14 +27,16 @@ public class ChangeProfileNameCommand implements Command {
         String newName = request.getParameter(RequestParameter.NAME);
         try {
             if (userService.isUserNameChange(login, newName)) {
-                request.getSession().setAttribute(AttributeName.CHANGE_SAVED,
-                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_SAVE_CHANGES));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_SAVE_CHANGES,
+                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                request.getSession().setAttribute(AttributeName.CHANGE_SAVED, attributeValue);
                 //request.getSession().setAttribute(AttributeName.NAME_ERROR, RequestParameter.EMPTY);
                 request.getSession().setAttribute(AttributeName.USER_NAME, newName);
             } else {
                 //request.getSession().setAttribute(AttributeName.CHANGE_SAVED, RequestParameter.EMPTY);
-                request.getSession().setAttribute(AttributeName.NAME_ERROR,
-                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_NAME_CHANGES));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_NAME_CHANGES,
+                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                request.getSession().setAttribute(AttributeName.NAME_ERROR, attributeValue);
             }
             router.setPagePath(PagePath.USER);
             router.setRedirect();

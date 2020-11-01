@@ -35,8 +35,9 @@ public class ChangeUserStatusCommand implements Command {
             router.setRedirect();
             if (!isChangeUserStatus) {
                 logger.log(Level.WARN, "User status is not change");
-                request.getSession().setAttribute(AttributeName.ERROR_MESSAGE,
-                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_STATUS_CHANGES));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_STATUS_CHANGES,
+                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                request.getSession().setAttribute(AttributeName.ERROR_MESSAGE, attributeValue);
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in change status", e);

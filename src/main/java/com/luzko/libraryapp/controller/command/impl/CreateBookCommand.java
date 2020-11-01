@@ -33,19 +33,22 @@ public class CreateBookCommand implements Command {
                     bookParameter.get(ColumnName.TITLE), bookParameter.get(ColumnName.YEAR), bookParameter.get(ColumnName.PAGES))
             ) {
                 if (bookService.add(bookParameter)) {
-                    request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE,
-                            ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_CORRECT));
+                    String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_CORRECT,
+                            (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                    request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, attributeValue);
                     //request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
                 } else {
-                    request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE,
-                            ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_DATA));
+                    String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_DATA,
+                            (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                    request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, attributeValue);
                     //request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
                     request.setAttribute(AttributeName.BOOK_PARAMETER, bookParameter);
                 }
                 request.getSession().setAttribute(AttributeName.CREATE_TYPE, createType);
             } else {
-                request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE,
-                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_EXIST));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_EXIST,
+                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, attributeValue);
                 request.getSession().setAttribute(AttributeName.BOOK_PARAMETER, bookParameter);
             }
             router.setPagePath(PagePath.CREATE_BOOK);

@@ -34,8 +34,9 @@ public class BookOverviewCommand implements Command {
                 request.getSession().setAttribute(AttributeName.BOOK, book);
                 router.setPagePath(PagePath.BOOK_OVERVIEW);
             } else {
-                request.getSession().setAttribute(AttributeName.OVERVIEW_ERROR,
-                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_OVERVIEW));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_OVERVIEW,
+                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                request.getSession().setAttribute(AttributeName.OVERVIEW_ERROR, attributeValue);
                 router.setPagePath(PagePath.LIBRARY);
             }
             //request.getSession().setAttribute(AttributeName.ORDER_ERROR, RequestParameter.EMPTY);

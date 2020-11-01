@@ -39,14 +39,15 @@ public class LoginCommand implements Command {
                     User user = userOptional.get();
                     router = defineRouterByStatus(user, request);
                 } else {
-                    request.setAttribute(AttributeName.ERROR_MESSAGE,
-                            ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_USER));
+                    String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_USER,
+                            (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                    request.setAttribute(AttributeName.ERROR_MESSAGE, attributeValue);
                     router.setPagePath(PagePath.ERROR);
                 }
             } else {
-                request.setAttribute(AttributeName.ERROR_LOGIN_PASSWORD_MESSAGE,
-                        //ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_ERROR));
-                        AttributeValue.PATH_LOGIN_ERROR);
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_ERROR,
+                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                request.setAttribute(AttributeName.ERROR_LOGIN_PASSWORD_MESSAGE, attributeValue);
                 router.setPagePath(PagePath.LOGIN);
             }
         } catch (ServiceException | CommandException e) {

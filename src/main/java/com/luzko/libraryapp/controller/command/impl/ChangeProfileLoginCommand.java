@@ -27,14 +27,16 @@ public class ChangeProfileLoginCommand implements Command {
         String newLogin = request.getParameter(RequestParameter.LOGIN);
         try {
             if (userService.isUserLoginChange(login, newLogin)) {
-                request.getSession().setAttribute(AttributeName.CHANGE_SAVED,
-                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_SAVE_CHANGES));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_SAVE_CHANGES,
+                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                request.getSession().setAttribute(AttributeName.CHANGE_SAVED, attributeValue);
                 //request.getSession().setAttribute(RequestParameter.LOGIN_ERROR, RequestParameter.EMPTY);
                 request.getSession().setAttribute(AttributeName.LOGIN, newLogin);
             } else {
                 //request.getSession().setAttribute(AttributeName.CHANGE_SAVED, AttributeName.EMPTY);
-                request.getSession().setAttribute(AttributeName.LOGIN_ERROR,
-                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_CHANGES));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_CHANGES,
+                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                request.getSession().setAttribute(AttributeName.LOGIN_ERROR, attributeValue);
             }
             router.setPagePath(PagePath.USER);
             router.setRedirect();

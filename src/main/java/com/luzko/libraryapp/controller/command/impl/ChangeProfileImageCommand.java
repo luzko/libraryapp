@@ -3,7 +3,6 @@ package com.luzko.libraryapp.controller.command.impl;
 import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.AttributeValue;
 import com.luzko.libraryapp.controller.PagePath;
-import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
@@ -22,7 +21,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 public class ChangeProfileImageCommand implements Command {
     private static final Logger logger = LogManager.getLogger(ChangeProfileImageCommand.class);
@@ -43,8 +44,9 @@ public class ChangeProfileImageCommand implements Command {
                 //request.getSession().setAttribute(AttributeName.AVATAR_ERROR,
                 //        ConfigurationManager.getMessageProperty(RequestParameter.EMPTY));
             } else {
-                request.getSession().setAttribute(AttributeName.AVATAR_ERROR,
-                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_AVATAR_CHANGES));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_AVATAR_CHANGES,
+                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                request.getSession().setAttribute(AttributeName.AVATAR_ERROR, attributeValue);
             }
             router.setPagePath(PagePath.USER);
             router.setRedirect();

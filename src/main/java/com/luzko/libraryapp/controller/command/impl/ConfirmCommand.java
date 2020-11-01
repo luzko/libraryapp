@@ -31,8 +31,9 @@ public class ConfirmCommand implements Command {
                 request.getSession().setAttribute(AttributeName.USER_STATUS, UserStatus.ACTIVE);
                 router.setPagePath(PagePath.USER);
             } else {
-                request.getSession().setAttribute(AttributeName.PARAM_CONFIRM_ERROR,
-                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_CODE));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_CODE,
+                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                request.getSession().setAttribute(AttributeName.PARAM_CONFIRM_ERROR, attributeValue);
                 router.setPagePath(PagePath.CONFIRMATION);
             }
             router.setRedirect();

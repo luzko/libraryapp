@@ -54,8 +54,9 @@ public class OrderPageCommand implements Command {
             List<Order> orderList = orderService.findPart(userId, AttributeName.USER_ORDER, shownRecords, RECORDS_PER_PAGE);
             defineOrdersAttribute(router, orderList, request);
         } else {
-            request.setAttribute(AttributeName.NOT_FOUND_ORDERS,
-                    ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_NOT_FOUND));
+            String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_NOT_FOUND,
+                    (String) request.getSession().getAttribute(AttributeName.LOCALE));
+            request.setAttribute(AttributeName.NOT_FOUND_ORDERS, attributeValue);
             router.setPagePath(PagePath.USER);
         }
     }
@@ -69,8 +70,9 @@ public class OrderPageCommand implements Command {
             List<Order> orderList = orderService.findPart(bookId, AttributeName.BOOK_ORDER, shownRecords, RECORDS_PER_PAGE);
             defineOrdersAttribute(router, orderList, request);
         } else {
-            request.setAttribute(AttributeName.NOT_FOUND_ORDERS,
-                    ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_NOT_FOUND));
+            String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_NOT_FOUND,
+                    (String) request.getSession().getAttribute(AttributeName.LOCALE));
+            request.setAttribute(AttributeName.NOT_FOUND_ORDERS, attributeValue);
             BookService bookService = ServiceFactory.getInstance().getBookService();
             Optional<Book> bookOptional = bookService.findById(bookId);
             Book book = bookOptional.get();
@@ -86,8 +88,9 @@ public class OrderPageCommand implements Command {
             List<Order> orderList = orderService.findPart(AttributeName.NEW_ORDER, shownRecords, RECORDS_PER_PAGE);
             defineOrdersAttribute(router, orderList, request);
         } else {
-            request.setAttribute(AttributeName.NOT_FOUND_ORDERS,
-                    ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_NOT_FOUND));
+            String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_NOT_FOUND,
+                    (String) request.getSession().getAttribute(AttributeName.LOCALE));
+            request.setAttribute(AttributeName.NOT_FOUND_ORDERS, attributeValue);
             router.setPagePath(PagePath.USER);
         }
     }

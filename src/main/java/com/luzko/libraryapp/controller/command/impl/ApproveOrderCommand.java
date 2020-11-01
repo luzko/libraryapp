@@ -7,8 +7,8 @@ import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.Order;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.OrderService;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import org.apache.logging.log4j.Level;
@@ -34,8 +34,9 @@ public class ApproveOrderCommand implements Command {
                 //request.getSession().setAttribute(AttributeName.ERROR_APPROVE,
                 //        ConfigurationManager.getMessageProperty(AttributeName.EMPTY));
             } else {
-                request.getSession().setAttribute(AttributeName.ERROR_APPROVE,
-                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_NOT_APPROVE_USER));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_NOT_APPROVE_USER,
+                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                request.getSession().setAttribute(AttributeName.ERROR_APPROVE, attributeValue);
             }
             List<Order> orderList = defineOrderList(orderService, request);
             request.getSession().setAttribute(AttributeName.ALL_ORDERS, orderList);
