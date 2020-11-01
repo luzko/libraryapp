@@ -27,9 +27,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 </head>
-
 <body id="page-top">
-
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
         <form class="form-inline"
@@ -41,7 +39,6 @@
                 </button>
             </div>
         </form>
-
         <form class="form-inline"
               action="${pageContext.request.contextPath}/controller" method="post">
             <c:if test="${login != null}">
@@ -54,7 +51,6 @@
                             </button>
                         </div>
                     </c:when>
-
                     <c:when test="${userRole == 'LIBRARIAN' or userRole == 'READER'}">
                         <input type="hidden" name="command" value="user_page"/>
                         <div>
@@ -66,7 +62,6 @@
                 </c:choose>
             </c:if>
         </form>
-
         <form class="form-inline"
               method="POST" action="${pageContext.request.contextPath}/controller">
             <c:if test="${login == null}">
@@ -88,7 +83,6 @@
         </form>
     </div>
 </nav>
-
 <section id="about" class="registration-section text-center"
          style="height: 1000px; background-color: rgba(22, 22, 22, 1);">
     <div class="masthead3">
@@ -146,7 +140,6 @@
                             </tr>
                             </thead>
                             <tbody>
-
                             <c:forEach items="${allBooks}" var="book">
                                 <tr class="table-success">
                                     <td>
@@ -223,7 +216,6 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </c:forEach>
-
                                     <c:if test="${currentPage lt countPage}">
                                         <li class="page-item">
                                             <form class="form-inline" method="POST"

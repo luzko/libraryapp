@@ -1,8 +1,8 @@
 package com.luzko.libraryapp.controller;
 
-import com.luzko.libraryapp.model.connection.ConnectionPool;
 import com.luzko.libraryapp.controller.command.ActionProvider;
 import com.luzko.libraryapp.controller.command.Command;
+import com.luzko.libraryapp.model.connection.ConnectionPool;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +35,9 @@ public class FrontController extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        System.out.println(3);
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
+        System.out.println(commandName);
         Optional<Command> commandOptional = ActionProvider.defineCommand(commandName);
         Router router;
         if (commandOptional.isPresent()) {
@@ -49,6 +51,7 @@ public class FrontController extends HttpServlet {
         } else {
             response.sendRedirect(router.getPagePath());
         }
+        System.out.println(4);
     }
 
     @Override
