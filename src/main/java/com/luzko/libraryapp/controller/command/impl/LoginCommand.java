@@ -2,18 +2,18 @@ package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.AttributeValue;
-import com.luzko.libraryapp.controller.Router;
-import com.luzko.libraryapp.util.ConfigurationManager;
 import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
+import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.exception.CommandException;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.User;
 import com.luzko.libraryapp.model.entity.UserRole;
 import com.luzko.libraryapp.model.entity.UserStatus;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.UserService;
+import com.luzko.libraryapp.util.ConfigurationManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,7 +45,8 @@ public class LoginCommand implements Command {
                 }
             } else {
                 request.setAttribute(AttributeName.ERROR_LOGIN_PASSWORD_MESSAGE,
-                        ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_ERROR));
+                        //ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_ERROR));
+                        AttributeValue.PATH_LOGIN_ERROR);
                 router.setPagePath(PagePath.LOGIN);
             }
         } catch (ServiceException | CommandException e) {

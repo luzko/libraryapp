@@ -66,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
         OrderDao orderDao = OrderDaoImpl.getInstance();
         long bookId = Long.parseLong(bookIdString);
         try {
-            OrderType orderType = orderTypeString.equals(RequestParameter.TYPE_HOME) ? OrderType.HOME : OrderType.READING_ROOM;
+            OrderType orderType = OrderType.valueOf(orderTypeString.toUpperCase());
             return orderDao.isCreateOrder(userId, bookId, orderType);
         } catch (DaoException e) {
             throw new ServiceException("Create order error", e);
