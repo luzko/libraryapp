@@ -8,7 +8,9 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Properties;
+import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -38,13 +40,6 @@ public class ConnectionPool {
         isInitialized = new AtomicBoolean(false);
         isPoolClosing = new AtomicBoolean(false);
         initLock = new ReentrantLock();
-    }
-
-    private static class ConnectionPoolSingletonHolder {
-        /**
-         * The Instance.
-         */
-        static final ConnectionPool INSTANCE = new ConnectionPool();
     }
 
     /**
@@ -117,10 +112,13 @@ public class ConnectionPool {
                 logger.log(Level.ERROR, "Error destroy connection.", e);
             }
         }
-        deregisterDrivers();
-        isInitialized.set(false);
-        isPoolClosing.set(false);
-        initLock.unlock();
+        try {
+            deregisterDrivers();
+            isInitialized.set(false);
+            isPoolClosing.set(false);
+        } finally {
+            initLock.unlock();
+        }
     }
 
     private void closeConnection(ProxyConnection connection) {
@@ -152,5 +150,12 @@ public class ConnectionPool {
         } else {
             logger.log(Level.WARN, "Invalid connection");
         }
+    }
+
+    private static class ConnectionPoolSingletonHolder {
+        /**
+         * The Instance.
+         */
+        static final ConnectionPool INSTANCE = new ConnectionPool();
     }
 }
