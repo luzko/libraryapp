@@ -64,7 +64,7 @@
     <div class="masthead3">
         <div class="container-fluid  align-items-center">
             <div class="row justify-content-center ">
-                <form method="get" action="${pageContext.request.contextPath}/controller">
+                <form method="GET" action="${pageContext.request.contextPath}/controller">
                     <div class="jumbotron" style="margin-top: 0px;">
                         <div class="d-flex justify-content-around"><h2><fmt:message key="text.site.orders"/></h2></div>
                         <c:choose>

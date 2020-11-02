@@ -48,7 +48,7 @@
         </form>
 
         <c:if test="${login == null}">
-            <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/controller">
+            <form class="form-inline" method="GET" action="${pageContext.request.contextPath}/controller">
                 <input type="hidden" name="command" value="login_page"/>
                 <div>
                     <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">

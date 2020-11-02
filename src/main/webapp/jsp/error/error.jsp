@@ -28,7 +28,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <form class="form-inline" action="${pageContext.request.contextPath}/controller" method="post">
+        <form class="form-inline" action="${pageContext.request.contextPath}/controller" method="POST">
             <input type="hidden" name="command" value="home_page"/>
             <div>
                 <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">

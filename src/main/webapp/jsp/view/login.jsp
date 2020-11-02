@@ -36,7 +36,7 @@
             </div>
         </form>
         <form class="form-inline"
-              method="POST" action="${pageContext.request.contextPath}/controller">
+              method="GET" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="registration_page"/>
             <div>
                 <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">

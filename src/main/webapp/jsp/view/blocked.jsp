@@ -60,7 +60,7 @@
 
                     <div class="modal fade" id="exampleModal" tabindex="-1"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <form class="form" action="${pageContext.request.contextPath}/controller" method="post">
+                        <form class="form" action="${pageContext.request.contextPath}/controller" method="POST">
                             <input type="hidden" name="command" value="send_message_admin"/>
                             <input type="hidden" name="typeMessage" value="blocked"/>
                             <div class="modal-dialog">

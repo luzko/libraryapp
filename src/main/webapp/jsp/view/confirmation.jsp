@@ -64,11 +64,11 @@
                         <fmt:message key="submit.confirm"/>
                     </button>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" <%--userRoleType="dialog--%>>"
+                    <div class="modal fade" id="exampleModal" tabindex="-1">"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <form class="form" action="${pageContext.request.contextPath}/controller" method="post">
+                        <form class="form" action="${pageContext.request.contextPath}/controller" method="POST">
                             <input type="hidden" name="command" value="confirm"/>
-                            <div class="modal-dialog" <%--userRoleType="document"--%>>
+                            <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-body">
                                         <div class="form-group">

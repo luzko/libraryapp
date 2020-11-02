@@ -144,7 +144,7 @@ public class StatementSql {
             "UPDATE orders SET order_status_id_fk = ? WHERE order_id LIKE ?";
 
     public static final String RETURN_ORDER =
-            "UPDATE orders SET order_status_id_fk = 5, return_date LIKE ? WHERE order_id LIKE ?";
+            "UPDATE orders SET order_status_id_fk = 5, return_date = ? WHERE order_id LIKE ?";
 
     public static final String CANCEL_ORDER_BY_BOOK =
             "UPDATE orders SET order_status_id_fk = 4 WHERE order_status_id_fk = 1 AND book_id_fk LIKE ?";

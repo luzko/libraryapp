@@ -60,7 +60,7 @@
     <div class="masthead3">
         <div class="container-fluid  align-items-center">
             <div class="row justify-content-center ">
-                <form method="get" action="${pageContext.request.contextPath}/controller">
+                <form method="GET" action="${pageContext.request.contextPath}/controller">
                     <div class="jumbotron" style="margin-top: 0px;">
                         <nav class="navbar navbar-expand-lg navbar-light">
                             <div class="container">
@@ -136,7 +136,7 @@
                                     </td>
                                     <c:choose>
                                         <c:when test="${user.userStatus == 'ACTIVE'}">
-                                            <form action="${pageContext.request.contextPath}/controller" method="post">
+                                            <form action="${pageContext.request.contextPath}/controller" method="POST">
                                                 <input type="hidden" name="command" value="change_user_status"/>
                                                 <input type="hidden" name="login" value="${user.login}"/>
                                                 <input type="hidden" name="status" value="${user.userStatus}">
@@ -151,7 +151,7 @@
                                             </form>
                                         </c:when>
                                         <c:when test="${user.userStatus == 'BLOCKED'}">
-                                            <form action="${pageContext.request.contextPath}/controller" method="post">
+                                            <form action="${pageContext.request.contextPath}/controller" method="POST">
                                                 <input type="hidden" name="command" value="change_user_status"/>
                                                 <input type="hidden" name="login" value="${user.login}"/>
                                                 <input type="hidden" name="status" value="${user.userStatus}">

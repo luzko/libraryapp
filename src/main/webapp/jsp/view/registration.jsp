@@ -41,7 +41,7 @@
         <c:choose>
             <c:when test="${userRole == null}">
                 <form class="form-inline"
-                      method="POST" action="${pageContext.request.contextPath}/controller">
+                      method="GET" action="${pageContext.request.contextPath}/controller">
                     <input type="hidden" name="command" value="login_page"/>
                     <div>
                         <button type="submit" class="btn btn-primary js-scroll-trigger custom-button">
@@ -70,7 +70,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <form action="${pageContext.request.contextPath}/controller" method="post">
+                <form action="${pageContext.request.contextPath}/controller" method="POST">
                     <div class="form-group row">
                         <input type="hidden" name="command" value="registration"/>
                         <label class="col-sm-4 col-form-label float-sm-right" for="login" style="color: white">

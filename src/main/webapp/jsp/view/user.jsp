@@ -75,7 +75,7 @@
 
 <div class="modal fade" id="exampleModal" tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form class="form" action="${pageContext.request.contextPath}/controller" method="post">
+    <form class="form" action="${pageContext.request.contextPath}/controller" method="POST">
         <input type="hidden" name="command" value="send_message_admin"/>
         <input type="hidden" name="typeMessage" value="active"/>
         <div class="modal-dialog">
@@ -250,7 +250,7 @@
                             </div>
 
                             <form class="form-inline" action="${pageContext.request.contextPath}/images"
-                                  enctype="multipart/form-data" method="post">
+                                  enctype="multipart/form-data" method="POST">
                                 <input type="hidden" name="command" value="change_profile_image"/>
                                 <input type="file" name="image" accept="image/jpeg,image/png"
                                        class="btn btn-outline-secondary" required/>
@@ -276,7 +276,7 @@
                                 <br/>
                                 <div class="field">
                                     <form class="form-inline" action="${pageContext.request.contextPath}/controller"
-                                          method="post" style="margin-top: 5px;">
+                                          method="POST" style="margin-top: 5px;">
                                         <br/>
                                         <input type="hidden" name="command" value="change_profile_login"/>
 
@@ -310,7 +310,7 @@
                                 </div>
                                 <div class="field">
                                     <form class="form-inline" action="${pageContext.request.contextPath}/controller"
-                                          method="post">
+                                          method="POST">
                                         <br/>
                                         <input type="hidden" name="command" value="change_profile_name"/>
 
@@ -345,7 +345,7 @@
                                 </div>
                                 <div class="field">
                                     <form class="form-inline" action="${pageContext.request.contextPath}/controller"
-                                          method="post">
+                                          method="POST">
                                         <br/>
                                         <input type="hidden" name="command" value="change_profile_surname"/>
 
