@@ -30,10 +30,7 @@ public class ApproveOrderCommand implements Command {
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
         String userId = request.getParameter(RequestParameter.USER_ID);
         try {
-            if (orderService.isApprove(orderId, bookId, userId)) {
-                //request.getSession().setAttribute(AttributeName.ERROR_APPROVE,
-                //        ConfigurationManager.getMessageProperty(AttributeName.EMPTY));
-            } else {
+            if (!orderService.isApprove(orderId, bookId, userId)) {
                 String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_NOT_APPROVE_USER,
                         (String) request.getSession().getAttribute(AttributeName.LOCALE));
                 request.getSession().setAttribute(AttributeName.ERROR_APPROVE, attributeValue);

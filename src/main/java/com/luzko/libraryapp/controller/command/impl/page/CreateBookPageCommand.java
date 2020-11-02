@@ -33,8 +33,6 @@ public class CreateBookPageCommand implements Command {
                 List<Category> categoryList = Arrays.asList(Category.values());
                 request.getSession().setAttribute(AttributeName.ALL_CATEGORIES, categoryList);
             }
-            //request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, AttributeName.EMPTY);
-            //request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, AttributeName.EMPTY);
             request.setAttribute(RequestParameter.CREATE_TYPE, createType);
             router.setPagePath(PagePath.CREATE_BOOK);
         } catch (ServiceException e) {

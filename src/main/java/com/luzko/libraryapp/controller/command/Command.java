@@ -13,12 +13,12 @@ public interface Command {
 
     Router execute(HttpServletRequest request);
 
-    default void asdf(HttpServletRequest request) {
+    default void removeTempAttribute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Enumeration<String> attributeNames = session.getAttributeNames();
         while (attributeNames.hasMoreElements()) {
             String attributeName = attributeNames.nextElement();
-            if (attributeName.equals("ChangedSave")) {
+            if (AttributeName.tempAttributeList.contains(attributeName)) {
                 session.removeAttribute(attributeName);
             }
         }

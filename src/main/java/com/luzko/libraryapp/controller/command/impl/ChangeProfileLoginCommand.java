@@ -30,10 +30,8 @@ public class ChangeProfileLoginCommand implements Command {
                 String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_SAVE_CHANGES,
                         (String) request.getSession().getAttribute(AttributeName.LOCALE));
                 request.getSession().setAttribute(AttributeName.CHANGE_SAVED, attributeValue);
-                //request.getSession().setAttribute(RequestParameter.LOGIN_ERROR, RequestParameter.EMPTY);
                 request.getSession().setAttribute(AttributeName.LOGIN, newLogin);
             } else {
-                //request.getSession().setAttribute(AttributeName.CHANGE_SAVED, AttributeName.EMPTY);
                 String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_CHANGES,
                         (String) request.getSession().getAttribute(AttributeName.LOCALE));
                 request.getSession().setAttribute(AttributeName.LOGIN_ERROR, attributeValue);

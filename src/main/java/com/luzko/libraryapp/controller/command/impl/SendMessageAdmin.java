@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 public class SendMessageAdmin implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
-        asdf(request);
         Router router = new Router();
         String login = (String) request.getSession().getAttribute(AttributeName.LOGIN);
         String subject = request.getParameter(RequestParameter.SUBJECT);

@@ -30,12 +30,10 @@ public class CreateAuthorCommand implements Command {
                 String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_AUTHOR_CORRECT,
                         (String) request.getSession().getAttribute(AttributeName.LOCALE));
                 request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, attributeValue);
-                //request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
             } else {
                 String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_AUTHOR_DATA,
                         (String) request.getSession().getAttribute(AttributeName.LOCALE));
                 request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, attributeValue);
-                //request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
             }
             request.getSession().setAttribute(AttributeName.CREATE_TYPE, createType);
             router.setPagePath(PagePath.CREATE_BOOK);

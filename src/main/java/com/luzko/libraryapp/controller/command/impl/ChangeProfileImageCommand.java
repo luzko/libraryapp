@@ -41,8 +41,6 @@ public class ChangeProfileImageCommand implements Command {
             String fileName = defineFileName(request);
             if (userService.isChangeProfileImage(login, fileName)) {
                 request.getSession().setAttribute(AttributeName.AVATAR, fileName);
-                //request.getSession().setAttribute(AttributeName.AVATAR_ERROR,
-                //        ConfigurationManager.getMessageProperty(RequestParameter.EMPTY));
             } else {
                 String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_AVATAR_CHANGES,
                         (String) request.getSession().getAttribute(AttributeName.LOCALE));

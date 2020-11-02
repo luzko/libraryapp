@@ -7,8 +7,8 @@ import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.dao.ColumnName;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.BookService;
 import com.luzko.libraryapp.util.ConfigurationManager;
 import org.apache.logging.log4j.Level;
@@ -36,12 +36,10 @@ public class CreateBookCommand implements Command {
                     String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_CORRECT,
                             (String) request.getSession().getAttribute(AttributeName.LOCALE));
                     request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, attributeValue);
-                    //request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, RequestParameter.EMPTY);
                 } else {
                     String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_DATA,
                             (String) request.getSession().getAttribute(AttributeName.LOCALE));
                     request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, attributeValue);
-                    //request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, RequestParameter.EMPTY);
                     request.setAttribute(AttributeName.BOOK_PARAMETER, bookParameter);
                 }
                 request.getSession().setAttribute(AttributeName.CREATE_TYPE, createType);

@@ -29,12 +29,10 @@ public class CreateOrderCommand implements Command {
         long userId = (long) userIdObject;
         try {
             if (orderService.isCreateOrder(userId, bookId, typeOrder)) {
-                //request.getSession().setAttribute(AttributeName.ORDER_ERROR, RequestParameter.EMPTY);
                 String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_SUCCESS,
                         (String) request.getSession().getAttribute(AttributeName.LOCALE));
                 request.getSession().setAttribute(AttributeName.ORDER_SUCCESS, attributeValue);
             } else {
-                //request.getSession().setAttribute(AttributeName.ORDER_SUCCESS, RequestParameter.EMPTY);
                 String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_ERROR,
                         (String) request.getSession().getAttribute(AttributeName.LOCALE));
                 request.getSession().setAttribute(AttributeName.ORDER_ERROR, attributeValue);

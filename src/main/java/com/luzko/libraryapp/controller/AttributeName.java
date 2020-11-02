@@ -1,5 +1,7 @@
 package com.luzko.libraryapp.controller;
 
+import java.util.List;
+
 public class AttributeName {
     private AttributeName() {
 
@@ -73,4 +75,10 @@ public class AttributeName {
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String CONTENT_DISPOSITION = "Content-Disposition";
     public static final String CONTENT_VALUE = "inline; filename=\"%s\"";
+
+    public static final List<String> tempAttributeList = List.of(
+            ALL_AUTHORS, ALL_ORDERS, ALL_BOOKS, ALL_CATEGORIES, ALL_USERS, CHANGE_SAVED, CORRECT_DATA_MESSAGE,
+            ERROR_APPROVE, OVERVIEW_ERROR, AVATAR_ERROR, LOGIN_ERROR, NAME_ERROR, ERROR_MESSAGE,
+            ERROR_DATA_MESSAGE, BOOK_PARAMETER, ORDER_SUCCESS, ORDER_ERROR, PARAM_CONFIRM_ERROR
+    );
 }

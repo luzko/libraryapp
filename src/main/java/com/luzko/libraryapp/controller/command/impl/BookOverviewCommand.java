@@ -39,8 +39,6 @@ public class BookOverviewCommand implements Command {
                 request.getSession().setAttribute(AttributeName.OVERVIEW_ERROR, attributeValue);
                 router.setPagePath(PagePath.LIBRARY);
             }
-            //request.getSession().setAttribute(AttributeName.ORDER_ERROR, RequestParameter.EMPTY);
-            //request.getSession().setAttribute(AttributeName.ORDER_SUCCESS, RequestParameter.EMPTY);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in library page", e);
             router.setPagePath(PagePath.ERROR);
