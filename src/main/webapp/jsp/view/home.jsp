@@ -46,7 +46,7 @@
             </div>
         </form>
 
-        <form class="form-inline" action="${pageContext.request.contextPath}/controller" method="GET">
+        <form class="form-inline" action="${pageContext.request.contextPath}/controller" method="POST">
             <c:if test="${login != null}">
                 <c:choose>
                     <c:when test="${userRole == 'ADMIN'}">
