@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 public class UserPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
+        removeTempAttribute(request);
         Router router = new Router();
         UserStatus userStatus = (UserStatus) request.getSession().getAttribute(RequestParameter.USER_STATUS);
         request.getSession().setAttribute(AttributeName.TYPE_PROFILE_PAGE, AttributeValue.SEE_PROFILE_PAGE);

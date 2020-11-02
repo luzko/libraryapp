@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 public class HomePageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
+        removeTempAttribute(request);
         Router router = new Router();
         router.setPagePath(PagePath.HOME);
         return router;

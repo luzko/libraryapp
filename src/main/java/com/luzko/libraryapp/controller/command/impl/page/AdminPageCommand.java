@@ -20,6 +20,7 @@ public class AdminPageCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
+        removeTempAttribute(request);
         Router router = new Router();
         try {
             List<User> userList = defineUserList(request);

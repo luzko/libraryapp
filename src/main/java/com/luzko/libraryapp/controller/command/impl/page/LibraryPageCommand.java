@@ -20,6 +20,7 @@ public class LibraryPageCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
+        removeTempAttribute(request);
         Router router = new Router();
         try {
             List<Book> bookList = defineBookList(request);

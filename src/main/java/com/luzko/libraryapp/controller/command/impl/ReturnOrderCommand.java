@@ -21,7 +21,6 @@ public class ReturnOrderCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
-        asdf(request);
         Router router = new Router();
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
         String orderType = request.getParameter(RequestParameter.ORDER_TYPE);

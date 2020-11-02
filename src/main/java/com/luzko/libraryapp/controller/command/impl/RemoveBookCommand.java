@@ -18,7 +18,6 @@ public class RemoveBookCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
-        asdf(request);
         Router router = new Router();
         BookService bookService = ServiceFactory.getInstance().getBookService();
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
