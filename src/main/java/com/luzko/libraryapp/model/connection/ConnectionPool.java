@@ -25,7 +25,6 @@ public class ConnectionPool {
     private static final String DRIVER_NAME = "driver";
     private static final String URL = "url";
     private static final int POOL_SIZE = 8;
-
     private final Properties properties;
     private final BlockingQueue<ProxyConnection> availableConnection;
     private final Queue<ProxyConnection> givenConnection;
