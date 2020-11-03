@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
 
+@FunctionalInterface
 public interface Command {
     int RECORDS_PER_PAGE = 5;
 
