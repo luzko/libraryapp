@@ -20,7 +20,7 @@ import java.io.IOException;
  * The type Page security filter.
  */
 @WebFilter(urlPatterns = {"/jsp/view/*"}, initParams = {
-        @WebInitParam(name = "ERROR_STEP", value = "/jsp/error/errorstep.jsp")
+        @WebInitParam(name = "ERROR_STEP", value = "/jsp/error/error404.jsp")
 })
 public class PageSecurityFilter implements Filter {
     private static final String ERROR_STEP = "ERROR_STEP";

@@ -20,7 +20,7 @@ public class PagePath {
     public static final String ORDERS = "/jsp/view/orders.jsp";
 
     //error
-    public static final String ERROR = "/jsp/error/error.jsp";
-    public static final String ERROR_STEP = "/jsp/error/errorstep.jsp";
+    public static final String ERROR = "/jsp/error/error500.jsp";
+    public static final String ERROR_STEP = "/jsp/error/error404.jsp";
 }
 

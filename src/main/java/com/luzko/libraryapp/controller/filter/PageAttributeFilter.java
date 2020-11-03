@@ -18,7 +18,7 @@ import java.io.IOException;
  * The type Page attribute filter.
  */
 @WebFilter(urlPatterns = {"/jsp/view/*"}, initParams = {
-        @WebInitParam(name = "ERROR_STEP", value = "/jsp/error/errorstep.jsp")
+        @WebInitParam(name = "ERROR_STEP", value = "/jsp/error/error404.jsp")
 })
 public class PageAttributeFilter implements Filter {
     private String indexPath;
