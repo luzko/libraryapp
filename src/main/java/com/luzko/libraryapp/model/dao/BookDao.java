@@ -18,6 +18,8 @@ public interface BookDao extends BaseDao {
      */
     int findCount() throws DaoException;
 
+    int findCount(String searchName) throws DaoException;
+
     /**
      * Find part.
      *
@@ -27,6 +29,8 @@ public interface BookDao extends BaseDao {
      * @throws DaoException the dao exception
      */
     List<Book> findPartOfAll(int recordsShown, int recordsPerPage) throws DaoException;
+
+    List<Book> findByName(String searchName, int recordsShown, int recordsPerPage) throws DaoException;
 
     Optional<Book> findById(long bookId) throws DaoException;
 

@@ -32,7 +32,8 @@ public enum CommandType {
     RETURN_ORDER(new ReturnOrderCommand()),
     APPROVE_ORDER(new ApproveOrderCommand()),
     DENY_ORDER(new DenyOrderCommand()),
-    REMOVE_BOOK(new RemoveBookCommand());
+    REMOVE_BOOK(new RemoveBookCommand()),
+    FIND_BOOK(new FindBookCommand());
 
     private final Command command;
 

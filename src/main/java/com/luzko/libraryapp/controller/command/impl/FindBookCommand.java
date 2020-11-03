@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.controller.command.impl.page;
+package com.luzko.libraryapp.controller.command.impl;
 
 import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.AttributeValue;
@@ -19,22 +19,22 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
 
-public class LibraryPageCommand implements Command {
-    private static final Logger logger = LogManager.getLogger(LibraryPageCommand.class);
+public class FindBookCommand implements Command {
+    private static final Logger logger = LogManager.getLogger(FindBookCommand.class);
 
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
-        Object searchName = request.getSession().getAttribute(RequestParameter.SEARCH);
+        String searchName = request.getParameter(RequestParameter.SEARCH);
         try {
-            if(searchName != null) {
-                findBook(request, searchName);
-            } else {
-                List<Book> bookList = defineBookList(request);
+            if (searchName.isBlank()) {
+                request.getSession().removeAttribute(AttributeName.SEARCH);
+                List<Book> bookList = defineAllBookList(request);
                 request.getSession().setAttribute(AttributeName.ALL_BOOKS, bookList);
+            } else {
+                findBook(request, searchName);
             }
             router.setPagePath(PagePath.LIBRARY);
-            return router;
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in library page", e);
             router.setPagePath(PagePath.ERROR);
@@ -42,8 +42,8 @@ public class LibraryPageCommand implements Command {
         return router;
     }
 
-    private void findBook(HttpServletRequest request, Object searchNameObject) throws ServiceException {
-        String searchName = (String) searchNameObject;
+    private void findBook(HttpServletRequest request, String  searchName) throws ServiceException {
+        request.getSession().setAttribute(AttributeName.SEARCH, searchName);
         List<Book> bookList = defineSearchBookList(searchName, request);
         if(bookList.isEmpty()) {
             String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_NOT_FOUND,
@@ -54,7 +54,7 @@ public class LibraryPageCommand implements Command {
         }
     }
 
-    private List<Book> defineBookList(HttpServletRequest request) throws ServiceException {
+    private List<Book> defineAllBookList(HttpServletRequest request) throws ServiceException {
         BookService bookService = ServiceFactory.getInstance().getBookService();
         int countRecords = bookService.findCountRecords();
         int shownRecords = shownRecordsPagination(countRecords, request);

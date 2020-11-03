@@ -36,6 +36,21 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public int findCountRecords(String searchName) throws ServiceException {
+        logger.log(Level.INFO, "Find count search books");
+        int countRecords = 0;
+        BookDao bookDao = BookDaoImpl.getInstance();
+        if (BookValidator.isValidSearchValue(searchName)) {
+            try {
+                countRecords = bookDao.findCount(searchName);
+            } catch (DaoException e) {
+                throw new ServiceException("Find count search books error");
+            }
+        }
+        return countRecords;
+    }
+
+    @Override
     public List<Book> findPartOfAll(int recordsShown, int recordsPerPage) throws ServiceException {
         logger.log(Level.INFO, "Find part execute");
         BookDao bookDao = BookDaoImpl.getInstance();
@@ -43,6 +58,17 @@ public class BookServiceImpl implements BookService {
             return bookDao.findPartOfAll(recordsShown, recordsPerPage);
         } catch (DaoException e) {
             throw new ServiceException("Find part error", e);
+        }
+    }
+
+    @Override
+    public List<Book> findByName(String searchName, int recordsShown, int recordsPerPage) throws ServiceException {
+        logger.log(Level.INFO, "Find by name execute");
+        BookDao bookDao = BookDaoImpl.getInstance();
+        try {
+            return bookDao.findByName(searchName, recordsShown, recordsPerPage);
+        } catch (DaoException e) {
+            throw new ServiceException("Find by name error", e);
         }
     }
 

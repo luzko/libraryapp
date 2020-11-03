@@ -1,15 +1,19 @@
 package com.luzko.libraryapp.model.dao.impl;
 
+import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.builder.BookBuilder;
 import com.luzko.libraryapp.model.connection.ConnectionPool;
-import com.luzko.libraryapp.exception.DaoException;
+import com.luzko.libraryapp.model.dao.BookDao;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.StatementSql;
-import com.luzko.libraryapp.model.dao.BookDao;
 import com.luzko.libraryapp.model.entity.Book;
 import com.luzko.libraryapp.model.entity.Category;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +23,7 @@ import java.util.Optional;
  */
 public class BookDaoImpl implements BookDao {
     private static final BookDao INSTANCE = new BookDaoImpl();
+    private static final String PERCENT = "%";
 
     private BookDaoImpl() {
 
@@ -41,11 +46,38 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
+    public int findCount(String searchName) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_SEARCH_BOOK)) {
+            statement.setString(1, PERCENT + searchName + PERCENT);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(ColumnName.COUNT);
+        } catch (SQLException e) {
+            throw new DaoException("Find count records", e);
+        }
+    }
+
+    @Override
     public List<Book> findPartOfAll(int recordsShown, int recordsPerPage) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PART_BOOKS)) {
             statement.setInt(1, recordsPerPage);
             statement.setInt(2, recordsShown);
+            ResultSet resultSet = statement.executeQuery();
+            return createBooksFromResultSet(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException("Find all error", e);
+        }
+    }
+
+    @Override
+    public List<Book> findByName(String searchName, int recordsShown, int recordsPerPage) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_BY_NAME)) {
+            statement.setString(1, PERCENT + searchName + PERCENT);
+            statement.setInt(2, recordsPerPage);
+            statement.setInt(3, recordsShown);
             ResultSet resultSet = statement.executeQuery();
             return createBooksFromResultSet(resultSet);
         } catch (SQLException e) {

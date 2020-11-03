@@ -55,6 +55,14 @@ public class StatementSql {
                     "WHERE b.enabled = TRUE GROUP BY b.book_id ORDER BY title " +
                     "LIMIT ? OFFSET ?";
 
+    public static final String FIND_BY_NAME =
+            "SELECT b.book_id, b.title, b.category_id_fk, " +
+                    "GROUP_CONCAT(DISTINCT a.author ORDER BY a.author SEPARATOR ', ') authors FROM books b " +
+                    "LEFT JOIN book_authors ba on b.book_id = ba.book_id_fk " +
+                    "LEFT JOIN authors a on a.author_id = ba.author_id_fk " +
+                    "WHERE b.enabled = TRUE AND title LIKE ? GROUP BY b.book_id ORDER BY title " +
+                    "LIMIT ? OFFSET ?";
+
     public static final String FIND_BOOK_BY_ID =
             "SELECT b.book_id, b.title, b.year, b.pages, b.description, b.number_copies, b.category_id_fk, " +
                     "GROUP_CONCAT(DISTINCT a.author ORDER BY a.author SEPARATOR ', ') authors FROM books b " +
@@ -73,6 +81,9 @@ public class StatementSql {
 
     public static final String FIND_COUNT_BOOK =
             "SELECT count(*) count FROM books WHERE enabled = TRUE";
+
+    public static final String FIND_COUNT_SEARCH_BOOK =
+            "SELECT count(*) count FROM books WHERE enabled = TRUE AND title LIKE ?";
 
     public static final String ADD_BOOK =
             "INSERT INTO books(title, year, pages, description, number_copies, category_id_fk) " +

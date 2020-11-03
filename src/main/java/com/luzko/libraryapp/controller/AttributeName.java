@@ -41,11 +41,12 @@ public class AttributeName {
     //book
     public static final String ALL_BOOKS = "allBooks";
     public static final String BOOK = "book";
-
+    public static final String SEARCH = "search";
     public static final String OVERVIEW_ERROR = "overviewError";
     public static final String ALL_CATEGORIES = "allCategories";
     public static final String BOOK_PARAMETER = "bookParameter";
     public static final String CORRECT_BOOK_MESSAGE = "createBookSuccess";
+    public static final String NOT_FOUND_BOOKS = "notFoundBooks";
 
     //author
     public static final String ALL_AUTHORS = "allAuthors";
@@ -78,7 +79,7 @@ public class AttributeName {
 
     public static final List<String> tempAttributeList = List.of(
             ALL_AUTHORS, ALL_ORDERS, ALL_BOOKS, ALL_CATEGORIES, ALL_USERS, CHANGE_SAVED, CORRECT_DATA_MESSAGE,
-            ERROR_APPROVE, OVERVIEW_ERROR, AVATAR_ERROR, LOGIN_ERROR, NAME_ERROR, ERROR_MESSAGE,
+            ERROR_APPROVE, OVERVIEW_ERROR, AVATAR_ERROR, LOGIN_ERROR, NAME_ERROR, ERROR_MESSAGE, SEARCH,
             ERROR_DATA_MESSAGE, BOOK_PARAMETER, ORDER_SUCCESS, ORDER_ERROR, PARAM_CONFIRM_ERROR
     );
 }

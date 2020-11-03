@@ -15,6 +15,7 @@ public final class BookValidator {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 99;
     private static final String EMPTY_VALUE = "";
+    private static final String SEARCH_PATTERN = "^[\\p{L} ]{0,25}$";
     private static final String NAME_PATTERN = "^[\\p{L} ]{3,25}$";
     private static final String TITLE_PATTERN = "^[\\p{L} ]{5,25}$";
     private static final String XSS_PATTERN = "(?i)<script.*?>.*?</script.*?>";
@@ -80,6 +81,14 @@ public final class BookValidator {
             isTitleCorrect = title.matches(TITLE_PATTERN);
         }
         return isTitleCorrect;
+    }
+
+    public static boolean isValidSearchValue(String searchName) {
+        boolean isSearchValueCorrect = false;
+        if (searchName != null) {
+            isSearchValueCorrect = searchName.matches(SEARCH_PATTERN) && !searchName.matches(XSS_PATTERN);
+        }
+        return isSearchValueCorrect;
     }
 
     private static boolean isValidDescription(String description) {

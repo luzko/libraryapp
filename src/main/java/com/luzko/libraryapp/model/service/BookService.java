@@ -19,6 +19,8 @@ public interface BookService {
      */
     int findCountRecords() throws ServiceException;
 
+    int findCountRecords(String searchName) throws ServiceException;
+
     /**
      * Find part.
      *
@@ -28,6 +30,8 @@ public interface BookService {
      * @throws ServiceException the service exception
      */
     List<Book> findPartOfAll(int recordsShown, int recordsPerPage) throws ServiceException;
+
+    List<Book> findByName(String searchName, int recordsShown, int recordsPerPage) throws ServiceException;
 
     /**
      * Find by id.

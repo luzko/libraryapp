@@ -34,7 +34,7 @@ public class ChangeProfileSurnameCommand implements Command {
             } else {
                 String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_SURNAME_CHANGES,
                         (String) request.getSession().getAttribute(AttributeName.LOCALE));
-                request.getSession().setAttribute(AttributeName.NAME_ERROR, attributeValue);
+                request.getSession().setAttribute(AttributeName.SURNAME_ERROR, attributeValue);
             }
             router.setPagePath(PagePath.USER);
             router.setRedirect();

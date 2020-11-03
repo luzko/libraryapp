@@ -123,7 +123,7 @@
                         <div class="form-group row">
                             <div class="form-group row">
                                 <form action="${pageContext.request.contextPath}/controller" method="POST">
-                                    <input type="hidden" name="command" value="search_book"/>
+                                    <input type="hidden" name="command" value="find_book"/>
                                     <div class="col-sm-8">
                                         <input type="text" name="search" id="search" class="float-sm-left"
                                                style="width: 220px; margin-left: 15px;"
@@ -134,6 +134,10 @@
                                     </div>
                                 </form>
                             </div>
+                            <div style="color: red; margin-left: 10px;">
+                                    ${notFoundBooks}
+                            </div>
+
                         </div>
                     </c:if>
                     <div style="color: red;">

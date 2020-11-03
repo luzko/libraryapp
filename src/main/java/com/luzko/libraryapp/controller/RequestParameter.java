@@ -26,6 +26,7 @@ public class RequestParameter {
     public static final String NUMBER_COPIES = "number";
     public static final String CATEGORY = "category";
     public static final String AUTHOR = "author";
+    public static final String SEARCH = "search";
 
     //message
     public static final String SUBJECT = "subject";

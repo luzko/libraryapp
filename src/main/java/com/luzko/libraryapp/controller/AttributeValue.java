@@ -31,5 +31,6 @@ public class AttributeValue {
     public static final String PATH_ORDER_ERROR = "order.error";
     public static final String PATH_NOT_APPROVE_USER = "order.approve.error";
     public static final String PATH_ORDER_NOT_FOUND = "order.not.found";
+    public static final String PATH_BOOK_NOT_FOUND = "book.not.found";
     public static final String PATH_AVATAR_CHANGES = "avatar.error";
 }
