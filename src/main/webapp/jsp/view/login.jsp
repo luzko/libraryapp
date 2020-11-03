@@ -50,7 +50,7 @@
     <div class="container">
         <div class="row" style="margin-top: 70px;">
             <div class="col-lg-8 mx-auto">
-                <form action="${pageContext.request.contextPath}/controller" method="post">
+                <form action="${pageContext.request.contextPath}/controller" method="POST">
                     <div class="form-group row">
                         <input type="hidden" name="command" value="login"/>
                         <label class="col-sm-4 col-form-label float-sm-right" for="login" style="color: white">

@@ -60,7 +60,7 @@
     <div class="masthead3">
         <div class="container-fluid  align-items-center">
             <div class="row justify-content-center ">
-                <form method="GET" action="${pageContext.request.contextPath}/controller">
+                <%--<form method="GET" action="${pageContext.request.contextPath}/controller">--%>
                     <div class="jumbotron" style="margin-top: 0px;">
                         <nav class="navbar navbar-expand-lg navbar-light">
                             <div class="container">
@@ -232,7 +232,7 @@
                             </ul>
                         </div>
                     </div>
-                </form>
+                <%--</form>--%>
             </div>
             <br>
         </div>

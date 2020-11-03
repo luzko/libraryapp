@@ -88,7 +88,7 @@
     <div class="masthead3">
         <div class="container-fluid  align-items-center">
             <div class="row justify-content-center ">
-                <form method="GET" action="${pageContext.request.contextPath}/controller">
+                <%--<form method="GET" action="${pageContext.request.contextPath}/controller">--%>
                     <div class="jumbotron" style="margin-top: 0px;">
                         <c:if test="${userRole == 'ADMIN'}">
                             <nav class="navbar navbar-expand-lg navbar-light">
@@ -121,6 +121,24 @@
                         <div style="color: red;">
                             ${overviewError}
                         </div>
+                        <c:if test="${userRole != 'ADMIN'}">
+                            <div class="form-group row">
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label float-sm-right" for="name" style="color: white">
+                                        <fmt:message key="label.name"/>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="name" id="name" class="float-sm-left" style="width: 220px"
+                                               pattern="^[\p{L}]{3,25}$"
+                                               maxlength="45"
+                                               title="<fmt:message key="invalid.name"/>"
+                                               required
+                                               value="${registrationParameters.get("name")}"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </c:if>
                         <div class="d-flex justify-content-around"><h2><fmt:message key="text.site.books"/></h2></div>
                         <table class="table table-bordered table-hover">
                             <thead class="thead-dark">
@@ -235,7 +253,7 @@
                             </ul>
                         </div>
                     </div>
-                </form>
+                <%--</form>--%>
             </div>
             <br>
         </div>

@@ -61,7 +61,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <form action="${pageContext.request.contextPath}/controller" method="post">
+                <form action="${pageContext.request.contextPath}/controller" method="POST">
                     <c:choose>
                         <c:when test="${createType == 'author'}">
                             <input type="hidden" name="createType" value="author">
