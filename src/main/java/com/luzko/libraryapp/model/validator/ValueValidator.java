@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.validator;
+package com.luzko.libraryapp.model.validator;
 
 /**
  * The type Value validator.

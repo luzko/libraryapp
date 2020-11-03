@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.validator;
+package com.luzko.libraryapp.model.validator;
 
 import com.luzko.libraryapp.model.dao.ColumnName;
 import org.testng.annotations.AfterClass;

@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.validator;
+package com.luzko.libraryapp.model.validator;
 
 import org.testng.annotations.Test;
 
