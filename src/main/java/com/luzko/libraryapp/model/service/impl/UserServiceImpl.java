@@ -174,7 +174,7 @@ public class UserServiceImpl implements UserService {
     public boolean isCodeConfirmCorrect(String login, String codeConfirm) throws ServiceException {
         logger.log(Level.INFO, "Check code confirmation execute: {}, {}", login, codeConfirm);
         boolean isCodeConfirmCorrect = false;
-        if (ValueValidator.isValidValue(codeConfirm)) {
+        if (ValueValidator.isValidConfirmCode(codeConfirm)) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
                 String code = userDao.findCodeConfirmByLogin(login);

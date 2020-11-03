@@ -74,7 +74,12 @@
                                         <div class="form-group">
                                             <label for="code" class="form-control-label"><fmt:message
                                                     key="text.confirm.code"/></label>
-                                            <input type="text" class="form-control" id="code" name="code">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="code"
+                                                   name="code"
+                                                   pattern="^[\p{L} ]{5,20}$"
+                                                   maxlength="20">
                                         </div>
                                     </div>
                                     <div class="modal-footer">

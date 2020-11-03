@@ -15,7 +15,7 @@ public enum CommandType {
     LIBRARY_PAGE(new LibraryPageCommand()),
     CREATE_BOOK_PAGE(new CreateBookPageCommand()),
     ORDERS_PAGE(new OrderPageCommand()),
-    LOGIN(request -> new Router(PagePath.LOGIN)),
+    LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
     REGISTRATION(new RegistrationCommand()),
     LOCALE(new ChangeLocaleCommand()),

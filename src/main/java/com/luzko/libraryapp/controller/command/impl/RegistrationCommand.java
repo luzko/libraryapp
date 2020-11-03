@@ -70,7 +70,7 @@ public class RegistrationCommand implements Command {
         registrationParameter.put(ColumnName.NAME, request.getParameter(RequestParameter.NAME).trim());
         registrationParameter.put(ColumnName.SURNAME, request.getParameter(RequestParameter.SURNAME).trim());
         registrationParameter.put(ColumnName.EMAIL, request.getParameter(RequestParameter.EMAIL).trim());
-        registrationParameter.put(ColumnName.CONFIRM_CODE, CodeGenerator.generate());
+        registrationParameter.put(ColumnName.CONFIRM_CODE, CodeGenerator.generateCodeConfirm());
         return registrationParameter;
     }
 }

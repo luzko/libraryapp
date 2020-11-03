@@ -17,6 +17,10 @@ public final class CodeGenerator {
      *
      * @return the string
      */
+    public static String generateCodeConfirm() {
+        return generate().substring(0, 10);
+    }
+
     public static String generate() {
         UUID confirmCodeUuid = Generators.randomBasedGenerator().generate();
         return confirmCodeUuid.toString().replaceAll("-", "");
