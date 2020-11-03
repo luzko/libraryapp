@@ -51,8 +51,6 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, PERCENT + searchName + PERCENT);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
-            System.out.println("00");
-            System.out.println(resultSet.getInt(ColumnName.COUNT));
             return resultSet.getInt(ColumnName.COUNT);
         } catch (SQLException e) {
             throw new DaoException("Find count records", e);
