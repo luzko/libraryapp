@@ -29,14 +29,14 @@ public class FindBookCommand implements Command {
         try {
             if (searchName.isBlank()) {
                 request.getSession().removeAttribute(AttributeName.SEARCH);
-                List<Book> bookList = defineAllBookList(request);
+                List<Book> bookList = defineBookList(request);
                 request.getSession().setAttribute(AttributeName.ALL_BOOKS, bookList);
             } else {
                 findBook(request, searchName);
-            }
+        }
             router.setPagePath(PagePath.LIBRARY);
         } catch (ServiceException e) {
-            logger.log(Level.ERROR, "Error in library page", e);
+            logger.log(Level.ERROR, "Error in find book", e);
             router.setPagePath(PagePath.ERROR);
         }
         return router;
@@ -54,7 +54,7 @@ public class FindBookCommand implements Command {
         }
     }
 
-    private List<Book> defineAllBookList(HttpServletRequest request) throws ServiceException {
+    private List<Book> defineBookList(HttpServletRequest request) throws ServiceException {
         BookService bookService = ServiceFactory.getInstance().getBookService();
         int countRecords = bookService.findCountRecords();
         int shownRecords = shownRecordsPagination(countRecords, request);

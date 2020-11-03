@@ -18,6 +18,8 @@ public interface UserDao extends BaseDao {
      */
     int findCount() throws DaoException;
 
+    int findCount(String searchName) throws DaoException;
+
     /**
      * Find part.
      *
@@ -27,6 +29,8 @@ public interface UserDao extends BaseDao {
      * @throws DaoException the dao exception
      */
     List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws DaoException;
+
+    List<User> findByLogin(String searchName, int recordsShown, int recordsPerPage) throws DaoException;
 
     /**
      * Find password by login.

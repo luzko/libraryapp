@@ -39,9 +39,8 @@ public class LibraryPageCommand implements Command {
         return router;
     }
 
-    private void findBook(HttpServletRequest request, Object searchNameObject) throws ServiceException {
-        String searchName = (String) searchNameObject;
-        List<Book> bookList = defineSearchBookList(searchName, request);
+    private void findBook(HttpServletRequest request, Object searchName) throws ServiceException {
+        List<Book> bookList = defineSearchBookList((String) searchName, request);
         request.getSession().setAttribute(AttributeName.ALL_BOOKS, bookList);
     }
 

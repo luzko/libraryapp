@@ -1,7 +1,36 @@
 package com.luzko.libraryapp.controller.command;
 
-import com.luzko.libraryapp.controller.command.impl.*;
-import com.luzko.libraryapp.controller.command.impl.page.*;
+import com.luzko.libraryapp.controller.command.impl.ApproveOrderCommand;
+import com.luzko.libraryapp.controller.command.impl.BookOverviewCommand;
+import com.luzko.libraryapp.controller.command.impl.CancelOrderCommand;
+import com.luzko.libraryapp.controller.command.impl.ChangeLocaleCommand;
+import com.luzko.libraryapp.controller.command.impl.ChangeProfileImageCommand;
+import com.luzko.libraryapp.controller.command.impl.ChangeProfileLoginCommand;
+import com.luzko.libraryapp.controller.command.impl.ChangeProfileNameCommand;
+import com.luzko.libraryapp.controller.command.impl.ChangeProfileSurnameCommand;
+import com.luzko.libraryapp.controller.command.impl.ChangeUserStatusCommand;
+import com.luzko.libraryapp.controller.command.impl.ConfirmCommand;
+import com.luzko.libraryapp.controller.command.impl.CreateAuthorCommand;
+import com.luzko.libraryapp.controller.command.impl.CreateBookCommand;
+import com.luzko.libraryapp.controller.command.impl.CreateOrderCommand;
+import com.luzko.libraryapp.controller.command.impl.DenyOrderCommand;
+import com.luzko.libraryapp.controller.command.impl.FindBookCommand;
+import com.luzko.libraryapp.controller.command.impl.FindUserCommand;
+import com.luzko.libraryapp.controller.command.impl.LoginCommand;
+import com.luzko.libraryapp.controller.command.impl.LogoutCommand;
+import com.luzko.libraryapp.controller.command.impl.RegistrationCommand;
+import com.luzko.libraryapp.controller.command.impl.RemoveBookCommand;
+import com.luzko.libraryapp.controller.command.impl.ReturnOrderCommand;
+import com.luzko.libraryapp.controller.command.impl.SendMessageAdmin;
+import com.luzko.libraryapp.controller.command.impl.page.AdminPageCommand;
+import com.luzko.libraryapp.controller.command.impl.page.CreateBookPageCommand;
+import com.luzko.libraryapp.controller.command.impl.page.HomePageCommand;
+import com.luzko.libraryapp.controller.command.impl.page.LibraryPageCommand;
+import com.luzko.libraryapp.controller.command.impl.page.LoginPageCommand;
+import com.luzko.libraryapp.controller.command.impl.page.OrderPageCommand;
+import com.luzko.libraryapp.controller.command.impl.page.ProfileSettingPageCommand;
+import com.luzko.libraryapp.controller.command.impl.page.RegistrationPageCommand;
+import com.luzko.libraryapp.controller.command.impl.page.UserPageCommand;
 
 public enum CommandType {
     LOGIN_PAGE(new LoginPageCommand()),
@@ -33,7 +62,8 @@ public enum CommandType {
     APPROVE_ORDER(new ApproveOrderCommand()),
     DENY_ORDER(new DenyOrderCommand()),
     REMOVE_BOOK(new RemoveBookCommand()),
-    FIND_BOOK(new FindBookCommand());
+    FIND_BOOK(new FindBookCommand()),
+    FIND_USER(new FindUserCommand());
 
     private final Command command;
 

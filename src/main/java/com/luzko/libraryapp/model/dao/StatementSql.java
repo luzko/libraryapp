@@ -28,8 +28,16 @@ public class StatementSql {
                     "FROM users WHERE role_id_fk != 1 ORDER BY role_id_fk " +
                     "LIMIT ? OFFSET ?";
 
+    public static final String FIND_USERS =
+            "SELECT user_id, login, role_id_fk, name, surname, email, user_status_id_fk, avatar " +
+                    "FROM users WHERE role_id_fk != 1 AND login LIKE ? ORDER BY role_id_fk " +
+                    "LIMIT ? OFFSET ?";
+
     public static final String FIND_COUNT_USER =
             "SELECT count(*) count FROM users WHERE role_id_fk != 1";
+
+    public static final String FIND_COUNT_SEARCH_USER =
+            "SELECT count(*) count FROM users WHERE role_id_fk != 1 AND login LIKE ?";
 
     public static final String CHANGE_USER_STATUS =
             "UPDATE users SET user_status_id_fk = ? WHERE login LIKE ?";

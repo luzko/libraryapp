@@ -39,6 +39,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int findCount(String searchName) throws ServiceException {
+        logger.log(Level.INFO, "Find count users");
+        int countRecords = 0;
+        UserDao userDao = UserDaoImpl.getInstance();
+        if(UserValidator.isLoginSearchValid(searchName)) {
+            try {
+                countRecords = userDao.findCount(searchName);
+            } catch (DaoException e) {
+                throw new ServiceException("Find count search users error");
+            }
+        }
+        return countRecords;
+    }
+
+    @Override
     public List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws ServiceException {
         logger.log(Level.INFO, "Find part execute");
         UserDao userDao = UserDaoImpl.getInstance();
@@ -46,6 +61,17 @@ public class UserServiceImpl implements UserService {
             return userDao.findPartOfAll(recordsShown, recordsPerPage);
         } catch (DaoException e) {
             throw new ServiceException("Find part error", e);
+        }
+    }
+
+    @Override
+    public List<User> findByLogin(String searchName, int recordsShown, int recordsPerPage) throws ServiceException {
+        logger.log(Level.INFO, "Find users execute");
+        UserDao userDao = UserDaoImpl.getInstance();
+        try {
+            return userDao.findByLogin(searchName, recordsShown, recordsPerPage);
+        } catch (DaoException e) {
+            throw new ServiceException("Find users error", e);
         }
     }
 

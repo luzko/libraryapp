@@ -2,6 +2,7 @@ package com.luzko.libraryapp.controller.command.impl.page;
 
 import com.luzko.libraryapp.controller.AttributeName;
 import com.luzko.libraryapp.controller.PagePath;
+import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.exception.ServiceException;
@@ -20,11 +21,15 @@ public class AdminPageCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
-        removeTempAttribute(request);
         Router router = new Router();
+        Object searchName = request.getSession().getAttribute(RequestParameter.SEARCH_USER);
         try {
-            List<User> userList = defineUserList(request);
-            request.setAttribute(AttributeName.ALL_USERS, userList);
+            if (searchName == null) {
+                List<User> userList = defineUserList(request);
+                request.setAttribute(AttributeName.ALL_USERS, userList);
+            } else {
+                findUser(request, searchName);
+            }
             router.setPagePath(PagePath.ADMIN);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in admin page", e);
@@ -38,5 +43,17 @@ public class AdminPageCommand implements Command {
         int countRecords = userService.findCount();
         int shownRecords = shownRecordsPagination(countRecords, request);
         return userService.findPartOfAll(shownRecords, RECORDS_PER_PAGE);
+    }
+
+    private void findUser(HttpServletRequest request, Object searchName) throws ServiceException {
+        List<User> userList = defineSearchUserList((String) searchName, request);
+        request.setAttribute(AttributeName.ALL_USERS, userList);
+    }
+
+    private List<User> defineSearchUserList(String searchName, HttpServletRequest request) throws ServiceException {
+        UserService userService = ServiceFactory.getInstance().getUserService();
+        int countRecords = userService.findCount(searchName);
+        int shownRecords = shownRecordsPagination(countRecords, request);
+        return userService.findByLogin(searchName, shownRecords, RECORDS_PER_PAGE);
     }
 }

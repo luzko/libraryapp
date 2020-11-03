@@ -22,6 +22,7 @@ import java.util.Optional;
  */
 public class UserDaoImpl implements UserDao {
     private static final UserDao INSTANCE = new UserDaoImpl();
+    private static final String PERCENT = "%";
 
     private UserDaoImpl() {
 
@@ -44,11 +45,40 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public int findCount(String searchName) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_SEARCH_USER)){
+            statement.setString(1, PERCENT + searchName + PERCENT);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            System.out.println("00");
+            System.out.println(resultSet.getInt(ColumnName.COUNT));
+            return resultSet.getInt(ColumnName.COUNT);
+        } catch (SQLException e) {
+            throw new DaoException("Find count records", e);
+        }
+    }
+
+    @Override
     public List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_PART_USERS)) {
             statement.setInt(1, recordsPerPage);
             statement.setInt(2, recordsShown);
+            ResultSet resultSet = statement.executeQuery();
+            return createUsersFromResultSet(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException("Find all error", e);
+        }
+    }
+
+    @Override
+    public List<User> findByLogin(String searchName, int recordsShown, int recordsPerPage) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_USERS)) {
+            statement.setString(1, PERCENT + searchName + PERCENT);
+            statement.setInt(2, recordsPerPage);
+            statement.setInt(3, recordsShown);
             ResultSet resultSet = statement.executeQuery();
             return createUsersFromResultSet(resultSet);
         } catch (SQLException e) {

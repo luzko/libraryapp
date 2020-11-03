@@ -30,6 +30,8 @@ public class AttributeName {
     public static final String USER_ROLE = "userRole";
     public static final String REGISTRATION_PARAMETER = "registrationParameters";
     public static final String AVATAR = "avatar";
+    public static final String SEARCH_USER = "userSearch";
+    public static final String NOT_FOUND_USERS = "notFoundUsers";
 
     //profile
     public static final String TYPE_PROFILE_PAGE = "type";
@@ -79,7 +81,7 @@ public class AttributeName {
 
     public static final List<String> tempAttributeList = List.of(
             ALL_AUTHORS, ALL_ORDERS, ALL_BOOKS, ALL_CATEGORIES, ALL_USERS, CHANGE_SAVED, CORRECT_DATA_MESSAGE,
-            ERROR_APPROVE, OVERVIEW_ERROR, AVATAR_ERROR, LOGIN_ERROR, NAME_ERROR, ERROR_MESSAGE, SEARCH,
-            ERROR_DATA_MESSAGE, BOOK_PARAMETER, ORDER_SUCCESS, ORDER_ERROR, PARAM_CONFIRM_ERROR
+            ERROR_APPROVE, OVERVIEW_ERROR, AVATAR_ERROR, LOGIN_ERROR, NAME_ERROR, ERROR_MESSAGE, SEARCH_USER,
+            ERROR_DATA_MESSAGE, BOOK_PARAMETER, ORDER_SUCCESS, ORDER_ERROR, PARAM_CONFIRM_ERROR, SEARCH
     );
 }

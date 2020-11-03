@@ -16,6 +16,7 @@ public class RequestParameter {
     public static final String USER_STATUS = "status";
     public static final String PASSWORD = "password";
     public static final String EMAIL = "email";
+    public static final String SEARCH_USER = "userSearch";
 
     //book
     public static final String BOOK_ID = "book_id";

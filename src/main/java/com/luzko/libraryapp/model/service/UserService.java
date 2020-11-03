@@ -19,6 +19,8 @@ public interface UserService {
      */
     int findCount() throws ServiceException;
 
+    int findCount(String searchName) throws ServiceException;
+
     /**
      * Find part.
      *
@@ -26,6 +28,8 @@ public interface UserService {
      * @throws ServiceException the service exception
      */
     List<User> findPartOfAll(int recordsShown, int recordsPerPage) throws ServiceException;
+
+    List<User> findByLogin(String searchName, int recordsShown, int recordsPerPage) throws ServiceException;
 
     /**
      * Verify user.
