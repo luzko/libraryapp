@@ -67,12 +67,30 @@
                                 <form class="form-inline" name="Simple"
                                       action="${pageContext.request.contextPath}/controller" method="GET">
                                     <input type="hidden" name="command" value="registration_page"/>
-                                    <button type="submit" class="btn btn-outline-secondary"><fmt:message
+                                    <button type="submit" class="btn btn-outline-secondary" style="height: 50px;"><fmt:message
                                             key="submit.new.librarian"/>
                                     </button>
                                 </form>
                             </div>
                         </nav>
+                        <div class="form-group row">
+                            <div class="form-group row">
+                                <form action="${pageContext.request.contextPath}/controller" method="POST">
+                                    <input type="hidden" name="command" value="find_user"/>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="userSearch" class="float-sm-left"
+                                               style="width: 220px; margin-left: 15px; margin-top: 20px;"
+                                               pattern="^[\w.]{5,20}$"
+                                               maxlength="20"
+                                               title="<fmt:message key="invalid.search"/>"
+                                        />
+                                    </div>
+                                </form>
+                            </div>
+                            <div style="color: red; margin-left: 10px;">
+                                ${notFoundBooks}
+                            </div>
+                        </div>
                         <div class="d-flex justify-content-around"><h2><fmt:message key="text.site.users"/></h2></div>
                         <table class="table table-bordered table-hover">
                             <thead class="thead-dark">

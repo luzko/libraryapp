@@ -137,7 +137,6 @@
                             <div style="color: red; margin-left: 10px;">
                                     ${notFoundBooks}
                             </div>
-
                         </div>
                     </c:if>
                     <div style="color: red;">
