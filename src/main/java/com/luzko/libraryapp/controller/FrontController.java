@@ -43,7 +43,6 @@ public class FrontController extends HttpServlet {
         } else {
             router = new Router(PagePath.ERROR);
         }
-
         if (router.getRouteType().equals(Router.RouteType.FORWARD)) {
             request.getRequestDispatcher(router.getPagePath()).forward(request, response);
         } else {
