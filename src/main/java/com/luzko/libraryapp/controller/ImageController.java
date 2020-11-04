@@ -48,7 +48,6 @@ public class ImageController extends HttpServlet {
                 router = new Router(PagePath.ERROR);
             }
         }
-
         if (router.getRouteType().equals(Router.RouteType.FORWARD)) {
             request.getRequestDispatcher(router.getPagePath()).forward(request, response);
         } else if (router.getRouteType().equals(Router.RouteType.REDIRECT)) {

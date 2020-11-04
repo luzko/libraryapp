@@ -1,7 +1,6 @@
 package com.luzko.libraryapp.controller.listener;
 
 import com.luzko.libraryapp.controller.AttributeName;
-import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.exception.ServiceException;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.UserService;
