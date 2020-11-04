@@ -14,17 +14,17 @@ public enum UserStatus {
         this.localeName = localeName;
     }
 
+    public static Optional<UserStatus> defineStatusById(int id) {
+        return Arrays.stream(UserStatus.values())
+                .filter(userStatus -> userStatus.defineId() == id)
+                .findFirst();
+    }
+
     public String getLocaleName() {
         return localeName;
     }
 
     public int defineId() {
         return this.ordinal() + 1;
-    }
-
-    public static Optional<UserStatus> defineStatusById(int id) {
-        return Arrays.stream(UserStatus.values())
-                .filter(userStatus -> userStatus.defineId() == id)
-                .findFirst();
     }
 }

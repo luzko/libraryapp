@@ -16,17 +16,17 @@ public enum OrderStatus {
         this.localeName = localeName;
     }
 
+    public static Optional<OrderStatus> defineOrderStatusById(int id) {
+        return Arrays.stream(OrderStatus.values())
+                .filter(orderStatus -> orderStatus.defineId() == id)
+                .findFirst();
+    }
+
     public String getLocaleName() {
         return localeName;
     }
 
     public int defineId() {
         return this.ordinal() + 1;
-    }
-
-    public static Optional<OrderStatus> defineOrderStatusById(int id) {
-        return Arrays.stream(OrderStatus.values())
-                .filter(orderStatus -> orderStatus.defineId() == id)
-                .findFirst();
     }
 }

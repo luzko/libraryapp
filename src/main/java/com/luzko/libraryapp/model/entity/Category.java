@@ -17,17 +17,17 @@ public enum Category {
         this.localeName = localName;
     }
 
+    public static Optional<Category> defineCategoryById(int id) {
+        return Arrays.stream(Category.values())
+                .filter(category -> category.defineId() == id)
+                .findFirst();
+    }
+
     public String getLocaleName() {
         return localeName;
     }
 
     public int defineId() {
         return this.ordinal() + 1;
-    }
-
-    public static Optional<Category> defineCategoryById(int id) {
-        return Arrays.stream(Category.values())
-                .filter(category -> category.defineId() == id)
-                .findFirst();
     }
 }

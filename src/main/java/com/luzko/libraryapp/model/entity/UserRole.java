@@ -14,17 +14,17 @@ public enum UserRole {
         this.localeName = localeName;
     }
 
+    public static Optional<UserRole> defineRoleById(int id) {
+        return Arrays.stream(UserRole.values())
+                .filter(userRole -> userRole.defineId() == id)
+                .findFirst();
+    }
+
     public String getLocaleName() {
         return localeName;
     }
 
     public int defineId() {
         return this.ordinal() + 1;
-    }
-
-    public static Optional<UserRole> defineRoleById(int id) {
-        return Arrays.stream(UserRole.values())
-                .filter(userRole -> userRole.defineId() == id)
-                .findFirst();
     }
 }
