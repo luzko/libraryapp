@@ -1,8 +1,8 @@
 package com.luzko.libraryapp.model.service.impl;
 
-import com.luzko.libraryapp.model.builder.UserBuilder;
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
+import com.luzko.libraryapp.model.builder.UserBuilder;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.UserDao;
 import com.luzko.libraryapp.model.dao.impl.UserDaoImpl;
@@ -10,9 +10,9 @@ import com.luzko.libraryapp.model.entity.User;
 import com.luzko.libraryapp.model.entity.UserRole;
 import com.luzko.libraryapp.model.entity.UserStatus;
 import com.luzko.libraryapp.model.service.UserService;
-import com.luzko.libraryapp.util.PasswordEncryption;
 import com.luzko.libraryapp.model.validator.UserValidator;
 import com.luzko.libraryapp.model.validator.ValueValidator;
+import com.luzko.libraryapp.util.PasswordEncryption;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         logger.log(Level.INFO, "Find count users");
         int countRecords = 0;
         UserDao userDao = UserDaoImpl.getInstance();
-        if(UserValidator.isLoginSearchValid(searchName)) {
+        if (UserValidator.isLoginSearchValid(searchName)) {
             try {
                 countRecords = userDao.findCount(searchName);
             } catch (DaoException e) {
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
     public boolean isChangePassword(String login, String newPassword) throws ServiceException {
         logger.log(Level.INFO, "Change password execute: {}", newPassword);
         boolean isPasswordChange = false;
-        if(UserValidator.isPasswordValid(newPassword)) {
+        if (UserValidator.isPasswordValid(newPassword)) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
                 String encryptedPassword = PasswordEncryption.encrypt(newPassword);
@@ -126,7 +126,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean registration(Map<String, String> registrationParameter, boolean isLibrarian) throws ServiceException {
+    public boolean isRegistration(Map<String, String> registrationParameter, boolean isLibrarian) throws ServiceException {
         logger.log(Level.INFO, "Registration execute");
         boolean isRegistered = false;
         UserDao userDao = UserDaoImpl.getInstance();
@@ -184,6 +184,17 @@ public class UserServiceImpl implements UserService {
             }
         }
         return isLoginUnique;
+    }
+
+    @Override
+    public String findCodeConfirm(String login) throws ServiceException {
+        logger.log(Level.INFO, "Find code confirm execute: {}", login);
+        UserDao userDao = UserDaoImpl.getInstance();
+        try {
+            return userDao.findCodeConfirmByLogin(login);
+        } catch (DaoException e) {
+            throw new ServiceException("Find code confirm error", e);
+        }
     }
 
     @Override

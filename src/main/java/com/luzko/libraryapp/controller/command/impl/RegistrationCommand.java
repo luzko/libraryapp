@@ -35,9 +35,9 @@ public class RegistrationCommand implements Command {
         boolean isLibrarian = role == UserRole.ADMIN;
         try {
             if (userService.isLoginUnique(registrationParameter.get(ColumnName.LOGIN))) {
-                if (userService.registration(registrationParameter, isLibrarian)) {
+                if (userService.isRegistration(registrationParameter, isLibrarian)) {
                     EmailSender.sendMessageConfirm(
-                            registrationParameter.get(ColumnName.EMAIL), registrationParameter.get(ColumnName.CONFIRM_CODE)
+                            registrationParameter.get(AttributeName.EMAIL), registrationParameter.get(AttributeName.CONFIRM_CODE)
                     );
                     router.setPagePath(isLibrarian ? PagePath.ADMIN : PagePath.LOGIN);
                     router.setRedirect();

@@ -33,6 +33,7 @@ public class AttributeName {
     public static final String AVATAR = "avatar";
     public static final String SEARCH_USER = "userSearch";
     public static final String NOT_FOUND_USERS = "notFoundUsers";
+    public static final String CONFIRM_CODE = "confirm";
 
     //profile
     public static final String TYPE_PROFILE_PAGE = "type";

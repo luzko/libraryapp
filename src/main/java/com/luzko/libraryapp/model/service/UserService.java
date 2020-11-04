@@ -60,7 +60,7 @@ public interface UserService {
      * @return the boolean
      * @throws ServiceException the service exception
      */
-    boolean registration(Map<String, String> registrationParameter, boolean isLibrarian) throws ServiceException;
+    boolean isRegistration(Map<String, String> registrationParameter, boolean isLibrarian) throws ServiceException;
 
     /**
      * Change user status.
@@ -80,6 +80,8 @@ public interface UserService {
      * @throws ServiceException the service exception
      */
     boolean isLoginUnique(String login) throws ServiceException;
+
+    String findCodeConfirm(String login) throws ServiceException;
 
     /**
      * Check code confirm correct.

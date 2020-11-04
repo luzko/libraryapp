@@ -11,6 +11,7 @@ import com.luzko.libraryapp.model.entity.UserStatus;
 import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.UserService;
 import com.luzko.libraryapp.util.ConfigurationManager;
+import com.luzko.libraryapp.util.mail.EmailSender;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,10 +32,7 @@ public class ConfirmCommand implements Command {
                 request.getSession().setAttribute(AttributeName.USER_STATUS, UserStatus.ACTIVE);
                 router.setPagePath(PagePath.USER);
             } else {
-                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_CODE,
-                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
-                request.getSession().setAttribute(AttributeName.PARAM_CONFIRM_ERROR, attributeValue);
-                router.setPagePath(PagePath.CONFIRMATION);
+                sendCodeConfirm(router, userService, request);
             }
             router.setRedirect();
         } catch (ServiceException e) {
@@ -42,5 +40,16 @@ public class ConfirmCommand implements Command {
             router.setPagePath(PagePath.ERROR);
         }
         return router;
+    }
+
+    private void sendCodeConfirm(Router router, UserService userService, HttpServletRequest request) throws ServiceException {
+        String login = (String) request.getSession().getAttribute(AttributeName.LOGIN);
+        String email = (String) request.getSession().getAttribute(AttributeName.EMAIL);
+        String codeConfirm = userService.findCodeConfirm(login);
+        EmailSender.sendMessageConfirm(email, codeConfirm);
+        String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_CODE,
+                (String) request.getSession().getAttribute(AttributeName.LOCALE));
+        request.getSession().setAttribute(AttributeName.PARAM_CONFIRM_ERROR, attributeValue);
+        router.setPagePath(PagePath.CONFIRMATION);
     }
 }
