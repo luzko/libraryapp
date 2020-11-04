@@ -33,6 +33,7 @@ public class CancelOrderCommand implements Command {
                 router.setPagePath(PagePath.ORDERS);
                 router.setRedirect();
             } else {
+                logger.log(Level.WARN, "Order isn't cancel");
                 router.setPagePath(PagePath.ERROR);
             }
         } catch (ServiceException e) {

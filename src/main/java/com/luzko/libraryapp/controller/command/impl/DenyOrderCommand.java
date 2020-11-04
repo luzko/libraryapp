@@ -33,6 +33,7 @@ public class DenyOrderCommand implements Command {
                 router.setPagePath(PagePath.ORDERS);
                 router.setRedirect();
             } else {
+                logger.log(Level.WARN, "Order isn't deny");
                 router.setPagePath(PagePath.ERROR);
             }
         } catch (ServiceException e) {

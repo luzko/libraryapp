@@ -25,16 +25,14 @@ public class CreateOrderCommand implements Command {
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
         String typeOrder = request.getParameter(RequestParameter.CREATE_ORDER_TYPE);
-        Object userIdObject = request.getSession().getAttribute(AttributeName.USER_ID);
-        long userId = (long) userIdObject;
+        String locale = (String) request.getSession().getAttribute(AttributeName.LOCALE);
+        long userId = (long) request.getSession().getAttribute(AttributeName.USER_ID);
         try {
             if (orderService.isCreateOrder(userId, bookId, typeOrder)) {
-                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_SUCCESS,
-                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_SUCCESS, locale);
                 request.getSession().setAttribute(AttributeName.ORDER_SUCCESS, attributeValue);
             } else {
-                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_ERROR,
-                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_ERROR, locale);
                 request.getSession().setAttribute(AttributeName.ORDER_ERROR, attributeValue);
             }
             router.setPagePath(PagePath.BOOK_OVERVIEW);
