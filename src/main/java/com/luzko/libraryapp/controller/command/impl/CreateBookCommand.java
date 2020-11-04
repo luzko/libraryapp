@@ -25,7 +25,6 @@ public class CreateBookCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
-        String createType = request.getParameter(RequestParameter.CREATE_TYPE);
         String locale = (String) request.getSession().getAttribute(AttributeName.LOCALE);
         BookService bookService = ServiceFactory.getInstance().getBookService();
         Map<String, String> bookParameter = fillBookParameter(request);
@@ -33,7 +32,7 @@ public class CreateBookCommand implements Command {
             if (bookService.isParameterUnique(bookParameter.get(RequestParameter.TITLE), bookParameter.get(RequestParameter.YEAR),
                     bookParameter.get(RequestParameter.PAGES))) {
                 addBook(bookService, bookParameter, request);
-                request.getSession().setAttribute(AttributeName.CREATE_TYPE, createType);
+                request.getSession().setAttribute(AttributeName.CREATE_TYPE, request.getParameter(RequestParameter.CREATE_TYPE));
             } else {
                 String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_EXIST, locale);
                 request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, attributeValue);
