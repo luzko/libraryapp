@@ -6,8 +6,8 @@ import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.Order;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.OrderService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -34,6 +34,7 @@ public class ReturnOrderCommand implements Command {
                 router.setPagePath(PagePath.ORDERS);
                 router.setRedirect();
             } else {
+                logger.log(Level.WARN, "Order isn't return");
                 router.setPagePath(PagePath.ERROR);
             }
         } catch (ServiceException e) {
@@ -44,8 +45,7 @@ public class ReturnOrderCommand implements Command {
     }
 
     private List<Order> defineOrderList(OrderService orderService, HttpServletRequest request) throws ServiceException {
-        Object userIdObject = request.getSession().getAttribute(AttributeName.USER_ID);
-        long userId = (long) userIdObject;
+        long userId = (long) request.getSession().getAttribute(AttributeName.USER_ID);
         int countRecords = orderService.findCount(userId, AttributeName.USER_ORDER);
         int shownRecords = shownRecordsPagination(countRecords, request);
         return orderService.findPart(userId, AttributeName.USER_ORDER, shownRecords, RECORDS_PER_PAGE);

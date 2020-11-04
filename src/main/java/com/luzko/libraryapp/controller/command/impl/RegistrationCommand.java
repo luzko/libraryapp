@@ -31,23 +31,9 @@ public class RegistrationCommand implements Command {
         Router router = new Router();
         UserService userService = ServiceFactory.getInstance().getUserService();
         Map<String, String> registrationParameter = fillRegistrationParameter(request);
-        Object role = request.getSession().getAttribute(AttributeName.USER_ROLE);
-        boolean isLibrarian = role == UserRole.ADMIN;
         try {
             if (userService.isLoginUnique(registrationParameter.get(ColumnName.LOGIN))) {
-                if (userService.isRegistration(registrationParameter, isLibrarian)) {
-                    EmailSender.sendMessageConfirm(
-                            registrationParameter.get(AttributeName.EMAIL), registrationParameter.get(AttributeName.CONFIRM_CODE)
-                    );
-                    router.setPagePath(isLibrarian ? PagePath.ADMIN : PagePath.LOGIN);
-                    router.setRedirect();
-                } else {
-                    String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_DATA,
-                            (String) request.getSession().getAttribute(AttributeName.LOCALE));
-                    request.setAttribute(AttributeName.ERROR_DATA_MESSAGE, attributeValue);
-                    request.setAttribute(AttributeName.REGISTRATION_PARAMETER, registrationParameter);
-                    router.setPagePath(PagePath.REGISTRATION);
-                }
+                registration(router, registrationParameter, request);
             } else {
                 String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_EXIST,
                         (String) request.getSession().getAttribute(AttributeName.LOCALE));
@@ -72,5 +58,24 @@ public class RegistrationCommand implements Command {
         registrationParameter.put(ColumnName.EMAIL, request.getParameter(RequestParameter.EMAIL).trim());
         registrationParameter.put(ColumnName.CONFIRM_CODE, CodeGenerator.generateCodeConfirm());
         return registrationParameter;
+    }
+
+    private void registration(Router router, Map<String, String> registrationParameter, HttpServletRequest request) throws ServiceException {
+        Object role = request.getSession().getAttribute(AttributeName.USER_ROLE);
+        boolean isLibrarian = role == UserRole.ADMIN;
+        UserService userService = ServiceFactory.getInstance().getUserService();
+        if (userService.isRegistration(registrationParameter, isLibrarian)) {
+            EmailSender.sendMessageConfirm(
+                    registrationParameter.get(AttributeName.EMAIL), registrationParameter.get(AttributeName.CONFIRM_CODE)
+            );
+            router.setPagePath(isLibrarian ? PagePath.ADMIN : PagePath.LOGIN);
+            router.setRedirect();
+        } else {
+            String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_DATA,
+                    (String) request.getSession().getAttribute(AttributeName.LOCALE));
+            request.setAttribute(AttributeName.ERROR_DATA_MESSAGE, attributeValue);
+            request.setAttribute(AttributeName.REGISTRATION_PARAMETER, registrationParameter);
+            router.setPagePath(PagePath.REGISTRATION);
+        }
     }
 }

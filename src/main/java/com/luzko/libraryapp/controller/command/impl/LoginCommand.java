@@ -32,6 +32,7 @@ public class LoginCommand implements Command {
         UserService userService = ServiceFactory.getInstance().getUserService();
         String login = request.getParameter(RequestParameter.LOGIN);
         String password = request.getParameter(RequestParameter.PASSWORD);
+        String locale = (String) request.getSession().getAttribute(AttributeName.LOCALE);
         try {
             if (userService.isVerifyUser(login, password)) {
                 Optional<User> userOptional = userService.findByLogin(login);
@@ -39,14 +40,12 @@ public class LoginCommand implements Command {
                     User user = userOptional.get();
                     router = defineRouterByStatus(user, request);
                 } else {
-                    String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_USER,
-                            (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                    String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_USER, locale);
                     request.setAttribute(AttributeName.ERROR_MESSAGE, attributeValue);
                     router.setPagePath(PagePath.ERROR);
                 }
             } else {
-                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_ERROR,
-                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_ERROR, locale);
                 request.setAttribute(AttributeName.ERROR_LOGIN_PASSWORD_MESSAGE, attributeValue);
                 router.setPagePath(PagePath.LOGIN);
             }
