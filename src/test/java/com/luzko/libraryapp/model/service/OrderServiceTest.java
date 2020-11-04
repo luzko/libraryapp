@@ -37,7 +37,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void findAllPositiveTest() {
+    public void findPartPositiveTest() {
         Order order = new Order();
         List<Order> expectedOrderList = List.of(order);
         String typeOrder = "type";
@@ -53,7 +53,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void findAllNegativeTest() {
+    public void findPartNegativeTest() {
         Order order = new Order();
         List<Order> expectedOrderList = Collections.emptyList();
         String typeOrder = "type";
@@ -69,7 +69,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void findAllExceptionTest() {
+    public void findPartExceptionTest() {
         String typeOrder = "type";
         int shownRecords = 5;
         int recordsPerPage = 5;

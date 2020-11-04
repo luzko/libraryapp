@@ -22,7 +22,7 @@ public class UserServiceTest {
     private UserDaoImpl daoMock;
     private UserService userService;
 
-    /*@BeforeClass
+    @BeforeClass
     public void setUp() {
         userService = ServiceFactory.getInstance().getUserService();
     }
@@ -33,7 +33,7 @@ public class UserServiceTest {
         String password = "qwerQWER1234";
         try {
             when(daoMock.findPasswordByLogin(anyString())).thenReturn("ccc0efccbeafae925ae3f2987bb170b644b4083d");
-            boolean actual = userService.verifyUser(login, password);
+            boolean actual = userService.isVerifyUser(login, password);
             assertTrue(actual);
         } catch (DaoException | ServiceException e) {
             fail();
@@ -46,7 +46,7 @@ public class UserServiceTest {
         String password = "qwerQWER1234";
         try {
             when(daoMock.findPasswordByLogin(anyString())).thenReturn("qwerQWER1234");
-            boolean actual = userService.verifyUser(login, password);
+            boolean actual = userService.isVerifyUser(login, password);
             assertFalse(actual);
         } catch (DaoException | ServiceException e) {
             fail();
@@ -59,7 +59,7 @@ public class UserServiceTest {
         String password = "qwerQWER1234";
         try {
             when(daoMock.findPasswordByLogin(anyString())).thenThrow(new DaoException());
-            assertThrows(ServiceException.class, () -> userService.verifyUser(login, password));
+            assertThrows(ServiceException.class, () -> userService.isVerifyUser(login, password));
         } catch (DaoException e) {
             fail();
         }
@@ -106,12 +106,12 @@ public class UserServiceTest {
     }
 
     @Test
-    public void findAllPositiveTest() {
+    public void findPartOfAllPositiveTest() {
         User user = new User();
         List<User> expectedUserList = List.of(user);
         try {
-            when(daoMock.findAll()).thenReturn(List.of(user));
-            List<User> actualUserList = userService.findAll();
+            when(daoMock.findPartOfAll()).thenReturn(List.of(user));
+            List<User> actualUserList = userService.findPartOfAll();
             assertEquals(actualUserList, expectedUserList);
         } catch (DaoException | ServiceException e) {
             fail();
@@ -262,5 +262,5 @@ public class UserServiceTest {
     public void tierDown() {
         daoMock = null;
         userService = null;
-    }*/
+    }
 }
