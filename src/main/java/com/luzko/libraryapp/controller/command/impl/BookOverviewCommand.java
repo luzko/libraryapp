@@ -30,8 +30,7 @@ public class BookOverviewCommand implements Command {
         try {
             Optional<Book> bookOptional = bookService.findById(bookId);
             if (bookOptional.isPresent()) {
-                Book book = bookOptional.get();
-                request.getSession().setAttribute(AttributeName.BOOK, book);
+                request.getSession().setAttribute(AttributeName.BOOK, bookOptional.get());
                 router.setPagePath(PagePath.BOOK_OVERVIEW);
             } else {
                 String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_OVERVIEW,
