@@ -19,11 +19,11 @@ import java.util.Properties;
 public class EmailSenderThread implements Runnable {
     private static final Logger logger = LogManager.getLogger(EmailSenderThread.class);
     private static final String MAIL_USER_NAME = "mail.user.name";
-    private MimeMessage message;
     private final String toEmail;
     private final String mailSubject;
     private final String mailText;
     private final Properties properties;
+    private MimeMessage message;
 
     /**
      * Instantiates a new Email sender.
