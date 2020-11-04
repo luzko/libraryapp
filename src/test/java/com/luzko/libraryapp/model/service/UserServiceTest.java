@@ -2,9 +2,9 @@ package com.luzko.libraryapp.model.service;
 
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.dao.impl.UserDaoImpl;
 import com.luzko.libraryapp.model.entity.User;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.AfterClass;
@@ -12,9 +12,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.testng.Assert.*;
 
 @PrepareForTest(UserDaoImpl.class)
@@ -108,10 +112,12 @@ public class UserServiceTest {
     @Test
     public void findPartOfAllPositiveTest() {
         User user = new User();
+        int recordsShown = 5;
+        int recordsPerPage = 5;
         List<User> expectedUserList = List.of(user);
         try {
-            when(daoMock.findPartOfAll()).thenReturn(List.of(user));
-            List<User> actualUserList = userService.findPartOfAll();
+            when(daoMock.findPartOfAll(recordsShown, recordsPerPage)).thenReturn(List.of(user));
+            List<User> actualUserList = userService.findPartOfAll(recordsShown, recordsPerPage);
             assertEquals(actualUserList, expectedUserList);
         } catch (DaoException | ServiceException e) {
             fail();
@@ -119,12 +125,14 @@ public class UserServiceTest {
     }
 
     @Test
-    public void findAllNegativeTest() {
+    public void findPartOfAllNegativeTest() {
         User user = new User();
+        int recordsShown = 5;
+        int recordsPerPage = 5;
         List<User> expectedUserList = Collections.emptyList();
         try {
-            when(daoMock.findAll()).thenReturn(List.of(user));
-            List<User> actualUserList = userService.findAll();
+            when(daoMock.findPartOfAll(recordsShown, recordsPerPage)).thenReturn(List.of(user));
+            List<User> actualUserList = userService.findPartOfAll(recordsShown, recordsPerPage);
             assertNotEquals(actualUserList, expectedUserList);
         } catch (DaoException | ServiceException e) {
             fail();
@@ -132,10 +140,12 @@ public class UserServiceTest {
     }
 
     @Test
-    public void findAllExceptionTest() {
+    public void findPartOfAllExceptionTest() {
         try {
-            when(daoMock.findAll()).thenThrow(new DaoException());
-            assertThrows(ServiceException.class, () -> userService.findAll());
+            int recordsShown = 5;
+            int recordsPerPage = 5;
+            when(daoMock.findPartOfAll(recordsShown, recordsPerPage)).thenThrow(new DaoException());
+            assertThrows(ServiceException.class, () -> userService.findPartOfAll(recordsShown, recordsPerPage));
         } catch (DaoException e) {
             fail();
         }
