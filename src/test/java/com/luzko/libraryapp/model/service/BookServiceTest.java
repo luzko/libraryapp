@@ -2,9 +2,9 @@ package com.luzko.libraryapp.model.service;
 
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.dao.impl.BookDaoImpl;
 import com.luzko.libraryapp.model.entity.Book;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.AfterClass;
@@ -12,7 +12,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
@@ -22,7 +24,7 @@ public class BookServiceTest {
     private BookDaoImpl daoMock;
     private BookService bookService;
 
-    /*@BeforeClass
+    @BeforeClass
     public void setUp() {
         bookService = ServiceFactory.getInstance().getBookService();
     }
@@ -41,7 +43,7 @@ public class BookServiceTest {
         Optional<Book> expectedBookOptional = Optional.of(book);
         try {
             when(daoMock.findById(bookId)).thenReturn(Optional.of(book));
-            Optional<Book> actualBookOptional = bookService.findById(String.valueOf(bookId));
+            Optional<Book> actualBookOptional = bookService.findById(bookId);
             assertEquals(actualBookOptional, expectedBookOptional);
         } catch (DaoException | ServiceException e) {
             fail();
@@ -56,7 +58,7 @@ public class BookServiceTest {
         Optional<Book> expectedBookOptional = Optional.of(book);
         try {
             when(daoMock.findById(bookId)).thenReturn(Optional.empty());
-            Optional<Book> actualBookOptional = bookService.findById(String.valueOf(bookId));
+            Optional<Book> actualBookOptional = bookService.findById(bookId);
             assertNotEquals(actualBookOptional, expectedBookOptional);
         } catch (DaoException | ServiceException e) {
             fail();
@@ -68,19 +70,21 @@ public class BookServiceTest {
         long bookId = 1;
         try {
             when(daoMock.findById(bookId)).thenThrow(new DaoException());
-            assertThrows(ServiceException.class, () -> bookService.findById(String.valueOf(bookId)));
+            assertThrows(ServiceException.class, () -> bookService.findById(bookId));
         } catch (DaoException e) {
             fail();
         }
     }
 
     @Test
-    public void findAllPositiveTest() {
+    public void findPartOfAllPositiveTest() {
         Book book = new Book();
         List<Book> expectedBookList = List.of(book);
+        int recordsShown = 5;
+        int recordsPerPage = 5;
         try {
-            when(daoMock.findAll()).thenReturn(List.of(book));
-            List<Book> actualBookList = bookService.findAll();
+            when(daoMock.findPartOfAll(recordsShown, recordsPerPage)).thenReturn(List.of(book));
+            List<Book> actualBookList = bookService.findPartOfAll(recordsShown, recordsPerPage);
             assertEquals(actualBookList, expectedBookList);
         } catch (DaoException | ServiceException e) {
             fail();
@@ -88,12 +92,14 @@ public class BookServiceTest {
     }
 
     @Test
-    public void findAllNegativeTest() {
+    public void findPartOfAllNegativeTest() {
         Book book = new Book();
         List<Book> expectedBookList = Collections.emptyList();
+        int recordsShown = 5;
+        int recordsPerPage = 5;
         try {
-            when(daoMock.findAll()).thenReturn(List.of(book));
-            List<Book> actualBookList = bookService.findAll();
+            when(daoMock.findPartOfAll(recordsShown, recordsPerPage)).thenReturn(List.of(book));
+            List<Book> actualBookList = bookService.findPartOfAll(recordsShown, recordsPerPage);
             assertNotEquals(actualBookList, expectedBookList);
         } catch (DaoException | ServiceException e) {
             fail();
@@ -101,10 +107,12 @@ public class BookServiceTest {
     }
 
     @Test
-    public void findAllExceptionTest() {
+    public void findPartOfAllExceptionTest() {
+        int recordsShown = 5;
+        int recordsPerPage = 5;
         try {
-            when(daoMock.findAll()).thenThrow(new DaoException());
-            assertThrows(ServiceException.class, () -> bookService.findAll());
+            when(daoMock.findPartOfAll(recordsShown, recordsPerPage)).thenThrow(new DaoException());
+            assertThrows(ServiceException.class, () -> bookService.findPartOfAll(recordsShown, recordsPerPage));
         } catch (DaoException e) {
             fail();
         }
@@ -155,5 +163,5 @@ public class BookServiceTest {
     public void tierDown() {
         daoMock = null;
         bookService = null;
-    }*/
+    }
 }

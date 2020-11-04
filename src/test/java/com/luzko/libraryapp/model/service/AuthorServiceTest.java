@@ -2,9 +2,9 @@ package com.luzko.libraryapp.model.service;
 
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.dao.impl.AuthorDaoImpl;
 import com.luzko.libraryapp.model.entity.Author;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.AfterClass;
@@ -12,9 +12,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.testng.Assert.*;
 
 @PrepareForTest(AuthorDaoImpl.class)
@@ -22,7 +25,7 @@ public class AuthorServiceTest {
     private AuthorDaoImpl daoMock;
     private AuthorService authorService;
 
-    /*@BeforeClass
+    @BeforeClass
     public void setUp() {
         authorService = ServiceFactory.getInstance().getAuthorService();
     }
@@ -71,47 +74,6 @@ public class AuthorServiceTest {
     }
 
     @Test
-    public void findByIdPositiveTest() {
-        long authorId = 1;
-        Author author = new Author();
-        author.setAuthorId(authorId);
-        Optional<Author> expectedAuthorOptional = Optional.of(author);
-        try {
-            when(daoMock.findById(authorId)).thenReturn(Optional.of(author));
-            Optional<Author> actualAuthorOptional = authorService.findById(authorId);
-            assertEquals(actualAuthorOptional, expectedAuthorOptional);
-        } catch (DaoException | ServiceException e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void findByIdNegativeTest() {
-        long authorId = 1;
-        Author author = new Author();
-        author.setAuthorId(authorId);
-        Optional<Author> expectedAuthorOptional = Optional.of(author);
-        try {
-            when(daoMock.findById(authorId)).thenReturn(Optional.empty());
-            Optional<Author> actualAuthorOptional = authorService.findById(authorId);
-            assertNotEquals(actualAuthorOptional, expectedAuthorOptional);
-        } catch (DaoException | ServiceException e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void findByIdExceptionTest() {
-        long authorId = 1;
-        try {
-            when(daoMock.findById(authorId)).thenThrow(new DaoException());
-            assertThrows(ServiceException.class, () -> authorService.findById(authorId));
-        } catch (DaoException e) {
-            fail();
-        }
-    }
-
-    @Test
     public void findAllPositiveTest() {
         Author author = new Author();
         List<Author> expectedAuthorList = List.of(author);
@@ -151,5 +113,5 @@ public class AuthorServiceTest {
     public void tierDown() {
         daoMock = null;
         authorService = null;
-    }*/
+    }
 }
