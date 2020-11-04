@@ -23,17 +23,16 @@ public class ChangePasswordCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         UserService userService = ServiceFactory.getInstance().getUserService();
-        String login = (String) request.getSession().getAttribute(AttributeName.LOGIN);
         String password = request.getParameter(RequestParameter.PASSWORD_OLD);
         String passwordNew = request.getParameter(RequestParameter.PASSWORD_NEW);
+        String login = (String) request.getSession().getAttribute(AttributeName.LOGIN);
+        String locale = (String) request.getSession().getAttribute(AttributeName.LOCALE);
         try {
             if (userService.isVerifyUser(login, password) && userService.isChangePassword(login, passwordNew)) {
-                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_SAVE_CHANGES,
-                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_SAVE_CHANGES, locale);
                 request.getSession().setAttribute(AttributeName.CHANGE_SAVED, attributeValue);
             } else {
-                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_PASSWORD_ERROR,
-                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_PASSWORD_ERROR, locale);
                 request.setAttribute(AttributeName.ERROR_PASSWORD_MESSAGE, attributeValue);
             }
             router.setPagePath(PagePath.USER);
