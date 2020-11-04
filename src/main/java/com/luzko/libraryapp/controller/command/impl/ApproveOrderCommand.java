@@ -25,7 +25,6 @@ public class ApproveOrderCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
-        String orderType = request.getParameter(RequestParameter.ORDER_TYPE);
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         String bookId = request.getParameter(RequestParameter.BOOK_ID);
         String userId = request.getParameter(RequestParameter.USER_ID);
@@ -35,16 +34,21 @@ public class ApproveOrderCommand implements Command {
                         (String) request.getSession().getAttribute(AttributeName.LOCALE));
                 request.getSession().setAttribute(AttributeName.ERROR_APPROVE, attributeValue);
             }
-            List<Order> orderList = defineOrderList(orderService, request);
-            request.getSession().setAttribute(AttributeName.ALL_ORDERS, orderList);
-            request.getSession().setAttribute(AttributeName.ORDER_TYPE, orderType);
-            router.setPagePath(PagePath.ORDERS);
-            router.setRedirect();
+            defineOrderType(router, orderService, request);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in deny order", e);
             router.setPagePath(PagePath.ERROR);
         }
         return router;
+    }
+
+    private void defineOrderType(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
+        List<Order> orderList = defineOrderList(orderService, request);
+        String orderType = request.getParameter(RequestParameter.ORDER_TYPE);
+        request.getSession().setAttribute(AttributeName.ALL_ORDERS, orderList);
+        request.getSession().setAttribute(AttributeName.ORDER_TYPE, orderType);
+        router.setPagePath(PagePath.ORDERS);
+        router.setRedirect();
     }
 
     private List<Order> defineOrderList(OrderService orderService, HttpServletRequest request) throws ServiceException {
