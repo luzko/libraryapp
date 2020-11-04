@@ -37,7 +37,8 @@ public enum CommandType {
     DENY_ORDER(new DenyOrderCommand()),
     REMOVE_BOOK(new RemoveBookCommand()),
     FIND_BOOK(new FindBookCommand()),
-    FIND_USER(new FindUserCommand());
+    FIND_USER(new FindUserCommand()),
+    CHANGE_PASSWORD(new ChangePasswordCommand());
 
     private final Command command;
 

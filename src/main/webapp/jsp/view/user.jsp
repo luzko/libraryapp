@@ -106,137 +106,174 @@
     </form>
 </div>
 
+<div class="modal fade" id="modalPassword" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form class="form" action="${pageContext.request.contextPath}/controller" method="POST">
+        <input type="hidden" name="command" value="change_password"/>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-group"><label for="old"
+                                                   class="form-control-label"><fmt:message
+                            key="password.old"/></label>
+                        <input type="text"
+                               class="form-control"
+                               id="old"
+                               name="oldPassword">
+                    </div>
+                    <div class="form-group"><label for="new"
+                                                   class="form-control-label"><fmt:message
+                            key="password.new"/></label>
+                        <input type="text"
+                               class="form-control"
+                               id="new"
+                               name="newPassword">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <fmt:message key="submit.close"/></button>
+                    <button type="submit" class="btn btn-primary" style="background-color: green">
+                        <fmt:message
+                                key="submit.save"/></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 <section id="about" class="about-section text-center">
     <div class="masthead3">
         <div class="container  align-items-center">
             <div class="row justify-content-center no-gutters">
 
                 <c:if test="${ not empty type and type eq 'see' }">
-                <div style="margin-top: 100px">
-                    <h1 style="color: #9fcdff">${userName} ${userSurname}</h1>
-                </div>
-
-                <div class="text_block">
-                    <div class="col-lg-8">
-                        <img class="img-fluid" src="/images/${avatar}"
-                             style="margin-top: 100px; border-radius: 30px" width="300" height="300"/>
+                    <div style="margin-top: 100px">
+                        <h1 style="color: #9fcdff">${userName} ${userSurname}</h1>
                     </div>
-                    <div class="col-lg-8 text-center">
-                        <div class="row">
-                            <div class="col-lg-6 text-right">
-                                <h4 style="color: #fff">
-                                    <br/><br/>
-                                    <fmt:message key="label.login"/>:
-                                    <br/>
-                                    <fmt:message key="label.userRoleType"/>:
-                                    <br/>
-                                    <fmt:message key="label.email"/>
-                                    <br/>
-                                </h4>
-                                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                            </div>
-                            <div class="col-lg-6 text-left">
-                                <h4 style="color: #fff">
-                                    <br/><br/>
-                                        ${login}
-                                    <br/>
-                                        ${userRole}
-                                    <br/>
-                                        ${email}
-                                    <br/><br/><br/>
-                                </h4>
-                                <c:choose>
-                                    <c:when test="${userRole == 'READER'}">
-                                        <div class="text-right">
-                                            <form class="form-inline" method="POST"
-                                                  action="${pageContext.request.contextPath}/controller">
-                                                <input type="hidden" name="command" value="settings"/>
+
+                    <div class="text_block">
+                        <div class="col-lg-8">
+                            <img class="img-fluid" src="/images/${avatar}"
+                                 style="margin-top: 100px; border-radius: 30px" width="300" height="300"/>
+                        </div>
+                        <div class="col-lg-8 text-center">
+                            <div class="row">
+                                <div class="col-lg-6 text-right">
+                                    <h4 style="color: #fff">
+                                        <br/><br/>
+                                        <fmt:message key="label.login"/>:
+                                        <br/>
+                                        <fmt:message key="label.userRoleType"/>:
+                                        <br/>
+                                        <fmt:message key="label.email"/>
+                                        <br/>
+                                    </h4>
+                                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                                </div>
+                                <div class="col-lg-6 text-left">
+                                    <h4 style="color: #fff">
+                                        <br/><br/>
+                                            ${login}
+                                        <br/>
+                                            ${userRole}
+                                        <br/>
+                                            ${email}
+                                        <br/><br/><br/>
+                                    </h4>
+                                    <c:choose>
+                                        <c:when test="${userRole == 'READER'}">
+                                            <div class="text-right">
+                                                <form class="form-inline" method="POST"
+                                                      action="${pageContext.request.contextPath}/controller">
+                                                    <input type="hidden" name="command" value="settings"/>
+                                                    <div>
+                                                        <button type="submit"
+                                                                style="width: 250px !important;"
+                                                                class="btn btn-primary js-scroll-trigger custom-button">
+                                                            <fmt:message key="submit.settings.profile"/>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="text-right">
+                                                <form class="form-inline" method="POST"
+                                                      action="${pageContext.request.contextPath}/controller">
+                                                    <input type="hidden" name="command" value="orders_page"/>
+                                                    <input type="hidden" name="orderType" value="user"/>
+                                                    <div>
+                                                        <button type="submit"
+                                                                style="width: 250px !important;"
+                                                                class="btn btn-primary js-scroll-trigger custom-button">
+                                                            <fmt:message key="submit.order.book"/>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="text-right">
                                                 <div>
-                                                    <button type="submit"
-                                                            style="width: 250px !important;"
-                                                            class="btn btn-primary js-scroll-trigger custom-button">
-                                                        <fmt:message key="submit.settings.profile"/>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="text-right">
-                                            <form class="form-inline" method="POST"
-                                                  action="${pageContext.request.contextPath}/controller">
-                                                <input type="hidden" name="command" value="orders_page"/>
-                                                <input type="hidden" name="orderType" value="user"/>
-                                                <div>
-                                                    <button type="submit"
-                                                            style="width: 250px !important;"
-                                                            class="btn btn-primary js-scroll-trigger custom-button">
-                                                        <fmt:message key="submit.order.book"/>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="text-right">
-                                            <div>
-                                                <div class="bd-example">
-                                                    <button type="submit"
-                                                            class="btn btn-primary js-scroll-trigger custom-button"
-                                                            style="width: 250px !important;"
-                                                            data-toggle="modal" data-target="#exampleModal">
-                                                        <fmt:message key="submit.mess.to.admin"/>
-                                                    </button>
+                                                    <div class="bd-example">
+                                                        <button type="submit"
+                                                                class="btn btn-primary js-scroll-trigger custom-button"
+                                                                style="width: 250px !important;"
+                                                                data-toggle="modal" data-target="#exampleModal">
+                                                            <fmt:message key="submit.mess.to.admin"/>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </c:when>
-                                    <c:when test="${userRole == 'LIBRARIAN'}">
-                                        <div class="text-right">
-                                            <form class="form-inline" method="POST"
-                                                  action="${pageContext.request.contextPath}/controller">
-                                                <input type="hidden" name="command" value="settings"/>
-                                                <div>
-                                                    <button type="submit"
-                                                            class="btn btn-primary js-scroll-trigger custom-button">
-                                                        <fmt:message key="submit.settings.profile"/>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="text-right">
-                                            <form class="form-inline" method="POST"
-                                                  action="${pageContext.request.contextPath}/controller">
-                                                <input type="hidden" name="command" value="orders_page"/>
-                                                <input type="hidden" name="orderType" value="new"/>
-                                                <div>
-                                                    <button type="submit"
-                                                            class="btn btn-primary js-scroll-trigger custom-button">
-                                                        <fmt:message key="submit.order.new"/>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="text-right">
-                                            <form class="form-inline" method="POST"
-                                                  action="${pageContext.request.contextPath}/controller">
-                                                <input type="hidden" name="command" value="orders_page"/>
-                                                <input type="hidden" name="orderType" value="all"/>
-                                                <div>
-                                                    <button type="submit"
-                                                            class="btn btn-primary js-scroll-trigger custom-button">
-                                                        <fmt:message key="submit.order.all"/>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </c:when>
-                                </c:choose>
-                            </div>
-                            <div style="color: red;">
-                                    ${notFoundOrders}
+                                        </c:when>
+                                        <c:when test="${userRole == 'LIBRARIAN'}">
+                                            <div class="text-right">
+                                                <form class="form-inline" method="POST"
+                                                      action="${pageContext.request.contextPath}/controller">
+                                                    <input type="hidden" name="command" value="settings"/>
+                                                    <div>
+                                                        <button type="submit"
+                                                                class="btn btn-primary js-scroll-trigger custom-button">
+                                                            <fmt:message key="submit.settings.profile"/>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="text-right">
+                                                <form class="form-inline" method="POST"
+                                                      action="${pageContext.request.contextPath}/controller">
+                                                    <input type="hidden" name="command" value="orders_page"/>
+                                                    <input type="hidden" name="orderType" value="new"/>
+                                                    <div>
+                                                        <button type="submit"
+                                                                class="btn btn-primary js-scroll-trigger custom-button">
+                                                            <fmt:message key="submit.order.new"/>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="text-right">
+                                                <form class="form-inline" method="POST"
+                                                      action="${pageContext.request.contextPath}/controller">
+                                                    <input type="hidden" name="command" value="orders_page"/>
+                                                    <input type="hidden" name="orderType" value="all"/>
+                                                    <div>
+                                                        <button type="submit"
+                                                                class="btn btn-primary js-scroll-trigger custom-button">
+                                                            <fmt:message key="submit.order.all"/>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </c:when>
+                                    </c:choose>
+                                </div>
+                                <div style="color: red;">
+                                        ${notFoundOrders}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </c:if>
+                </c:if>
 
-                    <c:if test="${not empty type and type eq 'change'}">
+                <c:if test="${not empty type and type eq 'change'}">
                     <div style="margin-top: 100px">
                         <h1 style="color: #9fcdff"><fmt:message key="submit.settings.profile"/></h1>
                     </div>
@@ -274,6 +311,16 @@
                                         ${ChangedSave}
                                 </div>
                                 <br/>
+                                <div>
+                                    <div class="col-lg-2 float-right">
+                                        <button type="submit"
+                                                class="btn btn-primary js-scroll-trigger custom-button"
+                                                style="margin-bottom: 15px;"
+                                                data-toggle="modal" data-target="#modalPassword">
+                                            <fmt:message key="submit.password"/>
+                                        </button>
+                                    </div>
+                                </div>
                                 <div class="field">
                                     <form class="form-inline" action="${pageContext.request.contextPath}/controller"
                                           method="POST" style="margin-top: 5px;">
@@ -380,9 +427,9 @@
                                 </div>
                             </div>
                         </div>
-                        </c:if>
                     </div>
-                </div>
+                </c:if>
+
             </div>
         </div>
     </div>
