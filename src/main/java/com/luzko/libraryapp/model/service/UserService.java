@@ -39,7 +39,9 @@ public interface UserService {
      * @return the boolean
      * @throws ServiceException the service exception
      */
-    boolean verifyUser(String login, String password) throws ServiceException;
+    boolean isVerifyUser(String login, String password) throws ServiceException;
+
+    boolean isChangePassword(String login, String newPassword) throws ServiceException;
 
     /**
      * Find by login.

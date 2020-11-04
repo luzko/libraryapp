@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean verifyUser(String login, String password) throws ServiceException {
+    public boolean isVerifyUser(String login, String password) throws ServiceException {
         logger.log(Level.INFO, "Verify user execute: {}, {}", login, password);
         boolean isCredentialCorrect = false;
         if (UserValidator.isLoginValid(login) && UserValidator.isPasswordValid(password)) {
@@ -92,6 +92,22 @@ public class UserServiceImpl implements UserService {
             }
         }
         return isCredentialCorrect;
+    }
+
+    @Override
+    public boolean isChangePassword(String login, String newPassword) throws ServiceException {
+        logger.log(Level.INFO, "Change password execute: {}", newPassword);
+        boolean isPasswordChange = false;
+        if(UserValidator.isPasswordValid(newPassword)) {
+            UserDao userDao = UserDaoImpl.getInstance();
+            try {
+                String encryptedPassword = PasswordEncryption.encrypt(newPassword);
+                isPasswordChange = userDao.isChangePassword(login, encryptedPassword);
+            } catch (DaoException e) {
+                throw new ServiceException("Change password error", e);
+            }
+        }
+        return isPasswordChange;
     }
 
     @Override

@@ -10,6 +10,9 @@ public class StatementSql {
             "INSERT INTO users(login, password, role_id_fk, name, surname, email, user_status_id_fk, confirm) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
+    public static final String CHANGE_PASSWORD =
+            "UPDATE users SET password = ? WHERE login LIKE ?";
+
     public static final String FIND_PASSWORD_BY_LOGIN =
             "SELECT password FROM users WHERE login LIKE ?";
 

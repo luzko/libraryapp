@@ -41,6 +41,8 @@ public interface UserDao extends BaseDao {
      */
     String findPasswordByLogin(String login) throws DaoException;
 
+    boolean isChangePassword(String login, String newPassword) throws DaoException;
+
     /**
      * Find by login.
      *

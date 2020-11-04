@@ -33,7 +33,7 @@ public class LoginCommand implements Command {
         String login = request.getParameter(RequestParameter.LOGIN);
         String password = request.getParameter(RequestParameter.PASSWORD);
         try {
-            if (userService.verifyUser(login, password)) {
+            if (userService.isVerifyUser(login, password)) {
                 Optional<User> userOptional = userService.findByLogin(login);
                 if (userOptional.isPresent()) {
                     User user = userOptional.get();

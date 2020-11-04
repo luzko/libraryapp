@@ -19,6 +19,7 @@ public class AttributeName {
     public static final String ERROR_APPROVE = "approveError";
     public static final String NOT_FOUND_ORDERS = "notFoundOrders";
     public static final String AVATAR_ERROR = "errorAvatar";
+    public static final String ERROR_PASSWORD_MESSAGE = "errorPassword";
 
     //user
     public static final String ALL_USERS = "allUsers";

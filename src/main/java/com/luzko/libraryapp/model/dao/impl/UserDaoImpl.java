@@ -1,12 +1,16 @@
 package com.luzko.libraryapp.model.dao.impl;
 
+import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.builder.UserBuilder;
 import com.luzko.libraryapp.model.connection.ConnectionPool;
-import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.StatementSql;
 import com.luzko.libraryapp.model.dao.UserDao;
-import com.luzko.libraryapp.model.entity.*;
+import com.luzko.libraryapp.model.entity.OrderStatus;
+import com.luzko.libraryapp.model.entity.OrderType;
+import com.luzko.libraryapp.model.entity.User;
+import com.luzko.libraryapp.model.entity.UserRole;
+import com.luzko.libraryapp.model.entity.UserStatus;
 import com.luzko.libraryapp.util.DateUtil;
 
 import java.sql.Connection;
@@ -47,7 +51,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public int findCount(String searchName) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_SEARCH_USER)){
+             PreparedStatement statement = connection.prepareStatement(StatementSql.FIND_COUNT_SEARCH_USER)) {
             statement.setString(1, PERCENT + searchName + PERCENT);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
@@ -97,6 +101,18 @@ public class UserDaoImpl implements UserDao {
             return userPassword;
         } catch (SQLException e) {
             throw new DaoException("Find password error", e);
+        }
+    }
+
+    @Override
+    public boolean isChangePassword(String login, String newPassword) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(StatementSql.CHANGE_PASSWORD)) {
+            statement.setString(1, newPassword);
+            statement.setString(2, login);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new DaoException("Change password error", e);
         }
     }
 

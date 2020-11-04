@@ -321,6 +321,12 @@
                                         </button>
                                     </div>
                                 </div>
+
+                                <div style="color: red;">
+                                        ${errorPassword}
+                                </div>
+
+
                                 <div class="field">
                                     <form class="form-inline" action="${pageContext.request.contextPath}/controller"
                                           method="POST" style="margin-top: 5px;">
