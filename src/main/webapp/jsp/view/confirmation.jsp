@@ -78,7 +78,7 @@
                                                    class="form-control"
                                                    id="code"
                                                    name="code"
-                                                   pattern="^[\p{L} ]{5,20}$"
+                                                   pattern="^[\w]{5,20}$"
                                                    maxlength="20">
                                         </div>
                                     </div>
