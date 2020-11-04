@@ -24,15 +24,14 @@ public class CreateAuthorCommand implements Command {
         Router router = new Router();
         String createType = request.getParameter(RequestParameter.CREATE_TYPE);
         String authorName = request.getParameter(RequestParameter.AUTHOR_NAME);
+        String locale = (String) request.getSession().getAttribute(AttributeName.LOCALE);
         AuthorService authorService = ServiceFactory.getInstance().getAuthorService();
         try {
             if (authorService.add(authorName)) {
-                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_AUTHOR_CORRECT,
-                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_AUTHOR_CORRECT, locale);
                 request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, attributeValue);
             } else {
-                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_AUTHOR_DATA,
-                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_AUTHOR_DATA, locale);
                 request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, attributeValue);
             }
             request.getSession().setAttribute(AttributeName.CREATE_TYPE, createType);

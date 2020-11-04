@@ -26,26 +26,16 @@ public class CreateBookCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         String createType = request.getParameter(RequestParameter.CREATE_TYPE);
+        String locale = (String) request.getSession().getAttribute(AttributeName.LOCALE);
         BookService bookService = ServiceFactory.getInstance().getBookService();
         Map<String, String> bookParameter = fillBookParameter(request);
         try {
-            if (bookService.isParameterUnique(
-                    bookParameter.get(ColumnName.TITLE), bookParameter.get(ColumnName.YEAR), bookParameter.get(ColumnName.PAGES))
-            ) {
-                if (bookService.add(bookParameter)) {
-                    String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_CORRECT,
-                            (String) request.getSession().getAttribute(AttributeName.LOCALE));
-                    request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, attributeValue);
-                } else {
-                    String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_DATA,
-                            (String) request.getSession().getAttribute(AttributeName.LOCALE));
-                    request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, attributeValue);
-                    request.setAttribute(AttributeName.BOOK_PARAMETER, bookParameter);
-                }
+            if (bookService.isParameterUnique(bookParameter.get(RequestParameter.TITLE), bookParameter.get(RequestParameter.YEAR),
+                    bookParameter.get(RequestParameter.PAGES))) {
+                addBook(bookService, bookParameter, request);
                 request.getSession().setAttribute(AttributeName.CREATE_TYPE, createType);
             } else {
-                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_EXIST,
-                        (String) request.getSession().getAttribute(AttributeName.LOCALE));
+                String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_LOGIN_EXIST, locale);
                 request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, attributeValue);
                 request.getSession().setAttribute(AttributeName.BOOK_PARAMETER, bookParameter);
             }
@@ -68,5 +58,17 @@ public class CreateBookCommand implements Command {
         bookParameter.put(ColumnName.AUTHOR, request.getParameter(RequestParameter.AUTHOR));
         bookParameter.put(ColumnName.DESCRIPTION, request.getParameter(RequestParameter.DESCRIPTION));
         return bookParameter;
+    }
+
+    private void addBook(BookService bookService, Map<String, String> bookParameter, HttpServletRequest request) throws ServiceException {
+        String locale = (String) request.getSession().getAttribute(AttributeName.LOCALE);
+        if (bookService.add(bookParameter)) {
+            String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_CORRECT, locale);
+            request.getSession().setAttribute(AttributeName.CORRECT_DATA_MESSAGE, attributeValue);
+        } else {
+            String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_DATA, locale);
+            request.getSession().setAttribute(AttributeName.ERROR_DATA_MESSAGE, attributeValue);
+            request.setAttribute(AttributeName.BOOK_PARAMETER, bookParameter);
+        }
     }
 }
