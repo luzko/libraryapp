@@ -46,8 +46,7 @@ public class OrderPageCommand implements Command {
     }
 
     private void userOrderOverview(Router router, OrderService orderService, HttpServletRequest request) throws ServiceException {
-        Object userIdObject = request.getSession().getAttribute(AttributeName.USER_ID);
-        long userId = (long) userIdObject;
+        long userId = (long) request.getSession().getAttribute(AttributeName.USER_ID);
         int countRecords = orderService.findCount(userId, AttributeName.USER_ORDER);
         if (countRecords > 0) {
             int shownRecords = shownRecordsPagination(countRecords, request);
@@ -70,14 +69,7 @@ public class OrderPageCommand implements Command {
             List<Order> orderList = orderService.findPart(bookId, AttributeName.BOOK_ORDER, shownRecords, RECORDS_PER_PAGE);
             defineOrdersAttribute(router, orderList, request);
         } else {
-            String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_NOT_FOUND,
-                    (String) request.getSession().getAttribute(AttributeName.LOCALE));
-            request.setAttribute(AttributeName.NOT_FOUND_ORDERS, attributeValue);
-            BookService bookService = ServiceFactory.getInstance().getBookService();
-            Optional<Book> bookOptional = bookService.findById(bookId);
-            Book book = bookOptional.get();
-            request.getSession().setAttribute(AttributeName.BOOK, book);
-            router.setPagePath(PagePath.BOOK_OVERVIEW);
+            bookOverview(router, bookId, request);
         }
     }
 
@@ -107,5 +99,16 @@ public class OrderPageCommand implements Command {
     private void defineOrdersAttribute(Router router, List<Order> orderList, HttpServletRequest request) {
         request.getSession().setAttribute(AttributeName.ALL_ORDERS, orderList);
         router.setPagePath(PagePath.ORDERS);
+    }
+
+    private void bookOverview(Router router, long bookId, HttpServletRequest request) throws ServiceException {
+        String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_ORDER_NOT_FOUND,
+                (String) request.getSession().getAttribute(AttributeName.LOCALE));
+        request.setAttribute(AttributeName.NOT_FOUND_ORDERS, attributeValue);
+        BookService bookService = ServiceFactory.getInstance().getBookService();
+        Optional<Book> bookOptional = bookService.findById(bookId);
+        Book book = bookOptional.get();
+        request.getSession().setAttribute(AttributeName.BOOK, book);
+        router.setPagePath(PagePath.BOOK_OVERVIEW);
     }
 }

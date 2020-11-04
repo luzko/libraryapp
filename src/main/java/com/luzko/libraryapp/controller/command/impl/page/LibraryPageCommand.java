@@ -39,16 +39,16 @@ public class LibraryPageCommand implements Command {
         return router;
     }
 
-    private void findBook(HttpServletRequest request, Object searchName) throws ServiceException {
-        List<Book> bookList = defineSearchBookList((String) searchName, request);
-        request.getSession().setAttribute(AttributeName.ALL_BOOKS, bookList);
-    }
-
     private List<Book> defineBookList(HttpServletRequest request) throws ServiceException {
         BookService bookService = ServiceFactory.getInstance().getBookService();
         int countRecords = bookService.findCountRecords();
         int shownRecords = shownRecordsPagination(countRecords, request);
         return bookService.findPartOfAll(shownRecords, RECORDS_PER_PAGE);
+    }
+
+    private void findBook(HttpServletRequest request, Object searchName) throws ServiceException {
+        List<Book> bookList = defineSearchBookList((String) searchName, request);
+        request.getSession().setAttribute(AttributeName.ALL_BOOKS, bookList);
     }
 
     private List<Book> defineSearchBookList(String searchName, HttpServletRequest request) throws ServiceException {
