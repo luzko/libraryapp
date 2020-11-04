@@ -2,9 +2,9 @@ package com.luzko.libraryapp.model.service;
 
 import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.dao.impl.OrderDaoImpl;
 import com.luzko.libraryapp.model.entity.Order;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.AfterClass;
@@ -12,9 +12,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.testng.Assert.*;
 
 @PrepareForTest(OrderDaoImpl.class)
@@ -22,7 +25,7 @@ public class OrderServiceTest {
     private OrderDaoImpl daoMock;
     private OrderService orderService;
 
-    /*@BeforeClass
+    @BeforeClass
     public void setUp() {
         orderService = ServiceFactory.getInstance().getOrderService();
     }
@@ -33,49 +36,16 @@ public class OrderServiceTest {
         Whitebox.setInternalState(OrderDaoImpl.class, "INSTANCE", daoMock);
     }
 
-    /*@Test
-    public void findByUserIdPositiveTest() {
-        Order order = new Order();
-        List<Order> expectedOrderList = List.of(order);
-        try {
-            when(daoMock.findByUserId(anyLong())).thenReturn(List.of(order));
-            List<Order> actualOrderList = orderService.findByUserId(1);
-            assertEquals(actualOrderList, expectedOrderList);
-        } catch (DaoException | ServiceException e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void findByUserIdNegativeTest() {
-        Order order = new Order();
-        List<Order> expectedOrderList = Collections.emptyList();
-        try {
-            when(daoMock.findByUserId(anyLong())).thenReturn(List.of(order));
-            List<Order> actualOrderList = orderService.findByUserId(1);
-            assertNotEquals(actualOrderList, expectedOrderList);
-        } catch (DaoException | ServiceException e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void findByUserIdExceptionTest() {
-        try {
-            when(daoMock.findByUserId(anyLong())).thenThrow(new DaoException());
-            assertThrows(ServiceException.class, () -> orderService.findByUserId(1));
-        } catch (DaoException e) {
-            fail();
-        }
-    }
-
     @Test
     public void findAllPositiveTest() {
         Order order = new Order();
         List<Order> expectedOrderList = List.of(order);
+        String typeOrder = "type";
+        int shownRecords = 5;
+        int recordsPerPage = 5;
         try {
-            when(daoMock.findAll()).thenReturn(List.of(order));
-            List<Order> actualOrderList = orderService.findAll();
+            when(daoMock.findPart(typeOrder, shownRecords, recordsPerPage)).thenReturn(List.of(order));
+            List<Order> actualOrderList = orderService.findPart(typeOrder, shownRecords, recordsPerPage);
             assertEquals(actualOrderList, expectedOrderList);
         } catch (DaoException | ServiceException e) {
             fail();
@@ -86,9 +56,12 @@ public class OrderServiceTest {
     public void findAllNegativeTest() {
         Order order = new Order();
         List<Order> expectedOrderList = Collections.emptyList();
+        String typeOrder = "type";
+        int shownRecords = 5;
+        int recordsPerPage = 5;
         try {
-            when(daoMock.findAll()).thenReturn(List.of(order));
-            List<Order> actualOrderList = orderService.findAll();
+            when(daoMock.findPart(typeOrder, shownRecords, recordsPerPage)).thenReturn(List.of(order));
+            List<Order> actualOrderList = orderService.findPart(typeOrder, shownRecords, recordsPerPage);
             assertNotEquals(actualOrderList, expectedOrderList);
         } catch (DaoException | ServiceException e) {
             fail();
@@ -97,9 +70,12 @@ public class OrderServiceTest {
 
     @Test
     public void findAllExceptionTest() {
+        String typeOrder = "type";
+        int shownRecords = 5;
+        int recordsPerPage = 5;
         try {
-            when(daoMock.findAll()).thenThrow(new DaoException());
-            assertThrows(ServiceException.class, () -> orderService.findAll());
+            when(daoMock.findPart(typeOrder, shownRecords, recordsPerPage)).thenThrow(new DaoException());
+            assertThrows(ServiceException.class, () -> orderService.findPart(typeOrder, shownRecords, recordsPerPage));
         } catch (DaoException e) {
             fail();
         }
@@ -173,5 +149,5 @@ public class OrderServiceTest {
     public void tierDown() {
         daoMock = null;
         orderService = null;
-    }*/
+    }
 }
