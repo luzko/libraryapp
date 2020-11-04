@@ -27,7 +27,7 @@ public class FindUserCommand implements Command {
         Router router = new Router();
         String searchName = request.getParameter(RequestParameter.SEARCH_USER);
         try {
-            if(searchName.isBlank()) {
+            if (searchName.isBlank()) {
                 request.getSession().removeAttribute(AttributeName.SEARCH_USER);
                 List<User> userList = defineUserList(request);
                 request.setAttribute(AttributeName.ALL_USERS, userList);
@@ -49,10 +49,10 @@ public class FindUserCommand implements Command {
         return userService.findPartOfAll(shownRecords, RECORDS_PER_PAGE);
     }
 
-    private void findUser(HttpServletRequest request, String  searchName) throws ServiceException {
+    private void findUser(HttpServletRequest request, String searchName) throws ServiceException {
         request.getSession().setAttribute(AttributeName.SEARCH_USER, searchName);
         List<User> userList = defineSearchUserList(searchName, request);
-        if(userList.isEmpty()) {
+        if (userList.isEmpty()) {
             String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_USER_NOT_FOUND,
                     (String) request.getSession().getAttribute(AttributeName.LOCALE));
             request.setAttribute(AttributeName.NOT_FOUND_USERS, attributeValue);

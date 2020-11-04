@@ -33,7 +33,7 @@ public class FindBookCommand implements Command {
                 request.getSession().setAttribute(AttributeName.ALL_BOOKS, bookList);
             } else {
                 findBook(request, searchName);
-        }
+            }
             router.setPagePath(PagePath.LIBRARY);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error in find book", e);
@@ -42,10 +42,10 @@ public class FindBookCommand implements Command {
         return router;
     }
 
-    private void findBook(HttpServletRequest request, String  searchName) throws ServiceException {
+    private void findBook(HttpServletRequest request, String searchName) throws ServiceException {
         request.getSession().setAttribute(AttributeName.SEARCH, searchName);
         List<Book> bookList = defineSearchBookList(searchName, request);
-        if(bookList.isEmpty()) {
+        if (bookList.isEmpty()) {
             String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_BOOK_NOT_FOUND,
                     (String) request.getSession().getAttribute(AttributeName.LOCALE));
             request.setAttribute(AttributeName.NOT_FOUND_BOOKS, attributeValue);
