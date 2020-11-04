@@ -51,6 +51,7 @@ public class AttributeName {
     public static final String BOOK_PARAMETER = "bookParameter";
     public static final String CORRECT_BOOK_MESSAGE = "createBookSuccess";
     public static final String NOT_FOUND_BOOKS = "notFoundBooks";
+    public static final String BOOK_DELETED = "bookDeleted";
 
     //author
     public static final String ALL_AUTHORS = "allAuthors";

@@ -192,6 +192,9 @@
             <div style="color: green;">
                 ${orderSuccess}
             </div>
+            <div style="color: green;">
+                ${bookDeleted}
+            </div>
         </div>
     </div>
 </section>

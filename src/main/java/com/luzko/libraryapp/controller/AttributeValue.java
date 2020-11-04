@@ -11,7 +11,7 @@ public class AttributeValue {
     public static final String RUS = "ru_RU";
     public static final String ENG = "en_US";
 
-    //message error
+    //message
     public static final String PATH_LOGIN_EXIST = "message.login.exist";
     public static final String PATH_INCORRECT_DATA = "message.login.incorrect.data";
     public static final String PATH_INCORRECT_USER = "message.user.incorrect";
@@ -35,4 +35,5 @@ public class AttributeValue {
     public static final String PATH_USER_NOT_FOUND = "user.not.found";
     public static final String PATH_AVATAR_CHANGES = "avatar.error";
     public static final String PATH_PASSWORD_ERROR = "password.error";
+    public static final String PATH_REMOVE_BOOK = "message.book.remove";
 }
