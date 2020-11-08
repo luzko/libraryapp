@@ -1,11 +1,11 @@
 package com.luzko.libraryapp.controller;
 
 /**
- * The type Router.
+ * The type represents a router, containing the type of the router and the path to the page.
  */
 public class Router {
     /**
-     * The enum Route type.
+     * The enum represents type of the router.
      */
     public enum RouteType {
         FORWARD,
@@ -25,7 +25,7 @@ public class Router {
     /**
      * Instantiates a new Router.
      *
-     * @param pagePath the page path
+     * @param pagePath the path to the page
      */
     public Router(String pagePath) {
         this.routeType = RouteType.FORWARD;
@@ -35,8 +35,8 @@ public class Router {
     /**
      * Instantiates a new Router.
      *
-     * @param routeType the route type
-     * @param pagePath  the page path
+     * @param routeType the type of the router
+     * @param pagePath  the path to the page
      */
     public Router(RouteType routeType, String pagePath) {
         this.routeType = routeType;
@@ -44,43 +44,43 @@ public class Router {
     }
 
     /**
-     * Gets route type.
+     * Gets type of the router.
      *
-     * @return the route type
+     * @return the type of the router
      */
     public RouteType getRouteType() {
         return routeType;
     }
 
     /**
-     * Sets route type.
+     * Sets type of the router.
      *
-     * @param routeType the route type
+     * @param routeType the type of the router
      */
     public void setRouteType(RouteType routeType) {
         this.routeType = routeType;
     }
 
     /**
-     * Gets page path.
+     * Gets path to the page.
      *
-     * @return the page path
+     * @return the path to the page
      */
     public String getPagePath() {
         return pagePath;
     }
 
     /**
-     * Sets page path.
+     * Sets path to the page.
      *
-     * @param pagePath the page path
+     * @param pagePath the path to the page
      */
     public void setPagePath(String pagePath) {
         this.pagePath = pagePath;
     }
 
     /**
-     * Sets redirect.
+     * Sets the type of router redirection.
      */
     public void setRedirect() {
         this.routeType = RouteType.REDIRECT;
