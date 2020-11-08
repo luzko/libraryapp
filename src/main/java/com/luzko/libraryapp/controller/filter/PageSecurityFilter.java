@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * The type Page security filter.
+ * The type represents the page security filter.
  */
 @WebFilter(urlPatterns = {"/jsp/view/*"}, initParams = {
         @WebInitParam(name = "ERROR_STEP", value = "/jsp/error/error404.jsp")

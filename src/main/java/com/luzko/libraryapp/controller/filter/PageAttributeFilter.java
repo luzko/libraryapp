@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * The type Page attribute filter.
+ * The type represents a page attribute filter.
  */
 @WebFilter(urlPatterns = {"/jsp/view/*"}, initParams = {
         @WebInitParam(name = "ERROR_STEP", value = "/jsp/error/error404.jsp")

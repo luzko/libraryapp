@@ -3,8 +3,7 @@ package com.luzko.libraryapp.controller.filter;
 import java.util.List;
 
 public class AvailabilityPage {
-
-    AvailabilityPage() {
+    private AvailabilityPage() {
 
     }
 
