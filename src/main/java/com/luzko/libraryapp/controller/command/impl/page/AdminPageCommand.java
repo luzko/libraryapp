@@ -16,6 +16,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * The type represents the command to view the admin page.
+ */
 public class AdminPageCommand implements Command {
     private static final Logger logger = LogManager.getLogger(AdminPageCommand.class);
 
@@ -24,11 +27,11 @@ public class AdminPageCommand implements Command {
         Router router = new Router();
         Object searchName = request.getSession().getAttribute(RequestParameter.SEARCH_USER);
         try {
-            if (searchName == null) {
+            if (searchName != null) {
+                findUser(request, searchName);
+            } else {
                 List<User> userList = defineUserList(request);
                 request.setAttribute(AttributeName.ALL_USERS, userList);
-            } else {
-                findUser(request, searchName);
             }
             router.setPagePath(PagePath.ADMIN);
         } catch (ServiceException e) {

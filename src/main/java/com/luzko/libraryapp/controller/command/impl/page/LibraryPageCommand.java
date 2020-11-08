@@ -24,11 +24,11 @@ public class LibraryPageCommand implements Command {
         Router router = new Router();
         Object searchName = request.getSession().getAttribute(RequestParameter.SEARCH);
         try {
-            if (searchName == null) {
+            if (searchName != null) {
+                findBook(request, searchName);
+            } else {
                 List<Book> bookList = defineBookList(request);
                 request.getSession().setAttribute(AttributeName.ALL_BOOKS, bookList);
-            } else {
-                findBook(request, searchName);
             }
             router.setPagePath(PagePath.LIBRARY);
             return router;
