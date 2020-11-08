@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 /**
- * The type Email sender thread.
+ * The type represents the email sender thread.
  */
 public class EmailSenderThread implements Runnable {
     private static final Logger logger = LogManager.getLogger(EmailSenderThread.class);
@@ -28,7 +28,7 @@ public class EmailSenderThread implements Runnable {
     /**
      * Instantiates a new Email sender.
      *
-     * @param toEmail     the to email
+     * @param toEmail     the to email address
      * @param mailSubject the mail subject
      * @param mailText    the mail text
      * @param properties  the properties

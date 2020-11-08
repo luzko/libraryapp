@@ -5,7 +5,7 @@ import com.luzko.libraryapp.util.ConfigurationManager;
 import java.util.Properties;
 
 /**
- * The type Email sender.
+ * The type represents the email sender.
  */
 public class EmailSender {
     private static final Properties properties = ConfigurationManager.getMailProperties();
@@ -20,7 +20,7 @@ public class EmailSender {
     /**
      * Send message with confirm code.
      *
-     * @param emailTo     the email to
+     * @param emailTo     the email address
      * @param codeConfirm the code confirm
      */
     public static void sendMessageConfirm(String emailTo, String codeConfirm) {
@@ -30,9 +30,9 @@ public class EmailSender {
     /**
      * Send message to admin.
      *
-     * @param login   the login
-     * @param subject the subject
-     * @param text    the text
+     * @param login   the user login
+     * @param subject the message subject
+     * @param text    the message text
      */
     public static void sendMessageAdmin(String login, String subject, String text) {
         sendMessage(properties.getProperty(MAIL_USER_NAME), login + " : " + subject, text);

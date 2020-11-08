@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * The type Date util.
+ * The type represents the date util.
  */
 public final class DateUtil {
     private static final String DATE_PATTERN = "dd-MM-yyyy";
@@ -17,7 +17,7 @@ public final class DateUtil {
      * Define date value by milliseconds.
      *
      * @param milliseconds the milliseconds
-     * @return the string
+     * @return the date string representation
      */
     public static String defineDateValue(long milliseconds) {
         Date date = new Date(milliseconds);
@@ -28,7 +28,7 @@ public final class DateUtil {
     /**
      * Define count milliseconds from date now.
      *
-     * @return the long
+     * @return the count milliseconds
      */
     public static long defineCountMillisecondsFromNow() {
         Date date = new Date();

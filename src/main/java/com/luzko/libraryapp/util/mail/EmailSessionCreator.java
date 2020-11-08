@@ -6,7 +6,7 @@ import javax.mail.Session;
 import java.util.Properties;
 
 /**
- * The type Email session creator.
+ * The type represents the email session creator.
  */
 public class EmailSessionCreator {
     private static final String MAIL_USER_NAME = "mail.user.name";

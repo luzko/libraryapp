@@ -5,7 +5,7 @@ import com.fasterxml.uuid.Generators;
 import java.util.UUID;
 
 /**
- * The type Code generator.
+ * The type represents the code generator.
  */
 public final class CodeGenerator {
     private CodeGenerator() {
@@ -15,12 +15,17 @@ public final class CodeGenerator {
     /**
      * Generate unique code for registration.
      *
-     * @return the string
+     * @return the code confirm
      */
     public static String generateCodeConfirm() {
         return generate().substring(0, 10);
     }
 
+    /**
+     * Generate unique code.
+     *
+     * @return the unique code
+     */
     public static String generate() {
         UUID confirmCodeUuid = Generators.randomBasedGenerator().generate();
         return confirmCodeUuid.toString().replaceAll("-", "");

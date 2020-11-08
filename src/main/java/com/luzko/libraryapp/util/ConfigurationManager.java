@@ -6,7 +6,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
- * The type Configuration manager.
+ * The type represents the configuration manager.
  */
 public final class ConfigurationManager {
     private static final String LANGUAGE = "ru";
