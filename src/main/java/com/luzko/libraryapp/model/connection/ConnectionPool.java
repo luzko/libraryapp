@@ -18,7 +18,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * The type Connection pool.
+ * The type represents the connection pool.
  */
 public class ConnectionPool {
     private static final Logger logger = LogManager.getLogger(ConnectionPool.class);
@@ -42,9 +42,9 @@ public class ConnectionPool {
     }
 
     /**
-     * Gets instance.
+     * Gets connection pool instance.
      *
-     * @return the instance
+     * @return the connection pool instance
      */
     public static ConnectionPool getInstance() {
         return ConnectionPoolSingletonHolder.INSTANCE;
@@ -153,7 +153,7 @@ public class ConnectionPool {
 
     private static class ConnectionPoolSingletonHolder {
         /**
-         * The Instance.
+         * The connection pool instance.
          */
         static final ConnectionPool INSTANCE = new ConnectionPool();
     }
