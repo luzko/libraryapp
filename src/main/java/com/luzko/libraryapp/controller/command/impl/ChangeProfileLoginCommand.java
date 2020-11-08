@@ -16,6 +16,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type represents the command to change the user's login.
+ */
 public class ChangeProfileLoginCommand implements Command {
     private static final Logger logger = LogManager.getLogger(ChangeProfileLoginCommand.class);
 

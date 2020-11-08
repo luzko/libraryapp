@@ -18,6 +18,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type represents the command to verify a user account.
+ */
 public class ConfirmCommand implements Command {
     private static final Logger logger = LogManager.getLogger(ConfirmCommand.class);
 

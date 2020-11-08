@@ -16,6 +16,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type represents the command for removing the book.
+ */
 public class RemoveBookCommand implements Command {
     private static final Logger logger = LogManager.getLogger(RemoveBookCommand.class);
 

@@ -8,6 +8,9 @@ import com.luzko.libraryapp.controller.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type represents the command to change the locale.
+ */
 public class ChangeLocaleCommand implements Command {
 
     @Override

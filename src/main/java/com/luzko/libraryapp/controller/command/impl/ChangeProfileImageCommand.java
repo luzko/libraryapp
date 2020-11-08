@@ -25,6 +25,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * The type represents the command to change the user's profile image.
+ */
 public class ChangeProfileImageCommand implements Command {
     private static final Logger logger = LogManager.getLogger(ChangeProfileImageCommand.class);
     private static final String UPLOAD_DIRECTORY = "C:\\upload";

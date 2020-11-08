@@ -6,8 +6,8 @@ import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
 import com.luzko.libraryapp.exception.ServiceException;
-import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.entity.Order;
+import com.luzko.libraryapp.model.factory.ServiceFactory;
 import com.luzko.libraryapp.model.service.OrderService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -16,6 +16,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * The type represents the command to reject the order.
+ */
 public class DenyOrderCommand implements Command {
     private static final Logger logger = LogManager.getLogger(DenyOrderCommand.class);
 

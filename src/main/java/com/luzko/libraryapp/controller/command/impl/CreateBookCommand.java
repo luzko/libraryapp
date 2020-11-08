@@ -19,6 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type represents the command for creating the book.
+ */
 public class CreateBookCommand implements Command {
     private static final Logger logger = LogManager.getLogger(CreateBookCommand.class);
 

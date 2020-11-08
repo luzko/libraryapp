@@ -6,6 +6,9 @@ import com.luzko.libraryapp.controller.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type represents the command to exit the application.
+ */
 public class LogoutCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {

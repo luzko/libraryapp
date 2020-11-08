@@ -10,6 +10,9 @@ import com.luzko.libraryapp.util.mail.EmailSender;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type represents the command to send a message to the administrator.
+ */
 public class SendMessageAdmin implements Command {
     @Override
     public Router execute(HttpServletRequest request) {

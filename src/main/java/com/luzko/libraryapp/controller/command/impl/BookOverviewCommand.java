@@ -18,6 +18,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * The type represents the command for book overview.
+ */
 public class BookOverviewCommand implements Command {
     private static final Logger logger = LogManager.getLogger(BookOverviewCommand.class);
 

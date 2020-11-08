@@ -23,6 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+/**
+ * The type represents the command to register with the application.
+ */
 public class RegistrationCommand implements Command {
     private static final Logger logger = LogManager.getLogger(RegistrationCommand.class);
 

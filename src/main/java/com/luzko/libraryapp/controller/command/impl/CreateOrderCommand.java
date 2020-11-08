@@ -16,6 +16,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type represents the command for creating a book order.
+ */
 public class CreateOrderCommand implements Command {
     private static final Logger logger = LogManager.getLogger(CreateOrderCommand.class);
 

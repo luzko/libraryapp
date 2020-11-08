@@ -16,6 +16,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * The type represents the command to return the order.
+ */
 public class ReturnOrderCommand implements Command {
     private static final Logger logger = LogManager.getLogger(ReturnOrderCommand.class);
 
