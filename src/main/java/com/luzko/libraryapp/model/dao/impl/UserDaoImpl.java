@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type User dao.
+ * The type represents User DAO implementation.
  */
 public class UserDaoImpl implements UserDao {
     private static final UserDao INSTANCE = new UserDaoImpl();

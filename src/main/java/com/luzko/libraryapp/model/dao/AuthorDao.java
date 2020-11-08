@@ -6,16 +6,22 @@ import com.luzko.libraryapp.model.entity.Author;
 import java.util.List;
 
 /**
- * The interface Author dao.
+ * The interface represents Author DAO.
  */
 public interface AuthorDao extends BaseDao {
 
+    /**
+     * Find all authors.
+     *
+     * @return the list of found authors
+     * @throws DaoException the dao exception
+     */
     List<Author> findAll() throws DaoException;
 
     /**
-     * Add.
+     * Add new author.
      *
-     * @param name the name
+     * @param name the author's name
      * @return the boolean
      * @throws DaoException the dao exception
      */
@@ -24,7 +30,7 @@ public interface AuthorDao extends BaseDao {
     /**
      * Check name is unique.
      *
-     * @param name the name
+     * @param name the author's name
      * @return the boolean
      * @throws DaoException the dao exception
      */

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Book dao.
+ * The type represents Book DAO implementation.
  */
 public class BookDaoImpl implements BookDao {
     private static final BookDao INSTANCE = new BookDaoImpl();

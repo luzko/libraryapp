@@ -9,15 +9,21 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * The interface represents Base DAO.
+ */
 public interface BaseDao {
 
+    /**
+     * The constant logger.
+     */
     Logger logger = LogManager.getLogger(AuthorServiceImpl.class);
 
     /**
      * Connection set auto commit.
      *
-     * @param connection the connection
-     * @param value      the value
+     * @param connection the connection instance
+     * @param value      the auto commit value
      * @throws DaoException the dao exception
      */
     default void setAutoCommit(Connection connection, boolean value) throws DaoException {
@@ -31,9 +37,9 @@ public interface BaseDao {
     }
 
     /**
-     * Connections rollback.
+     * Connection rollback.
      *
-     * @param connection the connection
+     * @param connection the connection instance
      * @throws DaoException the dao exception
      */
     default void rollback(Connection connection) throws DaoException {
@@ -49,7 +55,7 @@ public interface BaseDao {
     /**
      * Connection commit changes.
      *
-     * @param connection the connection
+     * @param connection the connection instance
      * @throws DaoException the dao exception
      */
     default void commit(Connection connection) throws DaoException {
@@ -65,7 +71,7 @@ public interface BaseDao {
     /**
      * Close connection.
      *
-     * @param connection the connection
+     * @param connection the connection instance
      * @throws DaoException the dao exception
      */
     default void close(Connection connection) throws DaoException {

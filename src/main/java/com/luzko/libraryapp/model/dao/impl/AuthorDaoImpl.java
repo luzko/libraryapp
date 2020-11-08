@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Author dao.
+ * The type represents Author DAO implementation.
  */
 public class AuthorDaoImpl implements AuthorDao {
     private static final AuthorDao INSTANCE = new AuthorDaoImpl();
