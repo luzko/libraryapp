@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * The type represents the command to register with the application.
  */
