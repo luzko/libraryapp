@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Optional;
 
 /**
- * The type Action provider.
+ * The type represents the command provider.
  */
 public class ActionProvider {
     private static final Logger logger = LogManager.getLogger(ActionProvider.class);
@@ -17,10 +17,10 @@ public class ActionProvider {
     }
 
     /**
-     * Define command type.
+     * Define command by name.
      *
      * @param commandName the command name
-     * @return the optional
+     * @return the optional of created command
      */
     public static Optional<Command> defineCommand(String commandName) {
         Optional<Command> command = Optional.empty();
