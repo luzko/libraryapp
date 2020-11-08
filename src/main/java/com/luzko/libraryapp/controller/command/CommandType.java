@@ -5,7 +5,9 @@ import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.impl.*;
 import com.luzko.libraryapp.controller.command.impl.page.*;
 
-
+/**
+ * The enumeration represents the type of the command.
+ */
 public enum CommandType {
     LOGIN_PAGE(request -> new Router(PagePath.LOGIN)),
     REGISTRATION_PAGE(request -> new Router(PagePath.REGISTRATION)),
@@ -46,6 +48,11 @@ public enum CommandType {
         this.command = command;
     }
 
+    /**
+     * Gets the command.
+     *
+     * @return the command
+     */
     public Command getCommand() {
         return command;
     }
