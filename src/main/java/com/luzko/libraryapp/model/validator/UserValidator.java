@@ -5,7 +5,7 @@ import com.luzko.libraryapp.model.dao.ColumnName;
 import java.util.Map;
 
 /**
- * The type User validator.
+ * The type represents the validator for users.
  */
 public final class UserValidator {
     private static final String EMPTY_VALUE = "";
@@ -51,9 +51,9 @@ public final class UserValidator {
     }
 
     /**
-     * Check login valid.
+     * Check user login valid.
      *
-     * @param login the login
+     * @param login the user login
      * @return the boolean
      */
     public static boolean isLoginValid(String login) {
@@ -64,6 +64,12 @@ public final class UserValidator {
         return isLoginCorrect;
     }
 
+    /**
+     * Check user search login value valid.
+     *
+     * @param login the user login value
+     * @return the boolean
+     */
     public static boolean isLoginSearchValid(String login) {
         boolean isLoginCorrect = false;
         if (login != null && !login.isEmpty()) {
@@ -75,7 +81,7 @@ public final class UserValidator {
     /**
      * Check password valid.
      *
-     * @param password the password
+     * @param password the user password value
      * @return the boolean
      */
     public static boolean isPasswordValid(String password) {
@@ -87,9 +93,9 @@ public final class UserValidator {
     }
 
     /**
-     * Check name valid.
+     * Check user name valid.
      *
-     * @param name the name
+     * @param name the user name value
      * @return the boolean
      */
     public static boolean isNameValid(String name) {
@@ -101,9 +107,9 @@ public final class UserValidator {
     }
 
     /**
-     * Check email valid.
+     * Check user email valid.
      *
-     * @param email the email
+     * @param email the user email value
      * @return the boolean
      */
     public static boolean isEmailValid(String email) {

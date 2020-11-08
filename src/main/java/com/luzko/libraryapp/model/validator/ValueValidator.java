@@ -1,7 +1,7 @@
 package com.luzko.libraryapp.model.validator;
 
 /**
- * The type Value validator.
+ * The type represents the validator for values.
  */
 public final class ValueValidator {
     private static final String XSS_PATTERN = "(?i)<script.*?>.*?</script.*?>";
@@ -13,14 +13,32 @@ public final class ValueValidator {
 
     }
 
+    /**
+     * Check valid confirm code.
+     *
+     * @param value the confirm code value
+     * @return the boolean
+     */
     public static boolean isValidConfirmCode(String value) {
         return isValidValue(value) && value.matches(CONFIRM_CODE_PATTERN);
     }
 
+    /**
+     * Check valid message.
+     *
+     * @param value the message value
+     * @return the boolean
+     */
     public static boolean isValidMessage(String value) {
         return isValidValue(value) && value.matches(MESSAGE_PATTERN);
     }
 
+    /**
+     * Check valid subject.
+     *
+     * @param value the subject value
+     * @return the boolean
+     */
     public static boolean isValidSubject(String value) {
         return isValidValue(value) && value.matches(SUBJECT_PATTERN);
     }

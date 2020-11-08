@@ -5,7 +5,7 @@ import com.luzko.libraryapp.model.dao.ColumnName;
 import java.util.Map;
 
 /**
- * The type Book validator.
+ * The type represents the validator for books.
  */
 public final class BookValidator {
     private static final int MIN_YEAR = 1000;
@@ -58,7 +58,7 @@ public final class BookValidator {
     /**
      * Check valid author name.
      *
-     * @param name the name
+     * @param name the author name
      * @return the boolean
      */
     public static boolean isValidAuthorName(String name) {
@@ -70,9 +70,9 @@ public final class BookValidator {
     }
 
     /**
-     * Check valid title.
+     * Check valid book title.
      *
-     * @param title the title
+     * @param title the book title
      * @return the boolean
      */
     public static boolean isValidTitle(String title) {
@@ -83,6 +83,12 @@ public final class BookValidator {
         return isTitleCorrect;
     }
 
+    /**
+     * Check valid search value.
+     *
+     * @param searchName the search value
+     * @return the boolean
+     */
     public static boolean isValidSearchValue(String searchName) {
         boolean isSearchValueCorrect = false;
         if (searchName != null) {
@@ -91,18 +97,10 @@ public final class BookValidator {
         return isSearchValueCorrect;
     }
 
-    private static boolean isValidDescription(String description) {
-        boolean isDescriptionCorrect = false;
-        if (description != null && !description.isEmpty()) {
-            isDescriptionCorrect = !description.matches(XSS_PATTERN);
-        }
-        return isDescriptionCorrect;
-    }
-
     /**
-     * Check year valid.
+     * Check book year valid.
      *
-     * @param year the year
+     * @param year the book year
      * @return the boolean
      */
     public static boolean isYearValid(int year) {
@@ -110,13 +108,21 @@ public final class BookValidator {
     }
 
     /**
-     * Check pages valid.
+     * Check book pages valid.
      *
-     * @param pages the pages
+     * @param pages the book pages
      * @return the boolean
      */
     public static boolean isPagesValid(int pages) {
         return pages >= MIN_PAGES && pages <= MAX_PAGES;
+    }
+
+    private static boolean isValidDescription(String description) {
+        boolean isDescriptionCorrect = false;
+        if (description != null && !description.isEmpty()) {
+            isDescriptionCorrect = !description.matches(XSS_PATTERN);
+        }
+        return isDescriptionCorrect;
     }
 
     private static boolean isNumberCopiesValid(int numberCopies) {
