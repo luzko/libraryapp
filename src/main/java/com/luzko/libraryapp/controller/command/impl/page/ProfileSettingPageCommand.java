@@ -8,6 +8,9 @@ import com.luzko.libraryapp.controller.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type represents the command to view the user setting page.
+ */
 public class ProfileSettingPageCommand implements Command {
 
     @Override

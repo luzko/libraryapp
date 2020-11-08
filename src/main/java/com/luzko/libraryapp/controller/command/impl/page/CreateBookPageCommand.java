@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The type represents the command for the book creation page.
+ */
 public class CreateBookPageCommand implements Command {
     private static final Logger logger = LogManager.getLogger(CreateBookPageCommand.class);
 

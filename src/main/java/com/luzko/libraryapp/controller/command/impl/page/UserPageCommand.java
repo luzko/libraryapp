@@ -10,6 +10,9 @@ import com.luzko.libraryapp.model.entity.UserStatus;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type represents the command to view user page.
+ */
 public class UserPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {

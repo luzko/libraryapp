@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type represents the command to view the order page.
+ */
 public class OrderPageCommand implements Command {
     private static final Logger logger = LogManager.getLogger(OrderPageCommand.class);
 
