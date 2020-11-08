@@ -41,6 +41,8 @@
 <header class="masthead2">
     <div class="container d-flex h-100 align-items-center">
         <div class="mx-auto text-center ">
+            <h1>500</h1>
+            <br/>
             <h1 class="mx-auto my-0 text-uppercase"><fmt:message key="text.blocked.err1"/></h1>
             <h2 class="text-white-50 mx-auto mt-2 mb-5"><fmt:message key="text.blocked.err2"/></h2>
         </div>

@@ -74,7 +74,7 @@
                     <div class="form-group row">
                         <input type="hidden" name="command" value="registration"/>
                         <label class="col-sm-4 col-form-label float-sm-right" for="login" style="color: white">
-                            <fmt:message key="label.login"/>
+                            <fmt:message key="label.login"/><span class="filed-required">*</span>
                         </label>
                         <div class="col-sm-8 ">
                             <input type="text" name="login" id="login" class="float-sm-left" style="width: 220px"
@@ -88,7 +88,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label float-sm-right" for="password" style="color: white">
-                            <fmt:message key="label.password"/>
+                            <fmt:message key="label.password"/><span class="filed-required">*</span>
                         </label>
                         <div class="col-sm-8">
                             <input type="password" name="password" id="password" class="float-sm-left"
@@ -103,7 +103,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label float-sm-right" for="email" style="color: white">
-                            <fmt:message key="label.email"/>
+                            <fmt:message key="label.email"/><span class="filed-required">*</span>
                         </label>
                         <div class="col-sm-8">
                             <input type="text" name="email" id="email" class="float-sm-left" style="width: 220px"
@@ -117,7 +117,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label float-sm-right" for="name" style="color: white">
-                            <fmt:message key="label.name"/>
+                            <fmt:message key="label.name"/><span class="filed-required">*</span>
                         </label>
                         <div class="col-sm-8">
                             <input type="text" name="name" id="name" class="float-sm-left" style="width: 220px"
@@ -131,7 +131,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label float-sm-right" for="surname" style="color: white">
-                            <fmt:message key="label.surname"/>
+                            <fmt:message key="label.surname"/><span class="filed-required">*</span>
                         </label>
                         <div class="col-sm-8">
                             <input type="text" name="surname" id="surname" class="float-sm-left" style="width: 220px"

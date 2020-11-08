@@ -69,7 +69,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="authorName"
                                        style="color: white">
-                                    <fmt:message key="label.name"/>
+                                    <fmt:message key="label.name"/><span class="filed-required">*</span>
                                 </label>
                                 <div class="col-sm-8">
                                     <input type="text" name="authorName" id="authorName" class="float-sm-left"
@@ -87,7 +87,7 @@
                             <input type="hidden" name="createType" value="book">
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="title" style="color: white">
-                                    <fmt:message key="label.title"/>
+                                    <fmt:message key="label.title"/><span class="filed-required">*</span>
                                 </label>
                                 <div class="col-sm-8 ">
                                     <input type="text" name="title" id="title" class="float-sm-left"
@@ -102,7 +102,7 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="year" style="color: white">
-                                    <fmt:message key="label.year"/>
+                                    <fmt:message key="label.year"/><span class="filed-required">*</span>
                                 </label>
                                 <div class="col-sm-8 ">
                                     <input type="text" name="year" id="year" class="float-sm-left"
@@ -117,7 +117,7 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="pages" style="color: white">
-                                    <fmt:message key="label.pages"/>
+                                    <fmt:message key="label.pages"/><span class="filed-required">*</span>
                                 </label>
                                 <div class="col-sm-8 ">
                                     <input type="text" name="pages" id="pages" class="float-sm-left"
@@ -132,7 +132,7 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="pages" style="color: white">
-                                    <fmt:message key="label.number"/>
+                                    <fmt:message key="label.number"/><span class="filed-required">*</span>
                                 </label>
                                 <div class="col-sm-8 ">
                                     <input type="text" name="number" id="number" class="float-sm-left"
@@ -149,7 +149,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="dropdownCategory"
                                        style="color: white">
-                                    <fmt:message key="label.category"/>
+                                    <fmt:message key="label.category"/><span class="filed-required">*</span>
                                 </label>
                                 <div class="col-sm-8 ">
                                     <select name="category" id="dropdownCategory" class="float-sm-left"
@@ -166,7 +166,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="dropdownAuthor"
                                        style="color: white">
-                                    <fmt:message key="label.author"/>
+                                    <fmt:message key="label.author"/><span class="filed-required">*</span>
                                 </label>
                                 <div class="col-sm-8 ">
                                     <select name="author" id="dropdownAuthor" class="float-sm-left"
@@ -183,7 +183,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label float-sm-right" for="description"
                                        style="color: white">
-                                    <fmt:message key="label.description"/>
+                                    <fmt:message key="label.description"/><span class="filed-required">*</span>
                                 </label>
                                 <div class="col-sm-8 ">
                                     <textarea type="text" name="description" id="description" class="float-sm-left"
