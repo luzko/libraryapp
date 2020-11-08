@@ -6,21 +6,21 @@ import com.luzko.libraryapp.model.entity.Author;
 import java.util.List;
 
 /**
- * The interface Author service.
+ * he interface represents Author Service.
  */
 public interface AuthorService {
     /**
-     * Find all.
+     * Find all authors.
      *
-     * @return the list
+     * @return the list of found authors
      * @throws ServiceException the service exception
      */
     List<Author> findAll() throws ServiceException;
 
     /**
-     * Add.
+     * Add new author.
      *
-     * @param name the name
+     * @param name the author's name
      * @return the boolean
      * @throws ServiceException the service exception
      */

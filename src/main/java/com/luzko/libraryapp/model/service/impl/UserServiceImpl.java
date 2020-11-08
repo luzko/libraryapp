@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * The type User service.
+ * The type represents User Service implementation.
  */
 public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);

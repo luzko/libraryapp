@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * The type Book service.
+ * The type represents Book Service implementation.
  */
 public class BookServiceImpl implements BookService {
     private static final Logger logger = LogManager.getLogger(BookServiceImpl.class);

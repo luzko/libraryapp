@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 /**
- * The type Author service.
+ * The type represents Author Service implementation.
  */
 public class AuthorServiceImpl implements AuthorService {
     private static final Logger logger = LogManager.getLogger(AuthorServiceImpl.class);
