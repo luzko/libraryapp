@@ -10,7 +10,7 @@ import com.luzko.libraryapp.model.service.UserService;
 import com.luzko.libraryapp.model.service.impl.UserServiceImpl;
 
 /**
- * The type Service factory.
+ * The type represents service factory.
  */
 public class ServiceFactory {
     private final UserService userService;
@@ -27,15 +27,15 @@ public class ServiceFactory {
 
     private static class ServiceFactorySingletonHolder {
         /**
-         * The Instance.
+         * The service factory instance.
          */
         static final ServiceFactory INSTANCE = new ServiceFactory();
     }
 
     /**
-     * Gets instance.
+     * Gets service factory instance.
      *
-     * @return the instance
+     * @return the service factory instance
      */
     public static ServiceFactory getInstance() {
         return ServiceFactory.ServiceFactorySingletonHolder.INSTANCE;
