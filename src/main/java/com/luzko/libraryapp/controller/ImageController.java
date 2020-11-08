@@ -16,7 +16,7 @@ import java.nio.file.Files;
 import java.util.Optional;
 
 /**
- * The type Image controller.
+ * The type represents the images controller.
  */
 @WebServlet(urlPatterns = {"/images/*"}, loadOnStartup = 2)
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)

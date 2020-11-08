@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * The type Front controller.
+ * The type represents the application controller.
  */
 @WebServlet(urlPatterns = {"/controller/*"}, loadOnStartup = 1)
 public class FrontController extends HttpServlet {
