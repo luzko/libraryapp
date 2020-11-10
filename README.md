@@ -54,7 +54,7 @@ ___
      * Редактирование информации профиля
      * Просмотр новых заказов
      * Просмотр всех заказов
-     * Просмотр заказов по определенной книге
+     * Просмотр заказов по книге
      * Подтверждение выдачи книги по заказу
      * Отказ в выдаче книги
      * Выход из аккаунта
@@ -68,4 +68,75 @@ ___
      * Добавление новой книги
      * Удаление книги
      * Выход из аккаунта
+___
+## Web application library - "libraryapp"
+---
+### Java Web Development Teaching Project
+### Author: Luzko Dmitry
+---
+### General description
+  The web application implements library health support.
+  The reader has the ability to search and order books in the catalog.
+  The librarian looks through the orders, gives the reader a book at home or in the reading room.
+  The administrator manages the users and the content of the system.
+___
+### Users
+   To differentiate user access levels, roles were introduced:
+   * **Guest**  
+    An unauthorized user has the opportunity to view the catalog and description of books,
+   pass authorization or registration.
+   * **Reader**  
+    The reader has access to books in the library,
+   may place orders, view and modify personal information.
+   * **Librarian**  
+    The librarian has access to the readers' orders and decides on the issue of books.
+   * **Administrator**  
+    The administrator manages the application, namely: users and system content.
+___
+### Functionality
+  * **General actions**
+    * Home page view
+    * Change site language
+    * Book Search
+    * Browse the book catalog
+    * View book description
+  * **Guest**  
+     * Authorization
+     * Registration
+  * **Reader**  
+     * **Unconfirmed**  
+       * Personal Profile Activation
+       * Sign out
+     * **Active** 
+       * Viewing personal profile
+       * Editing profile information
+       * Order a book to the reading room
+       * Order a book at home
+       * View your orders
+       * Returning a book
+       * Cancellations order
+       * Sending email to administrator
+       * Sign out
+     * **Заблокированный** 
+       * Sending email to administrator
+       * Sign out
+  * **Librarian**
+     * Viewing personal profile
+     * Editing profile information
+     * View new orders
+     * View all orders
+     * View orders by book
+     * Confirmation of an order
+     * Refusal to issue a book
+     * Sign out
+  * **Administrator**  
+     * View a list of all users
+     * Search by users
+     * Adding a new librarian
+     * Blocking a user
+     * Unlocking a user
+     * Adding a new author
+     * Adding a new book
+     * Deleting a Book
+     * Sign out
 ___
