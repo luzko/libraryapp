@@ -11,7 +11,7 @@ public final class UserValidator {
     private static final String EMPTY_VALUE = "";
     private static final String LOGIN_PATTERN = "^[\\w.]{5,20}$";
     private static final String LOGIN_SEARCH_PATTERN = "^[\\w.]{0,20}$";
-    private static final String PASSWORD_PATTERN = "^(?=.*[\\p{Lower}])(?=.*[\\p{Upper}])(?=.*\\d)[\\p{Alnum}]{6,20}$";
+    private static final String PASSWORD_PATTERN = "^(?=.*[\\p{Lower}])(?=.*[\\p{Upper}])(?=.*\\d)[\\p{Alnum}]{8,20}$";
     private static final String NAME_PATTERN = "^[\\p{L}]{3,25}$";
     private static final String EMAIL_PATTERN = "^[\\w.+-]{3,30}@[\\w.-]{2,15}\\.[\\p{Lower}]{2,4}$";
 

@@ -85,13 +85,17 @@
                                                    class="form-control-label"><fmt:message
                             key="text.blocked.theme"/></label> <input type="text"
                                                                       class="form-control"
-                                                                      id="subject" name="subject">
+                                                                      id="subject" name="subject"
+                                                                      pattern="^[\p{L}\d ?!,.']{5,35}$"
+                                                                      maxlength="35">
                     </div>
                     <div class="form-group"><label for="message"
                                                    class="form-control-label"><fmt:message
                             key="text.blocked.message"/> </label> <textarea class="form-control"
                                                                             id="message"
-                                                                            name="message"></textarea>
+                                                                            name="message"
+                                                                            pattern="^[\p{L}\d ?!,.']{5,300}$"
+                                                                            maxlength="300"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -119,7 +123,11 @@
                         <input type="text"
                                class="form-control"
                                id="old"
-                               name="oldPassword">
+                               name="oldPassword"
+                               pattern="^(?=.*[\p{Lower}])(?=.*[\p{Upper}])(?=.*\d)[\w.]{8,20}$"
+                               maxlength="20"
+                               title="<fmt:message key="invalid.registration.password"/>"
+                        >
                     </div>
                     <div class="form-group"><label for="new"
                                                    class="form-control-label"><fmt:message
@@ -127,7 +135,11 @@
                         <input type="text"
                                class="form-control"
                                id="new"
-                               name="newPassword">
+                               name="newPassword"
+                               pattern="^(?=.*[\p{Lower}])(?=.*[\p{Upper}])(?=.*\d)[\w.]{8,20}$"
+                               maxlength="20"
+                               title="<fmt:message key="invalid.registration.password"/>"
+                        >
                     </div>
                 </div>
                 <div class="modal-footer">

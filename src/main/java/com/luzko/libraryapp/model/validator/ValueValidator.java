@@ -6,8 +6,8 @@ package com.luzko.libraryapp.model.validator;
 public final class ValueValidator {
     private static final String XSS_PATTERN = "(?i)<script.*?>.*?</script.*?>";
     private static final String CONFIRM_CODE_PATTERN = "^[\\w]{5,20}$";
-    private static final String SUBJECT_PATTERN = "^[\\p{L} ]{5,35}$";
-    private static final String MESSAGE_PATTERN = "^[\\p{L} ]{5,300}$";
+    private static final String SUBJECT_PATTERN = "^[\\p{L}\\d ?!,.']{5,35}$";
+    private static final String MESSAGE_PATTERN = "^[\\p{L}\\d ?!,.']{5,300}$";
 
     private ValueValidator() {
 

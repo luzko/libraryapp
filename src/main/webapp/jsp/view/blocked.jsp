@@ -52,12 +52,10 @@
             <h2 class="text-white-50 mx-auto mt-2 mb-5"><fmt:message key="text.blocked.h4"/></h2>
             <div>
                 <div class="bd-example">
-
                     <button type="submit" class="btn btn-primary js-scroll-trigger custom-button"
                             data-toggle="modal" data-target="#exampleModal">
                         <fmt:message key="submit.mess.to.admin"/>
                     </button>
-
                     <div class="modal fade" id="exampleModal" tabindex="-1"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <form class="form" action="${pageContext.request.contextPath}/controller" method="POST">
@@ -71,7 +69,7 @@
                                                 key="text.blocked.theme"/></label> <input type="text"
                                                                                           class="form-control"
                                                                                           id="subject" name="subject"
-                                                                                          pattern="^[\p{L} ]{5,35}$"
+                                                                                          pattern="^[\p{L}\d ?!,.']{5,35}$"
                                                                                           maxlength="35">
                                         </div>
                                         <div class="form-group"><label for="message"
@@ -79,7 +77,7 @@
                                                 key="text.blocked.message"/> </label> <textarea class="form-control"
                                                                                                 id="message"
                                                                                                 name="message"
-                                                                                                pattern="^[\p{L} ]{5,300}$"
+                                                                                                pattern="^[\p{L}\d ?!,.']{5,300}$"
                                                                                                 maxlength="300"></textarea>
                                         </div>
                                     </div>

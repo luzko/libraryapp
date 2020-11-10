@@ -93,7 +93,7 @@
                         <div class="col-sm-8">
                             <input type="password" name="password" id="password" class="float-sm-left"
                                    style="width: 220px"
-                                   pattern="^(?=.*[\p{Lower}])(?=.*[\p{Upper}])(?=.*\d)[\p{Alnum}]{6,20}$"
+                                   pattern="^(?=.*[\p{Lower}])(?=.*[\p{Upper}])(?=.*\d)[\w.]{8,20}$"
                                    maxlength="20"
                                    title="<fmt:message key="invalid.registration.password"/>"
                                    required
