@@ -1,4 +1,4 @@
-## Веб приложение библиотека - "libraryapp"
+## Веб приложение - "libraryapp"
 ---
 ### Учебный проект по курсу Java Web Development
 ### Автор: Лузько Дмитрий
@@ -69,7 +69,7 @@ ___
      * Удаление книги
      * Выход из аккаунта
 ___
-## Web application library - "libraryapp"
+## Web application - "libraryapp"
 ---
 ### Java Web Development Teaching Project
 ### Author: Luzko Dmitry
@@ -114,7 +114,7 @@ ___
        * Order a book at home
        * View your orders
        * Returning a book
-       * Cancellations order
+       * Cancel a order
        * Sending email to administrator
        * Sign out
      * **Заблокированный** 
