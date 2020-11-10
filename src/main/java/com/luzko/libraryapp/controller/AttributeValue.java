@@ -14,6 +14,7 @@ public class AttributeValue {
     //message
     public static final String PATH_LOGIN_EXIST = "message.login.exist";
     public static final String PATH_INCORRECT_DATA = "message.login.incorrect.data";
+    public static final String PATH_CORRECT_DATA = "message.login.data";
     public static final String PATH_INCORRECT_USER = "message.user.incorrect";
     public static final String PATH_LOGIN_ERROR = "message.login.error";
     public static final String PATH_INCORRECT_CODE = "message.confirm.code";

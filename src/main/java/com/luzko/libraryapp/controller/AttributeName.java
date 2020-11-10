@@ -11,7 +11,7 @@ public class AttributeName {
     public static final String LOCALE = "locale";
     public static final String ENCODING = "encoding";
 
-    //error
+    //notification
     public static final String ERROR_MESSAGE = "errorMessage";
     public static final String ERROR_LOGIN_PASSWORD_MESSAGE = "errorLoginPasswordMessage";
     public static final String ERROR_DATA_MESSAGE = "errorDataMessage";
@@ -20,6 +20,7 @@ public class AttributeName {
     public static final String NOT_FOUND_ORDERS = "notFoundOrders";
     public static final String AVATAR_ERROR = "errorAvatar";
     public static final String ERROR_PASSWORD_MESSAGE = "errorPassword";
+    public static final String DATA_MESSAGE = "dataMessage";
 
     //user
     public static final String ALL_USERS = "allUsers";
@@ -84,8 +85,8 @@ public class AttributeName {
 
     //temp
     public static final List<String> tempAttributeList = List.of(
-            ALL_AUTHORS, ALL_ORDERS, ALL_BOOKS, ALL_CATEGORIES, ALL_USERS, CHANGE_SAVED, CORRECT_DATA_MESSAGE,
-            ERROR_APPROVE, OVERVIEW_ERROR, AVATAR_ERROR, LOGIN_ERROR, NAME_ERROR, ERROR_MESSAGE, SEARCH_USER,
-            ERROR_DATA_MESSAGE, BOOK_PARAMETER, ORDER_SUCCESS, ORDER_ERROR, PARAM_CONFIRM_ERROR, SEARCH
+            ALL_AUTHORS, ALL_ORDERS, ALL_BOOKS, ALL_CATEGORIES, ALL_USERS, CORRECT_DATA_MESSAGE, DATA_MESSAGE,
+            ERROR_APPROVE, OVERVIEW_ERROR, AVATAR_ERROR, LOGIN_ERROR, ERROR_MESSAGE, SEARCH_USER, CHANGE_SAVED,
+            ERROR_DATA_MESSAGE, BOOK_PARAMETER, ORDER_SUCCESS, ORDER_ERROR, PARAM_CONFIRM_ERROR, SEARCH, NAME_ERROR
     );
 }

@@ -65,16 +65,18 @@ public class RegistrationCommand implements Command {
     private void registration(Router router, Map<String, String> registrationParameter, HttpServletRequest request) throws ServiceException {
         Object role = request.getSession().getAttribute(AttributeName.USER_ROLE);
         boolean isLibrarian = role == UserRole.ADMIN;
+        String locale = (String) request.getSession().getAttribute(AttributeName.LOCALE);
         UserService userService = ServiceFactory.getInstance().getUserService();
         if (userService.isRegistration(registrationParameter, isLibrarian)) {
             EmailSender.sendMessageConfirm(
                     registrationParameter.get(AttributeName.EMAIL), registrationParameter.get(AttributeName.CONFIRM_CODE)
             );
+            String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_CORRECT_DATA, locale);
+            request.getSession().setAttribute(AttributeName.DATA_MESSAGE, attributeValue);
             router.setPagePath(isLibrarian ? PagePath.ADMIN : PagePath.LOGIN);
             router.setRedirect();
         } else {
-            String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_DATA,
-                    (String) request.getSession().getAttribute(AttributeName.LOCALE));
+            String attributeValue = ConfigurationManager.getMessageProperty(AttributeValue.PATH_INCORRECT_DATA, locale);
             request.setAttribute(AttributeName.ERROR_DATA_MESSAGE, attributeValue);
             request.setAttribute(AttributeName.REGISTRATION_PARAMETER, registrationParameter);
             router.setPagePath(PagePath.REGISTRATION);
