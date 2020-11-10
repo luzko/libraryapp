@@ -26,6 +26,7 @@ public class ApproveOrderCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
+        removeTempAttribute(request);
         Router router = new Router();
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
         String orderId = request.getParameter(RequestParameter.ORDER_ID);

@@ -24,6 +24,7 @@ public class DenyOrderCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
+        removeTempAttribute(request);
         Router router = new Router();
         OrderService orderService = ServiceFactory.getInstance().getOrderService();
         String orderType = request.getParameter(RequestParameter.ORDER_TYPE);

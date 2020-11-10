@@ -24,6 +24,7 @@ public class ChangeProfileNameCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
+        removeTempAttribute(request);
         Router router = new Router();
         UserService userService = ServiceFactory.getInstance().getUserService();
         String newName = request.getParameter(RequestParameter.NAME);

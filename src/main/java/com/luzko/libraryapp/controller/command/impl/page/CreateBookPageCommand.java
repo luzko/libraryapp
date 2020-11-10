@@ -26,6 +26,7 @@ public class CreateBookPageCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
+        removeTempAttribute(request);
         Router router = new Router();
         String createType = request.getParameter(RequestParameter.CREATE_TYPE);
         try {

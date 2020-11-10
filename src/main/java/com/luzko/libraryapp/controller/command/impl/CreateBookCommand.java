@@ -27,6 +27,7 @@ public class CreateBookCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
+        removeTempAttribute(request);
         Router router = new Router();
         String locale = (String) request.getSession().getAttribute(AttributeName.LOCALE);
         BookService bookService = ServiceFactory.getInstance().getBookService();

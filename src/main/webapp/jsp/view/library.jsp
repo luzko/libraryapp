@@ -93,7 +93,7 @@
                         <nav class="navbar navbar-expand-lg navbar-light">
                             <div class="container">
                                 <form class="form-inline" name="Simple"
-                                      action="${pageContext.request.contextPath}/controller" method="GET">
+                                      action="${pageContext.request.contextPath}/controller" method="POST">
                                     <input type="hidden" name="command" value="create_book_page"/>
                                     <input type="hidden" name="createType" value="author"/>
                                     <button type="submit" class="btn btn-outline-secondary"
@@ -107,7 +107,7 @@
                         <nav class="navbar navbar-expand-lg navbar-light">
                             <div class="container">
                                 <form class="form-inline" name="Simple"
-                                      action="${pageContext.request.contextPath}/controller" method="GET">
+                                      action="${pageContext.request.contextPath}/controller" method="POST">
                                     <input type="hidden" name="command" value="create_book_page"/>
                                     <input type="hidden" name="createType" value="book"/>
                                     <button type="submit" class="btn btn-outline-secondary"
@@ -179,7 +179,7 @@
                                             <fmt:message key="${book.category.localeName}"/>
                                         </span></h4></div>
                                 </td>
-                                <form action="${pageContext.request.contextPath}/controller" method="post">
+                                <form action="${pageContext.request.contextPath}/controller" method="POST">
                                     <input type="hidden" name="command" value="book_overview"/>
                                     <input type="hidden" name="book_id" value="${book.bookId}"/>
                                     <th scope="row">

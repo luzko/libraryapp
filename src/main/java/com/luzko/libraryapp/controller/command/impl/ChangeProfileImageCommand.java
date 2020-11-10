@@ -37,6 +37,7 @@ public class ChangeProfileImageCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
+        removeTempAttribute(request);
         Router router = new Router();
         UserService userService = ServiceFactory.getInstance().getUserService();
         String login = (String) request.getSession().getAttribute(AttributeName.LOGIN);

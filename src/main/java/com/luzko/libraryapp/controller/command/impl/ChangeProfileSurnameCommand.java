@@ -24,6 +24,7 @@ public class ChangeProfileSurnameCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
+        removeTempAttribute(request);
         Router router = new Router();
         UserService userService = ServiceFactory.getInstance().getUserService();
         String newSurname = request.getParameter(RequestParameter.SURNAME);
