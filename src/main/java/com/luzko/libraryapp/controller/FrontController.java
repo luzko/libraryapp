@@ -2,7 +2,7 @@ package com.luzko.libraryapp.controller;
 
 import com.luzko.libraryapp.controller.command.ActionProvider;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.model.connection.ConnectionPool;
+import com.luzko.libraryapp.model.pool.ConnectionPool;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

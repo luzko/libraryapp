@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.model.connection;
+package com.luzko.libraryapp.model.pool;
 
 import com.luzko.libraryapp.util.ConfigurationManager;
 import org.apache.logging.log4j.Level;

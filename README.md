@@ -15,7 +15,7 @@ ___
     Неавторизованный пользователь имеет возможность ознакомиться с каталогом и описанием книг, 
    пройти авторизацию или регистрацию.
    * **Читатель**  
-    Читатель имеет доступ к книгам в библиотке, 
+    Читатель имеет доступ к книгам в библиотеке, 
    может делать заказы, просматривать и изменять личную информацию.
    * **Библиотекарь**  
     Библиотекарь имеет доступ к заказам читателей и принимает решение о выдаче книг.
@@ -61,7 +61,7 @@ ___
   * **Администратор**  
      * Просмотр списка всех пользователей
      * Поиск по пользователям
-     * Добавление нового библиотекоря
+     * Добавление нового библиотекаря
      * Блокировка пользователя
      * Разблокировка пользователя
      * Добавление нового автора
@@ -75,23 +75,22 @@ ___
 ### Author: Luzko Dmitry
 ---
 ### General description
-  The web application implements library health support.
-  The reader has the ability to search and order books in the catalog.
-  The librarian looks through the orders, gives the reader a book at home or in the reading room.
-  The administrator manages the users and the content of the system.
+  The web application supports the functionality of the library. 
+  The reader can search and order books in the catalogue. 
+  The librarian reviews the orders, gives the book to the reader at home or in the reading room. 
+  The administrator manages the system’s users and content.
 ___
 ### Users
-   To differentiate user access levels, roles were introduced:
+   Roles were introduced to delineate user access levels:
    * **Guest**  
-    An unauthorized user has the opportunity to view the catalog and description of books,
-   pass authorization or registration.
+    An unauthorised user has the opportunity to view the catalogue and book descriptions, to log in or
+    register.
    * **Reader**  
-    The reader has access to books in the library,
-   may place orders, view and modify personal information.
+    The reader has access to books in the library, can order, view and modify personal information.
    * **Librarian**  
-    The librarian has access to the readers' orders and decides on the issue of books.
+    The librarian has access to the orders of the readers and decides on the issue of books.
    * **Administrator**  
-    The administrator manages the application, namely: users and system content.
+    The administrator manages the application, namely the users and the content of the system.
 ___
 ### Functionality
   * **General actions**
@@ -99,44 +98,44 @@ ___
     * Change site language
     * Book Search
     * Browse the book catalog
-    * View book description
+    * Book description review
   * **Guest**  
      * Authorization
      * Registration
   * **Reader**  
      * **Unconfirmed**  
-       * Personal Profile Activation
-       * Sign out
+       * Activating the Personal Profile
+       * Logging out
      * **Active** 
-       * Viewing personal profile
+       * Personal profile view
        * Editing profile information
-       * Order a book to the reading room
-       * Order a book at home
-       * View your orders
-       * Returning a book
-       * Cancel a order
-       * Sending email to administrator
-       * Sign out
-     * **Заблокированный** 
-       * Sending email to administrator
-       * Sign out
+       * Ordering of reading rooms
+       * Ordering of the house
+       * Review your orders
+       * Book return
+       * Cancellation
+       * E-mail to administrator
+       * Logging out
+     * **Blocked** 
+       * E-mail to administrator
+       * Logging out
   * **Librarian**
-     * Viewing personal profile
+     * Personal profile view
      * Editing profile information
      * View new orders
      * View all orders
-     * View orders by book
-     * Confirmation of an order
+     * Book order review
+     * Acknowledgement of booking
      * Refusal to issue a book
-     * Sign out
+     * Logging out
   * **Administrator**  
-     * View a list of all users
+     * View list of all users
      * Search by users
      * Adding a new librarian
-     * Blocking a user
-     * Unlocking a user
+     * User lock
+     * Unlocking the user
      * Adding a new author
      * Adding a new book
-     * Deleting a Book
-     * Sign out
+     * Book deletion
+     * Logging out
 ___

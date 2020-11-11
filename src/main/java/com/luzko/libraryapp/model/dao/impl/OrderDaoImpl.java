@@ -4,7 +4,7 @@ import com.luzko.libraryapp.exception.DaoException;
 import com.luzko.libraryapp.model.builder.BookBuilder;
 import com.luzko.libraryapp.model.builder.OrderBuilder;
 import com.luzko.libraryapp.model.builder.UserBuilder;
-import com.luzko.libraryapp.model.connection.ConnectionPool;
+import com.luzko.libraryapp.model.pool.ConnectionPool;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.OrderDao;
 import com.luzko.libraryapp.model.dao.StatementSql;

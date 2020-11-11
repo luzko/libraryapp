@@ -1,7 +1,7 @@
 package com.luzko.libraryapp.model.dao.impl;
 
 import com.luzko.libraryapp.exception.DaoException;
-import com.luzko.libraryapp.model.connection.ConnectionPool;
+import com.luzko.libraryapp.model.pool.ConnectionPool;
 import com.luzko.libraryapp.model.dao.AuthorDao;
 import com.luzko.libraryapp.model.dao.ColumnName;
 import com.luzko.libraryapp.model.dao.StatementSql;
