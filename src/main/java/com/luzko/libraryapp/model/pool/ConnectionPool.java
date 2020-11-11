@@ -41,6 +41,13 @@ public class ConnectionPool {
         initLock = new ReentrantLock();
     }
 
+    private static class ConnectionPoolSingletonHolder {
+        /**
+         * The connection pool instance.
+         */
+        static final ConnectionPool INSTANCE = new ConnectionPool();
+    }
+
     /**
      * Gets connection pool instance.
      *
@@ -149,12 +156,5 @@ public class ConnectionPool {
         } else {
             logger.log(Level.WARN, "Invalid connection");
         }
-    }
-
-    private static class ConnectionPoolSingletonHolder {
-        /**
-         * The connection pool instance.
-         */
-        static final ConnectionPool INSTANCE = new ConnectionPool();
     }
 }
