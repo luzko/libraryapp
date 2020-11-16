@@ -1,7 +1,6 @@
 package com.luzko.libraryapp.model.dao;
 
 import com.luzko.libraryapp.exception.DaoException;
-import com.luzko.libraryapp.model.service.impl.AuthorServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +16,7 @@ public interface BaseDao {
     /**
      * The constant logger.
      */
-    Logger logger = LogManager.getLogger(AuthorServiceImpl.class);
+    Logger logger = LogManager.getLogger(BaseDao.class);
 
     /**
      * Connection set auto commit.
