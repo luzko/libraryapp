@@ -28,7 +28,7 @@ public class LibraryPageCommand implements Command {
         Object searchName = request.getSession().getAttribute(RequestParameter.SEARCH);
         try {
             if (searchName != null) {
-                findBook(request, searchName);
+                findBook(searchName, request);
             } else {
                 List<Book> bookList = defineBookList(request);
                 request.getSession().setAttribute(AttributeName.ALL_BOOKS, bookList);
@@ -49,7 +49,7 @@ public class LibraryPageCommand implements Command {
         return bookService.findPartOfAll(shownRecords, RECORDS_PER_PAGE);
     }
 
-    private void findBook(HttpServletRequest request, Object searchName) throws ServiceException {
+    private void findBook(Object searchName, HttpServletRequest request) throws ServiceException {
         List<Book> bookList = defineSearchBookList((String) searchName, request);
         request.getSession().setAttribute(AttributeName.ALL_BOOKS, bookList);
     }

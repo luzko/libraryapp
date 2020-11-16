@@ -35,7 +35,7 @@ public class FindUserCommand implements Command {
                 List<User> userList = defineUserList(request);
                 request.setAttribute(AttributeName.ALL_USERS, userList);
             } else {
-                findUser(request, searchName);
+                findUser(searchName, request);
             }
             router.setPagePath(PagePath.ADMIN);
         } catch (ServiceException e) {
@@ -52,7 +52,7 @@ public class FindUserCommand implements Command {
         return userService.findPartOfAll(shownRecords, RECORDS_PER_PAGE);
     }
 
-    private void findUser(HttpServletRequest request, String searchName) throws ServiceException {
+    private void findUser(String searchName, HttpServletRequest request) throws ServiceException {
         request.getSession().setAttribute(AttributeName.SEARCH_USER, searchName);
         List<User> userList = defineSearchUserList(searchName, request);
         if (userList.isEmpty()) {

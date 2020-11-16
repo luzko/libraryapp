@@ -28,7 +28,7 @@ public class AdminPageCommand implements Command {
         Object searchName = request.getSession().getAttribute(RequestParameter.SEARCH_USER);
         try {
             if (searchName != null) {
-                findUser(request, searchName);
+                findUser(searchName, request);
             } else {
                 List<User> userList = defineUserList(request);
                 request.setAttribute(AttributeName.ALL_USERS, userList);
@@ -48,7 +48,7 @@ public class AdminPageCommand implements Command {
         return userService.findPartOfAll(shownRecords, RECORDS_PER_PAGE);
     }
 
-    private void findUser(HttpServletRequest request, Object searchName) throws ServiceException {
+    private void findUser(Object searchName, HttpServletRequest request) throws ServiceException {
         List<User> userList = defineSearchUserList((String) searchName, request);
         request.setAttribute(AttributeName.ALL_USERS, userList);
     }
