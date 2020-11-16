@@ -5,8 +5,8 @@ import com.luzko.libraryapp.controller.PagePath;
 import com.luzko.libraryapp.controller.RequestParameter;
 import com.luzko.libraryapp.controller.Router;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.model.validator.ValueValidator;
 import com.luzko.libraryapp.util.mail.EmailSender;
+import com.luzko.libraryapp.validator.ValueValidator;
 
 import javax.servlet.http.HttpServletRequest;
 

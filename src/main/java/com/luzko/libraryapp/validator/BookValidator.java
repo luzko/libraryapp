@@ -1,8 +1,10 @@
-package com.luzko.libraryapp.model.validator;
+package com.luzko.libraryapp.validator;
 
 import com.luzko.libraryapp.model.dao.ColumnName;
 
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The type represents the validator for books.
@@ -18,7 +20,7 @@ public final class BookValidator {
     private static final String SEARCH_PATTERN = "^[\\p{L} ]{0,25}$";
     private static final String NAME_PATTERN = "^[\\p{L} ]{3,25}$";
     private static final String TITLE_PATTERN = "^[\\p{L} ]{5,25}$";
-    private static final String XSS_PATTERN = "(?i)<script.*?>.*?</script.*?>";
+    private static final String XSS_PATTERN = "(\\b)(on\\S+)(\\s*)=|javascript:|(<\\s*)(\\/*)script|style(\\s*)=|(<\\s*)meta";
 
     private BookValidator() {
 
@@ -92,7 +94,7 @@ public final class BookValidator {
     public static boolean isValidSearchValue(String searchName) {
         boolean isSearchValueCorrect = false;
         if (searchName != null) {
-            isSearchValueCorrect = searchName.matches(SEARCH_PATTERN) && !searchName.matches(XSS_PATTERN);
+            isSearchValueCorrect = searchName.matches(SEARCH_PATTERN) && !isXssAttack(searchName);
         }
         return isSearchValueCorrect;
     }
@@ -119,8 +121,8 @@ public final class BookValidator {
 
     private static boolean isValidDescription(String description) {
         boolean isDescriptionCorrect = false;
-        if (description != null && !description.isEmpty()) {
-            isDescriptionCorrect = !description.matches(XSS_PATTERN);
+        if (description != null && !description.isBlank()) {
+            isDescriptionCorrect = !isXssAttack(description);
         }
         return isDescriptionCorrect;
     }
@@ -133,5 +135,11 @@ public final class BookValidator {
         java.util.Calendar calendar = java.util.Calendar.getInstance(java.util.TimeZone.getDefault(), java.util.Locale.getDefault());
         calendar.setTime(new java.util.Date());
         return calendar.get(java.util.Calendar.YEAR);
+    }
+
+    private static boolean isXssAttack(String value) {
+        Pattern pattern = Pattern.compile(XSS_PATTERN);
+        Matcher matcher = pattern.matcher(value);
+        return matcher.find();
     }
 }

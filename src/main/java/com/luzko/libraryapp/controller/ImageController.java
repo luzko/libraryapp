@@ -2,7 +2,7 @@ package com.luzko.libraryapp.controller;
 
 import com.luzko.libraryapp.controller.command.ActionProvider;
 import com.luzko.libraryapp.controller.command.Command;
-import com.luzko.libraryapp.model.validator.ValueValidator;
+import com.luzko.libraryapp.validator.ValueValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;

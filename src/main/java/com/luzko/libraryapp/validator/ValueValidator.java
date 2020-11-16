@@ -1,10 +1,13 @@
-package com.luzko.libraryapp.model.validator;
+package com.luzko.libraryapp.validator;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The type represents the validator for values.
  */
 public final class ValueValidator {
-    private static final String XSS_PATTERN = "(?i)<script.*?>.*?</script.*?>";
+    private static final String XSS_PATTERN = "(\\b)(on\\S+)(\\s*)=|javascript:|(<\\s*)(\\/*)script|style(\\s*)=|(<\\s*)meta";
     private static final String CONFIRM_CODE_PATTERN = "^[\\w]{5,20}$";
     private static final String SUBJECT_PATTERN = "^[\\p{L}\\d ?!,.']{5,35}$";
     private static final String MESSAGE_PATTERN = "^[\\p{L}\\d ?!,.']{5,300}$";
@@ -54,6 +57,8 @@ public final class ValueValidator {
     }
 
     private static boolean isXssAttack(String value) {
-        return value.matches(XSS_PATTERN);
+        Pattern pattern = Pattern.compile(XSS_PATTERN);
+        Matcher matcher = pattern.matcher(value);
+        return matcher.find();
     }
 }

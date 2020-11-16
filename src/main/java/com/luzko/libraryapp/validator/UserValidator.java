@@ -1,4 +1,4 @@
-package com.luzko.libraryapp.model.validator;
+package com.luzko.libraryapp.validator;
 
 import com.luzko.libraryapp.model.dao.ColumnName;
 
