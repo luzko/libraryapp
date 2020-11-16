@@ -108,7 +108,7 @@
                         <div class="col-sm-8">
                             <input type="text" name="email" id="email" class="float-sm-left" style="width: 220px"
                                    pattern="^[\w.+-]{3,30}@[\w.-]{2,15}\.[\p{Lower}]{2,4}$"
-                                   maxlength="40"
+                                   maxlength="50"
                                    title="<fmt:message key="invalid.registration.email"/>"
                                    required
                                    value="${registrationParameters.get("email")}"
@@ -122,7 +122,7 @@
                         <div class="col-sm-8">
                             <input type="text" name="name" id="name" class="float-sm-left" style="width: 220px"
                                    pattern="^[\p{L}]{3,25}$"
-                                   maxlength="45"
+                                   maxlength="25"
                                    title="<fmt:message key="invalid.name"/>"
                                    required
                                    value="${registrationParameters.get("name")}"
@@ -136,7 +136,7 @@
                         <div class="col-sm-8">
                             <input type="text" name="surname" id="surname" class="float-sm-left" style="width: 220px"
                                    pattern="^[\p{L}]{3,25}$"
-                                   maxlength="45"
+                                   maxlength="25"
                                    title="<fmt:message key="invalid.name"/>"
                                    required
                                    value="${registrationParameters.get("surname")}"
