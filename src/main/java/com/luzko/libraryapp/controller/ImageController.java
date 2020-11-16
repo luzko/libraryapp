@@ -42,7 +42,7 @@ public class ImageController extends HttpServlet {
             router = commandOptional.get().execute(request);
         } else {
             String filename = request.getPathInfo();
-            if (ValueValidator.isValidValue(filename)) {
+            if (ValueValidator.isValidValue(filename.substring(INDEX))) {
                 defineImagePath(filename, response);
             } else {
                 router = new Router(PagePath.ERROR);
@@ -56,7 +56,6 @@ public class ImageController extends HttpServlet {
     }
 
     private void defineImagePath(String filename, HttpServletResponse response) throws IOException {
-        filename = filename.substring(INDEX);
         File file = new File(UPLOAD_DIRECTORY, filename);
         response.setHeader(AttributeName.CONTENT_TYPE, getServletContext().getMimeType(filename));
         response.setHeader(AttributeName.CONTENT_DISPOSITION, String.format(AttributeName.CONTENT_VALUE, filename));
